@@ -1,16 +1,17 @@
-import React from 'react'
+import React from "react";
 import PropTypes from "prop-types";
-import styles from "./Button.module.scss"
+import styles from "./Button.module.scss";
 
-const Button = ({primary, secondary, disabled, label}) => {
-  return (
-    <div className={primary ? styles.button : styles.secondary}>{label}</div>
-  )
-}
+const Button = ({ variant, disabled, label }) => {
+  return <button className={(styles.button, styles[variant])}>{label}</button>;
+};
 
 Button.propTypes = {
-  primary: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired
-}
+  variant: PropTypes.string.isRequired,
+};
 
-export default Button
+Button.defaultProps = {
+  variant: "primary",
+};
+
+export default Button;

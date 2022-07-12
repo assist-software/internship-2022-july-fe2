@@ -1,7 +1,12 @@
 import React from "react";
+import Button from "../../components/Button/Button";
 
 const Selim = () => {
-  return <div>Selim</div>;
+  return (
+    <div>
+      <Button />
+    </div>
+  );
 };
 
 export default Selim;

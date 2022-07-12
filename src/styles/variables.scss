@@ -35,7 +35,6 @@ $color-warning-400: #f59e0b;
 $color-warning-500: #b45309;
 
 // gray
-$color-gray-white: #ffffff;
 $color-gray-25: #f9fafb;
 $color-gray-50: #f9fafb;
 $color-gray-100: #e4e7ec;
@@ -47,7 +46,10 @@ $color-gray-600: #4d5464;
 $color-gray-700: #404653;
 $color-gray-800: #333843;
 $color-gray-900: #262a32;
-$color-gray-black: #1c1c1e;
+
+// bw
+$color-white: #ffffff;
+$color-black: #1c1c1e;
 
 // FONT SIZES
 $font-h1: 36px;

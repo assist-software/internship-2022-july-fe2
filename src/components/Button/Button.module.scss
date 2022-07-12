@@ -4,10 +4,22 @@
   padding: 1rem 0.5rem;
   margin: 1rem 0.5rem;
 }
+
 .primary {
-  background-color: $color-alert-400;
+  background-color: $color-primary-400;
+  color: $color-white;
 }
 
 .secondary {
-  background-color: $color-warning-400;
+  background-color: $color-white;
+  color: $color-primary-500;
+  border: 1px solid black;
+}
+
+.tertiary {
+  background-color: $color-white;
+}
+
+.destructive {
+  background-color: $color-alert-400;
 }
