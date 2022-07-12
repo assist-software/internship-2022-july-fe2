@@ -1,0 +1,11 @@
+.list {
+  display: flex;
+  font-size: 2rem;
+  cursor: pointer;
+  li {
+    margin-right: 2rem;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
