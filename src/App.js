@@ -7,6 +7,10 @@ import {
   Listing,
   MyAccount,
   Onboarding,
+  Selim,
+  Catalin,
+  Andrei,
+  Sabin,
 } from "./pages";
 
 import { Header } from "./components";
@@ -30,6 +34,12 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/listing" element={<Listing />} />
         <Route path="/onboarding" element={<Onboarding />} />
+
+        {/* test */}
+        <Route path="/selim" element={<Selim />} />
+        <Route path="/catalin" element={<Catalin />} />
+        <Route path="/andrei" element={<Andrei />} />
+        <Route path="/sabin" element={<Sabin />} />
       </Routes>
     </Router>
   );
