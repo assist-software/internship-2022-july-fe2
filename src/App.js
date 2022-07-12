@@ -18,10 +18,7 @@ function App() {
     <Router>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/listing" element={<Listing />} />
-        <Route path="/onboarding" element={<Onboarding />} />
-
+        {/* rute protejate */}
         <Route element={<ProtectedRoute />}>
           <Route path="/my-account" element={<MyAccount />} />
           <Route path="/favorites" element={<Favorites />} />
@@ -29,6 +26,10 @@ function App() {
           <Route path="/add" element={<AddEdit />} />
           <Route path="/edit" element={<AddEdit />} />
         </Route>
+        {/* rute publice */}
+        <Route path="/" element={<Home />} />
+        <Route path="/listing" element={<Listing />} />
+        <Route path="/onboarding" element={<Onboarding />} />
       </Routes>
     </Router>
   );
