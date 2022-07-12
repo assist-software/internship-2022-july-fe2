@@ -1,0 +1,61 @@
+@import "./variables.scss";
+
+*:where(:not(iframe, canvas, img, svg, video):not(svg *, symbol *)) {
+  all: unset;
+  display: revert;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: $primary_font_family;
+}
+
+a,
+button {
+  cursor: revert;
+  pointer-events: revert;
+}
+
+ol,
+ul,
+menu {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+textarea {
+  white-space: revert;
+}
+
+meter {
+  -webkit-appearance: revert;
+  appearance: revert;
+}
+
+::placeholder {
+  color: unset;
+}
+
+:where([hidden]) {
+  display: none;
+}
+
+:where([contenteditable]) {
+  -moz-user-modify: read-write;
+  -webkit-user-modify: read-write;
+  -webkit-line-break: after-white-space;
+  overflow-wrap: break-word;
+}
+
+:where([draggable="true"]) {
+  -webkit-user-drag: element;
+}
