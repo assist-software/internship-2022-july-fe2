@@ -1,12 +1,4 @@
 import React from "react";
-<<<<<<< HEAD
-import Button from "../../components/Button/Button";
-
-const Selim = () => {
-  return (
-    <div>
-      <Button />
-=======
 import { Button, Input } from "../../components";
 import { ReactComponent as Heart } from "../../assets/icons/heart.svg";
 
@@ -27,7 +19,6 @@ const Selim = () => {
       <Input icon={<Heart />} error />
       <Input label="Label" />
       <Input disabled label="Label" />
->>>>>>> development
     </div>
   );
 };
