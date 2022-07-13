@@ -4,7 +4,7 @@ import Dropdown from "../../components/Dropdown/Dropdown";
 const Sabin = () => {
   return (
     <div style={{ width: "160px" }}>
-      <Dropdown />
+      <Dropdown fontWeight="bold" fontSize="buton" />
     </div>
   );
 };

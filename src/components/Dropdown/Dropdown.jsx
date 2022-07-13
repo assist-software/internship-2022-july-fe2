@@ -20,6 +20,9 @@ const style = {
     boxShadow: "6px 6px 20px rgba(0, 0, 0, 0.25)",
     paddingTop: 0,
     paddingBottom: 0,
+    border: 0,
+    outline: 0,
+    color: "black",
     "::-webkit-scrollbar": {
       width: "6px",
     },
@@ -35,20 +38,25 @@ const style = {
   menu: (base) => ({
     ...base,
     marginTop: 0,
-    gap: "100px!important",
+    border: 0,
+    outline: 0,
   }),
   control: (base, state) => ({
     ...base,
     boxShadow: state.isFocused ? null : null,
+    border: 0,
+    backgroundColor: "#ffffff",
+    color: "blue",
   }),
 };
-const Dropdown = () => {
+const Dropdown = ({ fontWeight, fontSize }) => {
   return (
     <Select
       options={options}
-      className={styles.dropdown}
+      className={`${styles.dropdown} ${styles[fontWeight]} ${styles[fontSize]} ${styles.classicOption}`}
       styles={style}
       placeholder="Placeholder"
+      components={{ IndicatorSeparator: () => null }}
     />
   );
 };
