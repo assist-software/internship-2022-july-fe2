@@ -1,0 +1,193 @@
+@import "../../../styles/variables.scss";
+
+// main container
+.containerLogin{
+    // display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    gap: 40px;
+    
+    width: 415px;
+    // height: 478px;
+    left: 281px;
+    top: 329px;
+}
+
+// title + input fields + remember me
+.contentContainerForm{
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 28px;
+    
+    width: 415px;
+    height: 296px;
+    
+    
+    // border: 1px solid red;
+}
+
+.form{
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 20px;
+    
+    width: 415px;
+    height: 246px;
+    
+    
+    // border: 1px solid green;
+    /* Inside auto layout */
+    
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.formTitle{
+    padding: 0px;
+    gap: 4px;
+    
+    width: 415px;
+    height: 58px;
+    
+    
+    // border: 1px solid purple;
+    /* Inside auto layout */
+    
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.title{
+    color: $color-black;
+    
+    font-size: $font-h4;
+    font-weight: $font-bold;
+
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.subTitle{
+    color: $color-gray-300;
+    font-size: $font-body-small;
+    font-weight: $font-semibold;
+
+}
+
+.formInput{
+    padding: 0px;
+    gap: 28px;
+    
+    width: 415px;
+    height: 168px;
+    
+    // border: 1px solid blue;
+    
+    /* Inside auto layout */
+    
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+
+
+
+.rememberMe{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.checkBox{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+
+
+}
+
+.inpCheckbox{
+    width: 15px;
+    height: 20px;
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.textRememberMe{
+    color: $color-gray-500;
+    font-size: $font-body-small;
+    font-weight: $font-medium;
+
+    width: 97px;
+    height: 22px;
+    text-align: center;
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+
+.forgotPassword{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0px;
+    
+    width: 294px;
+    height: 22px;
+    
+    
+    /* Inside auto layout */
+    
+    flex: none;
+    order: 1;
+    flex-grow: 1;
+
+}
+
+.textForgotPassword{
+    height: 22px;
+
+    color:$color-primary-400;
+    font-weight: $font-semibold;
+    font-size: $font-body-small;
+    cursor:pointer;
+
+    /* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 0;
+}
+
+
+// login button, login with google, signup option
+.contentContainerLoginOptions{
+    padding: 0px;
+    gap: 24px;
+    
+    width: 415px;
+    height: 142px;
+    
+    
+    // border: 1px solid orange;
+    /* Inside auto layout */
+    
+    flex: none;
+    order: 1;
+    flex-grow: 0;  
+}
