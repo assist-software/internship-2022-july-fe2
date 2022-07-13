@@ -74,6 +74,8 @@ input:focus:required {
 
 .container {
   position: relative;
+  border: 1px solid black;
+  margin: 1rem;
 
   p {
     font-size: $font-body-tiny;

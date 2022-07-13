@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Input } from "../../components";
 import { ReactComponent as Heart } from "../../assets/icons/heart.svg";
+import { getListings } from "../../api/API";
 
 const Selim = () => {
+  const [listings, setListings] = useState([]);
+  useEffect(() => {
+    getListings().then((res) => setListings(res));
+  }, []);
+
+  console.log(listings);
   return (
     <div
       style={{
@@ -17,8 +24,8 @@ const Selim = () => {
       <Button position="right" variant="secondary" label="Button" />
       <h1>Inputs</h1>
       <Input icon={<Heart />} error />
-      <Input label="Label" />
-      <Input disabled label="Label" />
+      <Input icon={<Heart />} label="Label" />
+      <Input error helper="afdas" icon={<Heart />} disabled label="Label" />
     </div>
   );
 };
