@@ -1,3 +1,6 @@
+@import "../../styles/variables.scss";
+
+
 .list {
   display: flex;
   font-size: 2rem;
@@ -8,4 +11,33 @@
       text-decoration: underline;
     }
   }
+}
+
+.assist{
+  width: 100px;
+  height: 40px;
+}
+
+
+.drop {
+  width: 160px;
+  margin: 2rem;
+}
+.search {
+  margin:1rem 2rem 1rem 2rem;
+  background-color: white;
+  height: 40px;
+  width: 400px;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.favorites {
+  width: 150px;
+  display: inline-flex;
+  gap: 8px;
+  background-color: white;
+  color: $color-gray-600;
+  border: none;
+  padding: 0.5rem;
 }
