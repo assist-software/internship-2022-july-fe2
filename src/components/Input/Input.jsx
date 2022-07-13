@@ -16,11 +16,14 @@ const Input = ({
   placeholder,
   type,
   value,
+  helper,
+  disabled,
 }) => {
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${error && styles.error}`}>
       {label && <label htmlFor={name}>{label}</label>}
       <input
+        disabled={disabled}
         value={value}
         id={id}
         name={name}
@@ -31,9 +34,13 @@ const Input = ({
         className={error ? styles.error : null}
         type={type}
       />
-      <span onClick={onIconClick} className={styles.icon}>
+      <span
+        onClick={onIconClick}
+        className={`${styles.icon} ${disabled && styles.disabled}`}
+      >
         {icon}
       </span>
+      <p>{helper}</p>
     </div>
   );
 };
@@ -51,13 +58,15 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   type: PropTypes.string,
   value: PropTypes.any,
+  helper: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 Input.defaultProps = {
   error: false,
-  icon: <Heart />,
+  icon: null,
   id: "",
-  label: "",
+  label: "Label",
   name: "",
   onBlur: () => {},
   onChange: () => {},
@@ -65,6 +74,8 @@ Input.defaultProps = {
   onIconClick: () => {},
   placeholder: "",
   type: "text",
+  helper: "",
+  disabled: false,
 };
 
 export default Input;
