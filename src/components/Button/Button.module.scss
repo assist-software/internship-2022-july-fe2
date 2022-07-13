@@ -20,8 +20,6 @@
 .primary {
   background-color: $color-primary-400;
   color: $color-white;
-<<<<<<< HEAD
-=======
 
   &:hover {
     background-color: $color-primary-500;
@@ -34,15 +32,11 @@
   &:disabled {
     background-color: $color-primary-200;
   }
->>>>>>> development
 }
 
 .secondary {
   background-color: $color-white;
   color: $color-primary-500;
-<<<<<<< HEAD
-  border: 1px solid black;
-=======
   border: 1px solid $color-primary-500;
 
   &:hover {
@@ -61,13 +55,10 @@
     color: $color-primary-200;
     border-color: $color-primary-200;
   }
->>>>>>> development
 }
 
 .tertiary {
   background-color: $color-white;
-<<<<<<< HEAD
-=======
   color: $color-primary-500;
 
   &:hover {
@@ -83,13 +74,10 @@
   &:disabled {
     color: $color-primary-200;
   }
->>>>>>> development
 }
 
 .destructive {
   background-color: $color-alert-400;
-<<<<<<< HEAD
-=======
   color: $color-white;
 
   &:hover {
@@ -125,5 +113,4 @@
   svg {
     display: none;
   }
->>>>>>> development
 }
