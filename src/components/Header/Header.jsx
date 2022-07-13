@@ -10,7 +10,7 @@ const Header = () => {
         <li onClick={() => navigate("/")}>Home</li>
         <li onClick={() => navigate("/my-account")}>MyAccount</li>
         <li onClick={() => navigate("/listing")}>Listing</li>
-        <li onClick={() => navigate("/onboarding")}>Onboarding</li>
+        <li onClick={() => navigate("/login")}>Onboarding</li>
         <li onClick={() => navigate("/favorites")}>Favorites</li>
         <li onClick={() => navigate("/confirmation")}>Confirmation</li>
         <li onClick={() => navigate("/add")}>AddEdit</li>

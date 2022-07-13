@@ -7,7 +7,7 @@ const ProtectedRoutes = ({ role }) => {
   return auth?.name ? (
     <Outlet />
   ) : (
-    <Navigate to="/onboarding" state={{ from: location }} replace />
+    <Navigate to="/login" state={{ from: location }} replace />
   );
 };
 
