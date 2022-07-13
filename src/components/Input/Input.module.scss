@@ -9,11 +9,17 @@ input {
   font-size: $font-body-normal;
   font-weight: $font-medium;
   line-height: 24px;
+  padding-right: 4rem;
 
   &:hover,
   &:active,
   &:focus {
     border-color: $color-gray-400;
+  }
+
+  &:disabled {
+    background: $color-gray-50;
+    border: unset;
   }
 }
 
@@ -47,14 +53,19 @@ input:focus:required {
 }
 
 .error {
-  border-color: red;
+  input {
+    border-color: $color-alert-400;
+  }
+  p {
+    color: $color-alert-500 !important;
+  }
 }
 
 .icon {
   position: absolute;
   bottom: 50%;
   transform: translate(-100%, 50%);
-  border-left: 2px solid $color-gray-200;
+  border-left: 1px solid $color-gray-200;
   margin-left: -12px;
   padding-left: 10px;
   width: fit-content;
@@ -62,5 +73,19 @@ input:focus:required {
 }
 
 .container {
+  border: 1px solid black;
+  margin: 1rem;
   position: relative;
+
+  p {
+    font-size: $font-body-tiny;
+    font-weight: $font-regular;
+    line-height: 20px;
+    margin-top: 4px;
+    color: $color-gray-500;
+  }
+}
+
+.disabled {
+  fill: $color-gray-200;
 }

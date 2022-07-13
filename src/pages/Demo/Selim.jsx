@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Input } from "../../components";
+import { ReactComponent as Heart } from "../../assets/icons/heart.svg";
 
 const Selim = () => {
   return (
@@ -15,9 +16,9 @@ const Selim = () => {
       <Button variant="destructive" label="Button" />
       <Button position="right" variant="secondary" label="Button" />
       <h1>Inputs</h1>
-      <Input placeholder="Placeholder" />
-      <Input placeholder="Placeholder" />
-      <Input placeholder="Placeholder" />
+      <Input icon={<Heart />} error />
+      <Input label="Label" />
+      <Input disabled label="Label" />
     </div>
   );
 };
