@@ -12,6 +12,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
   variant: "primary",
+  label: "Button",
 };
 
 export default Button;
