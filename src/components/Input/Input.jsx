@@ -31,6 +31,7 @@ const Input = ({
         onBlur={onBlur}
         onClick={onClick}
         placeholder={placeholder}
+        className={error ? styles.error : null}
         type={type}
       />
       <span
