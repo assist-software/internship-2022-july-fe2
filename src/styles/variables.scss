@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+// COLORS
+// primary
+$color-primary-50: #f1f6ff;
+$color-primary-100: #e2edff;
+$color-primary-200: #b7d1fe;
+$color-primary-300: #5592fd;
+$color-primary-400: #0356e8;
+$color-primary-500: #0241ae;
+$color-primary-600: #023691;
+$color-primary-700: #012b74;
+
+// secondary
+$color-secondary-300: #fff;
+$color-secondary-400: #fff;
+$color-secondary-500: #fff;
+
+// success
+$color-success-300: #6ee7b7;
+$color-success-400: #10b981;
+$color-success-500: #035e43;
+
+// alert
+$color-alert-200: #fbc7c9;
+$color-alert-300: #f2454c;
+$color-alert-400: #ef2028;
+$color-alert-500: #dd1018;
+$color-alert-600: #be0e14;
+$color-alert-700: #9e0b11;
+
+// warning
+$color-warning-300: #fcd34d;
+$color-warning-400: #f59e0b;
+$color-warning-500: #b45309;
+
+// gray
+$color-gray-white: #ffffff;
+$color-gray-25: #f9fafb;
+$color-gray-50: #f9fafb;
+$color-gray-100: #e4e7ec;
+$color-gray-200: #d0d5dd;
+$color-gray-300: #98a2b3;
+$color-gray-400: #667085;
+$color-gray-500: #596274;
+$color-gray-600: #4d5464;
+$color-gray-700: #404653;
+$color-gray-800: #333843;
+$color-gray-900: #262a32;
+$color-gray-black: #1c1c1e;
+
+// FONT SIZES
+$font-h1: 36px;
+$font-h2: 32px;
+$font-h3: 28px;
+$font-h4: 24px;
+$font-h5: 20px;
+$font-h6: 18px;
+$font-button: 14px;
+$font-body-normal: 16px;
+$font-body-small: 14px;
+$font-body-tiny: 12px;
+
+// FONT WEIGHTS
+$font-bold: 700;
+$font-semibold: 600;
+$font-medium: 500;
+$font-regular: 400;
+
+// FONT FAMILY
+$primary_font_family: "Inter", sans-serif;

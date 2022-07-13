@@ -1,0 +1,13 @@
+@import "../../styles/variables.scss";
+
+.button {
+  padding: 1rem 0.5rem;
+  margin: 1rem 0.5rem;
+}
+.primary {
+  background-color: $color-alert-400;
+}
+
+.secondary {
+  background-color: $color-warning-400;
+}

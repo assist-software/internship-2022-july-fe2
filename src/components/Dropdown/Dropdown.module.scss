@@ -1,0 +1,34 @@
+@import "../../styles/variables.scss";
+
+.dropdown{
+    margin: 1rem; 
+    width: 100%;
+}
+
+.bold{
+    font-weight: $font-bold;
+}
+
+.semibold{
+    font-weight: $font-semibold;
+}
+
+.medium{
+    font-weight: $font-medium;
+}
+
+.regular{
+    font-weight: $font-regular;
+}
+
+.buton{
+    &__control{
+    font-size: $font-button;
+    color: $color-primary-500;
+    }
+}
+
+.bodySmall{
+    font-size: $font-body-small;
+    color:black;
+}
