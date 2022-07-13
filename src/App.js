@@ -34,7 +34,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/listing" element={<Listing />} />
         <Route path="/onboarding" element={<Onboarding />} />
-
         {/* test */}
         <Route path="/selim" element={<Selim />} />
         <Route path="/catalin" element={<Catalin />} />

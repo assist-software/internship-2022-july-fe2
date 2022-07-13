@@ -1,25 +1,116 @@
 @import "../../styles/variables.scss";
 
 .button {
-  padding: 1rem 0.5rem;
-  margin: 1rem 0.5rem;
+  padding: 11px 77px;
+  border-radius: 8px;
+  font-size: $font-button;
+  font-weight: $font-semibold;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 22px;
+
+  &:disabled {
+    pointer-events: none;
+  }
 }
 
 .primary {
   background-color: $color-primary-400;
   color: $color-white;
+
+  &:hover {
+    background-color: $color-primary-500;
+  }
+
+  &:active {
+    background-color: $color-primary-700;
+  }
+
+  &:disabled {
+    background-color: $color-primary-200;
+  }
 }
 
 .secondary {
   background-color: $color-white;
   color: $color-primary-500;
-  border: 1px solid black;
+  border: 1px solid $color-primary-500;
+
+  &:hover {
+    border-color: $color-primary-600;
+    background-color: $color-primary-100;
+    color: $color-primary-600;
+  }
+
+  &:active {
+    border-color: $color-primary-700;
+    background-color: $color-primary-200;
+    color: $color-primary-700;
+  }
+
+  &:disabled {
+    color: $color-primary-200;
+    border-color: $color-primary-200;
+  }
 }
 
 .tertiary {
   background-color: $color-white;
+  color: $color-primary-500;
+
+  &:hover {
+    background-color: $color-primary-100;
+    color: $color-primary-600;
+  }
+
+  &:active {
+    background-color: $color-primary-200;
+    color: $color-primary-700;
+  }
+
+  &:disabled {
+    color: $color-primary-200;
+  }
 }
 
 .destructive {
   background-color: $color-alert-400;
+  color: $color-white;
+
+  &:hover {
+    background-color: $color-alert-500;
+  }
+
+  &:active {
+    background-color: $color-alert-700;
+  }
+
+  &:disabled {
+    background-color: $color-alert-200;
+  }
+}
+
+.left {
+  fill: currentColor;
+  svg {
+    margin-right: 8px;
+  }
+}
+
+.right {
+  fill: currentColor;
+  flex-direction: row-reverse;
+
+  svg {
+    margin-left: 8px;
+  }
+}
+
+.none {
+  svg {
+    display: none;
+  }
 }
