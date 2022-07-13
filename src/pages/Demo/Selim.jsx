@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../../components/Button/Button";
+import { Button, Input } from "../../components";
 
 const Selim = () => {
   return (
@@ -8,29 +8,16 @@ const Selim = () => {
         width: "20rem",
       }}
     >
-      <h1>Regular</h1>
+      <h1>Buttons</h1>
       <Button variant="primary" label="Button" />
       <Button variant="secondary" label="Button" />
       <Button variant="tertiary" label="Button" />
       <Button variant="destructive" label="Button" />
-
-      <h2>Disabled</h2>
-      <Button disabled variant="primary" label="Button" />
-      <Button disabled variant="secondary" label="Button" />
-      <Button disabled variant="tertiary" label="Button" />
-      <Button disabled variant="destructive" label="Button" />
-
-      <h1>icon</h1>
-      <Button position="right" variant="primary" label="Button" />
       <Button position="right" variant="secondary" label="Button" />
-      <Button position="left" variant="tertiary" label="Button" />
-      <Button position="left" variant="destructive" label="Button" />
-
-      <h1>default</h1>
-      <Button />
-      <Button />
-      <Button />
-      <Button />
+      <h1>Inputs</h1>
+      <Input placeholder="Placeholder" />
+      <Input placeholder="Placeholder" />
+      <Input placeholder="Placeholder" />
     </div>
   );
 };
