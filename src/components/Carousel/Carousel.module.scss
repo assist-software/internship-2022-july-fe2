@@ -14,7 +14,11 @@
   border: 1px solid black;
   height: 275px;
   border-radius: 12px;
-  width: 300px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   .chevron {
     height: 50px;
     width: 50px;
@@ -23,4 +27,10 @@
     background: #0356e8;
     color: white;
   }
+  span {
+    text-align: center;
+  }
+}
+.ahref {
+  text-decoration: none;
 }

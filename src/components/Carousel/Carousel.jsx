@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getListings } from "../../api/API";
 import { Button, Card } from "../../components";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -18,12 +19,14 @@ const Carousel = ({ title }) => {
   useEffect(() => {
     getListings().then((res) => setListings(res));
   }, []);
+
+  const navigate = useNavigate();
   return (
     <div>
       <div>
         <div className={styles.headerSwiper}>
           <h5>{title}</h5>
-          <span>
+          <span onClick={() => navigate("/listing")}>
             <Button
               icon={<ArrowRight />}
               position="right"
@@ -53,13 +56,15 @@ const Carousel = ({ title }) => {
             </SwiperSlide>
           ))}
           <SwiperSlide>
-            <div className={styles.seeEverything}>
-              <span>
-                <ChevronRight className={styles.chevron} />
-              </span>
-              <span>
-                <Button variant="tertiary" label="See everything" />
-              </span>
+            <div onClick={() => navigate("/listing")}>
+              <div className={styles.seeEverything}>
+                <span>
+                  <ChevronRight className={styles.chevron} />
+                </span>
+                <span>
+                  <Button variant="tertiary" label="See everything" />
+                </span>
+              </div>
             </div>
           </SwiperSlide>
         </Swiper>
