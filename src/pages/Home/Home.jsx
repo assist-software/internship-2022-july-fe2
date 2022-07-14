@@ -1,25 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { getListings } from "../../api/API";
-
-import { Card } from "../../components";
-
+import Carousel from "../../components/Carousel/Carousel";
+import styles from "./Home.module.scss";
 const Home = () => {
-  const [listings, setListings] = useState([]);
-  console.log(listings);
-  useEffect(() => {
-    getListings().then((res) => setListings(res));
-  }, []);
   return (
     <div>
-      {listings?.map((listing, index) => (
-        <Card
-          image={listing.image}
-          title={listing.title}
-          description={listing.description}
-          price={listing.price}
-          location={listing.location}
-        />
-      ))}
+      <div>
+        <h1 className={styles.h1}>What are you interested in?</h1>
+      </div>
+      <Carousel title="Most view" />
     </div>
   );
 };

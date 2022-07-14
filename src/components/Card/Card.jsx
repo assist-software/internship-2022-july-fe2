@@ -1,12 +1,21 @@
 import React from "react";
 import styles from "./Card.module.scss";
-import photo from "../../assets/images/splash.png";
+// import photo from "../../assets/images/splash.png";
 
-const Card = ({ listView, image, title, location, description, price }) => {
+const Card = ({
+  style,
+  listView,
+  image,
+  title,
+  location,
+  description,
+  price,
+}) => {
   return (
     <div className={styles.cards}>
       <div className={styles.card}>
         <div
+          style={style}
           className={`${
             listView ? styles.listCardContent : styles.cardContent
           }`}
