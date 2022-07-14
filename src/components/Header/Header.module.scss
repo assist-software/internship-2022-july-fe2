@@ -1,20 +1,11 @@
 @import "../../styles/variables.scss";
 
 
-.list {
-  display: flex;
-  font-size: 2rem;
-  cursor: pointer;
-  li {
-    margin-right: 2rem;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-}
 .navbar {
   border-bottom: 1px solid !important;
   border-bottom-color: $color-gray-200 !important;
+  z-index: 1 !important;
+  background-color: white !important;
 }
 .assist{
   width: 100px;
@@ -44,7 +35,7 @@
   gap: 8px !important;
   background-color: white !important;
   color: $color-gray-600 !important;
-  border: none ;
+  border: none !important;
   padding: 0.5rem !important;
   font-weight: $font-semibold;
   font-size: $font-button;
@@ -66,7 +57,7 @@
 .profileTitle {
   color: $color-gray-600 !important;
   background-color: white !important;
-  border: none ;
+  border: none !important;
   font-weight: $font-semibold;
   font-size: $font-body-small;
   padding: 0.58rem !important;
