@@ -16,6 +16,7 @@
     "react-scripts": "5.0.1",
     "react-select": "^5.4.0",
     "sass": "^1.53.0",
+    "swiper": "^8.3.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
