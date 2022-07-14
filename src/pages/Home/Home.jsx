@@ -13,7 +13,7 @@ const Home = () => {
     <div>
       {listings?.map((listing, index) => (
         <Card
-          image={listing.image}
+          image={listing.images}
           title={listing.title}
           description={listing.description}
           price={listing.price}
