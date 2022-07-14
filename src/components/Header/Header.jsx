@@ -16,8 +16,8 @@ const Header = () => {
   return (
     <Navbar collapseOnSelect expand="lg" className={styles.navbar}>
       <Container>
-        <Navbar.Brand href="#home">
-          <img src={logo} className={styles.assist} />
+        <Navbar.Brand onClick={() => navigate("/")}>
+          <img src={logo} className={styles.assist} alt="Assist header logo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -40,7 +40,7 @@ const Header = () => {
           </Nav>
           <Nav>
             <Button className={styles.favorites}>
-              <img src={heart} />
+              <img src={heart} alt="Heart icon for favorites" />
               Favourites
             </Button>
             <NavDropdown title="My profile" id="collasible-nav-dropdown">
