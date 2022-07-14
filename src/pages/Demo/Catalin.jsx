@@ -1,7 +1,15 @@
-import React, { useState } from "react";
-import Card from "../../components/Card/Card";
+import React, { useEffect, useState } from "react";
+// import Card from "../../components/Card/Card";
+import { getListings } from "../../api/API";
+// import styles from "./Catalin.module.scss";
+import styles from "../../components/Card/Card.module.scss";
 
 const Catalin = (props) => {
+  const [listings, setListings] = useState([]);
+  console.log(listings);
+  useEffect(() => {
+    getListings().then((res) => setListings(res));
+  }, []);
   const DATA = [
     {
       id: 1,
@@ -45,21 +53,33 @@ const Catalin = (props) => {
     },
   ];
   const [announces, setAnnounces] = useState(DATA);
-  const [showGrid, setShowGrid] = useState(false);
+  const [listView, setListView] = useState(false);
+
   return (
     <div>
       Catalin
-      <button onClick={() => setShowGrid(!showGrid)}>Click here</button>
-      {announces.map((announce) => (
+      <button onClick={() => setListView(!listView)}>Click here</button>
+      {/* {announces.map((announce) => (
         <Card
           title={announce.title}
           location={announce.location}
           price={announce.price}
           description={announce.description}
           key={announce.id}
-          showGrid={showGrid}
+          listView={listView}
         />
-      ))}
+      ))} */}
+      {/* {listings?.map((listing, index) => (
+        <Card
+          key={index}
+          image={listing.image}
+          title={listing.title}
+          description={listing.description}
+          price={listing.price}
+          location={listing.location}
+          listView={listView}
+        />
+      ))} */}
     </div>
   );
 };
