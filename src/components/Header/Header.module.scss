@@ -35,7 +35,7 @@
   border-top-right-radius: 10px !important;
 }
 .search:focus {
-  box-shadow: none;
+  box-shadow: none !important;
 }
 
 .favorites {
@@ -44,10 +44,13 @@
   gap: 8px !important;
   background-color: white !important;
   color: $color-gray-600 !important;
-  border: none !important;
+  border: none ;
   padding: 0.5rem !important;
   font-weight: $font-semibold;
   font-size: $font-button;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5px;
 }
 
 .favoritesDiv:hover {
@@ -56,14 +59,22 @@
   }
   stroke: $color-primary-300 !important;
 }
+.favorites:focus {
+  box-shadow: none !important;
+}
 
 .profileTitle {
   color: $color-gray-600 !important;
-  
   background-color: white !important;
-  border: none !important;
+  border: none ;
   font-weight: $font-semibold;
   font-size: $font-body-small;
+  padding: 0.58rem !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5px;
+  gap: 8px !important;
 }
 .profileTitle:focus {
   box-shadow: none !important;

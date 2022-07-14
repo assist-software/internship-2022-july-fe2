@@ -15,7 +15,7 @@ import { ReactComponent as Security } from "../../assets/icons/security.svg";
 import { ReactComponent as Bell } from "../../assets/icons/bell.svg";
 import { ReactComponent as Chat } from "../../assets/icons/chat.svg";
 import { ReactComponent as Logout } from "../../assets/icons/logout.svg";
-import { ReactComponent as Search } from "../../assets/icons/magnifying-glass.svg";
+import ButtonComp from "../Button/Button";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -43,9 +43,18 @@ const Header = () => {
                 aria-label="Search"
               />
             </Form>
+            {/* <ButtonComp
+              variant="tertiary"
+              label="Favorites"
+              icon={<Heart />}
+              position="left"
+            /> */}
           </Nav>
           <Nav>
-            <div className={styles.favoritesDiv}>
+            <div
+              className={styles.favoritesDiv}
+              onClick={() => navigate("/favorites")}
+            >
               <Button className={styles.favorites}>
                 <Heart className={styles.favoritesHeart} />
                 Favourites
