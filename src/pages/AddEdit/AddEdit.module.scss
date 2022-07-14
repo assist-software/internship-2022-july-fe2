@@ -1,0 +1,62 @@
+@import "../../styles/variables.scss";
+
+.price {
+    display: flex;
+    margin-bottom: 10px;
+    h6{
+        margin-top: 40px;
+        margin-left: 10px;
+        font-weight: $font-medium;
+        font-size: $font-body-small;
+    }
+}
+
+.addTitle {
+    font-weight: $font-bold;
+    font-size: $font-h2;
+    margin-top: 32px;
+    margin-bottom: 24px;
+}
+
+.info {
+    h3{
+        font-weight: $font-bold;
+        font-size: $font-h6;
+       
+    };
+    p{
+        font-weight: $font-body-small;
+        font-size: $font-regular;
+        margin-top: 4px;
+    }
+    
+}
+.inputs {
+    margin-top: 0px;
+}
+.bottomBorder {
+    border-bottom: 1px solid $color-gray-100;
+}
+
+
+
+.imgPlaceholder{
+    height: 128px;
+    width: 164px;
+    background-color: $color-gray-50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    cursor: pointer;
+    .addIcon {
+        stroke: $color-gray-400;
+        height: 26px;
+        width: 26px;
+    }
+}
+
+.imgPlaceholder:hover {
+    box-shadow: 0px 10px 24px rgba(0, 0, 0, 0.14);
+}
