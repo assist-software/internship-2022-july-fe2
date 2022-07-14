@@ -44,7 +44,7 @@ const Carousel = ({ title }) => {
             <SwiperSlide key={listing.id}>
               <Card
                 style={{ width: "90%" }}
-                image={listing.image}
+                image={listing.images}
                 title={listing.title}
                 description={listing.description}
                 price={listing.price}
