@@ -26,6 +26,8 @@ const Selim = () => {
       <Input icon={<Heart />} error />
       <Input icon={<Heart />} label="Label" />
       <Input error helper="afdas" icon={<Heart />} disabled label="Label" />
+
+      <Button var />
     </div>
   );
 };

@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getListings } from "../../api/API";
+
+import { Card } from "../../components";
 
 const Home = () => {
-  return <div>Home</div>;
+  const [listings, setListings] = useState([]);
+  console.log(listings);
+  useEffect(() => {
+    getListings().then((res) => setListings(res));
+  }, []);
+  return (
+    <div>
+      {listings?.map((listing, index) => (
+        <Card
+          image={listing.image}
+          title={listing.title}
+          description={listing.description}
+          price={listing.price}
+          location={listing.location}
+        />
+      ))}
+    </div>
+  );
 };
 
 export default Home;
