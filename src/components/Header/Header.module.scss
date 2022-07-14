@@ -36,8 +36,8 @@
   width: 150px;
   display: inline-flex;
   gap: 8px;
-  background-color: white;
-  color: $color-gray-600;
+  background-color: white !important;
+  color: black !important;
   border: none;
   padding: 0.5rem;
 }
