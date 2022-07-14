@@ -1,3 +1,6 @@
+@import "../../styles/variables.scss";
+
+
 .list {
   display: flex;
   font-size: 2rem;
@@ -8,4 +11,98 @@
       text-decoration: underline;
     }
   }
+}
+.navbar {
+  border-bottom: 1px solid !important;
+  border-bottom-color: $color-gray-200 !important;
+}
+.assist{
+  width: 100px;
+  height: 40px;
+}
+
+
+.drop {
+  width: 160px;
+  margin: 2rem;
+}
+.search {
+  margin:1rem 2rem 1rem 2rem;
+  background-color: white;
+  height: 40px;
+  width: 400px !important;
+  border-bottom-right-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+}
+.search:focus {
+  box-shadow: none;
+}
+
+.favorites {
+  width: 150px;
+  display: inline-flex !important;
+  gap: 8px !important;
+  background-color: white !important;
+  color: $color-gray-600 !important;
+  border: none !important;
+  padding: 0.5rem !important;
+  font-weight: $font-semibold;
+  font-size: $font-button;
+}
+
+.favoritesDiv:hover {
+  .favorites{
+    color: $color-primary-300 !important;
+  }
+  stroke: $color-primary-300 !important;
+}
+
+.profileTitle {
+  color: $color-gray-600 !important;
+  
+  background-color: white !important;
+  border: none !important;
+  font-weight: $font-semibold;
+  font-size: $font-body-small;
+}
+.profileTitle:focus {
+  box-shadow: none !important;
+}
+.profileTitle:hover {
+  color: $color-primary-300 !important;
+}
+
+.blueLogo {
+  fill: $color-primary-400 !important;
+  color: $color-primary-400 !important;
+  stroke: $color-primary-400 !important;
+  width: 16px;
+  height: 16px;
+  margin: 5px;
+}
+
+.profileOption{
+  font-weight: $font-medium;
+  font-size: $font-body-small;
+  color: $color-gray-600 !important;
+}
+.profileOption:hover {
+  background-color: white !important;
+  color: $color-primary-300  !important;
+}
+
+.dropMenu{
+  border: 0px !important;
+  border-radius: 12px !important;
+ box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.14);
+}
+
+.hello{
+  font-size: $font-body-normal ;
+  font-weight: $font-bold;
+}
+.logout{
+  stroke: $color-gray-500  !important;
+  height: 18px;
+  width: 18px;
 }
