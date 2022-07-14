@@ -1,32 +1,31 @@
 import React from "react";
 import styles from "./Card.module.scss";
 import photo from "../../assets/images/splash.png";
-const Card = (props) => {
+
+const Card = ({ listView, image, title, location, description, price }) => {
   return (
     <div className={styles.cards}>
       <div className={styles.card}>
         <div
           className={`${
-            props.showGrid ? styles.listCardContent : styles.cardContent
+            listView ? styles.listCardContent : styles.cardContent
           }`}
         >
           <img
-            src={photo}
+            src={image}
             alt="announces-img"
-            className={`${
-              props.showGrid ? styles.ListCardImg : styles.cardImg
-            }`}
+            className={`${listView ? styles.ListCardImg : styles.cardImg}`}
           />
           <div className={styles.contentCard}>
-            <p className={styles.cardTitle}>{props.title}</p>
-            <p className={styles.cardLocation}>{props.location}</p>
+            <p className={styles.cardTitle}>{title}</p>
+            <p className={styles.cardLocation}>{location}</p>
             <p
-              style={{ display: props.showGrid ? "block" : "none" }}
+              style={{ display: listView ? "block" : "none" }}
               className={styles.cardDescription}
             >
-              {props.description}
+              {description}
             </p>
-            <p className={styles.cardPrice}>{props.price} lei</p>
+            <p className={styles.cardPrice}>{price} lei</p>
           </div>
         </div>
       </div>
