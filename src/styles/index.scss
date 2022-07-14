@@ -1,6 +1,5 @@
 @import "./variables.scss";
 @import "./bootstrap.scss";
-@import "~bootstrap/scss/bootstrap";
 
 *:where(:not(iframe, canvas, img, svg, video, input):not(svg *, symbol *)) {
   all: unset;
