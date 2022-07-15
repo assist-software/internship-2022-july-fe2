@@ -43,12 +43,6 @@ const Header = () => {
                 aria-label="Search"
               />
             </Form>
-            {/* <ButtonComp
-              variant="tertiary"
-              label="Favorites"
-              icon={<Heart />}
-              position="left"
-            /> */}
           </Nav>
           <Nav>
             <div
