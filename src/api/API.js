@@ -11,10 +11,14 @@ export const getListings = async () => {
   }
 };
 
-// get user
-export const getUser = async (id) => {
+
+// get user by email
+export const getUser = async (email) => {
   try {
-    const response = await axios.get("/user/", id);
+    const response = await axios.get("/user/" + email);
+
+    
+
     return response.data;
   } catch (error) {
     console.error(error);

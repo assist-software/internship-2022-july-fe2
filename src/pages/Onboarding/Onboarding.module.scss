@@ -46,3 +46,12 @@
     height: auto;
     width: 50vw;
 }
+
+@media (max-width : 550px){
+    .leftSide{
+        width:100%;
+    }
+    .rightImageOnboarding{
+        display: none;
+    }
+}
