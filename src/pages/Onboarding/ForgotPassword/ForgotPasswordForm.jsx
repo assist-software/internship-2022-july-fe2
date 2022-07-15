@@ -11,7 +11,7 @@ import { getUser } from "../../../api/API";
 export default function ForgotPasswordForm() {
   const navigate = useNavigate();
 
-  const { setAuth } = useAuth();
+  const { setUser } = useAuth();
 
   const [email, setEmail] = useState("");
 
@@ -42,7 +42,7 @@ export default function ForgotPasswordForm() {
       getUser(email).then((res) => setIsLoggedIn(res));
       // should make a validation if a user doesn't exist
       if (isLoggedIn !== null) {
-        setAuth({ name: "Team undefined" });
+        setUser({ name: "Team undefined" });
         navigate("/reset-password");
       }
     } catch (error) {
