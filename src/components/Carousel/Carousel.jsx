@@ -6,7 +6,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
 import styles from "./Carousel.module.scss";
 import { ReactComponent as ArrowRight } from "../../assets/icons/arrow-right.svg";
-import { ReactComponent as ChevronRight } from "../../assets/icons/chevron-right.svg";
 // Import Swiper styles
 import "./swipper.scss";
 import "swiper/css";
@@ -59,11 +58,9 @@ const Carousel = ({ title }) => {
             <div onClick={() => navigate("/listing")}>
               <div className={styles.seeEverything}>
                 <span>
-                  <ChevronRight className={styles.chevron} />
+                  <ArrowRight className={styles.chevron} />
                 </span>
-                <span>
-                  <Button variant="tertiary" label="See everything" />
-                </span>
+                <p className={styles.text}>See Everything</p>
               </div>
             </div>
           </SwiperSlide>

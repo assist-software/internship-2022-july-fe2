@@ -10,7 +10,7 @@
   }
 }
 .seeEverything {
-  margin-top: 20px;
+  margin: 20px;
   border: 1px solid black;
   height: 275px;
   border-radius: 12px;
@@ -19,16 +19,21 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+
   .chevron {
     height: 50px;
     width: 50px;
     border: 1px solid $color-black;
     border-radius: 50%;
     background: #0356e8;
-    color: white;
+    color: white !important;
   }
-  span {
+  .text {
     text-align: center;
+    color: blue !important;
+    font-weight: 600;
+    font-size: $font-body-small;
   }
 }
 .ahref {
