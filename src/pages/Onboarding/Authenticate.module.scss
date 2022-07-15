@@ -1,4 +1,4 @@
-@import "../../../styles/variables.scss";
+@import "../../styles/variables.scss";
 
 div a{
     text-decoration: none;
@@ -86,6 +86,26 @@ div a{
     flex-grow: 0;
 }
 
+.registerSeparator{
+    width: 415px;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    hr{
+        width: 100%;
+        height: 1px;
+    }
+    span{
+        margin: 0px 20px;
+        font-size:$font-body-tiny;
+        font-weight: $font-semibold;
+        color:#6c6c6c;
+    }
+}
+
+
+
 .authError{
     color: $color-alert-400;
     font-size: $font-body-small;
@@ -133,6 +153,18 @@ div a{
     flex-grow: 0;
 }
 
+.textpwdInfo{
+    width: 415px;
+    height: 20px;
+    font-size:$font-body-tiny;
+    font-weight: $font-regular;
+    line-height: 20px;
+    color: $color-gray-500;
+
+    flex: none;
+    order: 0;
+    flex-grow: 1;
+}
 
 .forgotPassword{
     display: flex;
@@ -186,10 +218,14 @@ div a{
 
     width: 415px;
     height: 96px;
+    Button, .formInput Button{
+        margin-top:20px;
+    }
 }
 
-.contentContainerButtons Button{
-    margin-top:20px;
+
+.register{
+    margin-top:90px;
 }
 
 .contentContainerAuthEndForm{
@@ -212,12 +248,21 @@ div a{
 
 }
 
+.authRegister{
+    margin-top:-35px;
+}
+
 .textAuthEndForm{
     font-size: $font-body-small;
     font-weight: $font-semibold;
     line-height: 22px;
     align-items: center;
+
+    span{
+      color: $color-primary-400;
+    }
 }
+
 
 @media (max-width : 860px){
     .authError,
@@ -230,10 +275,12 @@ div a{
     .contentContainerAuthOptions,
     .forgotPassword,
     .contentContainerButtons,
-    .contentContainerButtons Button,
-    .contentContainerAuthEndForm
+    .contentContainerButtons Button, 
+    .formInput Button,
+    .contentContainerAuthEndForm,
+    .registerSeparator
     {
-        width: 250px;
+        width: 260px;
     }
 
     .authError{
@@ -258,11 +305,17 @@ div a{
     //     height: 120px;
     // }
     
-    .contentContainerButtons Button{
-        padding:11px;
+    .contentContainerButtons Button, .formInput Button{
+        padding:9px;
     }
     .textAuthEndForm{
         margin-top:15px;
+    }
+    .authRegister{
+      margin-top:-15px;
+  }
+    .register{
+        margin-top:90px;
     }
 }
 
@@ -279,9 +332,10 @@ div a{
     .forgotPassword,
     .contentContainerButtons,
     .contentContainerButtons Button,
+    .formInput Button,
     .contentContainerAuthEndForm
     {
-        width: 250px;
+        width: 260px;
     }    
     
    
@@ -299,7 +353,10 @@ div a{
     //     height: 120px;
     // }
     
-    .contentContainerButtons Button{
-        padding:11px;
+    .contentContainerButtons Button, .formInput Button{
+        padding:5px;
+    }
+    .register{
+        margin-top:90px;
     }
 }
