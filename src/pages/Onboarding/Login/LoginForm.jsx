@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
-import style from "./LoginForm.module.scss";
+import style from "../Authenticate.module.scss";
 import Input from "../../../components/Input/Input";
 import Button from "../../../components/Button/Button";
 import { ReactComponent as Google } from "../../../assets/icons/google.svg";
