@@ -1,10 +1,12 @@
+import { useEffect } from "react";
 import { Outlet, Navigate, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 const ProtectedRoutes = ({ role }) => {
   let location = useLocation();
-  const { auth } = useAuth();
-  return auth?.name ? (
+  const { token, isLoggedIn } = useAuth();
+
+  return isLoggedIn() ? (
     <Outlet />
   ) : (
     <Navigate to="/login" state={{ from: location }} replace />
