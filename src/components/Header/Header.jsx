@@ -1,22 +1,107 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Header.module.scss";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import { Dropdown, InputGroup } from "react-bootstrap";
+import logo from "../../assets/logo/logo-assist-tagline.png";
+import { Button } from "react-bootstrap";
+import DropdownComp from "../Dropdown/Dropdown";
+import { Form } from "react-bootstrap";
+import { ReactComponent as Heart } from "../../assets/icons/heart.svg";
+import { ReactComponent as Person } from "../../assets/icons/person.svg";
+import { ReactComponent as Security } from "../../assets/icons/security.svg";
+import { ReactComponent as Bell } from "../../assets/icons/bell.svg";
+import { ReactComponent as Chat } from "../../assets/icons/chat.svg";
+import { ReactComponent as Logout } from "../../assets/icons/logout.svg";
+import ButtonComp from "../Button/Button";
 
 const Header = () => {
   const navigate = useNavigate();
   return (
-    <div>
-      <ul className={styles.list}>
-        <li onClick={() => navigate("/")}>Home</li>
-        <li onClick={() => navigate("/my-account")}>MyAccount</li>
-        <li onClick={() => navigate("/listing")}>Listing</li>
-        <li onClick={() => navigate("/login")}>Onboarding</li>
-        <li onClick={() => navigate("/favorites")}>Favorites</li>
-        <li onClick={() => navigate("/confirmation")}>Confirmation</li>
-        <li onClick={() => navigate("/add")}>AddEdit</li>
-        <li onClick={() => navigate("/edit")}>AddEdit</li>
-      </ul>
-    </div>
+    <Navbar collapseOnSelect expand="lg" className={styles.navbar} sticky="top">
+      <Container>
+        <Navbar.Brand onClick={() => navigate("/")}>
+          <img src={logo} className={styles.assist} alt="Assist header logo" />
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me-auto">
+            <div style={{ width: "160px" }}>
+              <DropdownComp
+                fontWeight="semibold"
+                fontSize="buton"
+                className={styles.drop}
+              />
+            </div>
+            <Form className="d-flex">
+              <Form.Control
+                type="search"
+                placeholder="Search"
+                className={styles.search}
+                aria-label="Search"
+              />
+            </Form>
+          </Nav>
+          <Nav>
+            <div
+              className={styles.favoritesDiv}
+              onClick={() => navigate("/favorites")}
+            >
+              <Button className={styles.favorites}>
+                <Heart className={styles.favoritesHeart} />
+                Favourites
+              </Button>
+            </div>
+            <Dropdown>
+              <Dropdown.Toggle className={styles.profileTitle}>
+                My Profile
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu className={styles.dropMenu}>
+                <Dropdown.ItemText className={styles.hello}>
+                  Hello!
+                </Dropdown.ItemText>
+                <Dropdown.Item
+                  href="#action/3.1"
+                  className={styles.profileOption}
+                >
+                  <Person className={styles.blueLogo} />
+                  Profile
+                </Dropdown.Item>
+                <Dropdown.Item
+                  href="#action/3.1"
+                  className={styles.profileOption}
+                >
+                  <Bell className={styles.blueLogo} />
+                  Notifications
+                </Dropdown.Item>
+                <Dropdown.Item
+                  href="#action/3.1"
+                  className={styles.profileOption}
+                >
+                  <Chat className={styles.blueLogo} />
+                  Messages
+                </Dropdown.Item>
+                <Dropdown.Item
+                  href="#action/3.2"
+                  className={styles.profileOption}
+                >
+                  <Security className={styles.blueLogo} />
+                  {"Login & security"}
+                </Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item className={styles.profileOption}>
+                  <Logout className={styles.logout} />
+                  Logout
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 };
 

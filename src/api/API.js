@@ -11,7 +11,7 @@ export const getListings = async () => {
   }
 };
 
-// get user
+// get user by id
 export const getUser = async (id) => {
   try {
     const response = await axios.get("/user/" + id);

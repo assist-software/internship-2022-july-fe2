@@ -1,15 +1,16 @@
 @import "../../../styles/variables.scss";
 
+div a{
+    text-decoration: none;
+}
 // main container
-.containerLogin{
-    // display: flex;
+.containerAuth{
+    display: flex;
     flex-direction: column;
     align-items: center;
     
-    gap: 40px;
-    
     width: 415px;
-    // height: 478px;
+    height: 478px;
     left: 281px;
     top: 329px;
 }
@@ -24,8 +25,6 @@
     width: 415px;
     height: 296px;
     
-    
-    // border: 1px solid red;
 }
 
 .form{
@@ -37,9 +36,6 @@
     width: 415px;
     height: 246px;
     
-    
-    // border: 1px solid green;
-    /* Inside auto layout */
     
     flex: none;
     order: 0;
@@ -53,10 +49,6 @@
     
     width: 415px;
     height: 58px;
-    
-    
-    // border: 1px solid purple;
-    /* Inside auto layout */
     
     order: 0;
     align-self: stretch;
@@ -88,41 +80,43 @@
     width: 415px;
     height: 168px;
     
-    // border: 1px solid blue;
-    
-    /* Inside auto layout */
-    
     flex: none;
     order: 1;
     align-self: stretch;
     flex-grow: 0;
 }
 
-
+.authError{
+    color: $color-alert-400;
+    font-size: $font-body-small;
+    width:415px;
+}
 
 
 .rememberMe{
+
     display: flex;
     flex-direction: row;
     align-items: center;
+    
+    width: 415px;
+    height: 80px;
+    
+    flex: none;
+    order: 1;
+    flex-grow: 0;
 }
 
 .checkBox{
     display: flex;
     flex-direction: row;
+    
+    justify-content: flex-end;
     align-items: center;
-    gap: 4px;
+    gap: 5px;
+    padding:0px;
+    padding-top:14px;
 
-
-}
-
-.inpCheckbox{
-    width: 15px;
-    height: 20px;
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
 }
 
 .textRememberMe{
@@ -151,8 +145,6 @@
     height: 22px;
     
     
-    /* Inside auto layout */
-    
     flex: none;
     order: 1;
     flex-grow: 1;
@@ -167,27 +159,147 @@
     font-size: $font-body-small;
     cursor:pointer;
 
-    /* Inside auto layout */
-
-flex: none;
-order: 0;
-flex-grow: 0;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
 }
 
 
 // login button, login with google, signup option
-.contentContainerLoginOptions{
+.contentContainerAuthOptions{
     padding: 0px;
     gap: 24px;
     
     width: 415px;
     height: 142px;
     
-    
-    // border: 1px solid orange;
-    /* Inside auto layout */
-    
     flex: none;
     order: 1;
     flex-grow: 0;  
+}
+
+.contentContainerButtons{
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+
+    width: 415px;
+    height: 96px;
+}
+
+.contentContainerButtons Button{
+    margin-top:20px;
+}
+
+.contentContainerAuthEndForm{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0px;
+    gap: 4px;
+
+    width: 415px;
+    height: 22px;
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+
+    margin-top:36px;
+
+}
+
+.textAuthEndForm{
+    font-size: $font-body-small;
+    font-weight: $font-semibold;
+    line-height: 22px;
+    align-items: center;
+}
+
+@media (max-width : 860px){
+    .authError,
+    .containerAuth, 
+    .contentContainerForm, 
+    .form, 
+    .formTitle, 
+    .formInput,
+    .rememberMe,
+    .contentContainerAuthOptions,
+    .forgotPassword,
+    .contentContainerButtons,
+    .contentContainerButtons Button,
+    .contentContainerAuthEndForm
+    {
+        width: 250px;
+    }
+
+    .authError{
+        font-size: $font-body-tiny;
+    }
+
+    .contentContainerButtons{
+        margin-top:40px;
+    }
+   
+    .rememberMe{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .forgotPassword{
+        justify-content: center;    
+    }
+    
+    // .contentContainerButtons{
+    //     height: 120px;
+    // }
+    
+    .contentContainerButtons Button{
+        padding:11px;
+    }
+    .textAuthEndForm{
+        margin-top:15px;
+    }
+}
+
+@media (max-width : 550px){
+
+
+    .containerAuth, 
+    .contentContainerForm, 
+    .form, 
+    .formTitle, 
+    .formInput,
+    .rememberMe,
+    .contentContainerAuthOptions,
+    .forgotPassword,
+    .contentContainerButtons,
+    .contentContainerButtons Button,
+    .contentContainerAuthEndForm
+    {
+        width: 250px;
+    }    
+    
+   
+    .rememberMe{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .forgotPassword{
+        justify-content: center;    
+    }
+    
+    // .contentContainerButtons{
+    //     height: 120px;
+    // }
+    
+    .contentContainerButtons Button{
+        padding:11px;
+    }
 }
