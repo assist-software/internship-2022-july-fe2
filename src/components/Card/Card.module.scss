@@ -58,6 +58,17 @@
     padding: 8px;
   }
 }
+
+.listTitleAndLocation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.col {
+  flex-direction: column;
+}
+
 .cardTitle {
   font-weight: $font-semibold;
   color: $color-black;
