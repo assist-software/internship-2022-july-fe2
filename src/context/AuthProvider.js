@@ -13,6 +13,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const isLoggedIn = () => {
+    console.log(token, "token");
     if (token) {
       return true;
     }

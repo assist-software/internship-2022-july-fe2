@@ -5,6 +5,7 @@ export { default as Home } from "./Home/Home";
 export { default as Listing } from "./Listing/Listing";
 export { default as MyAccount } from "./MyAccount/MyAccount";
 export { default as Onboarding } from "./Onboarding/Onboarding";
+export { default as Layout } from "./Layout/Layout";
 
 // demo
 export { default as Andrei } from "./Demo/Andrei";
