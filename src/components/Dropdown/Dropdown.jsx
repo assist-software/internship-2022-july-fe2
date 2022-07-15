@@ -2,6 +2,7 @@ import React from "react";
 import Select from "react-select";
 import styles from "./Dropdown.module.scss";
 import { components } from "react-select";
+import PropTypes from "prop-types";
 
 // const Option = (props) => {
 //   return (
@@ -93,6 +94,19 @@ const Dropdown = ({ fontWeight, fontSize, title }) => {
       components={{ IndicatorSeparator: () => null }}
     />
   );
+};
+
+Dropdown.propTypes = {
+  fontWeight: PropTypes.oneOf(["bold", "semibold", "medium", "regular"])
+    .isRequired,
+  fontSize: PropTypes.oneOf(["buton", "bodySmall"]).isRequired,
+  placeholder: PropTypes.string.isRequired,
+};
+
+Dropdown.defaultProps = {
+  fontWeight: "semibold",
+  fontSize: "bodySmall",
+  placeholder: "Placeholder",
 };
 
 export default Dropdown;
