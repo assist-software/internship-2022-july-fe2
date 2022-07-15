@@ -37,7 +37,7 @@ function App() {
           <Route path="/my-account" element={<MyAccount />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/confirmation" element={<Confirmation />} />
-          <Route path="/add" element={<AddEdit />} />
+
           <Route path="/edit" element={<AddEdit />} />
         </Route>
         {/* rute publice */}
@@ -50,6 +50,7 @@ function App() {
         >
           <Route path="/" element={<Home />} />
           <Route path="/listing" element={<Listing />} />
+          <Route path="/add" element={<AddEdit />} />
           {/* <Route path="/onboarding" element={<Onboarding />} />   */}
         </Route>
 
