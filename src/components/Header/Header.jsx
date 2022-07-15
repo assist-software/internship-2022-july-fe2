@@ -15,7 +15,6 @@ import { ReactComponent as Security } from "../../assets/icons/security.svg";
 import { ReactComponent as Bell } from "../../assets/icons/bell.svg";
 import { ReactComponent as Chat } from "../../assets/icons/chat.svg";
 import { ReactComponent as Logout } from "../../assets/icons/logout.svg";
-import ButtonComp from "../Button/Button";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -28,10 +27,11 @@ const Header = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <div style={{ width: "160px" }}>
+            <div style={{ width: "150px" }}>
               <DropdownComp
                 fontWeight="semibold"
                 fontSize="buton"
+                title="Category"
                 className={styles.drop}
               />
             </div>
@@ -56,6 +56,9 @@ const Header = () => {
             </div>
             <Dropdown>
               <Dropdown.Toggle className={styles.profileTitle}>
+                <Person
+                  style={{ stroke: "$color-gray-600", marginRight: "5px" }}
+                />
                 My Profile
               </Dropdown.Toggle>
 
@@ -64,35 +67,38 @@ const Header = () => {
                   Hello!
                 </Dropdown.ItemText>
                 <Dropdown.Item
-                  href="#action/3.1"
+                  onClick={() => navigate("/my-account")}
                   className={styles.profileOption}
                 >
                   <Person className={styles.blueLogo} />
                   Profile
                 </Dropdown.Item>
                 <Dropdown.Item
-                  href="#action/3.1"
+                  onClick={() => navigate("/my-account")}
                   className={styles.profileOption}
                 >
                   <Bell className={styles.blueLogo} />
                   Notifications
                 </Dropdown.Item>
                 <Dropdown.Item
-                  href="#action/3.1"
+                  onClick={() => navigate("/my-account")}
                   className={styles.profileOption}
                 >
                   <Chat className={styles.blueLogo} />
                   Messages
                 </Dropdown.Item>
                 <Dropdown.Item
-                  href="#action/3.2"
+                  onClick={() => navigate("/my-account")}
                   className={styles.profileOption}
                 >
                   <Security className={styles.blueLogo} />
                   {"Login & security"}
                 </Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Item className={styles.profileOption}>
+                <Dropdown.Item
+                  onClick={() => navigate("/")}
+                  className={styles.profileOption}
+                >
                   <Logout className={styles.logout} />
                   Logout
                 </Dropdown.Item>

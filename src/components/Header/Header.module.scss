@@ -8,8 +8,11 @@
   background-color: white !important;
 }
 .assist{
-  width: 100px;
-  height: 40px;
+  width: 103px !important;
+  min-width: 100px !important;
+  height: 32px;
+  min-height: 40px !important;
+  cursor: pointer;
 }
 
 

@@ -1,0 +1,46 @@
+@import "../../styles/variables.scss";
+
+.filterOrderBy {
+  font-weight: $font-semibold;
+  color: $color-gray-400;
+  font-size: $font-body-small;
+}
+.headerBtns {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.leftSide {
+  display: flex;
+  width: 50%;
+  p {
+    margin: 5px;
+  }
+}
+.rightSide {
+  display: flex;
+  width: 50%;
+  justify-content: end;
+  p {
+    margin: 5px;
+  }
+}
+.dropdownTitle {
+  background-color: transparent !important;
+  color: black !important;
+  border: 0px !important;
+  font-weight: 600 !important;
+  font-size: $font-body-small !important;
+  &:active {
+    background-color: transparent !important;
+    color: black !important;
+    border-color: red;
+  }
+  &:visited {
+    border-color: red !important;
+  }
+  &:focus {
+    box-shadow: none !important;
+  }
+}
