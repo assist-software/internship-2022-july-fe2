@@ -1,0 +1,10 @@
+@import "../../../styles/variables.scss";
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 5px dashed orange;
+}
