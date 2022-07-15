@@ -24,11 +24,24 @@
 .buton{
     &__control{
     font-size: $font-button;
-    color: $color-primary-500;
+    color: #0241ae;
+    }
+
+    &__placeholder{
+        color :$color-primary-500;
     }
 }
 
 .bodySmall{
     font-size: $font-body-small;
-    color:black;
+    
+}
+.optionCheck{
+    width: 13px;
+    height: 11px;
+    padding-top: 5px;
+    text-align: center;
+}
+.optionLabel{
+    align-self: center;
 }
