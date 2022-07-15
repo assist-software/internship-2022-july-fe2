@@ -70,6 +70,7 @@ const Dropdown = ({ fontWeight, fontSize, title }) => {
       border: 0,
       backgroundColor: "#ffffff",
       color: "#0241ae",
+      cursor: "pointer",
     }),
     placeholder: (base) => ({
       ...base,

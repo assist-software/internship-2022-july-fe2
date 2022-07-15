@@ -56,6 +56,9 @@ const Header = () => {
             </div>
             <Dropdown>
               <Dropdown.Toggle className={styles.profileTitle}>
+                <Person
+                  style={{ stroke: "$color-gray-600", marginRight: "5px" }}
+                />
                 My Profile
               </Dropdown.Toggle>
 
@@ -71,28 +74,31 @@ const Header = () => {
                   Profile
                 </Dropdown.Item>
                 <Dropdown.Item
-                  href="#action/3.1"
+                  onClick={() => navigate("/my-account")}
                   className={styles.profileOption}
                 >
                   <Bell className={styles.blueLogo} />
                   Notifications
                 </Dropdown.Item>
                 <Dropdown.Item
-                  href="#action/3.1"
+                  onClick={() => navigate("/my-account")}
                   className={styles.profileOption}
                 >
                   <Chat className={styles.blueLogo} />
                   Messages
                 </Dropdown.Item>
                 <Dropdown.Item
-                  href="#action/3.2"
+                  onClick={() => navigate("/my-account")}
                   className={styles.profileOption}
                 >
                   <Security className={styles.blueLogo} />
                   {"Login & security"}
                 </Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Item className={styles.profileOption}>
+                <Dropdown.Item
+                  onClick={() => navigate("/")}
+                  className={styles.profileOption}
+                >
                   <Logout className={styles.logout} />
                   Logout
                 </Dropdown.Item>
