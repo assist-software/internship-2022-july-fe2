@@ -34,7 +34,6 @@ function App() {
             </>
           }
         >
-          <Route path="/my-account" element={<MyAccount />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/confirmation" element={<Confirmation />} />
 
@@ -48,6 +47,7 @@ function App() {
             </>
           }
         >
+          <Route path="/my-account" element={<MyAccount />} />
           <Route path="/" element={<Home />} />
           <Route path="/listing" element={<Listing />} />
           <Route path="/add" element={<AddEdit />} />
