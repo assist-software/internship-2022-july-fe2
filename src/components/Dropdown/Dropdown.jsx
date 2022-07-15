@@ -1,24 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import styles from "./Dropdown.module.scss";
 import { components } from "react-select";
 import PropTypes from "prop-types";
 
-// const Option = (props) => {
-//   return (
-//     <div className={styles.option}>
-//       <components.Option {...props}>
-//         <input
-//           type="checkbox"
-//           checked={props.isSelected}
-//           onChange={() => null}
-//           className={styles.optionCheck}
-//         />{" "}
-//         <label className={styles.optionLabel}>{props.label}</label>
-//       </components.Option>
-//     </div>
-//   );
-// };
+const Option = (props) => {
+  return (
+    <div className={styles.option}>
+      {" "}
+      <components.Option {...props}>
+        {" "}
+        <input
+          type="checkbox"
+          checked={props.isSelected}
+          onChange={() => null}
+          className={styles.optionCheck}
+        />{" "}
+        <label className={styles.optionLabel}>{props.label}</label>
+      </components.Option>
+    </div>
+  );
+};
 
 const options = [
   { value: "option1", label: "Option 1" },
@@ -27,11 +29,17 @@ const options = [
   { value: "option4", label: "Option 3" },
   { value: "option5", label: "Option 3" },
   { value: "option6", label: "Option 3" },
-  { value: "option7", label: "Option 3" },
+  { value: "option7", label: "Option 12" },
   { value: "option8", label: "Option 3" },
-  { value: "option9", label: "Option 3" },
+  { value: "option9", label: "Option 9" },
 ];
-const Dropdown = ({ fontWeight, fontSize, title }) => {
+
+const Dropdown = ({ fontWeight, fontSize, title, multi }) => {
+  const [multipleOption, setMultipleOption] = useState(
+    multi
+      ? { IndicatorSeparator: () => null, Option }
+      : { IndicatorSeparator: () => null }
+  );
   function setColor(fontSize) {
     if (fontSize === "buton") return "$color-primary-500";
     else return "black";
@@ -59,6 +67,7 @@ const Dropdown = ({ fontWeight, fontSize, title }) => {
         height: "2px!important",
       },
     }),
+
     menu: (base) => ({
       ...base,
       marginTop: 0,
@@ -73,7 +82,7 @@ const Dropdown = ({ fontWeight, fontSize, title }) => {
       color: "#0241ae",
       cursor: "pointer",
     }),
-    placeholder: (base) => ({
+    placeholder: (base, state) => ({
       ...base,
       color: color,
     }),
@@ -85,13 +94,24 @@ const Dropdown = ({ fontWeight, fontSize, title }) => {
       },
     }),
   };
+  // function handleOnChange(param) {
+  //   // setSelected(e.target.value)
+  //   console.log(param[0].value);
+  // }
+
   return (
     <Select
       options={options}
       className={`${styles.dropdown} ${styles[fontWeight]} ${styles[fontSize]} ${styles.classicOption}`}
       styles={style}
       placeholder={title}
-      components={{ IndicatorSeparator: () => null }}
+      components={multipleOption}
+      isMulti={multi ? true : null}
+      closeMenuOnSelect={multi ? false : true}
+      hideSelectedOptions={multi ? false : true}
+      defaultValue={title}
+      controlShouldRenderValue={multi ? false : true}
+      // onChange={handleOnChange}
     />
   );
 };
@@ -101,12 +121,14 @@ Dropdown.propTypes = {
     .isRequired,
   fontSize: PropTypes.oneOf(["buton", "bodySmall"]).isRequired,
   placeholder: PropTypes.string.isRequired,
+  multi: PropTypes.bool,
 };
 
 Dropdown.defaultProps = {
   fontWeight: "semibold",
   fontSize: "bodySmall",
   placeholder: "Placeholder",
+  multi: false,
 };
 
 export default Dropdown;
