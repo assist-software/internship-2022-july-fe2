@@ -1,4 +1,4 @@
-@import "../../../styles/variables.scss";
+@import "../../styles/variables.scss";
 
 div a{
     text-decoration: none;
@@ -100,6 +100,7 @@ div a{
         margin: 0px 20px;
         font-size:$font-body-tiny;
         font-weight: $font-semibold;
+        color:#6c6c6c;
     }
 }
 
