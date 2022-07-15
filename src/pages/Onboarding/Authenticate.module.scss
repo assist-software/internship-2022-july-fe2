@@ -1,4 +1,4 @@
-@import "../../../styles/variables.scss";
+@import "../../styles/variables.scss";
 
 div a{
     text-decoration: none;
@@ -15,7 +15,18 @@ div a{
     top: 329px;
 }
 
-// title + input fields + remember me
+//reset pwd
+.containerAuthResetPwd{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 415px;
+    height: 208px;
+    left: 281px;
+    top: 429px;
+}
+
+
 .contentContainerForm{
     flex-direction: column;
     align-items: flex-start;
@@ -23,9 +34,22 @@ div a{
     gap: 28px;
     
     width: 415px;
-    height: 296px;
+    height: 320px;
     
 }
+
+// reset pwd
+.contentContainerFormResetPwd{
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 28px;
+    
+    width: 415px;
+    height: 70px;
+    
+}
+
 
 .form{
     flex-direction: column;
@@ -44,6 +68,18 @@ div a{
 }
 
 .formTitle{
+    padding: 0px;
+    gap: 4px;
+    
+    width: 415px;
+    height: 58px;
+    
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.formTitleReset{
     padding: 0px;
     gap: 4px;
     
@@ -85,6 +121,26 @@ div a{
     align-self: stretch;
     flex-grow: 0;
 }
+
+.registerSeparator{
+    width: 415px;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    hr{
+        width: 100%;
+        height: 1px;
+    }
+    span{
+        margin: 0px 20px;
+        font-size:$font-body-tiny;
+        font-weight: $font-semibold;
+        color:#6c6c6c;
+    }
+}
+
+
 
 .authError{
     color: $color-alert-400;
@@ -133,6 +189,18 @@ div a{
     flex-grow: 0;
 }
 
+.textpwdInfo{
+    width: 415px;
+    height: 20px;
+    font-size:$font-body-tiny;
+    font-weight: $font-regular;
+    line-height: 20px;
+    color: $color-gray-500;
+
+    flex: none;
+    order: 0;
+    flex-grow: 1;
+}
 
 .forgotPassword{
     display: flex;
@@ -186,12 +254,18 @@ div a{
 
     width: 415px;
     height: 96px;
+    Button, .formInput Button{
+        margin-top:20px;
+    }
 }
 
-.contentContainerButtons Button{
-    margin-top:20px;
-}
 
+.register{
+    margin-top:90px;
+}
+.reset{
+    margin-top:90px;
+}
 .contentContainerAuthEndForm{
     display: flex;
     flex-direction: row;
@@ -212,28 +286,47 @@ div a{
 
 }
 
+.authRegister{
+    margin-top:-35px;
+}
+
 .textAuthEndForm{
     font-size: $font-body-small;
     font-weight: $font-semibold;
     line-height: 22px;
     align-items: center;
+
+    span{
+      color: $color-primary-400;
+      cursor:pointer;
+    }
 }
+
 
 @media (max-width : 860px){
     .authError,
     .containerAuth, 
     .contentContainerForm, 
     .form, 
-    .formTitle, 
+    .formTitle,
+    .formTitleReset, 
     .formInput,
     .rememberMe,
     .contentContainerAuthOptions,
     .forgotPassword,
     .contentContainerButtons,
-    .contentContainerButtons Button,
-    .contentContainerAuthEndForm
+    .contentContainerButtons Button, 
+    .formInput Button,
+    .contentContainerAuthEndForm,
+    .registerSeparator,
+    .containerAuthResetPwd,
+    .contentContainerFormResetPwd
     {
-        width: 250px;
+        width: 260px;
+    }
+
+    .formTitleReset{
+        height: 80px;
     }
 
     .authError{
@@ -242,6 +335,10 @@ div a{
 
     .contentContainerButtons{
         margin-top:40px;
+    }
+    
+    .reset{
+        margin-top:120px;
     }
    
     .rememberMe{
@@ -258,11 +355,17 @@ div a{
     //     height: 120px;
     // }
     
-    .contentContainerButtons Button{
-        padding:11px;
+    .contentContainerButtons Button, .formInput Button{
+        padding:9px;
     }
     .textAuthEndForm{
         margin-top:15px;
+    }
+    .authRegister{
+      margin-top:-15px;
+  }
+    .register{
+        margin-top:90px;
     }
 }
 
@@ -279,9 +382,12 @@ div a{
     .forgotPassword,
     .contentContainerButtons,
     .contentContainerButtons Button,
-    .contentContainerAuthEndForm
+    .formInput Button,
+    .contentContainerAuthEndForm,
+    .containerAuthResetPwd,
+    .contentContainerFormResetPwd
     {
-        width: 250px;
+        width: 260px;
     }    
     
    
@@ -299,7 +405,10 @@ div a{
     //     height: 120px;
     // }
     
-    .contentContainerButtons Button{
-        padding:11px;
+    .contentContainerButtons Button, .formInput Button{
+        padding:5px;
+    }
+    .register{
+        margin-top:90px;
     }
 }
