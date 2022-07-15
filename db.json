@@ -168,6 +168,38 @@
       "isActive": true
     }
   ],
+  "login": [
+    {
+      "id": 1,
+      "email": "admin@1.com",
+      "password": "admin1",
+      "token": "secret"
+    },
+    {
+      "id": 2,
+      "email": "admin@2.com",
+      "password": "admin2",
+      "token": "secret"
+    },
+    {
+      "id": 3,
+      "email": "admin@3.com",
+      "password": "admin3",
+      "token": "secret"
+    },
+    {
+      "id": 4,
+      "email": "admin@4.com",
+      "password": "admin4",
+      "token": "secret"
+    },
+    {
+      "id": 5,
+      "email": "admin@5.com",
+      "password": "admin5",
+      "token": "secret"
+    }
+  ],
   "message": [],
   "favorite": []
 }

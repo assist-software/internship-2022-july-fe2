@@ -12,6 +12,7 @@ import {
   Listing,
   MyAccount,
   Onboarding,
+  Layout,
   Selim,
   Catalin,
   Andrei,
@@ -30,28 +31,31 @@ function App() {
           element={
             <>
               <Header />
-              <ProtectedRoute />
+              <Layout>
+                <ProtectedRoute />
+              </Layout>
             </>
           }
         >
-          <Route path="/my-account" element={<MyAccount />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/confirmation" element={<Confirmation />} />
-
+          <Route path="/my-account" element={<MyAccount />} />
           <Route path="/edit" element={<AddEdit />} />
         </Route>
         {/* rute publice */}
         <Route
           element={
             <>
-              <Header /> <Outlet />
+              <Header />
+              <Layout>
+                <Outlet />
+              </Layout>
             </>
           }
         >
           <Route path="/" element={<Home />} />
           <Route path="/listing" element={<Listing />} />
           <Route path="/add" element={<AddEdit />} />
-          {/* <Route path="/onboarding" element={<Onboarding />} />   */}
         </Route>
 
         <Route path="/login" element={<Onboarding />} />

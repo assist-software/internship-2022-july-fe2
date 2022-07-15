@@ -2,9 +2,10 @@ import React, { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
-import style from "./LoginForm.module.scss";
+import style from "../Authenticate.module.scss";
 import Input from "../../../components/Input/Input";
 import Button from "../../../components/Button/Button";
+
 import { ReactComponent as Google } from "../../../assets/icons/google.svg";
 import { ReactComponent as View } from "../../../assets/icons/view.svg";
 import { ReactComponent as ViewOff } from "../../../assets/icons/view-off.svg";
@@ -14,10 +15,16 @@ import { getUser } from "../../../api/API";
 export default function LoginForm() {
   const navigate = useNavigate();
 
-  const { setAuth } = useAuth();
+  const { setUser, user } = useAuth();
   const [passwordShown, setPasswordShown] = useState(true);
-  const [user, setUser] = useState("");
+
+  // form values
+  const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
+
+  console.log(email, pwd, "inputs");
+
+  // error states
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [emailError, setEmailError] = useState(null);
   const [pwdError, setPwdError] = useState(null);
@@ -28,7 +35,7 @@ export default function LoginForm() {
     return re.test(String(email).toLowerCase());
   };
   const handleEmailError = () => {
-    if (!validateEmail(user)) {
+    if (!validateEmail(email)) {
       setEmailError("Invalid e-mail address!");
     } else setEmailError(null);
     if (!emailError) {
@@ -50,26 +57,53 @@ export default function LoginForm() {
 
   const handleLogIn = () => {
     try {
-      if (user === "" || pwd === "") {
+      if (email === "" || pwd === "") {
         handleEmailError();
         handlePwdError();
         return;
       }
 
-      getUser(user).then((res) => setIsLoggedIn(res));
-      // should make a validation if a user doesn't exist
+      getUser(email).then((res) => setIsLoggedIn(res));
+      // should make a validation if a email doesn't exist
       if (isLoggedIn !== null) {
-        setAuth({ name: "Team undefined" });
+        setUser({ name: "Team undefined" });
         navigate("/");
       }
     } catch (error) {
       console.log(error);
     }
   };
-  console.log(isLoggedIn + " =-----=");
 
   const passToggleHandler = () => {
     setPasswordShown(!passwordShown);
+  };
+
+  // test login handlers
+  const handleTestLoginUser = () => {
+    const token = 1234;
+    const role = "user";
+    const name = "Andrei";
+    try {
+      localStorage.setItem("token", token);
+      localStorage.setItem("role", role);
+      localStorage.setItem("name", name);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleTestLoginAdmin = () => {
+    const token = 1234;
+    const role = "admin";
+    const name = "Catalin";
+    try {
+      localStorage.setItem("token", token);
+      localStorage.setItem("role", role);
+      localStorage.setItem("name", name);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -82,20 +116,23 @@ export default function LoginForm() {
           </div>
 
           <div className={style.formInput}>
+            {/* email */}
             {emailError && <div className={style.authError}>{emailError}</div>}
             <Input
               label="Email"
               id="email"
               name="email"
-              value={user}
+              value={email}
               onChange={(e) => {
-                setUser(e.target.value);
+                setEmail(e.target.value);
                 handleEmailError();
               }}
               type="email"
               placeholder={"Email"}
               required
             />
+
+            {/* password */}
             {pwdError && <div className={style.authError}>{pwdError}</div>}
             <Input
               label="Password"
@@ -122,14 +159,14 @@ export default function LoginForm() {
           </div>
 
           <div className={style.forgotPassword}>
-            <a
+            <span
               className={style.textForgotPassword}
               onClick={() => {
                 navigate("/forgot-password");
               }}
             >
               Forgot your password?
-            </a>
+            </span>
           </div>
         </div>
       </div>
@@ -139,12 +176,7 @@ export default function LoginForm() {
           <Button
             variant="primary"
             label="Log in"
-            onClick={() => {
-              handleLogIn();
-              // setAuth({ name: "Team undefined" });
-              // //<Navigate to="/" state={{ from: location }} replace />;
-              // navigate("/");
-            }}
+            onClick={handleTestLoginUser}
           />
 
           <Button
@@ -152,19 +184,20 @@ export default function LoginForm() {
             icon={<Google />}
             position="left"
             label="Log in with Google"
+            onClick={handleTestLoginAdmin}
           />
         </div>
         <div className={style.contentContainerAuthEndForm}>
           <p className={style.textAuthEndForm}>
-            Don't have an account?{" "}
-            <a
+            Don't have an account?
+            <span
               className={style.textAuthEndForm}
               onClick={() => {
                 navigate("/register");
               }}
             >
               Sign up
-            </a>
+            </span>
           </p>
         </div>
       </div>

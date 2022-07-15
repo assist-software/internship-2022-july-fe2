@@ -26,8 +26,15 @@ const Card = ({
             className={`${listView ? styles.ListCardImg : styles.cardImg}`}
           />
           <div className={styles.contentCard}>
-            <p className={styles.cardTitle}>{title}</p>
-            <p className={styles.cardLocation}>{location}</p>
+            <div
+              className={`${styles.listTitleAndLocation} ${
+                !listView && styles.col
+              }`}
+            >
+              <p className={styles.cardTitle}>{title}</p>
+              <p className={styles.cardLocation}>{location}</p>
+            </div>
+
             <p
               style={{ display: listView ? "block" : "none" }}
               className={styles.cardDescription}

@@ -3,6 +3,8 @@ import Dropdown from "react-bootstrap/Dropdown";
 import { ReactComponent as GridRow } from "../../assets/icons/grid.svg";
 import { ReactComponent as Rows } from "../../assets/icons/rows.svg";
 import filtersStyle from "./Filters.module.scss";
+import Form from "react-bootstrap/Form";
+
 const Filters = ({ setListView }) => {
   return (
     <div>
@@ -18,10 +20,10 @@ const Filters = ({ setListView }) => {
               <Dropdown.ItemText className={filtersStyle.hello}>
                 Hello!
               </Dropdown.ItemText>
-              <Dropdown.Item className={filtersStyle.profileOption}>
-                <input type="checkbox" />
-                <label>Label</label>
-              </Dropdown.Item>
+              <Dropdown.Item
+                type="checkbox"
+                className={filtersStyle.profileOption}
+              ></Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
           <Dropdown>
@@ -31,14 +33,15 @@ const Filters = ({ setListView }) => {
 
             <Dropdown.Menu className={filtersStyle.dropMenu}>
               <Dropdown.ItemText className={filtersStyle.hello}>
-                Hello!
+                <Form.Check label="Option 1" className={filtersStyle.checks} />
+                <Form.Check label="Option 1" className={filtersStyle.checks} />
+                <Form.Check label="Option 1" className={filtersStyle.checks} />
+                <Form.Check label="Option 1" className={filtersStyle.checks} />
               </Dropdown.ItemText>
+
               <Dropdown.Item
-                href="#action/3.1"
                 className={filtersStyle.profileOption}
-              >
-                Profile
-              </Dropdown.Item>
+              ></Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </div>
