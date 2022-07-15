@@ -259,13 +259,14 @@ div a{
     }
 }
 
-
 .register{
     margin-top:90px;
 }
+
 .reset{
     margin-top:90px;
 }
+
 .contentContainerAuthEndForm{
     display: flex;
     flex-direction: row;
@@ -328,6 +329,10 @@ div a{
     .formTitleReset{
         height: 80px;
     }
+    .registerSeparator
+    {
+        width: 260px;
+    }
 
     .authError{
         font-size: $font-body-tiny;
@@ -385,7 +390,9 @@ div a{
     .formInput Button,
     .contentContainerAuthEndForm,
     .containerAuthResetPwd,
-    .contentContainerFormResetPwd
+    .contentContainerFormResetPwd,
+    .contentContainerAuthEndForm,
+    .contentContainerAuthEndForm
     {
         width: 260px;
     }    
