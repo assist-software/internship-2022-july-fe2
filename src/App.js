@@ -53,6 +53,7 @@ function App() {
             </>
           }
         >
+          <Route path="/my-account" element={<MyAccount />} />
           <Route path="/" element={<Home />} />
           <Route path="/listing" element={<Listing />} />
           <Route path="/add" element={<AddEdit />} />
