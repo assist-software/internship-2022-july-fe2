@@ -15,7 +15,6 @@ import { ReactComponent as Security } from "../../assets/icons/security.svg";
 import { ReactComponent as Bell } from "../../assets/icons/bell.svg";
 import { ReactComponent as Chat } from "../../assets/icons/chat.svg";
 import { ReactComponent as Logout } from "../../assets/icons/logout.svg";
-import ButtonComp from "../Button/Button";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -28,10 +27,11 @@ const Header = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <div style={{ width: "160px" }}>
+            <div style={{ width: "150px" }}>
               <DropdownComp
                 fontWeight="semibold"
                 fontSize="buton"
+                title="Category"
                 className={styles.drop}
               />
             </div>
@@ -64,7 +64,7 @@ const Header = () => {
                   Hello!
                 </Dropdown.ItemText>
                 <Dropdown.Item
-                  href="#action/3.1"
+                  onClick={() => navigate("/my-account")}
                   className={styles.profileOption}
                 >
                   <Person className={styles.blueLogo} />
