@@ -13,6 +13,7 @@ import {
   MyAccount,
   Onboarding,
   Layout,
+  Details,
   Selim,
   Catalin,
   Andrei,
@@ -56,6 +57,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/listing" element={<Listing />} />
           <Route path="/add" element={<AddEdit />} />
+          <Route path="/details" element={<Details />} />
         </Route>
 
         <Route path="/login" element={<Onboarding />} />
