@@ -6,7 +6,7 @@ import style from "../Authenticate.module.scss";
 import Input from "../../../components/Input/Input";
 import Button from "../../../components/Button/Button";
 
-import { getUser } from "../../../api/API";
+import { getUserById } from "../../../api/API";
 
 export default function ForgotPasswordForm() {
   const navigate = useNavigate();
@@ -39,7 +39,7 @@ export default function ForgotPasswordForm() {
         return;
       }
 
-      getUser(email).then((res) => setIsLoggedIn(res));
+      getUserById(email).then((res) => setIsLoggedIn(res));
       // should make a validation if a user doesn't exist
       if (isLoggedIn !== null) {
         setUser({ name: "Team undefined" });

@@ -1,11 +1,16 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 import styles from "./Details.module.scss";
 
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import { Button } from "../../components";
 
-import { ReactComponent as Heart } from "../../assets/icons/heart.svg";
+import { getListingById, getUserById } from "../../api/API";
 
+import { useParams } from "react-router-dom";
+
+import moment from "moment";
+
+// map to render, default location is Suceava
 const Map = () => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -31,6 +36,40 @@ const Map = () => {
 };
 
 const Details = () => {
+  // states for the details page
+  const [listing, setListing] = useState({});
+  const [owner, setOwner] = useState({});
+
+  // get the id from the url
+  const { id } = useParams();
+
+  // get listing from API
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await getListingById(id);
+        setListing(response);
+      } catch (error) {
+        console.log("Error: ", error);
+      }
+    })();
+  }, []);
+
+  // get owner from API
+  const getOwner = async () => {
+    if (listing.author) {
+      try {
+        const response = await getUserById(listing.author);
+        setOwner(response);
+      } catch (error) {
+        console.log("Error: ", error);
+      }
+    }
+  };
+  useEffect(() => {
+    getOwner();
+  }, [listing.author]);
+
   return (
     <section className={styles.container}>
       {/* images */}
@@ -49,9 +88,7 @@ const Details = () => {
       {/* title */}
       <div className={styles.title}>
         <div>
-          <h5 className={styles.listingName}>
-            Dreamy Treehouse Above Park City
-          </h5>
+          <h5 className={styles.listingName}>{listing.title}</h5>
           <h4 className={styles.listingPrice}>123456 lei</h4>
         </div>
         <button className={styles.shareButton}>Share</button>
@@ -63,23 +100,12 @@ const Details = () => {
         <div className={styles.listingDetails}>
           <div className={styles.description}>
             <h6>Description</h6>
-            <p>
-              Lörem ipsum infraling nyr platoren preska platin. Okun vugt serat,
-              tetrangen. Farat heterovis husanar ifall resade. Satsig mitulåd
-              gyn. Faranat fehugon pneumaskop respektive spökgarn tonöning.
-              Teger donök. Termopod Dylanman i tevänas om teras prehepp.
-              Förpappring. Anöde kvasiskade sogisk, donedat att terravision.
-              Kare mida. Ilogi löhung på samude. Skimma wiki att demynar.
-              Detehuvis nemykaligen i rutkod i regen alltså nyhet. Bebel pos
-              ultral ing osovis. Dinade pede, lagon respektive homopangen, i
-              predast. Bek saktiga gohåssa. Epil kasam väck ses seling. Väsat
-              beng, trisk, juholtare.
-            </p>
+            <p>{listing.description}</p>
           </div>
           {/* location */}
           <div className={styles.location}>
             <h6>Location</h6>
-            <p>City, Country</p>
+            <p>{listing.location}</p>
             {/* google maps */}
             <div className={styles.map}>
               <Map />
@@ -103,26 +129,22 @@ const Details = () => {
         {/* owner */}
         <div>
           <div className={styles.ownerDetails}>
-            <img
-              className={styles.ownerImage}
-              src="https://picsum.photos/200/300"
-              alt=""
-            />
+            <img className={styles.ownerImage} src={owner.photo} alt="" />
             <div>
-              <h6 className={styles.ownerName}>Jordan Henderson</h6>
+              <h6 className={styles.ownerName}>{owner.fullName}</h6>
               <p className={styles.ownerActivity}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+                Joiner in
+                <span> {moment(owner.createdAt).format("MMMM YYYY")}</span>
+                <br />
+                Response rate: <span>{owner.responseRate}</span>
+                <br />
+                Response time: <span>{owner.responseTime}</span>
               </p>
             </div>
           </div>
           <div className={styles.actions}>
             <Button label="Purchase" />
-            <Button
-              icon={<Heart />}
-              position="left"
-              label=""
-              variant="secondary"
-            />
+            <Button label="Like" variant="secondary" />
           </div>
         </div>
       </div>
