@@ -34,7 +34,7 @@ const options = [
   { value: "option9", label: "Option 9" },
 ];
 
-const Dropdown = ({ fontWeight, fontSize, title, multi }) => {
+const Dropdown = ({ fontWeight, fontSize, title, multi, options }) => {
   const [multipleOption, setMultipleOption] = useState(
     multi
       ? { IndicatorSeparator: () => null, Option }

@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Card.module.scss";
-
+import { ReactComponent as HeartFilled } from "../../assets/icons/heart-filled.svg";
+import { ReactComponent as Heart } from "../../assets/icons/heart.svg";
 const Card = ({
   onClick,
   style,
@@ -20,11 +21,20 @@ const Card = ({
             listView ? styles.listCardContent : styles.cardContent
           }`}
         >
-          <img
-            src={image}
-            alt="announces-img"
-            className={`${listView ? styles.ListCardImg : styles.cardImg}`}
-          />
+          <button
+            className={`${listView ? styles.heartList : styles.heartCard}`}
+            onClick={() => console.log("add to favorites")}
+          >
+            <Heart />
+          </button>
+          <div className={styles.imagesDiv}>
+            <img
+              src={image}
+              alt="announces-img"
+              className={`${listView ? styles.ListCardImg : styles.cardImg}`}
+            />
+          </div>
+
           <div className={styles.contentCard}>
             <div
               className={`${styles.listTitleAndLocation} ${
