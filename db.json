@@ -7,7 +7,7 @@
       "shortDescription": "Lorem ipsum dolor sit amet",
       "location": "Suceava, Romania",
       "price": "123,456",
-      "author": "1",
+      "author": 1,
       "approvedBy": "1",
       "status": 1,
       "images": "https://picsum.photos/200/300",
@@ -23,7 +23,7 @@
       "shortDescription": "Lorem ipsum dolor sit amet",
       "location": "Suceava, Romania",
       "price": "123,456",
-      "author": "2",
+      "author": 2,
       "approvedBy": "1",
       "status": 1,
       "images": "https://picsum.photos/200/300",
@@ -39,7 +39,7 @@
       "shortDescription": "Lorem ipsum dolor sit amet",
       "location": "Suceava, Romania",
       "price": "123,456",
-      "author": "5",
+      "author": 3,
       "approvedBy": "1",
       "status": 1,
       "images": "https://picsum.photos/200/300",
@@ -55,7 +55,7 @@
       "shortDescription": "Lorem ipsum dolor sit amet",
       "location": "Suceava, Romania",
       "price": "123,456",
-      "author": "1",
+      "author": 4,
       "approvedBy": "1",
       "status": 1,
       "images": "https://picsum.photos/200/300",
@@ -71,7 +71,7 @@
       "shortDescription": "Lorem ipsum dolor sit amet",
       "location": "Suceava, Romania",
       "price": "123,456",
-      "author": "1",
+      "author": 5,
       "approvedBy": "1",
       "status": 1,
       "images": "https://picsum.photos/200/300",
@@ -101,7 +101,7 @@
     },
     {
       "id": 2,
-      "fullName": "Andrei Andries",
+      "fullName": "Selim Muhammetgulyyev",
       "email": "lorem2@ipsum.com",
       "password": "1234",
       "gender": "male",
@@ -118,7 +118,7 @@
     },
     {
       "id": 3,
-      "fullName": "Andrei Andries",
+      "fullName": "Catalin Prisacaru",
       "email": "lorem3@ipsum.com",
       "password": "1234",
       "gender": "male",
@@ -135,7 +135,7 @@
     },
     {
       "id": 4,
-      "fullName": "Andrei Andries",
+      "fullName": "Sabin  Bejinari",
       "email": "lorem4@ipsum.com",
       "password": "1234",
       "gender": "male",
@@ -152,7 +152,7 @@
     },
     {
       "id": 5,
-      "fullName": "Andrei Andries",
+      "fullName": "Popescu Ion",
       "email": "lorem5@ipsum.com",
       "password": "1234",
       "gender": "male",
@@ -166,6 +166,38 @@
       "createdAt": "2022-05-25T17:31:43Z",
       "updatedAt": "2022-05-25T17:31:43Z",
       "isActive": true
+    }
+  ],
+  "login": [
+    {
+      "id": 1,
+      "email": "admin@1.com",
+      "password": "admin1",
+      "token": "secret"
+    },
+    {
+      "id": 2,
+      "email": "admin@2.com",
+      "password": "admin2",
+      "token": "secret"
+    },
+    {
+      "id": 3,
+      "email": "admin@3.com",
+      "password": "admin3",
+      "token": "secret"
+    },
+    {
+      "id": 4,
+      "email": "admin@4.com",
+      "password": "admin4",
+      "token": "secret"
+    },
+    {
+      "id": 5,
+      "email": "admin@5.com",
+      "password": "admin5",
+      "token": "secret"
     }
   ],
   "message": [],

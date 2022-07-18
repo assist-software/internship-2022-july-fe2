@@ -1,86 +1,86 @@
 {
   "listing": [
-      {
-        "id": 1,
-        "title": "Dreamy Treehouse Above Park City",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-        "shortDescription": "Lorem ipsum dolor sit amet",
-        "location": "Suceava, Romania",
-        "price": "123,456",
-        "author": "1",
-        "approvedBy": "1",
-        "status": 1,
-        "images": "https://picsum.photos/200/300",
-        "category": "latest",
-        "viewCounter": 0,
-        "createdAt": "2022-05-25T17:31:43Z",
-        "updatedAt": "2022-05-25T17:31:43Z"
-      },
-      {
-        "id": 2,
-        "title": "Dreamy Treehouse Above Park City",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-        "shortDescription": "Lorem ipsum dolor sit amet",
-        "location": "Suceava, Romania",
-        "price": "123,456",
-        "author": "2",
-        "approvedBy": "1",
-        "status": 1,
-        "images": "https://picsum.photos/200/300",
-        "category": "latest",
-        "viewCounter": 0,
-        "createdAt": "2022-05-25T17:31:43Z",
-        "updatedAt": "2022-05-25T17:31:43Z"
-      },
-      {
-        "id": 3,
-        "title": "Dreamy Treehouse Above Park City",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-        "shortDescription": "Lorem ipsum dolor sit amet",
-        "location": "Suceava, Romania",
-        "price": "123,456",
-        "author": "5",
-        "approvedBy": "1",
-        "status": 1,
-        "images": "https://picsum.photos/200/300",
-        "category": "latest",
-        "viewCounter": 0,
-        "createdAt": "2022-05-25T17:31:43Z",
-        "updatedAt": "2022-05-25T17:31:43Z"
-      },
-      {
-        "id": 4,
-        "title": "Dreamy Treehouse Above Park City",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-        "shortDescription": "Lorem ipsum dolor sit amet",
-        "location": "Suceava, Romania",
-        "price": "123,456",
-        "author": "1",
-        "approvedBy": "1",
-        "status": 1,
-        "images": "https://picsum.photos/200/300",
-        "category": "latest",
-        "viewCounter": 0,
-        "createdAt": "2022-05-25T17:31:43Z",
-        "updatedAt": "2022-05-25T17:31:43Z"
-      },
-      {
-        "id": 5,
-        "title": "Dreamy Treehouse Above Park City",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-        "shortDescription": "Lorem ipsum dolor sit amet",
-        "location": "Suceava, Romania",
-        "price": "123,456",
-        "author": "1",
-        "approvedBy": "1",
-        "status": 1,
-        "images": "https://picsum.photos/200/300",
-        "category": "latest",
-        "viewCounter": 0,
-        "createdAt": "2022-05-25T17:31:43Z",
-        "updatedAt": "2022-05-25T17:31:43Z"
-      }
-    ],
+    {
+      "id": 1,
+      "title": "Dreamy Treehouse Above Park City",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+      "shortDescription": "Lorem ipsum dolor sit amet",
+      "location": "Suceava, Romania",
+      "price": "123,456",
+      "author": 1,
+      "approvedBy": "1",
+      "status": 1,
+      "images": "https://picsum.photos/200/300",
+      "category": "latest",
+      "viewCounter": 0,
+      "createdAt": "2022-05-25T17:31:43Z",
+      "updatedAt": "2022-05-25T17:31:43Z"
+    },
+    {
+      "id": 2,
+      "title": "Dreamy Treehouse Above Park City",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+      "shortDescription": "Lorem ipsum dolor sit amet",
+      "location": "Suceava, Romania",
+      "price": "123,456",
+      "author": 2,
+      "approvedBy": "1",
+      "status": 1,
+      "images": "https://picsum.photos/200/300",
+      "category": "latest",
+      "viewCounter": 0,
+      "createdAt": "2022-05-25T17:31:43Z",
+      "updatedAt": "2022-05-25T17:31:43Z"
+    },
+    {
+      "id": 3,
+      "title": "Dreamy Treehouse Above Park City",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+      "shortDescription": "Lorem ipsum dolor sit amet",
+      "location": "Suceava, Romania",
+      "price": "123,456",
+      "author": 3,
+      "approvedBy": "1",
+      "status": 1,
+      "images": "https://picsum.photos/200/300",
+      "category": "latest",
+      "viewCounter": 0,
+      "createdAt": "2022-05-25T17:31:43Z",
+      "updatedAt": "2022-05-25T17:31:43Z"
+    },
+    {
+      "id": 4,
+      "title": "Dreamy Treehouse Above Park City",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+      "shortDescription": "Lorem ipsum dolor sit amet",
+      "location": "Suceava, Romania",
+      "price": "123,456",
+      "author": 4,
+      "approvedBy": "1",
+      "status": 1,
+      "images": "https://picsum.photos/200/300",
+      "category": "latest",
+      "viewCounter": 0,
+      "createdAt": "2022-05-25T17:31:43Z",
+      "updatedAt": "2022-05-25T17:31:43Z"
+    },
+    {
+      "id": 5,
+      "title": "Dreamy Treehouse Above Park City",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+      "shortDescription": "Lorem ipsum dolor sit amet",
+      "location": "Suceava, Romania",
+      "price": "123,456",
+      "author": 5,
+      "approvedBy": "1",
+      "status": 1,
+      "images": "https://picsum.photos/200/300",
+      "category": "latest",
+      "viewCounter": 0,
+      "createdAt": "2022-05-25T17:31:43Z",
+      "updatedAt": "2022-05-25T17:31:43Z"
+    }
+  ],
   "user": [
     {
       "id": 1,
@@ -101,8 +101,8 @@
     },
     {
       "id": 2,
-      "fullName": "Andrei Andries",
-      "email": "lorem@ipsum.com",
+      "fullName": "Selim Muhammetgulyyev",
+      "email": "lorem2@ipsum.com",
       "password": "1234",
       "gender": "male",
       "phone": "123456789",
@@ -118,8 +118,8 @@
     },
     {
       "id": 3,
-      "fullName": "Andrei Andries",
-      "email": "lorem@ipsum.com",
+      "fullName": "Catalin Prisacaru",
+      "email": "lorem3@ipsum.com",
       "password": "1234",
       "gender": "male",
       "phone": "123456789",
@@ -135,8 +135,8 @@
     },
     {
       "id": 4,
-      "fullName": "Andrei Andries",
-      "email": "lorem@ipsum.com",
+      "fullName": "Sabin  Bejinari",
+      "email": "lorem4@ipsum.com",
       "password": "1234",
       "gender": "male",
       "phone": "123456789",
@@ -152,8 +152,8 @@
     },
     {
       "id": 5,
-      "fullName": "Andrei Andries",
-      "email": "lorem@ipsum.com",
+      "fullName": "Popescu Ion",
+      "email": "lorem5@ipsum.com",
       "password": "1234",
       "gender": "male",
       "phone": "123456789",
@@ -167,9 +167,39 @@
       "updatedAt": "2022-05-25T17:31:43Z",
       "isActive": true
     }
-    ],
-  "message": [
-    ],
-    "favorite": [
-    ]
-  }
+  ],
+  "login": [
+    {
+      "id": 1,
+      "email": "admin@1.com",
+      "password": "admin1",
+      "token": "secret"
+    },
+    {
+      "id": 2,
+      "email": "admin@2.com",
+      "password": "admin2",
+      "token": "secret"
+    },
+    {
+      "id": 3,
+      "email": "admin@3.com",
+      "password": "admin3",
+      "token": "secret"
+    },
+    {
+      "id": 4,
+      "email": "admin@4.com",
+      "password": "admin4",
+      "token": "secret"
+    },
+    {
+      "id": 5,
+      "email": "admin@5.com",
+      "password": "admin5",
+      "token": "secret"
+    }
+  ],
+  "message": [],
+  "favorite": []
+}

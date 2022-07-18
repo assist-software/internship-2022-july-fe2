@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./Card.module.scss";
-// import photo from "../../assets/images/splash.png";
 
 const Card = ({
+  onClick,
   style,
   listView,
   image,
@@ -13,7 +13,7 @@ const Card = ({
 }) => {
   return (
     <div className={styles.cards}>
-      <div className={styles.card}>
+      <div onClick={onClick} className={styles.card}>
         <div
           style={style}
           className={`${
@@ -26,8 +26,15 @@ const Card = ({
             className={`${listView ? styles.ListCardImg : styles.cardImg}`}
           />
           <div className={styles.contentCard}>
-            <p className={styles.cardTitle}>{title}</p>
-            <p className={styles.cardLocation}>{location}</p>
+            <div
+              className={`${styles.listTitleAndLocation} ${
+                !listView && styles.col
+              }`}
+            >
+              <p className={styles.cardTitle}>{title}</p>
+              <p className={styles.cardLocation}>{location}</p>
+            </div>
+
             <p
               style={{ display: listView ? "block" : "none" }}
               className={styles.cardDescription}

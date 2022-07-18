@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Button, Input } from "../../../components";
 import RowItem from "../RowItem/RowItem";
 import styles from "./Profile.module.scss";
-import { getUser } from "../../../api/API";
+import { getUserById } from "../../../api/API";
 
 const Profile = () => {
   // get user from API
   useEffect(() => {
     (async () => {
       try {
-        const response = await getUser(1);
+        const response = await getUserById(1);
         setUser(response);
       } catch (error) {
         console.log("Error: ", error);

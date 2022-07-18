@@ -1,0 +1,13 @@
+@import "../../styles/mixins.scss";
+
+.layout {
+  padding: 2rem 8rem;
+
+  @include medium {
+    padding: 0 2rem;
+  }
+
+  @include small {
+    padding: 0 1rem;
+  }
+}

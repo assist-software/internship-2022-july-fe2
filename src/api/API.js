@@ -1,6 +1,16 @@
 import axios from "axios";
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
+// login
+export const login = async (email, password) => {
+  try {
+    const response = await axios.post("/login", { email, password });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // get listing
 export const getListings = async () => {
   try {
@@ -11,8 +21,18 @@ export const getListings = async () => {
   }
 };
 
+// get listing by id
+export const getListingById = async (id) => {
+  try {
+    const response = await axios.get("/listing/" + id);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 // get user by id
-export const getUser = async (id) => {
+export const getUserById = async (id) => {
   try {
     const response = await axios.get("/user/" + id);
     return response.data;

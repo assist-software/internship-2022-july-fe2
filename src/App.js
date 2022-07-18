@@ -12,6 +12,8 @@ import {
   Listing,
   MyAccount,
   Onboarding,
+  Layout,
+  Details,
   Selim,
   Catalin,
   Andrei,
@@ -25,41 +27,47 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* rute protejate */}
         <Route
           element={
             <>
               <Header />
-              <ProtectedRoute />
+              <Layout>
+                <ProtectedRoute />
+              </Layout>
             </>
           }
         >
-          <Route path="/my-account" element={<MyAccount />} />
+          {/* protected routes */}
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/confirmation" element={<Confirmation />} />
-
+          <Route path="/my-account" element={<MyAccount />} />
           <Route path="/edit" element={<AddEdit />} />
         </Route>
-        {/* rute publice */}
+
         <Route
           element={
             <>
-              <Header /> <Outlet />
+              <Header />
+              <Layout>
+                <Outlet />
+              </Layout>
             </>
           }
         >
+          {/* public routes */}
           <Route path="/" element={<Home />} />
           <Route path="/listing" element={<Listing />} />
           <Route path="/add" element={<AddEdit />} />
-          {/* <Route path="/onboarding" element={<Onboarding />} />   */}
+          <Route path="/listing/:id" element={<Details />} />
         </Route>
 
+        {/* onboarding routes */}
         <Route path="/login" element={<Onboarding />} />
         <Route path="/register" element={<Onboarding />} />
         <Route path="/forgot-password" element={<Onboarding />} />
         <Route path="/reset-password" element={<Onboarding />} />
 
-        {/* test */}
+        {/* test routes */}
         <Route path="/selim" element={<Selim />} />
         <Route path="/catalin" element={<Catalin />} />
         <Route path="/andrei" element={<Andrei />} />
