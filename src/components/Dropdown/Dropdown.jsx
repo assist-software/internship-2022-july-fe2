@@ -77,7 +77,7 @@ const Dropdown = ({ fontWeight, fontSize, title, multi, options }) => {
       ...base,
       boxShadow: state.isFocused ? null : null,
       border: 0,
-      backgroundColor: "#ffffff",
+      backgroundColor: "transparent",
       color: "#0241ae",
       cursor: "pointer",
     }),
