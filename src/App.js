@@ -40,7 +40,12 @@ function App() {
           {/* protected routes */}
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/confirmation" element={<Confirmation />} />
-          <Route path="/my-account" element={<MyAccount />} />
+          <Route path="/my-account">
+            <Route path="profile" element={<MyAccount />} />
+            <Route path="security" element={<MyAccount />} />
+            <Route path="notifications" element={<MyAccount />} />
+            <Route path="messages" element={<MyAccount />} />
+          </Route>
           <Route path="/edit" element={<AddEdit />} />
         </Route>
 
