@@ -1,39 +1,49 @@
-import React, { useState } from "react";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import React, { useState, useCallback } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import { Input, Button, Select } from "../../components";
+
 import styles from "./AddEdit.module.scss";
-import PropTypes from "prop-types";
-import Input from "../../components/Input/Input";
 import { ReactComponent as Add } from "../../assets/icons/add.svg";
-import Button from "../../components/Button/Button";
+
+import { useDropzone } from "react-dropzone";
+
+import { nanoid } from "nanoid";
 
 const AddEdit = (props) => {
-  //react dropzone for images
+  // form data
+  const [formValue, setFormValue] = useState({
+    title: "",
+    category: "",
+    price: "",
+    images: [],
+    description: "",
+    location: "",
+    phoneNumber: "",
+  });
 
-  const [title, setTitle] = useState(props.title || "");
-  const [category, setCategory] = useState(props.category || "");
-  const [price, setPrice] = useState(props.price || "");
-  const [description, setDescription] = useState(props.description || "");
-  const [location, setLocation] = useState(props.location || "");
-  const [phoneNumber, setPhoneNumber] = useState(props.phoneNumber || "");
+  console.log(formValue, "formValue");
 
-  //make price number only
-  const handlePriceChange = (e) => {
-    const re = /^[0-9\b]+$/;
-    if (e.target.value === "" || re.test(e.target.value)) {
-      setPrice(e.target.value);
-      console.log(e.target.value);
-    }
+  // handleChange
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValue({ ...formValue, [name]: value });
   };
-  // make phone number number only
-  const handlePhoneNumberChange = (e) => {
-    const re = /^[0-9\b]+$/;
-    if (e.target.value === "" || re.test(e.target.value)) {
-      setPhoneNumber(e.target.value);
-      console.log(e.target.value);
-    }
-  };
+
+  // test
+  const [images, setImages] = useState([]);
+  const onDrop = useCallback((acceptedFiles) => {
+    acceptedFiles.map((file) => {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        setImages((prevState) => [
+          ...prevState,
+          { id: nanoid(), src: e.target.result },
+        ]);
+      };
+      reader.readAsDataURL(file);
+      return file;
+    });
+  }, []);
 
   return (
     <Container>
@@ -47,23 +57,36 @@ const AddEdit = (props) => {
         </Col>
         <Col md={{ span: 6, offset: 0 }} className={styles.bottomBorder}>
           <div className={styles.inputs}>
+            {/* title */}
             <Input
+              name="title"
+              id="title"
+              value={formValue.title}
               label="Title"
               placeholder="Placeholder"
-              value={title}
-              onChange={(event) => setTitle(event.target.value)}
+              onChange={handleChange}
             />
-            <Input
+            {/* category */}
+            <Select
+              value={formValue.category}
+              name="category"
+              id="category"
+              onChange={handleChange}
               label="Category"
-              placeholder="Select category"
-              value={category}
-              onChange={(event) => setCategory(event.target.value)}
+              options={[
+                { value: "category1", label: "Category 1" },
+                { value: "category2", label: "Category 2" },
+                { value: "category3", label: "Category 3" },
+              ]}
             />
             <div className={styles.price}>
+              {/* price */}
               <Input
+                name="price"
+                id="price"
+                onChange={handleChange}
                 label="Price"
-                value={price}
-                onChange={(event) => handlePriceChange(event)}
+                value={formValue.price}
               />
               <h6>lei</h6>
             </div>
@@ -80,14 +103,10 @@ const AddEdit = (props) => {
         <Col md={{ span: 6, offset: 0 }} className={styles.bottomBorder}>
           <Row>
             <Col sm={{ span: 2, offset: 0 }}>
-              <div className={styles.imgPlaceholder}>
-                <Add className={styles.addIcon} />
-              </div>
+              <MyDropzone />
             </Col>
             <Col sm={{ span: 2, offset: 2 }}>
-              <div className={styles.imgPlaceholder}>
-                <Add className={styles.addIcon} />
-              </div>
+              <MyDropzone />
             </Col>
             <Col sm={{ span: 2, offset: 2 }}>
               <div className={styles.imgPlaceholder}>
@@ -140,12 +159,15 @@ const AddEdit = (props) => {
           </div>
         </Col>
         <Col md={{ span: 6, offset: 0 }} className={styles.bottomBorder}>
+          {/* description */}
           <Input
+            name="description"
+            id="description"
             label="Description details"
             placeholder="Placeholder"
-            helper={`${description.length} /100 characters`}
-            value={description}
-            onChange={(event) => setDescription(event.target.value)}
+            helper={`${formValue.description.length} /100 characters`}
+            value={formValue.description}
+            onChange={handleChange}
           />
         </Col>
       </Row>
@@ -157,17 +179,22 @@ const AddEdit = (props) => {
           </div>
         </Col>
         <Col md={{ span: 6, offset: 0 }} className={styles.bottomBorder}>
+          {/* location */}
           <Input
+            name="location"
+            id="location"
             label="Location"
             placeholder="Placeholder"
-            value={location}
-            onChange={(event) => setLocation(event.target.value)}
+            value={formValue.location}
+            onChange={handleChange}
           />
           <div className={styles.price}>
+            {/* phone */}
             <Input
+              name="phoneNumber"
+              id="phoneNumber"
               label="Phone number"
-              value={phoneNumber}
-              onChange={(event) => handlePhoneNumberChange(event)}
+              value={formValue.phoneNumber}
             />
           </div>
         </Col>
@@ -190,13 +217,18 @@ const AddEdit = (props) => {
   );
 };
 
-AddEdit.propTypes = {
-  title: PropTypes.string,
-  category: PropTypes.string,
-  price: PropTypes.number,
-  description: PropTypes.string,
-  location: PropTypes.string,
-  phoneNumber: PropTypes.number,
-};
+function MyDropzone({ open }) {
+  const { getRootProps, getInputProps } = useDropzone({});
+  return (
+    <div {...getRootProps({ className: "dropzone" })}>
+      <input className="input-zone" {...getInputProps()} />
+      <div className="text-center">
+        <p className="dropzone-content">
+          Drag drop some files here, or click to select files
+        </p>
+      </div>
+    </div>
+  );
+}
 
 export default AddEdit;

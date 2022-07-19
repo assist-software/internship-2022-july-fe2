@@ -30,7 +30,7 @@ Select.propTypes = {
   name: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   options: PropTypes.array.isRequired,
-  label: PropTypes.array.isRequired,
+  label: PropTypes.string.isRequired,
   onChange: PropTypes.func,
 };
 
