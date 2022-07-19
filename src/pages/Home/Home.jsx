@@ -6,6 +6,7 @@ const Home = () => {
       <div>
         <h1 className={styles.h1}>What are you interested in?</h1>
       </div>
+
       <Carousel title="Most view" />
       <Carousel title="Big Houses" />
       <Carousel title="Small Houses" />

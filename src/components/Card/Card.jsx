@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Card.module.scss";
 import { ReactComponent as HeartFilled } from "../../assets/icons/heart-filled.svg";
 import { ReactComponent as Heart } from "../../assets/icons/heart.svg";
+
 const Card = ({
   onClick,
   style,
@@ -12,6 +13,10 @@ const Card = ({
   description,
   price,
 }) => {
+  const [like, setLike] = useState(false);
+  function stopPropagation(e) {
+    e.stopPropagation();
+  }
   return (
     <div className={styles.cards}>
       <div onClick={onClick} className={styles.card}>
@@ -21,12 +26,15 @@ const Card = ({
             listView ? styles.listCardContent : styles.cardContent
           }`}
         >
-          <button
-            className={`${listView ? styles.heartList : styles.heartCard}`}
-            onClick={() => console.log("add to favorites")}
-          >
-            <Heart />
-          </button>
+          <div onClick={stopPropagation}>
+            <button
+              className={`${listView ? styles.heartList : styles.heartCard}`}
+              onClick={() => setLike(!like)}
+            >
+              {!like ? <Heart /> : <HeartFilled className={styles.heartFill} />}
+            </button>
+          </div>
+
           <div className={styles.imagesDiv}>
             <img
               src={image}
