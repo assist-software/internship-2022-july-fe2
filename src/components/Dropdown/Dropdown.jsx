@@ -32,13 +32,56 @@ const options = [
   { value: "option9", label: "Option 9" },
 ];
 
-const Dropdown = ({ fontWeight, fontSize, title, multi }) => {
+const Locations = [
+  { value: "alba", label: "Alba" },
+  { value: "arad", label: "Arad" },
+  { value: "arges", label: "Arges" },
+  { value: "bacau", label: "Bacau" },
+  { value: "bihor", label: "Bihor" },
+  { value: "bistrita_nasaud", label: "Bistrita-Nasaud" },
+  { value: "botosani", label: "Botosani" },
+  { value: "brasov", label: "Brasov" },
+  { value: "braila", label: "Braila" },
+  { value: "buzau", label: "Buzau" },
+  { value: "caras_severin", label: "Caras-Severin" },
+  { value: "calarasi", label: "Calarasi" },
+  { value: "cluj", label: "Cluj" },
+  { value: "constanta", label: "Constanta" },
+  { value: "covasna", label: "Covasna" },
+  { value: "dambovita", label: "Dambovita" },
+  { value: "dolj", label: "Dolj" },
+  { value: "galati", label: "Galati" },
+  { value: "giurgiu", label: "Giurgiu" },
+  { value: "gorj", label: "Gorj" },
+  { value: "harghita", label: "Harghita" },
+  { value: "hunedoara", label: "Hunedoara" },
+  { value: "ialomita", label: "Ialomita" },
+  { value: "iasi", label: "Iasi" },
+  { value: "ilfov", label: "Ilfov" },
+  { value: "maramures", label: "Maramures" },
+  { value: "mehedinti", label: "Mehedinti" },
+  { value: "mures", label: "Mures" },
+  { value: "neamt", label: "Neamt" },
+  { value: "olt", label: "Olt" },
+  { value: "prahova", label: "Prahova" },
+  { value: "satu_mare", label: "Satu Mare" },
+  { value: "salaj", label: "Salaj" },
+  { value: "sibiu", label: "Sibiu" },
+  { value: "suceava", label: "Suceava" },
+  { value: "teleorman", label: "Teleorman" },
+  { value: "timis", label: "Timis" },
+  { value: "tulcea", label: "Tulcea" },
+  { value: "vaslui", label: "Vaslui" },
+  { value: "valcea", label: "Valcea" },
+  { value: "vrancea", label: "Vrancea" },
+];
+
+const Dropdown = ({ fontWeight, fontSize, title, multi, options }) => {
   const [multipleOption] = useState(
     multi
       ? { IndicatorSeparator: () => null, Option }
       : { IndicatorSeparator: () => null }
   );
-
   function setColor(fontSize) {
     if (fontSize === "buton") return "$color-primary-500";
     else return "black";
@@ -92,10 +135,6 @@ const Dropdown = ({ fontWeight, fontSize, title, multi }) => {
       },
     }),
   };
-  // function handleOnChange(param) {
-  //   // setSelected(e.target.value)
-  //   console.log(param[0].value);
-  // }
 
   return (
     <Select
@@ -127,6 +166,7 @@ Dropdown.defaultProps = {
   fontSize: "bodySmall",
   placeholder: "Placeholder",
   multi: false,
+  options: Locations,
 };
 
 export default Dropdown;

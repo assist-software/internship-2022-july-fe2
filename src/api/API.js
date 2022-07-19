@@ -31,6 +31,16 @@ export const getListingById = async (id) => {
   }
 };
 
+// add listing
+export const addListing = async (data) => {
+  try {
+    const response = await axios.post("/listing", data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 // get user by id
 export const getUserById = async (id) => {
   try {
