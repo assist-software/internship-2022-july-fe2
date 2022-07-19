@@ -10,11 +10,9 @@ export const AuthProvider = ({ children }) => {
   // id should change with token in production
   const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
 
-  console.log(userId, "----id");
   const fetchUser = async () => {
     try {
       const response = await getUserById(userId);
-      console.log(response);
       setUser(response.data);
     } catch (error) {
       console.log("Error: ", error);

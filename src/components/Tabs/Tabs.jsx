@@ -5,8 +5,6 @@ import useAuth from "../../hooks/useAuth";
 
 const Tabs = () => {
   const { user } = useAuth();
-  console.log(user);
-
   return (
     <div className={styles.tabs}>
       {user?.role === "user" ? (
