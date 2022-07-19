@@ -1,11 +1,135 @@
-.list {
-  display: flex;
-  font-size: 2rem;
+@import "../../styles/variables.scss";
+
+
+.navbar {
+  border-bottom: 1px solid !important;
+  border-bottom-color: $color-gray-200 !important;
+  z-index: 1 !important;
+  background-color: white !important;
+}
+.assist{
+  width: 103px !important;
+  min-width: 100px !important;
+  height: 32px;
+  min-height: 40px !important;
   cursor: pointer;
-  li {
-    margin-right: 2rem;
-    &:hover {
-      text-decoration: underline;
-    }
+  
+}
+
+
+
+.search {
+  margin:1rem 0rem 1rem 0rem;
+  background-color: white;
+  height: 40px;
+  width: 400px !important;
+  border-right: none !important;
+  border-radius: 0px !important;
+}
+.search:focus,:hover {
+  box-shadow: none !important;
+  border-color: $color-gray-200 !important;
+}
+
+.searchIcon {
+  margin: 1rem 0;
+  border: 1px solid $color-gray-200 !important;
+  height: 40px;
+  width: 40px;
+  border-left: none !important;
+  border-bottom-right-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+  stroke: $color-primary-500;
+  padding:10px 10px;
+}
+
+.category{
+  margin: 1rem 0;
+  border: 1px solid $color-gray-200 !important;
+  height: 40px;
+  width: 150px;
+  border-bottom-left-radius: 10px !important;
+  border-top-left-radius: 10px !important;
+  padding-left: 1rem;
+}
+
+.favorites {
+  width: 150px;
+  display: inline-flex !important;
+  gap: 8px !important;
+  background-color: white !important;
+  color: $color-gray-600 !important;
+  border: none !important;
+  padding: 0.5rem !important;
+  font-weight: $font-semibold;
+  font-size: $font-button;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5px;
+}
+
+.favoritesDiv:hover {
+  .favorites{
+    color: $color-primary-300 !important;
   }
+  stroke: $color-primary-300 !important;
+}
+.favorites:focus {
+  box-shadow: none !important;
+}
+
+.profileTitle {
+  color: $color-gray-600 !important;
+  background-color: white !important;
+  border: none !important;
+  font-weight: $font-semibold;
+  font-size: $font-body-small;
+  padding: 0.48rem !important;
+  margin-left: 0.9rem !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5px;
+  gap: 8px !important;
+}
+.profileTitle:focus {
+  box-shadow: none !important;
+}
+.profileTitle:hover {
+  color: $color-primary-300 !important;
+}
+
+.blueLogo {
+  fill: $color-primary-400 !important;
+  color: $color-primary-400 !important;
+  stroke: $color-primary-400 !important;
+  width: 16px;
+  height: 16px;
+  margin: 5px;
+}
+
+.profileOption{
+  font-weight: $font-medium;
+  font-size: $font-body-small;
+  color: $color-gray-600 !important;
+}
+.profileOption:hover {
+  background-color: white !important;
+  color: $color-primary-300  !important;
+}
+
+.dropMenu{
+  border: 0px !important;
+  border-radius: 12px !important;
+ box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.14);
+}
+
+.hello{
+  font-size: $font-body-normal ;
+  font-weight: $font-bold;
+}
+.logout{
+  stroke: $color-gray-500  !important;
+  height: 18px;
+  width: 18px;
 }

@@ -3,11 +3,12 @@ import useAuth from "../hooks/useAuth";
 
 const ProtectedRoutes = ({ role }) => {
   let location = useLocation();
-  const { auth } = useAuth();
-  return auth?.name ? (
+  const { isLoggedIn } = useAuth();
+
+  return isLoggedIn() ? (
     <Outlet />
   ) : (
-    <Navigate to="/onboarding" state={{ from: location }} replace />
+    <Navigate to="/login" state={{ from: location }} replace />
   );
 };
 

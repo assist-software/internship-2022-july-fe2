@@ -25,3 +25,4 @@ yarn-error.log*
 # 
 .env
 db.json
+.Demo

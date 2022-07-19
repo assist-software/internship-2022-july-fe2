@@ -1,9 +1,45 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import { getListings } from "../../api/API";
+import Card from "../../components/Card/Card";
+import Filters from "../../components/Filters/Filters";
+import listingStyle from "./Listing.module.scss";
 
-const Listing = () => {
+import { useNavigate } from "react-router-dom";
+
+const Listing = ({ title }) => {
+  const [listings, setListings] = useState([]);
+  useEffect(() => {
+    getListings().then((res) => setListings(res));
+  }, []);
+
+  // view
+  const [listView, setListView] = useState(true);
+
+  const navigate = useNavigate();
+
   return (
-    <div>Listing</div>
-  )
-}
+    <div>
+      <div>
+        <h3 className={listingStyle.title}>Latest</h3>
+      </div>
+      <Filters setListView={setListView} />
 
-export default Listing
+      {listings?.map((listing, index) => (
+        <Card
+          key={index}
+          image={listing.images}
+          title={listing.title}
+          description={listing.description}
+          price={listing.price}
+          location={listing.location}
+          listView={listView}
+          onClick={() => {
+            navigate("/listing/" + listing.id);
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+export default Listing;

@@ -1,1 +1,88 @@
 @import "../../styles/variables.scss";
+
+input {
+  border: 1px solid $color-gray-200;
+  padding: 10px 12px;
+  width: 100%;
+  border-radius: 8px;
+  color: $color-black;
+  font-size: $font-body-normal;
+  font-weight: $font-medium;
+  line-height: 24px;
+  padding-right: 4rem;
+
+  &:hover,
+  &:active,
+  &:focus {
+    border-color: $color-gray-400;
+  }
+
+  &:disabled {
+    background: $color-gray-50;
+    border: unset;
+  }
+}
+
+input::placeholder {
+  color: $color-gray-200;
+  font-size: $font-body-normal;
+  font-weight: $font-medium;
+  line-height: 24px;
+}
+
+label {
+  color: $color-gray-600;
+  font-size: $font-body-small;
+  font-weight: $font-medium;
+  line-height: 22px;
+  display: flex;
+  margin-bottom: 4px;
+}
+
+input:focus:required {
+  &:invalid {
+    color: red;
+    border-color: red;
+    box-shadow: 0 0 6px red;
+  }
+  &:valid,
+  &:placeholder-shown {
+    border-color: green;
+    box-shadow: 0 0 8px green;
+  }
+}
+
+.error {
+  input {
+    border-color: $color-alert-400;
+  }
+  p {
+    color: $color-alert-500 !important;
+  }
+}
+
+.icon {
+  position: absolute;
+  bottom: 30%;
+  transform: translate(-100%, 50%);
+  border-left: 1px solid $color-gray-200;
+  margin-left: -12px;
+  padding-left: 10px;
+  width: fit-content;
+  height: auto;
+}
+
+.container {
+  position: relative;
+  p {
+    font-size: $font-body-tiny;
+    font-weight: $font-regular;
+    line-height: 20px;
+    margin-top: 4px;
+    color: $color-gray-500;
+  }
+}
+
+.disabled {
+  fill: $color-gray-200;
+}

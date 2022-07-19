@@ -1,0 +1,36 @@
+@import "../../styles/variables.scss";
+
+.filterOrderBy {
+  font-weight: $font-semibold;
+  color: $color-gray-400;
+  font-size: $font-body-small;
+  padding-top: 3px;
+}
+.headerBtns {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.leftSide {
+  display: flex;
+  width: 50%;
+  p {
+    margin: 5px;
+  }
+}
+.rightSide {
+  display: flex;
+  width: 50%;
+  justify-content: flex-end;
+  p {
+    margin: 5px;
+  }
+}
+.gridRow {
+  margin-left: 55px;
+}
+.locationPrice {
+  display: flex;
+}

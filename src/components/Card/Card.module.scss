@@ -1,0 +1,130 @@
+@import "../../styles/variables.scss";
+
+.cards {
+  width: 100%;
+}
+
+.cardContent {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  float: left;
+  border-radius: 12px;
+  height: 40%;
+  border: 1px solid $color-gray-300;
+  width: 300px;
+  margin: 0px 30px 30px 0px;
+  p {
+    padding: 7px;
+    margin: 0px;
+  }
+}
+
+.listCardContent {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  border-radius: 12px;
+  height: 40%;
+  border: 1px solid $color-gray-300;
+  width: 100%;
+  margin: 0px 0px 30px 0px;
+  padding: 15px;
+  p {
+    padding: 7px;
+    margin: 0px;
+  }
+}
+
+.cardImg {
+  border-radius: 12px 12px 0px 0px;
+  height: 166px;
+  width: 100%;
+  object-fit: cover;
+}
+.ListCardImg {
+  border-radius: 12px;
+  height: 175px;
+  width: 500px;
+  object-fit: cover;
+  @media (max-width: 860px) {
+    height: 275px;
+  }
+  @media (max-width: 550px) {
+    height: 175px;
+  }
+}
+
+.contentCard {
+  margin-right: 0px 5px;
+  p {
+    padding: 8px;
+  }
+}
+
+.listTitleAndLocation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 30px;
+}
+
+.col {
+  flex-direction: column;
+}
+
+.cardTitle {
+  font-weight: $font-semibold;
+  color: $color-black;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.cardLocation {
+  font-weight: $font-regular;
+  color: $color-gray-400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.cardDescription {
+  font-weight: $font-regular;
+  color: $color-gray-400;
+  @media (max-width: 550px) {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
+.cardPrice {
+  font-weight: $font-semibold;
+  color: $color-black;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.imagesDiv {
+  position: relative;
+}
+.heartList {
+  position: absolute;
+  top: 17px;
+  right: 7px;
+  padding: 5px;
+  border-radius: 50%;
+  fill: $color-gray-300;
+}
+.heartCard {
+  z-index: 999;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: #1c1c1e33;
+  padding: 5px;
+  border-radius: 50%;
+  fill: white;
+}
+.heartFill {
+  fill: red !important;
+  color: black !important;
+}

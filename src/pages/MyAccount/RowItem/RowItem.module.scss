@@ -1,0 +1,33 @@
+@import "../../../styles/variables.scss";
+
+.container {
+  border-bottom: 1px solid $color-gray-200;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+
+  > span {
+    margin: 20px 0;
+  }
+}
+
+.title {
+  font-size: $font-body-normal;
+  font-weight: $font-regular;
+  color: $color-gray-700;
+  line-height: 24px;
+}
+
+.info {
+  font-size: $font-body-small;
+  font-weight: $font-regular;
+  line-height: 22px;
+  color: $color-gray-400;
+}
+
+.action {
+  color: $color-primary-500;
+  font-size: $font-button;
+  font-weight: $font-semibold;
+}

@@ -1,0 +1,23 @@
+.swiper-button-next,
+.swiper-button-prev {
+  --swiper-navigation-size: 44px !important;
+  border: 1px solid black;
+  border-radius: 50%;
+  background-color: white;
+}
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 15px !important;
+}
+.swiper-button-next,
+.swiper-rtl,
+.swiper-button-prev {
+  height: 30px !important;
+  width: 30px !important;
+}
+.swiper-slide {
+  width: 300px;
+}
+.swiper {
+  z-index: 0 !important;
+}

@@ -1,0 +1,47 @@
+@import "../../styles/variables.scss";
+
+.container {
+  // border: 1px solid red;
+  width: 100%;
+  display: flex;
+  column-gap: 128px;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  // outline: 5px dashed orange;
+  width: 165px;
+
+  > button {
+    display: flex;
+    align-items: center;
+    margin-bottom: 26px;
+    font-size: $font-body-small;
+    font-weight: $font-medium;
+    line-height: 22px;
+    color: $color-gray-500;
+    letter-spacing: 0.2px;
+    svg {
+      margin-right: 12px;
+    }
+  }
+}
+
+.profilePicture {
+  border-radius: 50%;
+  width: 112px;
+  aspect-ratio: 1;
+  align-self: center;
+  margin-bottom: 29px;
+}
+
+.content {
+  width: 652px;
+  // outline: 5px dashed black;
+}
+
+.active {
+}
