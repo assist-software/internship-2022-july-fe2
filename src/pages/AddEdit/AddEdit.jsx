@@ -11,18 +11,6 @@ import Button from "../../components/Button/Button";
 const AddEdit = (props) => {
   //react dropzone for images
 
-  //
-  const [showPreview, setShowPreview] = useState(false);
-
-  //input fields
-  // const [formValue, setFormValue] = useState({
-  //   title: "",
-  //   category: "",
-  //   price: "",
-  //   description: "",
-  //   location: "",
-  //   phoneNumber: "",
-  // });
   const [title, setTitle] = useState(props.title || "");
   const [category, setCategory] = useState(props.category || "");
   const [price, setPrice] = useState(props.price || "");
@@ -47,61 +35,6 @@ const AddEdit = (props) => {
     }
   };
 
-  const checkErrors = (input) => {
-    if (input === "title") {
-      if (title.length < 3) {
-        return "Title must be at least 3 characters long.";
-      }
-    }
-    if (input === "category") {
-      if (category.length < 3) {
-        return "Category must be at least 3 characters long.";
-      }
-    }
-    if (input === "price") {
-      if (price.length < 1 && price.value <= 0) {
-        return "Price must be higher than 0.";
-      }
-    }
-    if (input === "description") {
-      if (description.length <= 1 && description.length > 100) {
-        return description.length + "/100 mandatory characters";
-      }
-    }
-    if (input === "location") {
-      if (location.length < 1) {
-        return "Location must be selected";
-      }
-    }
-    if (input === "phoneNumber") {
-      if (phoneNumber.length < 3) {
-        return "Phoe number must be at least 3 characters long.";
-      }
-    }
-    return "";
-  };
-
-  const isFormValid = () => {
-    let isValid = true;
-    Object.forEach((input) => {
-      if (checkErrors(input)) {
-        isValid = false;
-      }
-    });
-    return isValid;
-  };
-
-  // const handleSubmit = async () => {
-  //   if (isFormValid()) {
-  //     try {
-  //     } catch (error) {
-  //       console.log(error, "error");
-  //     }
-  //   } else {
-  //     console.log("Form has an error.");
-  //   }
-  // };
-  //
   return (
     <Container>
       <h1 className={styles.addTitle}>Add new</h1>
@@ -244,11 +177,7 @@ const AddEdit = (props) => {
         <Col md={{ span: 6, offset: 0 }}>
           <Row>
             <Col sm={{ span: 2, offset: 5 }}>
-              <Button
-                variant="secondary"
-                label="Preview"
-                onClick={() => setShowPreview(true)}
-              />
+              <Button variant="secondary" label="Preview" />
             </Col>
 
             <Col sm={{ span: 2, offset: 2 }}>

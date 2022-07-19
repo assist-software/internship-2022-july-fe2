@@ -20,18 +20,6 @@ const Option = (props) => {
   );
 };
 
-const options = [
-  { value: "option1", label: "Option 1" },
-  { value: "option2", label: "Option 2" },
-  { value: "option3", label: "Option 3" },
-  { value: "option4", label: "Option 3" },
-  { value: "option5", label: "Option 3" },
-  { value: "option6", label: "Option 3" },
-  { value: "option7", label: "Option 12" },
-  { value: "option8", label: "Option 3" },
-  { value: "option9", label: "Option 9" },
-];
-
 const Locations = [
   { value: "alba", label: "Alba" },
   { value: "arad", label: "Arad" },
