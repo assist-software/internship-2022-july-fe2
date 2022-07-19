@@ -1,10 +1,11 @@
 import Carousel from "../../components/Carousel/Carousel";
+import Tabs from "../../components/Tabs/Tabs";
 import styles from "./Home.module.scss";
 const Home = () => {
   return (
     <div>
       <div>
-        <h1 className={styles.h1}>What are you interested in?</h1>
+        <Tabs />
       </div>
 
       <Carousel title="Most view" />

@@ -9,6 +9,7 @@ import Button from "../../../components/Button/Button";
 import { ReactComponent as Google } from "../../../assets/icons/google.svg";
 import { ReactComponent as View } from "../../../assets/icons/view.svg";
 import { ReactComponent as ViewOff } from "../../../assets/icons/view-off.svg";
+import { getUserById } from "../../../api/API";
 
 // import { getUserById } from "../../../api/API";
 
@@ -87,8 +88,9 @@ export default function LoginForm() {
     try {
       localStorage.setItem("token", token);
       localStorage.setItem("role", role);
-      localStorage.setItem("user", id);
+      localStorage.setItem("userId", id);
       navigate("/");
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -100,8 +102,9 @@ export default function LoginForm() {
     try {
       localStorage.setItem("token", token);
       localStorage.setItem("role", role);
-      localStorage.setItem("name", id);
+      localStorage.setItem("userId", id);
       navigate("/");
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
