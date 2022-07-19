@@ -11,7 +11,7 @@ const options = [
 
 const Select = ({ name, id, label, helper, value, options, onChange }) => {
   return (
-    <div>
+    <div className={styles}>
       <label htmlFor={name}>{label}</label>
       <select value={value} name={name} id={id} onChange={onChange}>
         <option disabled>Select a gender</option>

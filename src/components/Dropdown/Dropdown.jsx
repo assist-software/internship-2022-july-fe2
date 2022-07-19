@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Select from "react-select";
 import styles from "./Dropdown.module.scss";
 import { components } from "react-select";
@@ -35,11 +35,10 @@ const options = [
 ];
 
 const Dropdown = ({ fontWeight, fontSize, title, multi }) => {
-  const [multipleOption, setMultipleOption] = useState(
-    multi
-      ? { IndicatorSeparator: () => null, Option }
-      : { IndicatorSeparator: () => null }
-  );
+  const multipleOption = multi
+    ? { IndicatorSeparator: () => null, Option }
+    : { IndicatorSeparator: () => null };
+
   function setColor(fontSize) {
     if (fontSize === "buton") return "$color-primary-500";
     else return "black";

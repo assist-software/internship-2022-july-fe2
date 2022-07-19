@@ -1,9 +1,6 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-// auth
-import { logout } from "../../hooks/useAuth";
-
 // icons
 import { ReactComponent as ProfileIcon } from "../../assets/icons/person.svg";
 import { ReactComponent as SecurityIcon } from "../../assets/icons/security.svg";

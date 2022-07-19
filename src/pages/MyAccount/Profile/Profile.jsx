@@ -33,7 +33,7 @@ const Profile = () => {
       fetchUser();
       setRefetch(false);
     }
-  }, [refetch]);
+  }, [fetchUser, refetch]);
 
   // set user details to formvalue
   useEffect(() => {

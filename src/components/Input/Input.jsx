@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./Input.module.scss";
 import PropTypes from "prop-types";
-import { ReactComponent as Heart } from "../../assets/icons/heart.svg";
 
 const Input = ({
   error,

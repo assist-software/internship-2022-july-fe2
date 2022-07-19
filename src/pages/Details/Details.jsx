@@ -53,7 +53,7 @@ const Details = () => {
         console.log("Error: ", error);
       }
     })();
-  }, []);
+  }, [id]);
 
   // get owner from API
   const getOwner = async () => {
@@ -66,9 +66,10 @@ const Details = () => {
       }
     }
   };
+
   useEffect(() => {
     getOwner();
-  }, [listing.author]);
+  }, [getOwner, listing.author]);
 
   return (
     <section className={styles.container}>

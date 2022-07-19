@@ -4,7 +4,7 @@ import styles from "./Header.module.scss";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { Dropdown, InputGroup } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 import logo from "../../assets/logo/logo-assist-tagline.png";
 import { Button } from "react-bootstrap";
 import DropdownComp from "../Dropdown/Dropdown";
