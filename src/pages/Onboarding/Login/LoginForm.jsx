@@ -82,11 +82,12 @@ export default function LoginForm() {
   const handleTestLoginUser = () => {
     const token = 1234;
     const role = "user";
-    const name = "Andrei";
+    const id = 2;
+
     try {
       localStorage.setItem("token", token);
       localStorage.setItem("role", role);
-      localStorage.setItem("name", name);
+      localStorage.setItem("user", id);
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -95,11 +96,11 @@ export default function LoginForm() {
   const handleTestLoginAdmin = () => {
     const token = 1234;
     const role = "admin";
-    const name = "Catalin";
+    const id = 1;
     try {
       localStorage.setItem("token", token);
       localStorage.setItem("role", role);
-      localStorage.setItem("name", name);
+      localStorage.setItem("name", id);
       navigate("/");
     } catch (error) {
       console.log(error);

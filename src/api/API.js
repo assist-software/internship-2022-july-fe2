@@ -35,7 +35,17 @@ export const getListingById = async (id) => {
 export const getUserById = async (id) => {
   try {
     const response = await axios.get("/user/" + id);
-    return response.data;
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// update user
+export const updateUser = async (data) => {
+  try {
+    const response = await axios.put("/user/" + data.id, data);
+    return response;
   } catch (error) {
     console.error(error);
   }

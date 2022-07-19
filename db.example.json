@@ -84,6 +84,8 @@
   "user": [
     {
       "id": 1,
+      "firstName": "Andrei",
+      "lastName": "Andries",
       "fullName": "Andrei Andries",
       "email": "lorem@ipsum.com",
       "password": "1234",
@@ -101,6 +103,8 @@
     },
     {
       "id": 2,
+      "firstName": "Selim",
+      "lastName": "Muhammetgulyyev",
       "fullName": "Selim Muhammetgulyyev",
       "email": "lorem2@ipsum.com",
       "password": "1234",
@@ -118,6 +122,8 @@
     },
     {
       "id": 3,
+      "firstName": "Catalin",
+      "lastName": "Prisacaru",
       "fullName": "Catalin Prisacaru",
       "email": "lorem3@ipsum.com",
       "password": "1234",
@@ -135,6 +141,8 @@
     },
     {
       "id": 4,
+      "firstName": "Sabin",
+      "lastName": "Bejinari",
       "fullName": "Sabin  Bejinari",
       "email": "lorem4@ipsum.com",
       "password": "1234",
@@ -152,6 +160,8 @@
     },
     {
       "id": 5,
+      "firstName": "Popescu",
+      "lastName": "Ion",
       "fullName": "Popescu Ion",
       "email": "lorem5@ipsum.com",
       "password": "1234",

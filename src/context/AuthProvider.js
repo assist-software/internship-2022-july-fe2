@@ -1,29 +1,48 @@
 import { createContext, useEffect, useState } from "react";
-
+import { getUserById } from "../api/API";
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState({});
-  const token = localStorage.getItem("token");
+  // user
+  const [user, setUser] = useState(null);
 
-  // logout
-  const logout = () => {
-    localStorage.clear();
-    setUser({});
-  };
-
-  const isLoggedIn = () => {
-    console.log(token, "token");
-    if (token) {
-      return true;
+  //  set user from local storage if exists
+  // id should change with token in production
+  const fetchUser = async () => {
+    try {
+      const userId = localStorage.getItem("user");
+      const response = await getUserById(userId);
+      setUser(response.data);
+    } catch (error) {
+      console.log("Error: ", error);
     }
   };
 
-  console.log(user, "user");
-  console.log(localStorage.getItem("user"), "localStorage");
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
+  // logout function
+  const logout = () => {
+    setUser(null);
+    localStorage.clear();
+  };
+
+  // login function
+  const login = (user) => {
+    localStorage.setItem("token", user.token);
+    setUser(user);
+  };
+
+  // check if user is logged in
+  const isLoggedIn = () => {
+    return !!localStorage.getItem("token");
+  };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, token, logout, user, setUser }}>
+    <AuthContext.Provider
+      value={{ login, logout, isLoggedIn, user, fetchUser, setUser }}
+    >
       {children}
     </AuthContext.Provider>
   );

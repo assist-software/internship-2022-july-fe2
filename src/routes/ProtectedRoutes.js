@@ -4,7 +4,7 @@ import useAuth from "../hooks/useAuth";
 
 const ProtectedRoutes = ({ role }) => {
   let location = useLocation();
-  const { token, isLoggedIn } = useAuth();
+  const { isLoggedIn } = useAuth();
 
   return isLoggedIn() ? (
     <Outlet />
