@@ -4,8 +4,23 @@ axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 // login
 export const login = async (email, password) => {
   try {
-    const response = await axios.post("/login", { email, password });
-    return response.data;
+    const response = await axios.post("/user/authenticate", {
+      email,
+      password,
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// register
+export const register = async (email, password) => {
+  try {
+    const response = await axios.post(
+      "/user/register?email=" + email + "&password=" + password
+    );
+    return response;
   } catch (error) {
     console.log(error);
   }
