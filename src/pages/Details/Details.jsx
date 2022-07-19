@@ -4,7 +4,7 @@ import styles from "./Details.module.scss";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import { Button } from "../../components";
 
-import { getListingById, getUserById } from "../../api/API";
+import { getListingById } from "../../api/API";
 
 import { useParams } from "react-router-dom";
 
@@ -38,7 +38,8 @@ const Map = () => {
 const Details = () => {
   // states for the details page
   const [listing, setListing] = useState({});
-  const [owner, setOwner] = useState({});
+  // const [owner, setOwner] = useState({});
+  const owner = {};
 
   // get the id from the url
   const { id } = useParams();
@@ -56,20 +57,20 @@ const Details = () => {
   }, [id]);
 
   // get owner from API
-  const getOwner = async () => {
-    if (listing.author) {
-      try {
-        const response = await getUserById(listing.author);
-        setOwner(response.data);
-      } catch (error) {
-        console.log("Error: ", error);
-      }
-    }
-  };
+  // const getOwner = async () => {
+  //   if (listing.author) {
+  //     try {
+  //       const response = await getUserById(listing.author);
+  //       setOwner(response.data);
+  //     } catch (error) {
+  //       console.log("Error: ", error);
+  //     }
+  //   }
+  // };
 
-  useEffect(() => {
-    getOwner();
-  }, [getOwner, listing.author]);
+  // useEffect(() => {
+  //   getOwner();
+  // }, [getOwner, listing.author]);
 
   return (
     <section className={styles.container}>
