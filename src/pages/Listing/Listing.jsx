@@ -4,13 +4,18 @@ import Card from "../../components/Card/Card";
 import Filters from "../../components/Filters/Filters";
 import listingStyle from "./Listing.module.scss";
 
+import { useNavigate } from "react-router-dom";
+
 const Listing = ({ title }) => {
   const [listings, setListings] = useState([]);
-  console.log(listings);
   useEffect(() => {
     getListings().then((res) => setListings(res));
   }, []);
+
+  // view
   const [listView, setListView] = useState(true);
+
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -28,6 +33,9 @@ const Listing = ({ title }) => {
           price={listing.price}
           location={listing.location}
           listView={listView}
+          onClick={() => {
+            navigate("/listing/" + listing.id);
+          }}
         />
       ))}
     </div>

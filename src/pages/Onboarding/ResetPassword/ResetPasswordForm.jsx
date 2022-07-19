@@ -5,11 +5,8 @@ import useAuth from "../../../hooks/useAuth";
 import style from "../Authenticate.module.scss";
 import Input from "../../../components/Input/Input";
 import Button from "../../../components/Button/Button";
-import { ReactComponent as Google } from "../../../assets/icons/google.svg";
 import { ReactComponent as View } from "../../../assets/icons/view.svg";
 import { ReactComponent as ViewOff } from "../../../assets/icons/view-off.svg";
-
-import { getUser } from "../../../api/API";
 
 export default function ResetPasswordForm() {
   const navigate = useNavigate();
@@ -59,7 +56,7 @@ export default function ResetPasswordForm() {
       }
       if (pwd !== "" && pwdConfirm !== "")
         if (handlePwdConfirmError() !== -1) {
-          // getUser(email).then((res) => setIsLoggedIn(res);
+          // getUserById(email).then((res) => setIsLoggedIn(res);
           setIsLoggedIn(true);
 
           // should make a validation if a user doesn't exist

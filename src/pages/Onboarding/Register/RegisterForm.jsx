@@ -9,7 +9,7 @@ import { ReactComponent as Google } from "../../../assets/icons/google.svg";
 import { ReactComponent as View } from "../../../assets/icons/view.svg";
 import { ReactComponent as ViewOff } from "../../../assets/icons/view-off.svg";
 
-import { getUser } from "../../../api/API";
+import { getUserById } from "../../../api/API";
 
 export default function RegisterForm() {
   const navigate = useNavigate();
@@ -56,7 +56,7 @@ export default function RegisterForm() {
         return;
       }
 
-      getUser(email).then((res) => setIsLoggedIn(res));
+      getUserById(email).then((res) => setIsLoggedIn(res));
       // should make a validation if a user doesn't exist
       if (isLoggedIn !== null) {
         setAuth({ name: "Team undefined" });

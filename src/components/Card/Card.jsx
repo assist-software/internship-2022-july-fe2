@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Card.module.scss";
-// import photo from "../../assets/images/splash.png";
+import { ReactComponent as HeartFilled } from "../../assets/icons/heart-filled.svg";
+import { ReactComponent as Heart } from "../../assets/icons/heart.svg";
 
 const Card = ({
+  onClick,
   style,
   listView,
   image,
@@ -11,20 +13,36 @@ const Card = ({
   description,
   price,
 }) => {
+  const [like, setLike] = useState(false);
+  function stopPropagation(e) {
+    e.stopPropagation();
+  }
   return (
     <div className={styles.cards}>
-      <div className={styles.card}>
+      <div onClick={onClick} className={styles.card}>
         <div
           style={style}
           className={`${
             listView ? styles.listCardContent : styles.cardContent
           }`}
         >
-          <img
-            src={image}
-            alt="announces-img"
-            className={`${listView ? styles.ListCardImg : styles.cardImg}`}
-          />
+          <div onClick={stopPropagation}>
+            <button
+              className={`${listView ? styles.heartList : styles.heartCard}`}
+              onClick={() => setLike(!like)}
+            >
+              {!like ? <Heart /> : <HeartFilled className={styles.heartFill} />}
+            </button>
+          </div>
+
+          <div className={styles.imagesDiv}>
+            <img
+              src={image}
+              alt="announces-img"
+              className={`${listView ? styles.ListCardImg : styles.cardImg}`}
+            />
+          </div>
+
           <div className={styles.contentCard}>
             <div
               className={`${styles.listTitleAndLocation} ${

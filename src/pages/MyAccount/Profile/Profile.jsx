@@ -2,49 +2,53 @@ import React, { useState, useEffect } from "react";
 import { Button, Input } from "../../../components";
 import RowItem from "../RowItem/RowItem";
 import styles from "./Profile.module.scss";
-import { getUser } from "../../../api/API";
+
+import useAuth from "../../../hooks/useAuth";
+import useStateProvider from "../../../hooks/useStateProvider";
+
+import { updateUser } from "../../../api/API";
+
+import moment from "moment";
+import Select from "../../../components/Select/Select";
 
 const Profile = () => {
-  // get user from API
-  useEffect(() => {
-    (async () => {
-      try {
-        const response = await getUser(1);
-        setUser(response);
-      } catch (error) {
-        console.log("Error: ", error);
-      }
-    })();
-  }, []);
+  // global states
+  const { user, fetchUser } = useAuth();
 
-  // initial states
+  // state provider
+  const { setAlert } = useStateProvider();
+
+  // refetch trigger
+  const [refetch, setRefetch] = useState(false);
+
+  // active form
   const [activeForm, setActiveForm] = useState("");
-  const [user, setUser] = useState({});
 
-  // form values
-  const [formValue, setFormValue] = useState({
-    firstName: "",
-    lastName: "",
-    gender: "",
-    dateOfBirth: "",
-    email: "",
-    phone: "",
-    address: "",
-  });
+  // form data
+  const [formValue, setFormValue] = useState({});
 
-  const { lastName, firstName, gender, dateOfBirth, email, phone, address } =
-    formValue;
+  // refetch user data
+  useEffect(() => {
+    if (refetch) {
+      fetchUser();
+      setRefetch(false);
+    }
+  }, [fetchUser, refetch]);
 
-  // set user data to forms
+  // set user details to formvalue
   useEffect(() => {
     if (user) {
-      // setFormValue.firstName(user?.fullName || "");
-      setFormValue({ lastName: user?.fullName } || "");
-      setFormValue({ gender: user?.gender } || "");
-      setFormValue({ dateOfBirth: user?.dateOfBirth } || "");
-      setFormValue({ email: user?.email } || "");
-      setFormValue({ phone: user?.phone } || "");
-      setFormValue({ address: user?.address } || "");
+      setFormValue({
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        fullName: user.fullName,
+        email: user.email,
+        phone: user.phone,
+        address: user.address,
+        gender: user.gender,
+        dateOfBirth: user.dateOfBirth,
+      });
     }
   }, [user]);
 
@@ -54,13 +58,93 @@ const Profile = () => {
     setFormValue({ ...formValue, [name]: value });
   };
 
+  // check errors
+  const checkErrors = (field) => {
+    if (field === "firstName") {
+      if (formValue.firstName.length < 3) {
+        return "First name must be at least 3 characters long";
+      }
+    }
+    if (field === "lastName") {
+      if (formValue.lastName.length < 3) {
+        return "Last name must be at least 3 characters long";
+      }
+    }
+    // gender
+    if (field === "gender") {
+      // one of male female or other
+      if (
+        formValue.gender !== "Male" &&
+        formValue.gender !== "Female" &&
+        formValue.gender !== "Other"
+      ) {
+        return "Must be one of male, female, other";
+      }
+    }
+    if (field === "email") {
+      if (!formValue.email.includes("@")) {
+        return "Email must be valid";
+      }
+    }
+    if (field === "phone") {
+      if (formValue.phone.length !== 10 || !formValue.phone.match(/^[0-9]+$/)) {
+        return "Phone must be valid";
+      }
+    }
+    if (field === "address") {
+      if (formValue.address.length < 10) {
+        return "Address must be at least 10 characters long";
+      }
+    }
+    if (field === "dateOfBirth") {
+      // at least 18 years old
+      const age = moment().diff(formValue.dateOfBirth, "years");
+      if (age < 18) {
+        return "At least 18 years old";
+      }
+    }
+    return "";
+  };
+
+  // check if form is valid
+  const isFormValid = () => {
+    let isValid = true;
+    Object.keys(formValue).forEach((field) => {
+      if (checkErrors(field)) {
+        isValid = false;
+      }
+    });
+    return isValid;
+  };
+
+  // handleSubmit
+  const handleSubmit = async () => {
+    if (isFormValid()) {
+      try {
+        const response = await updateUser(formValue);
+        if (response.status === 200) {
+          setAlert({
+            type: "success",
+            message: "Profile updated successfully",
+          });
+          setRefetch(true);
+          setActiveForm("");
+        }
+      } catch (error) {
+        console.log(error, "error");
+      }
+    } else {
+      console.log("Form has error");
+    }
+  };
+
   return (
     <div>
       <h4 className={styles.title}>Profile</h4>
-      {/* name */}
+      {/* full name */}
       <RowItem
         title="Full name"
-        info={user.fullName}
+        info={(user?.firstName + " " + user?.lastName).trim() || "Not set"}
         action="Edit"
         active={activeForm === "name" ? true : false}
         onCancel={() => {
@@ -75,27 +159,31 @@ const Profile = () => {
           {/* firstName */}
           <Input
             onChange={handleChange}
-            value={formValue.email}
+            value={formValue.firstName}
             name="firstName"
             id="firstName"
             type="text"
             label="First name"
+            helper={checkErrors("firstName") || ""}
+            error={checkErrors("firstName") ? true : false}
           />
 
           {/* lastName */}
           <Input
             onChange={handleChange}
-            value={lastName}
+            value={formValue.lastName}
             name="lastName"
             id="lastName"
             type="text"
             label="Last name"
+            helper={checkErrors("lastName") || ""}
+            error={checkErrors("lastName") ? true : false}
           />
 
+          {/* disabled if not valid */}
           <Button
-            onClick={() => {
-              setActiveForm("");
-            }}
+            disabled={isFormValid() ? false : true}
+            onClick={handleSubmit}
             label="Save"
           />
         </div>
@@ -103,11 +191,9 @@ const Profile = () => {
 
       {/* gender */}
       <RowItem
-        name="firstName"
-        id="firstName"
         action="Edit"
         active={activeForm === "gender" ? true : false}
-        info="Male"
+        info={user?.gender || "Not set"}
         onAction={() => setActiveForm("gender")}
         onCancel={() => {
           setActiveForm("");
@@ -116,11 +202,21 @@ const Profile = () => {
       />
       {activeForm === "gender" && (
         <div className={styles.form}>
-          <Input onChange={handleChange} value={gender} label="Gender" />
+          <Select
+            value={formValue?.gender}
+            name="gender"
+            id="gender"
+            onChange={handleChange}
+            label="Gender"
+            options={[
+              { value: "Male", label: "Male" },
+              { value: "Female", label: "Female" },
+              { value: "Other", label: "Other" },
+            ]}
+          />
           <Button
-            onClick={() => {
-              setActiveForm("");
-            }}
+            disabled={isFormValid() ? false : true}
+            onClick={handleSubmit}
             label="Save"
           />
         </div>
@@ -134,22 +230,25 @@ const Profile = () => {
           setActiveForm("");
         }}
         title="Date of birth"
-        info="05.05.2000"
+        info={user?.dateOfBirth || "Not set"}
         action="Edit"
       />
       {activeForm === "birthday" && (
         <div className={styles.form}>
           <Input
             onChange={handleChange}
+            value={moment(formValue.dateOfBirth).format("YYYY-MM-DD")}
+            // value="2022-05-25"
             name="dateOfBirth"
             id="dateOfBirth"
-            value={dateOfBirth}
+            type="date"
             label="Birthday"
+            helper={checkErrors("dateOfBirth") || ""}
+            error={checkErrors("dateOfBirth") ? true : false}
           />
           <Button
-            onClick={() => {
-              setActiveForm("");
-            }}
+            disabled={isFormValid() ? false : true}
+            onClick={handleSubmit}
             label="Save"
           />
         </div>
@@ -163,22 +262,24 @@ const Profile = () => {
           setActiveForm("");
         }}
         title="Email address"
-        info="james.milner@example.com"
+        info={user?.email || "Not set"}
         action="Edit"
       />
       {activeForm === "email" && (
         <div className={styles.form}>
           <Input
             onChange={handleChange}
+            value={formValue.email}
             name="email"
             id="email"
-            value={email}
+            type="text"
             label="Email"
+            helper={checkErrors("email") || ""}
+            error={checkErrors("email") ? true : false}
           />
           <Button
-            onClick={() => {
-              setActiveForm("");
-            }}
+            disabled={isFormValid() ? false : true}
+            onClick={handleSubmit}
             label="Save"
           />
         </div>
@@ -191,22 +292,24 @@ const Profile = () => {
           setActiveForm("");
         }}
         title="Phone number"
-        info="123456789"
+        info={user?.phone || "Not set"}
         action="Edit"
       />
       {activeForm === "phone" && (
         <div className={styles.form}>
           <Input
             onChange={handleChange}
+            value={formValue.phone}
             name="phone"
             id="phone"
-            value={phone}
+            type="text"
             label="Phone"
+            helper={checkErrors("phone") || ""}
+            error={checkErrors("phone") ? true : false}
           />
           <Button
-            onClick={() => {
-              setActiveForm("");
-            }}
+            disabled={isFormValid() ? false : true}
+            onClick={handleSubmit}
             label="Save"
           />
         </div>
@@ -218,22 +321,24 @@ const Profile = () => {
           setActiveForm("");
         }}
         title="Address"
-        info="Not provided"
+        info={user?.address || "Not set"}
         action="Edit"
       />
       {activeForm === "address" && (
         <div className={styles.form}>
           <Input
             onChange={handleChange}
+            value={formValue.address}
             name="address"
             id="address"
-            value={address}
+            type="text"
             label="Address"
+            helper={checkErrors("address") || ""}
+            error={checkErrors("address") ? true : false}
           />
           <Button
-            onClick={() => {
-              setActiveForm("");
-            }}
+            disabled={isFormValid() ? false : true}
+            onClick={handleSubmit}
             label="Save"
           />
         </div>

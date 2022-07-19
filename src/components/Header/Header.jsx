@@ -4,7 +4,7 @@ import styles from "./Header.module.scss";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { Dropdown, InputGroup } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 import logo from "../../assets/logo/logo-assist-tagline.png";
 import { Button } from "react-bootstrap";
 import DropdownComp from "../Dropdown/Dropdown";
@@ -15,11 +15,12 @@ import { ReactComponent as Security } from "../../assets/icons/security.svg";
 import { ReactComponent as Bell } from "../../assets/icons/bell.svg";
 import { ReactComponent as Chat } from "../../assets/icons/chat.svg";
 import { ReactComponent as Logout } from "../../assets/icons/logout.svg";
+import { ReactComponent as Loop } from "../../assets/icons/magnifying-glass.svg";
 
 const Header = () => {
   const navigate = useNavigate();
   return (
-    <Navbar collapseOnSelect expand="lg" className={styles.navbar} sticky="top">
+    <Navbar collapseOnSelect expand="xl" className={styles.navbar} sticky="top">
       <Container>
         <Navbar.Brand onClick={() => navigate("/")}>
           <img src={logo} className={styles.assist} alt="Assist header logo" />
@@ -27,22 +28,25 @@ const Header = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <div style={{ width: "150px" }}>
-              <DropdownComp
-                fontWeight="semibold"
-                fontSize="buton"
-                title="Category"
-                className={styles.drop}
-              />
+            <div style={{ display: "inline-flex" }}>
+              <div className={styles.category}>
+                <DropdownComp
+                  fontWeight="semibold"
+                  fontSize="buton"
+                  title="Category"
+                  className={styles.drop}
+                />
+              </div>
+              <Form className="d-flex">
+                <Form.Control
+                  type="search"
+                  placeholder="Search"
+                  className={styles.search}
+                  aria-label="Search"
+                />
+                <Loop className={styles.searchIcon} />
+              </Form>
             </div>
-            <Form className="d-flex">
-              <Form.Control
-                type="search"
-                placeholder="Search"
-                className={styles.search}
-                aria-label="Search"
-              />
-            </Form>
           </Nav>
           <Nav>
             <div
@@ -57,7 +61,7 @@ const Header = () => {
             <Dropdown>
               <Dropdown.Toggle className={styles.profileTitle}>
                 <Person
-                  style={{ stroke: "$color-gray-600", marginRight: "5px" }}
+                  style={{ stroke: "$color-gray-600", marginRight: "7px" }}
                 />
                 My Profile
               </Dropdown.Toggle>
@@ -67,28 +71,28 @@ const Header = () => {
                   Hello!
                 </Dropdown.ItemText>
                 <Dropdown.Item
-                  onClick={() => navigate("/my-account")}
+                  onClick={() => navigate("/my-account/profile")}
                   className={styles.profileOption}
                 >
                   <Person className={styles.blueLogo} />
                   Profile
                 </Dropdown.Item>
                 <Dropdown.Item
-                  onClick={() => navigate("/my-account")}
+                  onClick={() => navigate("/my-account/notifications")}
                   className={styles.profileOption}
                 >
                   <Bell className={styles.blueLogo} />
                   Notifications
                 </Dropdown.Item>
                 <Dropdown.Item
-                  onClick={() => navigate("/my-account")}
+                  onClick={() => navigate("/my-account/messages")}
                   className={styles.profileOption}
                 >
                   <Chat className={styles.blueLogo} />
                   Messages
                 </Dropdown.Item>
                 <Dropdown.Item
-                  onClick={() => navigate("/my-account")}
+                  onClick={() => navigate("/my-account/security")}
                   className={styles.profileOption}
                 >
                   <Security className={styles.blueLogo} />

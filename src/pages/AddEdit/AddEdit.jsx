@@ -1,13 +1,40 @@
-import React from "react";
-import Input from "../../components/Input/Input";
+import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import styles from "./AddEdit.module.scss";
+import PropTypes from "prop-types";
+import Input from "../../components/Input/Input";
 import { ReactComponent as Add } from "../../assets/icons/add.svg";
 import Button from "../../components/Button/Button";
 
-const AddEdit = () => {
+const AddEdit = (props) => {
+  //react dropzone for images
+
+  const [title, setTitle] = useState(props.title || "");
+  const [category, setCategory] = useState(props.category || "");
+  const [price, setPrice] = useState(props.price || "");
+  const [description, setDescription] = useState(props.description || "");
+  const [location, setLocation] = useState(props.location || "");
+  const [phoneNumber, setPhoneNumber] = useState(props.phoneNumber || "");
+
+  //make price number only
+  const handlePriceChange = (e) => {
+    const re = /^[0-9\b]+$/;
+    if (e.target.value === "" || re.test(e.target.value)) {
+      setPrice(e.target.value);
+      console.log(e.target.value);
+    }
+  };
+  // make phone number number only
+  const handlePhoneNumberChange = (e) => {
+    const re = /^[0-9\b]+$/;
+    if (e.target.value === "" || re.test(e.target.value)) {
+      setPhoneNumber(e.target.value);
+      console.log(e.target.value);
+    }
+  };
+
   return (
     <Container>
       <h1 className={styles.addTitle}>Add new</h1>
@@ -20,10 +47,24 @@ const AddEdit = () => {
         </Col>
         <Col md={{ span: 6, offset: 0 }} className={styles.bottomBorder}>
           <div className={styles.inputs}>
-            <Input label="Title" placeholder="Placeholder" />
-            <Input label="Category" placeholder="Select category" />
+            <Input
+              label="Title"
+              placeholder="Placeholder"
+              value={title}
+              onChange={(event) => setTitle(event.target.value)}
+            />
+            <Input
+              label="Category"
+              placeholder="Select category"
+              value={category}
+              onChange={(event) => setCategory(event.target.value)}
+            />
             <div className={styles.price}>
-              <Input label="Price" />
+              <Input
+                label="Price"
+                value={price}
+                onChange={(event) => handlePriceChange(event)}
+              />
               <h6>lei</h6>
             </div>
           </div>
@@ -102,7 +143,9 @@ const AddEdit = () => {
           <Input
             label="Description details"
             placeholder="Placeholder"
-            helper="0/100 mandatory characters"
+            helper={`${description.length} /100 characters`}
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
           />
         </Col>
       </Row>
@@ -114,9 +157,18 @@ const AddEdit = () => {
           </div>
         </Col>
         <Col md={{ span: 6, offset: 0 }} className={styles.bottomBorder}>
-          <Input label="Location" placeholder="Placeholder" />
+          <Input
+            label="Location"
+            placeholder="Placeholder"
+            value={location}
+            onChange={(event) => setLocation(event.target.value)}
+          />
           <div className={styles.price}>
-            <Input label="Phone number" />
+            <Input
+              label="Phone number"
+              value={phoneNumber}
+              onChange={(event) => handlePhoneNumberChange(event)}
+            />
           </div>
         </Col>
       </Row>
@@ -136,6 +188,15 @@ const AddEdit = () => {
       </Row>
     </Container>
   );
+};
+
+AddEdit.propTypes = {
+  title: PropTypes.string,
+  category: PropTypes.string,
+  price: PropTypes.number,
+  description: PropTypes.string,
+  location: PropTypes.string,
+  phoneNumber: PropTypes.number,
 };
 
 export default AddEdit;
