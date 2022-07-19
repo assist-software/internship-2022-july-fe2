@@ -4,12 +4,14 @@
   font-weight: $font-semibold;
   color: $color-gray-400;
   font-size: $font-body-small;
+  padding-top: 3px;
 }
 .headerBtns {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 10px;
 }
 .leftSide {
   display: flex;
@@ -26,24 +28,9 @@
     margin: 5px;
   }
 }
-.dropdownTitle {
-  background-color: transparent !important;
-  color: black !important;
-  border: 0px !important;
-  font-weight: 600 !important;
-  font-size: $font-body-small !important;
-  &:active {
-    background-color: transparent !important;
-    color: black !important;
-    border-color: red;
-  }
-  &:visited {
-    border-color: red !important;
-  }
-  &:focus {
-    box-shadow: none !important;
-  }
+.gridRow {
+  margin-left: 55px;
 }
-.checks {
-  width: 10px;
+.locationPrice {
+  display: flex;
 }

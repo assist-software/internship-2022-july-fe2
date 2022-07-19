@@ -35,9 +35,9 @@ const Carousel = ({ title }) => {
           </span>
         </div>
         <Swiper
-          slidesPerView={5}
+          slidesPerView={4}
           spaceBetween={1}
-          slidesPerGroup={5}
+          slidesPerGroup={4}
           navigation={true}
           modules={[Pagination, Navigation]}
           className="mySwipper"
@@ -51,6 +51,9 @@ const Carousel = ({ title }) => {
                 description={listing.description}
                 price={listing.price}
                 location={listing.location}
+                onClick={() => {
+                  navigate("/listing/" + listing.id);
+                }}
               />
             </SwiperSlide>
           ))}
