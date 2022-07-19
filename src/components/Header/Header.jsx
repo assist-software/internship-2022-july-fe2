@@ -71,28 +71,28 @@ const Header = () => {
                   Hello!
                 </Dropdown.ItemText>
                 <Dropdown.Item
-                  onClick={() => navigate("/my-account")}
+                  onClick={() => navigate("/my-account/profile")}
                   className={styles.profileOption}
                 >
                   <Person className={styles.blueLogo} />
                   Profile
                 </Dropdown.Item>
                 <Dropdown.Item
-                  onClick={() => navigate("/my-account")}
+                  onClick={() => navigate("/my-account/notifications")}
                   className={styles.profileOption}
                 >
                   <Bell className={styles.blueLogo} />
                   Notifications
                 </Dropdown.Item>
                 <Dropdown.Item
-                  onClick={() => navigate("/my-account")}
+                  onClick={() => navigate("/my-account/messages")}
                   className={styles.profileOption}
                 >
                   <Chat className={styles.blueLogo} />
                   Messages
                 </Dropdown.Item>
                 <Dropdown.Item
-                  onClick={() => navigate("/my-account")}
+                  onClick={() => navigate("/my-account/security")}
                   className={styles.profileOption}
                 >
                   <Security className={styles.blueLogo} />

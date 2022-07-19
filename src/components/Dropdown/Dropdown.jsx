@@ -6,15 +6,13 @@ import PropTypes from "prop-types";
 const Option = (props) => {
   return (
     <div className={styles.option}>
-      {" "}
       <components.Option {...props}>
-        {" "}
         <input
           type="checkbox"
           checked={props.isSelected}
           onChange={() => null}
           className={styles.optionCheck}
-        />{" "}
+        />
         <label className={styles.optionLabel}>{props.label}</label>
       </components.Option>
     </div>
@@ -32,6 +30,7 @@ const options = [
   { value: "option8", label: "Option 3" },
   { value: "option9", label: "Option 9" },
 ];
+
 
 const Locations = [
   { value: "alba", label: "Alba" },
