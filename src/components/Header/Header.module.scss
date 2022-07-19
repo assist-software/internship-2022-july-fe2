@@ -26,7 +26,7 @@
   border-right: none !important;
   border-radius: 0px !important;
 }
-.search:focus,:hover {
+.search:focus,.search:hover {
   box-shadow: none !important;
   border-color: $color-gray-200 !important;
 }

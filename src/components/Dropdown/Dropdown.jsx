@@ -64,7 +64,14 @@ const Locations = [
   { value: "vrancea", label: "Vrancea" },
 ];
 
-const Dropdown = ({ fontWeight, fontSize, title, multi, options }) => {
+const Dropdown = ({
+  fontWeight,
+  fontSize,
+  title,
+  multi,
+  options,
+  searchable,
+}) => {
   const [multipleOption] = useState(
     multi
       ? { IndicatorSeparator: () => null, Option }
@@ -137,6 +144,7 @@ const Dropdown = ({ fontWeight, fontSize, title, multi, options }) => {
       defaultValue={title}
       controlShouldRenderValue={multi ? false : true}
       // onChange={handleOnChange}
+      isSearchable={searchable ? true : false}
     />
   );
 };
@@ -147,6 +155,7 @@ Dropdown.propTypes = {
   fontSize: PropTypes.oneOf(["buton", "bodySmall"]).isRequired,
   placeholder: PropTypes.string.isRequired,
   multi: PropTypes.bool,
+  searchable: PropTypes.bool,
 };
 
 Dropdown.defaultProps = {
@@ -155,6 +164,7 @@ Dropdown.defaultProps = {
   placeholder: "Placeholder",
   multi: false,
   options: Locations,
+  searchable: false,
 };
 
 export default Dropdown;
