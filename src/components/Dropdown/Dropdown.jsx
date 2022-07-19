@@ -2,6 +2,7 @@ import Select from "react-select";
 import styles from "./Dropdown.module.scss";
 import { components } from "react-select";
 import PropTypes from "prop-types";
+import React, { useState } from "react";
 
 const Option = (props) => {
   return (
@@ -32,9 +33,11 @@ const options = [
 ];
 
 const Dropdown = ({ fontWeight, fontSize, title, multi }) => {
-  const multipleOption = multi
-    ? { IndicatorSeparator: () => null, Option }
-    : { IndicatorSeparator: () => null };
+  const [multipleOption] = useState(
+    multi
+      ? { IndicatorSeparator: () => null, Option }
+      : { IndicatorSeparator: () => null }
+  );
 
   function setColor(fontSize) {
     if (fontSize === "buton") return "$color-primary-500";
