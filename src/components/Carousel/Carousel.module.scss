@@ -3,6 +3,7 @@
 .headerSwiper {
   display: flex;
   justify-content: space-between;
+  margin: 46px 0px 0px 0px;
   h5 {
     font-size: $font-h5;
     font-weight: 700;
@@ -10,7 +11,6 @@
   }
 }
 .seeEverything {
-  margin: 20px;
   border: 1px solid black;
   height: 275px;
   border-radius: 12px;
