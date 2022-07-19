@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { ReactComponent as GridRow } from "../../assets/icons/grid.svg";
-import { ReactComponent as Rows } from "../../assets/icons/rows.svg";
 import filtersStyle from "./Filters.module.scss";
 import DropdownComponent from "../Dropdown/Dropdown";
 import { getListings } from "../../api/API";
+import GridRows from "./GridRows";
 
-const Filters = ({ setListView }) => {
+const Filters = ({ setListView, hideControls }) => {
   const [listings, setListings] = useState([]);
   console.log(listings);
   useEffect(() => {
@@ -27,18 +26,8 @@ const Filters = ({ setListView }) => {
           <div>
             <DropdownComponent title="Most Popular" />
           </div>
-          <div className={filtersStyle.gridRow}>
-            <GridRow
-              onClick={() => {
-                setListView(false);
-              }}
-            />
-            <Rows
-              onClick={() => {
-                setListView(true);
-              }}
-            />
-          </div>
+
+          {!hideControls && <GridRows setListView={setListView} />}
         </div>
       </div>
     </div>
