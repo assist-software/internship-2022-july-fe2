@@ -279,7 +279,7 @@ const Profile = () => {
           />
           <Button
             disabled={isFormValid() ? false : true}
-            onClick={handleSubmit()}
+            onClick={handleSubmit}
             label="Save"
           />
         </div>

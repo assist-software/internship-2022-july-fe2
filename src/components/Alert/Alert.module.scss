@@ -21,13 +21,13 @@
 }
 
 .warning {
-  background-color: orange;
+  background-color: $color-warning-400;
 }
 
 .danger {
-  background-color: red;
+  background-color: $color-alert-400;
 }
 
 .success {
-  background-color: green;
+  background-color: $color-success-400;
 }
