@@ -11,6 +11,30 @@ export const login = async (email, password) => {
   }
 };
 
+// get user by email and password as JSON
+// export const login = async (data) => {
+//   try {
+//     const response = await axios
+//       .post("/User/Authenticate", {
+//         email: data.email,
+//         password: data.password,
+//       })
+//       .then((res) => {
+//         const token = res.data.token;
+//         localStorage.setItem("token", token);
+//         if (res.data.role === 0) {
+//           localStorage.setItem("role", 0);
+//         } else if (res.data.role === 1) {
+//           localStorage.setItem("role", 1);
+//         }
+//       });
+//     return response;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
+// user - 0, admin - 1
+
 // get listing
 export const getListings = async () => {
   try {
