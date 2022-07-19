@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import styles from "./Tabs.module.scss";
 import Button from "../Button/Button";
 import useAuth from "../../hooks/useAuth";

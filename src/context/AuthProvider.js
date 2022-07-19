@@ -9,7 +9,6 @@ export const AuthProvider = ({ children }) => {
   //  set user from local storage if exists
   // id should change with token in production
   const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
-
   const fetchUser = async () => {
     try {
       const response = await getUserById(userId);
@@ -24,10 +23,11 @@ export const AuthProvider = ({ children }) => {
   }, [userId]);
 
   // logout function
-  const logout = () => {
+  function logout() {
     setUser(null);
     localStorage.clear();
-  };
+    setUserId(null);
+  }
 
   // login function
   const login = (user) => {

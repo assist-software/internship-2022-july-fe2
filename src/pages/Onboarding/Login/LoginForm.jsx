@@ -10,13 +10,9 @@ import { ReactComponent as Google } from "../../../assets/icons/google.svg";
 import { ReactComponent as View } from "../../../assets/icons/view.svg";
 import { ReactComponent as ViewOff } from "../../../assets/icons/view-off.svg";
 
-import useAuth from "../../../hooks/useAuth";
-
 // import { getUserById } from "../../../api/API";
 
 export default function LoginForm() {
-  const { fetchUser } = useAuth();
-
   const navigate = useNavigate();
 
   // const { setUser } = useAuth();
@@ -93,7 +89,7 @@ export default function LoginForm() {
       localStorage.setItem("role", role);
       localStorage.setItem("userId", id);
       navigate("/");
-      fetchUser();
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -106,8 +102,8 @@ export default function LoginForm() {
       localStorage.setItem("token", token);
       localStorage.setItem("role", role);
       localStorage.setItem("userId", id);
-      fetchUser();
       navigate("/");
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
