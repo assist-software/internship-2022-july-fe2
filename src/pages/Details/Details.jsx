@@ -60,7 +60,7 @@ const Details = () => {
     if (listing.author) {
       try {
         const response = await getUserById(listing.author);
-        setOwner(response);
+        setOwner(response.data);
       } catch (error) {
         console.log("Error: ", error);
       }

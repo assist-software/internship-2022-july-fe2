@@ -22,8 +22,11 @@ import {
 
 import { Header } from "./components";
 import ProtectedRoute from "./routes/ProtectedRoutes";
+import Alert from "./components/Alert/Alert";
+import useStateProvider from "./hooks/useStateProvider";
 
 function App() {
+  const { alert } = useStateProvider();
   return (
     <Router>
       <Routes>
@@ -78,6 +81,7 @@ function App() {
         <Route path="/andrei" element={<Andrei />} />
         <Route path="/sabin" element={<Sabin />} />
       </Routes>
+      {alert && <Alert message={alert.message} type={alert.type} />}
     </Router>
   );
 }

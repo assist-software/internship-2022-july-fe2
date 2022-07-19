@@ -4,19 +4,36 @@ import RowItem from "../RowItem/RowItem";
 import styles from "./Profile.module.scss";
 
 import useAuth from "../../../hooks/useAuth";
+import useStateProvider from "../../../hooks/useStateProvider";
+
 import { updateUser } from "../../../api/API";
 
 import moment from "moment";
+import Select from "../../../components/Select/Select";
 
 const Profile = () => {
-  // user data
-  const { user } = useAuth();
+  // global states
+  const { user, fetchUser } = useAuth();
 
-  // initial form state
+  // state provider
+  const { setAlert } = useStateProvider();
+
+  // refetch trigger
+  const [refetch, setRefetch] = useState(false);
+
+  // active form
   const [activeForm, setActiveForm] = useState("");
 
-  // form values
+  // form data
   const [formValue, setFormValue] = useState({});
+
+  // refetch user data
+  useEffect(() => {
+    if (refetch) {
+      fetchUser();
+      setRefetch(false);
+    }
+  }, [refetch]);
 
   // set user details to formvalue
   useEffect(() => {
@@ -53,13 +70,24 @@ const Profile = () => {
         return "Last name must be at least 3 characters long";
       }
     }
+    // gender
+    if (field === "gender") {
+      // one of male female or other
+      if (
+        formValue.gender !== "Male" &&
+        formValue.gender !== "Female" &&
+        formValue.gender !== "Other"
+      ) {
+        return "Must be one of male, female, other";
+      }
+    }
     if (field === "email") {
       if (!formValue.email.includes("@")) {
         return "Email must be valid";
       }
     }
     if (field === "phone") {
-      if (formValue.phone.length !== 10) {
+      if (formValue.phone.length !== 10 || !formValue.phone.match(/^[0-9]+$/)) {
         return "Phone must be valid";
       }
     }
@@ -69,8 +97,10 @@ const Profile = () => {
       }
     }
     if (field === "dateOfBirth") {
-      if (moment(formValue.dateOfBirth).isAfter(moment())) {
-        return "Date of birth must be in the past";
+      // at least 18 years old
+      const age = moment().diff(formValue.dateOfBirth, "years");
+      if (age < 18) {
+        return "At least 18 years old";
       }
     }
     return "";
@@ -92,9 +122,12 @@ const Profile = () => {
     if (isFormValid()) {
       try {
         const response = await updateUser(formValue);
-        console.log(response, "response");
         if (response.status === 200) {
-          console.log("updated");
+          setAlert({
+            type: "success",
+            message: "Profile updated successfully",
+          });
+          setRefetch(true);
           setActiveForm("");
         }
       } catch (error) {
@@ -111,9 +144,7 @@ const Profile = () => {
       {/* full name */}
       <RowItem
         title="Full name"
-        info={
-          (formValue?.firstName + " " + formValue?.lastName).trim() || "Not set"
-        }
+        info={(user?.firstName + " " + user?.lastName).trim() || "Not set"}
         action="Edit"
         active={activeForm === "name" ? true : false}
         onCancel={() => {
@@ -133,7 +164,7 @@ const Profile = () => {
             id="firstName"
             type="text"
             label="First name"
-            helper={checkErrors("firstName")}
+            helper={checkErrors("firstName") || ""}
             error={checkErrors("firstName") ? true : false}
           />
 
@@ -145,11 +176,11 @@ const Profile = () => {
             id="lastName"
             type="text"
             label="Last name"
-            helper={checkErrors("lastName")}
+            helper={checkErrors("lastName") || ""}
             error={checkErrors("lastName") ? true : false}
           />
 
-          {/* disabled if no changes has made */}
+          {/* disabled if not valid */}
           <Button
             disabled={isFormValid() ? false : true}
             onClick={handleSubmit}
@@ -162,7 +193,7 @@ const Profile = () => {
       <RowItem
         action="Edit"
         active={activeForm === "gender" ? true : false}
-        info={formValue?.gender || "Not set"}
+        info={user?.gender || "Not set"}
         onAction={() => setActiveForm("gender")}
         onCancel={() => {
           setActiveForm("");
@@ -171,15 +202,17 @@ const Profile = () => {
       />
       {activeForm === "gender" && (
         <div className={styles.form}>
-          <Input
-            onChange={handleChange}
-            value={formValue.gender}
+          <Select
+            value={formValue?.gender}
             name="gender"
             id="gender"
-            type="text"
+            onChange={handleChange}
             label="Gender"
-            helper={checkErrors("gender")}
-            error={checkErrors("gender") ? true : false}
+            options={[
+              { value: "Male", label: "Male" },
+              { value: "Female", label: "Female" },
+              { value: "Other", label: "Other" },
+            ]}
           />
           <Button
             disabled={isFormValid() ? false : true}
@@ -197,7 +230,7 @@ const Profile = () => {
           setActiveForm("");
         }}
         title="Date of birth"
-        info={formValue?.dateOfBirth || "Not set"}
+        info={user?.dateOfBirth || "Not set"}
         action="Edit"
       />
       {activeForm === "birthday" && (
@@ -210,12 +243,12 @@ const Profile = () => {
             id="dateOfBirth"
             type="date"
             label="Birthday"
+            helper={checkErrors("dateOfBirth") || ""}
+            error={checkErrors("dateOfBirth") ? true : false}
           />
           <Button
-            onClick={() => {
-              setActiveForm("");
-              handleSubmit();
-            }}
+            disabled={isFormValid() ? false : true}
+            onClick={handleSubmit}
             label="Save"
           />
         </div>
@@ -229,7 +262,7 @@ const Profile = () => {
           setActiveForm("");
         }}
         title="Email address"
-        info={formValue?.email || "Not set"}
+        info={user?.email || "Not set"}
         action="Edit"
       />
       {activeForm === "email" && (
@@ -241,12 +274,12 @@ const Profile = () => {
             id="email"
             type="text"
             label="Email"
+            helper={checkErrors("email") || ""}
+            error={checkErrors("email") ? true : false}
           />
           <Button
-            onClick={() => {
-              setActiveForm("");
-              handleSubmit();
-            }}
+            disabled={isFormValid() ? false : true}
+            onClick={handleSubmit()}
             label="Save"
           />
         </div>
@@ -259,7 +292,7 @@ const Profile = () => {
           setActiveForm("");
         }}
         title="Phone number"
-        info={formValue?.phone || "Not set"}
+        info={user?.phone || "Not set"}
         action="Edit"
       />
       {activeForm === "phone" && (
@@ -271,12 +304,12 @@ const Profile = () => {
             id="phone"
             type="text"
             label="Phone"
+            helper={checkErrors("phone") || ""}
+            error={checkErrors("phone") ? true : false}
           />
           <Button
-            onClick={() => {
-              setActiveForm("");
-              handleSubmit();
-            }}
+            disabled={isFormValid() ? false : true}
+            onClick={handleSubmit}
             label="Save"
           />
         </div>
@@ -288,7 +321,7 @@ const Profile = () => {
           setActiveForm("");
         }}
         title="Address"
-        info={formValue?.address || "Not set"}
+        info={user?.address || "Not set"}
         action="Edit"
       />
       {activeForm === "address" && (
@@ -300,12 +333,12 @@ const Profile = () => {
             id="address"
             type="text"
             label="Address"
+            helper={checkErrors("address") || ""}
+            error={checkErrors("address") ? true : false}
           />
           <Button
-            onClick={() => {
-              setActiveForm("");
-              handleSubmit();
-            }}
+            disabled={isFormValid() ? false : true}
+            onClick={handleSubmit}
             label="Save"
           />
         </div>

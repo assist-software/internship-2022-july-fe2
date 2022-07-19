@@ -8,17 +8,18 @@ export const AuthProvider = ({ children }) => {
 
   //  set user from local storage if exists
   // id should change with token in production
+  const fetchUser = async () => {
+    try {
+      const userId = localStorage.getItem("user");
+      const response = await getUserById(userId);
+      setUser(response.data);
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  };
 
   useEffect(() => {
-    const userId = localStorage.getItem("user");
-    (async () => {
-      try {
-        const response = await getUserById(userId);
-        setUser(response.data);
-      } catch (error) {
-        console.log("Error: ", error);
-      }
-    })();
+    fetchUser();
   }, []);
 
   // logout function
@@ -39,7 +40,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ login, logout, isLoggedIn, user, setUser }}>
+    <AuthContext.Provider
+      value={{ login, logout, isLoggedIn, user, fetchUser, setUser }}
+    >
       {children}
     </AuthContext.Provider>
   );

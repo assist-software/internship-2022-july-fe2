@@ -103,14 +103,14 @@
     },
     {
       "id": 2,
-      "firstName": "Selim",
+      "firstName": "Selima",
       "lastName": "Muhammetgulyyev",
       "fullName": "Selim Muhammetgulyyev",
-      "email": "lorem@ipsum.com",
+      "email": "lorem@ipsum.comm",
       "phone": "1234567890",
       "address": "Str Universitatii 13",
-      "gender": "Malesdaf`zx",
-      "dateOfBirth": "2000-03-07"
+      "gender": "Male",
+      "dateOfBirth": "2000-09-09"
     },
     {
       "id": 3,
