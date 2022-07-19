@@ -1,0 +1,90 @@
+@import "../../styles/variables.scss";
+
+.gridDense{
+    path{
+        fill:$color-primary-500;
+    }
+}
+
+.modalTitle {
+    display: inline-flex;
+}
+.chevron {
+    margin: 37px 0px 33px 39px;
+    cursor: pointer;
+    path{
+        fill: $color-primary-500;
+    }
+}
+
+.rightButtons {
+    display: inline-flex;
+    justify-content: flex-end;
+    width: 95%;
+
+}
+.share {
+    display: inline-flex;
+    margin: 37px 0px 33px 39px;
+    font-weight: $font-bold;
+    font-size: $font-button;
+    color: $color-primary-500;
+    cursor: pointer;
+    svg{
+        path{
+            fill: $color-primary-500;
+        }
+    }
+    h5{
+        margin-left: 10px;
+    }
+}
+.save {
+    display: inline-flex;
+    margin: 37px 20px 33px 39px;
+    font-weight: $font-bold;
+    font-size: $font-button;
+    color: $color-primary-500;
+    cursor: pointer;
+    svg{
+        path{
+            fill: $color-primary-500;
+        }
+    }
+    h5{
+        margin-left: 10px;
+    }
+}
+.modalBody{
+    display: flex;
+    justify-content: space-around;
+    align-self: center;
+    flex-wrap: wrap; 
+}
+.modalBody::-webkit-scrollbar {
+    border-radius: 5px;
+    width: 8px;
+    height: 7px;
+}
+.modalBody::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #403633;
+}
+
+.largeImage {
+    display: flex;
+    justify-content: center;
+    margin: 0px 20px 30px 20px;
+    height: 80%;
+    width: 80%;  
+}
+.smallImage {
+    display: inline-flex;
+    justify-content: space-around;
+    height: 70%;
+    width: 80%;
+    margin-bottom: 30px;
+    padding-left: 14rem;
+    padding-right: 14rem;
+    
+}
