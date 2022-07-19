@@ -1,15 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Dropdown from "../../components/Dropdown/Dropdown";
+import { getListings } from "../../api/API";
 
 const Sabin = () => {
-  return (
-    <div>
-      <div style={{ width: "160px" }}>
-        <Dropdown fontWeight="bold" fontSize="buton" />
-      </div>
-      <Dropdown fontWeight="bold" fontSize="buton" multi title="Location" />
-    </div>
-  );
+  return <div></div>;
 };
 
 export default Sabin;
