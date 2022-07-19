@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./Card.module.scss";
 import { ReactComponent as HeartFilled } from "../../assets/icons/heart-filled.svg";
 import { ReactComponent as Heart } from "../../assets/icons/heart.svg";

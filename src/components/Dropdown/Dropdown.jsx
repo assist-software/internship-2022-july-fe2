@@ -6,15 +6,13 @@ import PropTypes from "prop-types";
 const Option = (props) => {
   return (
     <div className={styles.option}>
-      {" "}
       <components.Option {...props}>
-        {" "}
         <input
           type="checkbox"
           checked={props.isSelected}
           onChange={() => null}
           className={styles.optionCheck}
-        />{" "}
+        />
         <label className={styles.optionLabel}>{props.label}</label>
       </components.Option>
     </div>
@@ -33,20 +31,11 @@ const options = [
   { value: "option9", label: "Option 9" },
 ];
 
-<<<<<<< HEAD
 const Dropdown = ({ fontWeight, fontSize, title, multi }) => {
   const multipleOption = multi
     ? { IndicatorSeparator: () => null, Option }
     : { IndicatorSeparator: () => null };
 
-=======
-const Dropdown = ({ fontWeight, fontSize, title, multi, options }) => {
-  const [multipleOption, setMultipleOption] = useState(
-    multi
-      ? { IndicatorSeparator: () => null, Option }
-      : { IndicatorSeparator: () => null }
-  );
->>>>>>> fa94e373c7283534a8c0e69d1e7ebfb636a11b33
   function setColor(fontSize) {
     if (fontSize === "buton") return "$color-primary-500";
     else return "black";
