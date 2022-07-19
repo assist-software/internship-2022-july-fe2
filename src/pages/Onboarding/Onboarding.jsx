@@ -1,6 +1,5 @@
 import React from "react";
-import useAuth from "../../hooks/useAuth";
-import { Outlet, useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import AssistLogo from "../../assets/images/logo-assist-tagline.png";
 import LoginImage from "../../assets/images/splash.png";
 import style from "./Onboarding.module.scss";
@@ -19,7 +18,7 @@ const Onboarding = () => {
           <img
             src={AssistLogo}
             className={style.logoImageOnboarding}
-            alt="Login Image Logo"
+            alt="Login Logo"
           />
           <br />
           <br />
@@ -35,7 +34,7 @@ const Onboarding = () => {
       <img
         src={LoginImage}
         className={style.rightImageOnboarding}
-        alt="Login Image"
+        alt="Login"
       />
       {/* </div> */}
       {/* </div> */}

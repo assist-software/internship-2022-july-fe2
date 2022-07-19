@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
-import useAuth from "../../../hooks/useAuth";
+// import useAuth from "../../../hooks/useAuth";
 import style from "../Authenticate.module.scss";
 import Input from "../../../components/Input/Input";
 import Button from "../../../components/Button/Button";
@@ -10,12 +10,12 @@ import { ReactComponent as Google } from "../../../assets/icons/google.svg";
 import { ReactComponent as View } from "../../../assets/icons/view.svg";
 import { ReactComponent as ViewOff } from "../../../assets/icons/view-off.svg";
 
-import { getUserById } from "../../../api/API";
+// import { getUserById } from "../../../api/API";
 
 export default function LoginForm() {
   const navigate = useNavigate();
 
-  const { setUser, user } = useAuth();
+  // const { setUser } = useAuth();
   const [passwordShown, setPasswordShown] = useState(true);
 
   // form values
@@ -25,7 +25,7 @@ export default function LoginForm() {
   console.log(email, pwd, "inputs");
 
   // error states
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [emailError, setEmailError] = useState(null);
   const [pwdError, setPwdError] = useState(null);
 
@@ -55,24 +55,24 @@ export default function LoginForm() {
     }
   };
 
-  const handleLogIn = () => {
-    try {
-      if (email === "" || pwd === "") {
-        handleEmailError();
-        handlePwdError();
-        return;
-      }
+  // const handleLogIn = () => {
+  //   try {
+  //     if (email === "" || pwd === "") {
+  //       handleEmailError();
+  //       handlePwdError();
+  //       return;
+  //     }
 
-      getUserById(email).then((res) => setIsLoggedIn(res));
-      // should make a validation if a email doesn't exist
-      if (isLoggedIn !== null) {
-        setUser({ name: "Team undefined" });
-        navigate("/");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     getUserById(email).then((res) => setIsLoggedIn(res));
+  //     // should make a validation if a email doesn't exist
+  //     if (isLoggedIn !== null) {
+  //       setUser({ name: "Team undefined" });
+  //       navigate("/");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const passToggleHandler = () => {
     setPasswordShown(!passwordShown);
@@ -82,11 +82,12 @@ export default function LoginForm() {
   const handleTestLoginUser = () => {
     const token = 1234;
     const role = "user";
-    const name = "Andrei";
+    const id = 2;
+
     try {
       localStorage.setItem("token", token);
       localStorage.setItem("role", role);
-      localStorage.setItem("name", name);
+      localStorage.setItem("user", id);
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -95,11 +96,11 @@ export default function LoginForm() {
   const handleTestLoginAdmin = () => {
     const token = 1234;
     const role = "admin";
-    const name = "Catalin";
+    const id = 1;
     try {
       localStorage.setItem("token", token);
       localStorage.setItem("role", role);
-      localStorage.setItem("name", name);
+      localStorage.setItem("name", id);
       navigate("/");
     } catch (error) {
       console.log(error);

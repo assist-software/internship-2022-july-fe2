@@ -5,11 +5,8 @@ import useAuth from "../../../hooks/useAuth";
 import style from "../Authenticate.module.scss";
 import Input from "../../../components/Input/Input";
 import Button from "../../../components/Button/Button";
-import { ReactComponent as Google } from "../../../assets/icons/google.svg";
 import { ReactComponent as View } from "../../../assets/icons/view.svg";
 import { ReactComponent as ViewOff } from "../../../assets/icons/view-off.svg";
-
-import { getUserById } from "../../../api/API";
 
 export default function ResetPasswordForm() {
   const navigate = useNavigate();

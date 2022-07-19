@@ -1,7 +1,14 @@
 @import "../../styles/variables.scss";
 
+<<<<<<< HEAD
 .dropdown {
   width: 100%;
+=======
+.dropdown{
+//margin: 1rem; 
+
+    width: 100%;
+>>>>>>> 57641774106adbd1ed3d10cdc122c60927f9e513
 }
 
 .bold {
@@ -45,3 +52,12 @@
   font-size: $font-body-small;
   font-weight: $font-bold;
 }
+<<<<<<< HEAD
+=======
+.optionLabel{
+    align-self: center;
+    font-size: $font-body-small;
+    font-weight: $font-bold;
+
+}
+>>>>>>> 57641774106adbd1ed3d10cdc122c60927f9e513

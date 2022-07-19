@@ -84,6 +84,8 @@
   "user": [
     {
       "id": 1,
+      "firstName": "Andrei edited",
+      "lastName": "Andries",
       "fullName": "Andrei Andries",
       "email": "lorem@ipsum.com",
       "password": "1234",
@@ -101,23 +103,19 @@
     },
     {
       "id": 2,
+      "firstName": "Selima",
+      "lastName": "Muhammetgulyyev",
       "fullName": "Selim Muhammetgulyyev",
-      "email": "lorem2@ipsum.com",
-      "password": "1234",
-      "gender": "male",
-      "phone": "123456789",
-      "role": "admin",
-      "dateOfBirth": "2022-05-25T17:31:43Z",
+      "email": "lorem@ipsum.comm",
+      "phone": "1234567890",
       "address": "Str Universitatii 13",
-      "photo": "https://picsum.photos/200/300",
-      "userActivities": 1,
-      "token": "secret",
-      "createdAt": "2022-05-25T17:31:43Z",
-      "updatedAt": "2022-05-25T17:31:43Z",
-      "isActive": true
+      "gender": "Male",
+      "dateOfBirth": "2000-09-09"
     },
     {
       "id": 3,
+      "firstName": "Catalin",
+      "lastName": "Prisacaru",
       "fullName": "Catalin Prisacaru",
       "email": "lorem3@ipsum.com",
       "password": "1234",
@@ -135,6 +133,8 @@
     },
     {
       "id": 4,
+      "firstName": "Sabin",
+      "lastName": "Bejinari",
       "fullName": "Sabin  Bejinari",
       "email": "lorem4@ipsum.com",
       "password": "1234",
@@ -152,6 +152,8 @@
     },
     {
       "id": 5,
+      "firstName": "Popescu",
+      "lastName": "Ion",
       "fullName": "Popescu Ion",
       "email": "lorem5@ipsum.com",
       "password": "1234",
