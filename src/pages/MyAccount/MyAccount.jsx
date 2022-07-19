@@ -1,20 +1,29 @@
-import React, { useState } from "react";
-import styles from "./MyAccount.module.scss";
-import { Button } from "../../components";
+import React from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+
+// icons
 import { ReactComponent as ProfileIcon } from "../../assets/icons/person.svg";
 import { ReactComponent as SecurityIcon } from "../../assets/icons/security.svg";
 import { ReactComponent as BellIcon } from "../../assets/icons/bell.svg";
 import { ReactComponent as ChatIcon } from "../../assets/icons/chat.svg";
 import { ReactComponent as LogoutIcon } from "../../assets/icons/logout.svg";
+
+// tabs
 import Profile from "./Profile/Profile";
 import Security from "./Security/Security";
 import Notifications from "./Notifications/Notifications";
 import Messages from "./Messages/Messages";
 
+// styles
+import styles from "./MyAccount.module.scss";
+
 const MyAccount = () => {
-  const [activeTab, setActiveTab] = useState("profile");
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const currentTab = location.pathname.split("/")[2];
   const tabSelector = () => {
-    switch (activeTab) {
+    switch (currentTab) {
       case "profile":
         return <Profile />;
       case "security":
@@ -27,6 +36,7 @@ const MyAccount = () => {
         break;
     }
   };
+
   return (
     <section className={styles.container}>
       {/* navigation section */}
@@ -36,24 +46,28 @@ const MyAccount = () => {
           src={"https://picsum.photos/200/300"}
           alt="profile"
         />
-        <nav className={styles.navigation}>
-          <button onClick={() => setActiveTab("profile")}>
+        <nav className={`${styles.navigation}`}>
+          <button onClick={() => navigate("/my-account/profile")}>
             <ProfileIcon />
             Profile
           </button>
-          <button onClick={() => setActiveTab("security")}>
+          <button onClick={() => navigate("/my-account/security")}>
             <SecurityIcon />
             Login & security
           </button>
-          <button onClick={() => setActiveTab("notifications")}>
+          <button onClick={() => navigate("/my-account/notifications")}>
             <BellIcon />
             Notifications
           </button>
-          <button onClick={() => setActiveTab("messages")}>
+          <button onClick={() => navigate("/my-account/messages")}>
             <ChatIcon />
             Messages
           </button>
-          <button onClick={() => console.log("Logout clicked")}>
+          <button
+            onClick={() => {
+              console.log("Logout clicked");
+            }}
+          >
             <LogoutIcon />
             Logout
           </button>

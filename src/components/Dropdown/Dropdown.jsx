@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import styles from "./Dropdown.module.scss";
 import { components } from "react-select";

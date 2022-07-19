@@ -22,8 +22,11 @@ import {
 
 import { Header } from "./components";
 import ProtectedRoute from "./routes/ProtectedRoutes";
+import Alert from "./components/Alert/Alert";
+import useStateProvider from "./hooks/useStateProvider";
 
 function App() {
+  const { alert } = useStateProvider();
   return (
     <Router>
       <Routes>
@@ -40,7 +43,12 @@ function App() {
           {/* protected routes */}
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/confirmation" element={<Confirmation />} />
-          <Route path="/my-account" element={<MyAccount />} />
+          <Route path="/my-account">
+            <Route path="profile" element={<MyAccount />} />
+            <Route path="security" element={<MyAccount />} />
+            <Route path="notifications" element={<MyAccount />} />
+            <Route path="messages" element={<MyAccount />} />
+          </Route>
           <Route path="/edit" element={<AddEdit />} />
         </Route>
 
@@ -73,6 +81,7 @@ function App() {
         <Route path="/andrei" element={<Andrei />} />
         <Route path="/sabin" element={<Sabin />} />
       </Routes>
+      {alert && <Alert message={alert.message} type={alert.type} />}
     </Router>
   );
 }

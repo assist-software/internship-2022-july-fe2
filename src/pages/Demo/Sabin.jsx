@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import Dropdown from "../../components/Dropdown/Dropdown";
-import { getListings } from "../../api/API";
+import React from "react";
 
 const Sabin = () => {
   return <div></div>;

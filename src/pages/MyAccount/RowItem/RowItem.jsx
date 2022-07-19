@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "../../../components";
 import styles from "./RowItem.module.scss";
 
 const RowItem = ({ active, title, info, action, onAction, onCancel }) => {

@@ -1,49 +1,47 @@
 @import "../../styles/variables.scss";
 
-.dropdown{
-//margin: 1rem; 
-    width: 100%;
+.dropdown {
+  width: 100%;
 }
 
-.bold{
-    font-weight: $font-bold;
+.bold {
+  font-weight: $font-bold;
 }
 
-.semibold{
-    font-weight: $font-semibold;
+.semibold {
+  font-weight: $font-semibold;
 }
 
-.medium{
-    font-weight: $font-medium;
+.medium {
+  font-weight: $font-medium;
 }
 
-.regular{
-    font-weight: $font-regular;
+.regular {
+  font-weight: $font-regular;
 }
 
-.buton{
-    &__control{
+.buton {
+  &__control {
     font-size: $font-button;
     color: #0241ae;
-    }
+  }
 
-    &__placeholder{
-        color :$color-primary-500;
-    }
+  &__placeholder {
+    color: $color-primary-500;
+  }
 }
 
-.bodySmall{
-    font-size: $font-body-small;
-    
+.bodySmall {
+  font-size: $font-body-small;
 }
-.optionCheck{
-    width: 13px;
-    height: 11px;
-    padding-top: 5px;
-    text-align: center;
+.optionCheck {
+  width: 13px;
+  height: 11px;
+  padding-top: 5px;
+  text-align: center;
 }
-.optionLabel{
-    align-self: center;
-    font-size: $font-body-small;
-    font-weight: $font-bold;
+.optionLabel {
+  align-self: center;
+  font-size: $font-body-small;
+  font-weight: $font-bold;
 }
