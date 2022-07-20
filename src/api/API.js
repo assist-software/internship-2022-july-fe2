@@ -26,6 +26,16 @@ export const register = async (email, password) => {
   }
 };
 
+// forgotpwd
+export const forgotpwd = async (email) => {
+  try {
+    const response = await axios.post("/user/reset/password?email=" + email);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // get user by email and password as JSON
 // export const login = async (data) => {
 //   try {
