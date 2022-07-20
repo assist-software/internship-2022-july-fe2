@@ -107,8 +107,9 @@ export default function LoginForm() {
       localStorage.setItem("token", token);
       localStorage.setItem("role", role);
       localStorage.setItem("userId", id);
-      fetchUser();
+      //fetchUser();
       navigate("/");
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
