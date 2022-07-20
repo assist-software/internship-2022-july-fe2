@@ -41,7 +41,7 @@ const Header = () => {
               </div>
               <Form className="d-flex">
                 <Form.Control
-                  type="search"
+                  type="text"
                   placeholder="Search"
                   className={styles.search}
                   aria-label="Search"
