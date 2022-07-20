@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./Card.module.scss";
 import { ReactComponent as HeartFilled } from "../../assets/icons/heart-filled.svg";
 import { ReactComponent as Heart } from "../../assets/icons/heart.svg";
+import useAuth from "../../hooks/useAuth";
 
 const Card = ({
   onClick,
@@ -17,6 +18,8 @@ const Card = ({
   function stopPropagation(e) {
     e.stopPropagation();
   }
+  const { user } = useAuth();
+
   return (
     <div className={styles.cards}>
       <div onClick={onClick} className={styles.card}>
@@ -60,6 +63,14 @@ const Card = ({
               {description}
             </p>
             <p className={styles.cardPrice}>{price} lei</p>
+            {user?.role === "admin" && (
+              <div onClick={stopPropagation} className={styles.controls}>
+                <button className={styles.delete}>
+                  <span>Delete</span>
+                </button>
+                <button className={styles.edit}>Edit</button>
+              </div>
+            )}
           </div>
         </div>
       </div>

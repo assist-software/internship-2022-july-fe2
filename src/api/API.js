@@ -4,12 +4,51 @@ axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 // login
 export const login = async (email, password) => {
   try {
-    const response = await axios.post("/login", { email, password });
-    return response.data;
+    const response = await axios.post("/user/authenticate", {
+      email,
+      password,
+    });
+    return response;
   } catch (error) {
     console.log(error);
   }
 };
+
+// register
+export const register = async (email, password) => {
+  try {
+    const response = await axios.post(
+      "/user/register?email=" + email + "&password=" + password
+    );
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// get user by email and password as JSON
+// export const login = async (data) => {
+//   try {
+//     const response = await axios
+//       .post("/User/Authenticate", {
+//         email: data.email,
+//         password: data.password,
+//       })
+//       .then((res) => {
+//         const token = res.data.token;
+//         localStorage.setItem("token", token);
+//         if (res.data.role === 0) {
+//           localStorage.setItem("role", 0);
+//         } else if (res.data.role === 1) {
+//           localStorage.setItem("role", 1);
+//         }
+//       });
+//     return response;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
+// user - 0, admin - 1
 
 // get listing
 export const getListings = async () => {

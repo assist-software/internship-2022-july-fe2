@@ -108,6 +108,7 @@
       "fullName": "Selim Muhammetgulyyev",
       "email": "lorem@ipsum.comm",
       "phone": "1234567890",
+      "role": "user",
       "address": "Str Universitatii 13",
       "gender": "Male",
       "dateOfBirth": "2000-09-09"
