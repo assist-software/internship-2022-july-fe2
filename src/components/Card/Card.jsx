@@ -13,13 +13,16 @@ const Card = ({
   location,
   description,
   price,
+  onIdClick,
+  admin,
+  hideApproval,
+  pending,
 }) => {
   const [like, setLike] = useState(false);
   function stopPropagation(e) {
     e.stopPropagation();
   }
   const { user } = useAuth();
-
   return (
     <div className={styles.cards}>
       <div onClick={onClick} className={styles.card}>
@@ -32,7 +35,9 @@ const Card = ({
           <div onClick={stopPropagation}>
             <button
               className={`${listView ? styles.heartList : styles.heartCard}`}
-              onClick={() => setLike(!like)}
+              onClick={() => {
+                setLike(!like);
+              }}
             >
               {!like ? <Heart /> : <HeartFilled className={styles.heartFill} />}
             </button>
@@ -63,8 +68,11 @@ const Card = ({
               {description}
             </p>
             <p className={styles.cardPrice}>{price} lei</p>
-            {user?.role === "admin" && (
+            {user?.role === 1 && (
               <div onClick={stopPropagation} className={styles.controls}>
+                {hideApproval && (
+                  <button className={styles.approve}>Approve</button>
+                )}
                 <button className={styles.delete}>
                   <span>Delete</span>
                 </button>

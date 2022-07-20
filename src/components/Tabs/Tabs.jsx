@@ -6,7 +6,7 @@ const Tabs = () => {
   const { user } = useAuth();
   return (
     <div className={styles.tabs}>
-      {user?.role === "user" ? (
+      {user?.role === 0 ? (
         <div className={styles.header}>
           <h3 className={styles.welcomeMessage}>
             Welcome back, {user?.fullName}
@@ -16,7 +16,7 @@ const Tabs = () => {
           </div>
         </div>
       ) : null}
-      {user?.role === "admin" ? (
+      {user?.role === 1 ? (
         <div>
           <h3 className={styles.welcomeMessage}>
             Welcome back, {user?.fullName}
