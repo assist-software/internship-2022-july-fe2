@@ -4,7 +4,7 @@
 .navbar {
   border-bottom: 1px solid !important;
   border-bottom-color: $color-gray-200 !important;
-  z-index: 1 !important;
+  z-index: 2 !important;
   background-color: white !important;
 }
 .assist{
@@ -142,9 +142,14 @@
 .hello{
   font-size: $font-body-normal ;
   font-weight: $font-bold;
+  color: $color-black;
 }
 .logout{
   stroke: $color-gray-500  !important;
-  height: 18px;
-  width: 18px;
+  height: 20px;
+  width: 20px;
+  margin: 5px;
+  path {
+    fill: $color-gray-500;
+  }
 }

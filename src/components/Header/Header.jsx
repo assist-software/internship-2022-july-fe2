@@ -101,6 +101,7 @@ const Header = () => {
                   {"Login & security"}
                 </Dropdown.Item>
                 <Dropdown.Divider />
+
                 <Dropdown.Item
                   onClick={logout}
                   className={styles.profileOption}
