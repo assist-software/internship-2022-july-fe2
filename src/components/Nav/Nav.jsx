@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Nav.module.scss";
 import useAuth from "../../hooks/useAuth";
 
-const Nav = ({ setView }) => {
+const Nav = ({ setView, view }) => {
   const { user } = useAuth();
   return (
     <div>
@@ -12,7 +12,7 @@ const Nav = ({ setView }) => {
             onClick={() => {
               setView(false);
             }}
-            className={styles.buttons}
+            className={`${styles.buttons} ${!view && styles.active}`}
           >
             All listings
           </button>
@@ -20,7 +20,7 @@ const Nav = ({ setView }) => {
             onClick={() => {
               setView(true);
             }}
-            className={styles.buttons}
+            className={`${styles.buttons} ${view && styles.active}`}
           >
             My listings
           </button>
@@ -32,7 +32,7 @@ const Nav = ({ setView }) => {
             onClick={() => {
               setView(false);
             }}
-            className={styles.buttons}
+            className={`${styles.buttons} ${!view && styles.active}`}
           >
             All listings
           </button>
@@ -40,7 +40,7 @@ const Nav = ({ setView }) => {
             onClick={() => {
               setView(true);
             }}
-            className={styles.buttons}
+            className={`${styles.buttons} ${view && styles.active}`}
           >
             Pending approval
           </button>

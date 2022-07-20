@@ -17,12 +17,16 @@ const Card = ({
   admin,
   hideApproval,
   pending,
+  listingId,
 }) => {
   const [like, setLike] = useState(false);
   function stopPropagation(e) {
     e.stopPropagation();
   }
   const { user } = useAuth();
+  const [idea, setIdea] = useState([]);
+
+  // console.log(idea);
   return (
     <div className={styles.cards}>
       <div onClick={onClick} className={styles.card}>
@@ -37,6 +41,7 @@ const Card = ({
               className={`${listView ? styles.heartList : styles.heartCard}`}
               onClick={() => {
                 setLike(!like);
+                setIdea(listingId);
               }}
             >
               {!like ? <Heart /> : <HeartFilled className={styles.heartFill} />}
