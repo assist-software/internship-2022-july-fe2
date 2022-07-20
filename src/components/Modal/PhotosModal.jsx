@@ -50,11 +50,7 @@ const PhotosModal = () => {
             <img src="https://picsum.photos/600/400" alt="" />
           </div>
           <div className={styles.smallImage}>
-            <img
-              style={{ justifyContent: "flex-start" }}
-              src="https://picsum.photos/400/500"
-              alt=""
-            />
+            <img src="https://picsum.photos/400/500" alt="" />
             <img src="https://picsum.photos/400/500" alt="" />
           </div>
           <div className={styles.largeImage}>

@@ -10,7 +10,7 @@ import { ReactComponent as Rows } from "../../assets/icons/rows.svg";
 
 const Favorites = () => {
   const navigate = useNavigate();
-  const [showError, setShowError] = useState(false); //daca user se logheaza setShowError=true / daca nu e logat e false
+  const [showError, setShowError] = useState(true); //daca user se logheaza setShowError=true / daca nu e logat e false
   const [listings, setListings] = useState([]);
   useEffect(() => {
     getListings().then((res) => setListings(res));
