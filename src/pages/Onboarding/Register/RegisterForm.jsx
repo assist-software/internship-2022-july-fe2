@@ -1,74 +1,78 @@
 import React, { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
-import useAuth from "../../../hooks/useAuth";
+import useStateProvider from "../../../hooks/useStateProvider";
 import style from "../Authenticate.module.scss";
 import Input from "../../../components/Input/Input";
 import Button from "../../../components/Button/Button";
+
 import { ReactComponent as Google } from "../../../assets/icons/google.svg";
 import { ReactComponent as View } from "../../../assets/icons/view.svg";
 import { ReactComponent as ViewOff } from "../../../assets/icons/view-off.svg";
 
-import { getUserById } from "../../../api/API";
+import { register } from "../../../api/API";
 
 export default function RegisterForm() {
   const navigate = useNavigate();
 
-  const { setAuth } = useAuth();
+  const { setAlert } = useStateProvider();
+
   const [passwordShown, setPasswordShown] = useState(true);
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [emailError, setEmailError] = useState(null);
-  const [pwdError, setPwdError] = useState(null);
+  const [emailError, setEmailError] = useState("");
+  const [pwdError, setPwdError] = useState("");
 
-  const validateEmail = (email) => {
-    const re =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-  };
   const handleEmailError = () => {
-    if (!validateEmail(email)) {
+    if (!email.includes("@")) {
       setEmailError("Invalid e-mail address!");
-    } else setEmailError(null);
-    if (!emailError) {
-      // No errors.
+    } else {
+      setEmailError("");
     }
   };
 
   const handlePwdError = () => {
-    if (pwd.length < 2) {
-      setPwdError("Password must be at least 3 chars long");
-    } else if (pwd.length > 50) {
-      setPwdError("Password must be of maximum 50 chars!");
-    } else setPwdError(null);
-
-    if (!pwdError) {
-      // No errors.
-    }
-  };
-
-  const handleSignUp = () => {
-    try {
-      if (email === "" || pwd === "") {
-        handleEmailError();
-        handlePwdError();
-        return;
-      }
-
-      getUserById(email).then((res) => setIsLoggedIn(res));
-      // should make a validation if a user doesn't exist
-      if (isLoggedIn !== null) {
-        setAuth({ name: "Team undefined" });
-        navigate("/");
-      }
-    } catch (error) {
-      console.log(error);
+    if (pwd.length < 7) {
+      setPwdError("Password must be at least 8 chars long");
+    } else {
+      setPwdError("");
     }
   };
 
   const passToggleHandler = () => {
     setPasswordShown(!passwordShown);
+  };
+
+  // handle register
+  const handleRegister = async () => {
+    try {
+      //
+      handleEmailError();
+      handlePwdError();
+      if (emailError === "" && pwdError === "" && pwd.length > 7) {
+        const response = await register(email, pwd);
+        if (response.status === 200) {
+          navigate("/login");
+          setAlert({
+            type: "success",
+            message: "Account created successfully",
+          });
+        }
+      } else {
+        if (emailError !== "") handleEmailError();
+        if (pwdError !== "") handlePwdError();
+        setAlert({
+          type: "danger",
+          message: "Fill all the required fields correctly.",
+        });
+      }
+    } catch (error) {
+      console.log(error, "error");
+      setAlert({
+        type: "danger",
+        message: "Something went wrong",
+      });
+    }
   };
 
   return (
@@ -116,7 +120,7 @@ export default function RegisterForm() {
               value={pwd}
               onChange={(e) => {
                 setPwd(e.target.value);
-                handlePwdError();
+                handlePwdError(e);
               }}
               type={passwordShown ? "password" : "text"}
               placeholder={"Password"}
@@ -138,9 +142,7 @@ export default function RegisterForm() {
             id="register"
             variant="primary"
             label="Sign up"
-            onClick={() => {
-              handleSignUp();
-            }}
+            onClick={handleRegister}
           />
         </div>
         <div
