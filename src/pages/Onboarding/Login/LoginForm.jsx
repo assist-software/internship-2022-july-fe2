@@ -19,6 +19,7 @@ import { login } from "../../../api/API";
 
 export default function LoginForm() {
   const { setUser } = useAuth();
+
   const { setAlert } = useStateProvider();
 
   const navigate = useNavigate();
@@ -59,6 +60,7 @@ export default function LoginForm() {
           navigate("/");
           localStorage.setItem("token", response?.data.token);
           localStorage.setItem("userId", response?.data.userId);
+
           setAlert({
             type: "success",
             message: "Login successfully",
@@ -109,6 +111,7 @@ export default function LoginForm() {
       localStorage.setItem("token", token);
       localStorage.setItem("role", role);
       localStorage.setItem("userId", id);
+      //fetchUser();
       navigate("/");
       window.location.reload();
     } catch (error) {

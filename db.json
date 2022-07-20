@@ -9,7 +9,7 @@
       "price": "123,456",
       "author": 1,
       "approvedBy": "1",
-      "status": 1,
+      "status": 0,
       "images": "https://picsum.photos/200/300",
       "category": "latest",
       "viewCounter": 0,

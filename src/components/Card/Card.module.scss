@@ -115,7 +115,7 @@
   fill: $color-gray-300;
 }
 .heartCard {
-  z-index: 999;
+  z-index: 1;
   position: absolute;
   top: 5px;
   right: 5px;
@@ -164,4 +164,10 @@
       background-color: $color-primary-100;
     }
   }
+}
+.approve {
+  padding: 10px;
+  background-color: $color-primary-400;
+  color: $color-white;
+  border-radius: 8px;
 }
