@@ -49,7 +49,6 @@ export default function LoginForm() {
     } else setPwdError("");
   };
 
-  // handle register
   const handleLogin = async () => {
     try {
       if (emailError === "" && pwdError === "" && pwd.length > 7) {
