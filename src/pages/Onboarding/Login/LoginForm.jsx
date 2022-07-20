@@ -18,7 +18,8 @@ import { login } from "../../../api/API";
 // import { getUserById } from "../../../api/API";
 
 export default function LoginForm() {
-  const { fetchUser, setUser } = useAuth();
+  const { setUser } = useAuth();
+
   const { setAlert } = useStateProvider();
 
   const navigate = useNavigate();
@@ -55,8 +56,11 @@ export default function LoginForm() {
         const response = await login(email, pwd);
         if (response.status === 200) {
           setUser(response.data);
+          console.log(response.data, "user json");
           navigate("/");
           localStorage.setItem("token", response?.data.token);
+          localStorage.setItem("userId", response?.data.userId);
+
           setAlert({
             type: "success",
             message: "Login successfully",

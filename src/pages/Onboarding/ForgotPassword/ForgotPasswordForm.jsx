@@ -6,47 +6,77 @@ import style from "../Authenticate.module.scss";
 import Input from "../../../components/Input/Input";
 import Button from "../../../components/Button/Button";
 
-import { getUserById } from "../../../api/API";
+import { forgotpwd } from "../../../api/API";
+import useStateProvider from "../../../hooks/useStateProvider";
 
 export default function ForgotPasswordForm() {
   const navigate = useNavigate();
 
-  const { setUser } = useAuth();
+  // const { setUser } = useAuth();
 
   const [email, setEmail] = useState("");
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [emailError, setEmailError] = useState(null);
 
-  const validateEmail = (email) => {
-    const re =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-  };
+  const { setAlert } = useStateProvider();
+
   const handleEmailError = () => {
-    if (!validateEmail(email)) {
+    if (!email.includes("@")) {
       setEmailError("Invalid e-mail address!");
-    } else setEmailError(null);
-    if (!emailError) {
-      // No errors.
+    } else {
+      setEmailError("");
     }
   };
 
-  const handleSendLink = () => {
-    try {
-      if (email === "") {
-        handleEmailError();
-        return;
-      }
+  // const handleSendLink = () => {
+  //   try {
+  //     if (email === "") {
+  //       handleEmailError();
+  //       return;
+  //     }
 
-      getUserById(email).then((res) => setIsLoggedIn(res));
-      // should make a validation if a user doesn't exist
-      if (isLoggedIn !== null) {
-        setUser({ name: "Team undefined" });
-        navigate("/reset-password");
+  //     getUserById(email).then((res) => setIsLoggedIn(res));
+  //     // should make a validation if a user doesn't exist
+  //     if (isLoggedIn !== null) {
+  //       setUser({ name: "Team undefined" });
+  //       navigate("/reset-password");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  const handleForgotPwd = async () => {
+    try {
+      if (emailError === "") {
+        const response = await forgotpwd(email);
+        if (response.status === 200) {
+          // setUser(response.data);
+          navigate("/login");
+          setAlert({
+            type: "success",
+            message: "You will receive an email.",
+          });
+        } else {
+          setAlert({
+            type: "danger",
+            message: "Something went wrong! Check your email.",
+          });
+        }
+      } else {
+        if (emailError !== "") handleEmailError();
+        setAlert({
+          type: "danger",
+          message: "Fill the email field!",
+        });
       }
     } catch (error) {
-      console.log(error);
+      console.log(error, "error");
+      setAlert({
+        type: "danger",
+        message: "Something went wrong! Check your email.",
+      });
     }
   };
 
@@ -87,7 +117,7 @@ export default function ForgotPasswordForm() {
             variant="primary"
             label="Send reset link"
             onClick={() => {
-              handleSendLink();
+              handleForgotPwd();
             }}
           />
         </div>
