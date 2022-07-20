@@ -3,6 +3,9 @@ import styles from "./Details.module.scss";
 
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import { Button } from "../../components";
+import PhotosModal from "../../components/Modal/PhotosModal";
+import { ReactComponent as GridDense } from "../../assets/icons/grid-dense.svg";
+import { ReactComponent as Share } from "../../assets/icons/share.svg";
 
 import { getListingById } from "../../api/API";
 
@@ -37,6 +40,7 @@ const Map = () => {
 
 const Details = () => {
   // states for the details page
+  const [showModal, setShowModal] = useState(false);
   const [listing, setListing] = useState({});
   // const [owner, setOwner] = useState({});
   const owner = {};
@@ -85,7 +89,20 @@ const Details = () => {
         <img src="https://picsum.photos/200/300" alt="" />
         <img src="https://picsum.photos/200/300" alt="" />
         <img src="https://picsum.photos/200/300" alt="" />
+        <div className={styles.photos}>
+          <Button
+            variant="secondary"
+            label="Show all photos"
+            icon={<GridDense className={styles.gridDense} />}
+            position="left"
+            onClick={() => {
+              setShowModal(true);
+            }}
+          />
+        </div>
       </div>
+
+      <PhotosModal showModal={showModal} setShowModal={setShowModal} />
 
       {/* title */}
       <div className={styles.title}>
@@ -93,7 +110,11 @@ const Details = () => {
           <h5 className={styles.listingName}>{listing.title}</h5>
           <h4 className={styles.listingPrice}>123456 lei</h4>
         </div>
-        <button className={styles.shareButton}>Share</button>
+        <button className={styles.shareButton}>
+          {" "}
+          <Share />
+          <span>Share</span>
+        </button>
       </div>
 
       {/* details */}
