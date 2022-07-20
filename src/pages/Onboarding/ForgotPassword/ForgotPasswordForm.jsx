@@ -21,8 +21,9 @@ export default function ForgotPasswordForm() {
 
   const { setAlert } = useStateProvider();
 
-  const handleEmailError = () => {
-    if (!email.includes("@")) {
+  const handleEmailError = (e) => {
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+    if (reg.test(e) === false) {
       setEmailError("Invalid e-mail address!");
     } else {
       setEmailError("");
@@ -65,7 +66,7 @@ export default function ForgotPasswordForm() {
           });
         }
       } else {
-        if (emailError !== "") handleEmailError();
+        if (emailError !== "") handleEmailError("");
         setAlert({
           type: "danger",
           message: "Fill the email field!",
@@ -100,7 +101,7 @@ export default function ForgotPasswordForm() {
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
-                handleEmailError();
+                handleEmailError(e.target.value);
               }}
               type="email"
               placeholder={"Email"}
@@ -120,9 +121,9 @@ export default function ForgotPasswordForm() {
               handleForgotPwd();
             }}
           />
-        </div>
-        <div className={style.contentContainerAuthEndForm}>
-          <div className={style.textAuthEndForm}>
+          <div
+            className={`${style.textAuthEndForm} ${style.forgotPasswordEndForm}`}
+          >
             <span
               onClick={() => {
                 navigate("/login");

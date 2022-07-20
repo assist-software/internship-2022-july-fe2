@@ -267,7 +267,7 @@ div a{
     margin-top:90px;
 }
 
-.contentContainerAuthEndForm{
+.contentContainerAuthEndForm,.forgotPasswordEndForm{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -303,7 +303,6 @@ div a{
     }
 }
 
-
 @media (max-width : 860px){
     .authError,
     .containerAuth, 
@@ -318,10 +317,11 @@ div a{
     .contentContainerButtons,
     .contentContainerButtons Button, 
     .formInput Button,
-    .contentContainerAuthEndForm,
     .registerSeparator,
     .containerAuthResetPwd,
-    .contentContainerFormResetPwd
+    .contentContainerFormResetPwd,
+    .contentContainerAuthEndForm,
+    .forgotPasswordEndForm
     {
         width: 260px;
     }
@@ -388,11 +388,10 @@ div a{
     .contentContainerButtons,
     .contentContainerButtons Button,
     .formInput Button,
-    .contentContainerAuthEndForm,
     .containerAuthResetPwd,
     .contentContainerFormResetPwd,
     .contentContainerAuthEndForm,
-    .contentContainerAuthEndForm
+    .forgotPasswordEndForm
     {
         width: 260px;
     }    
