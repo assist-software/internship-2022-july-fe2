@@ -6,7 +6,7 @@ import listingStyle from "./Listing.module.scss";
 
 import { useNavigate } from "react-router-dom";
 
-const Listing = ({ title }) => {
+const Listing = ({ title, hideControls }) => {
   const [listings, setListings] = useState([]);
   useEffect(() => {
     getListings().then((res) => setListings(res));
@@ -20,9 +20,9 @@ const Listing = ({ title }) => {
   return (
     <div>
       <div>
-        <h3 className={listingStyle.title}>Latest</h3>
+        <h3 className={listingStyle.title}>{title}</h3>
       </div>
-      <Filters setListView={setListView} />
+      <Filters hideControls={hideControls} setListView={setListView} />
 
       {listings?.map((listing, index) => (
         <Card
