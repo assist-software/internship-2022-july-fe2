@@ -24,7 +24,7 @@ const ListObject = ({ listView, admin, hideApproval, pending }) => {
                 price={listing.price}
                 location={listing.location}
                 listView={listView}
-                id={listing.id}
+                listingId={listing.id}
                 admin={admin}
                 hideApproval={hideApproval}
                 onIdClick={() => console.log(listing.id, "ghjk")}

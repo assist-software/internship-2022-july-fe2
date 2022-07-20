@@ -14,7 +14,6 @@ import "swiper/css/navigation";
 
 const Carousel = ({ title }) => {
   const [listings, setListings] = useState([]);
-  console.log(listings);
   useEffect(() => {
     getListings().then((res) => setListings(res));
   }, []);
@@ -51,6 +50,7 @@ const Carousel = ({ title }) => {
                 description={listing.description}
                 price={listing.price}
                 location={listing.location}
+                listingId={listing.id}
                 onClick={() => {
                   navigate("/listing/" + listing.id);
                 }}

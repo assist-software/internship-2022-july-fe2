@@ -12,7 +12,7 @@ const Home = () => {
     <div>
       <div>
         <Tabs />
-        <Nav setView={setView} />
+        <Nav view={view} setView={setView} />
       </div>
       {user?.role === 1 && (
         <>
@@ -43,29 +43,6 @@ const Home = () => {
           <Carousel title="Small Houses" />
         </>
       )}
-      {/* {user?.role === 1 ? (
-        <>
-          {view ? (
-            <Listing pending={1} hideApproval admin />
-          ) : (
-            <Listing pending={0} admin />
-          )}
-        </>
-      ) : (
-        <>
-          <Carousel title="Most view" />
-          <Carousel title="Big Houses" />
-          <Carousel title="Small Houses" />
-        </>
-      )} */}
-
-      {/* {user?.role === 1? (
-        <div>admin</div>
-      ) : user?.role === 0? (
-        <div>user</div>
-      ) : (
-        <div>guest</div>
-      )} */}
     </div>
   );
 };
