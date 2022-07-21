@@ -18,7 +18,8 @@ import { login } from "../../../api/API";
 // import { getUserById } from "../../../api/API";
 
 export default function LoginForm() {
-  const { fetchUser, setUser } = useAuth();
+  const { setUser } = useAuth();
+
   const { setAlert } = useStateProvider();
 
   const navigate = useNavigate();
@@ -34,37 +35,42 @@ export default function LoginForm() {
   const [emailError, setEmailError] = useState(null);
   const [pwdError, setPwdError] = useState(null);
 
-  const handleEmailError = () => {
-    if (!email.includes("@")) {
+  const handleEmailError = (e) => {
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+    if (reg.test(e) === false) {
       setEmailError("Invalid e-mail address!");
     } else {
       setEmailError("");
     }
   };
 
-  const handlePwdError = () => {
-    if (pwd.length < 7) {
+  const handlePwdError = (e) => {
+    if (e.length < 8) {
       setPwdError("Password must be at least 8 chars long");
     } else setPwdError("");
   };
 
-  // handle register
   const handleLogin = async () => {
     try {
-      if (emailError === "" && pwdError === "" && pwd.length > 7) {
-        const response = await login(email, pwd);
-        if (response.status === 200) {
-          setUser(response.data);
-          navigate("/");
-          localStorage.setItem("token", response?.data.token);
-          setAlert({
-            type: "success",
-            message: "Login successfully",
-          });
+      if (emailError === "" && pwdError === "") {
+        if (pwd.length > 7) {
+          const response = await login(email, pwd);
+          if (response.status === 200) {
+            setUser(response.data);
+            console.log(response.data, "user json");
+            navigate("/");
+            localStorage.setItem("token", response?.data.token);
+            localStorage.setItem("userId", response?.data.userId);
+
+            setAlert({
+              type: "success",
+              message: "Login successfully",
+            });
+          }
         }
       } else {
-        if (emailError !== "") handleEmailError();
-        if (pwdError !== "") handlePwdError();
+        if (emailError !== "") handleEmailError("");
+        if (pwdError !== "") handlePwdError("");
         setAlert({
           type: "danger",
           message: "Fill all the required fields correctly.",
@@ -134,7 +140,7 @@ export default function LoginForm() {
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
-                handleEmailError();
+                handleEmailError(e.target.value);
               }}
               type="email"
               placeholder={"Email"}
@@ -150,7 +156,7 @@ export default function LoginForm() {
               value={pwd}
               onChange={(e) => {
                 setPwd(e.target.value);
-                handlePwdError();
+                handlePwdError(e.target.value);
               }}
               type={passwordShown ? "password" : "text"}
               placeholder={"Password"}
@@ -194,7 +200,7 @@ export default function LoginForm() {
         </div>
         <div className={style.contentContainerAuthEndForm}>
           <p className={style.textAuthEndForm}>
-            Don't have an account?
+            Don't have an account?{" "}
             <span
               className={style.textAuthEndForm}
               onClick={() => {

@@ -11,9 +11,9 @@
   &:hover {
     color: $color-primary-300;
   }
-  &:focus {
-    color: $color-primary-500;
-    text-decoration: underline;
-    text-underline-offset: 14px;
-  }
+}
+.active {
+  color: $color-primary-500;
+  text-decoration: underline;
+  text-underline-offset: 14px;
 }

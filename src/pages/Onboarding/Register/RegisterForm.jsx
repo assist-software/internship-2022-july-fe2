@@ -20,23 +20,22 @@ export default function RegisterForm() {
   const [passwordShown, setPasswordShown] = useState(true);
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [pwdError, setPwdError] = useState("");
+  const [emailError, setEmailError] = useState(null);
+  const [pwdError, setPwdError] = useState(null);
 
-  const handleEmailError = () => {
-    if (!email.includes("@")) {
+  const handleEmailError = (e) => {
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+    if (reg.test(e) === false) {
       setEmailError("Invalid e-mail address!");
     } else {
       setEmailError("");
     }
   };
 
-  const handlePwdError = () => {
-    if (pwd.length < 7) {
+  const handlePwdError = (e) => {
+    if (e.length < 8) {
       setPwdError("Password must be at least 8 chars long");
-    } else {
-      setPwdError("");
-    }
+    } else setPwdError("");
   };
 
   const passToggleHandler = () => {
@@ -47,20 +46,22 @@ export default function RegisterForm() {
   const handleRegister = async () => {
     try {
       //
-      handleEmailError();
-      handlePwdError();
-      if (emailError === "" && pwdError === "" && pwd.length > 7) {
-        const response = await register(email, pwd);
-        if (response.status === 200) {
-          navigate("/login");
-          setAlert({
-            type: "success",
-            message: "Account created successfully",
-          });
+      // handleEmailError();
+      // handlePwdError();
+      if (emailError === "" && pwdError === "") {
+        if (pwd.length > 7) {
+          const response = await register(email, pwd);
+          if (response.status === 200) {
+            navigate("/login");
+            setAlert({
+              type: "success",
+              message: "Account created successfully",
+            });
+          }
         }
       } else {
-        if (emailError !== "") handleEmailError();
-        if (pwdError !== "") handlePwdError();
+        if (emailError !== "") handleEmailError("");
+        if (pwdError !== "") handlePwdError("");
         setAlert({
           type: "danger",
           message: "Fill all the required fields correctly.",
@@ -106,7 +107,7 @@ export default function RegisterForm() {
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
-                handleEmailError();
+                handleEmailError(e.target.value);
               }}
               type="email"
               placeholder={"Email"}
@@ -120,7 +121,7 @@ export default function RegisterForm() {
               value={pwd}
               onChange={(e) => {
                 setPwd(e.target.value);
-                handlePwdError(e);
+                handlePwdError(e.target.value);
               }}
               type={passwordShown ? "password" : "text"}
               placeholder={"Password"}
