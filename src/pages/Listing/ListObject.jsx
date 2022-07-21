@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 const ListObject = ({ listView, admin, hideApproval, pending }) => {
   const [listings, setListings] = useState([]);
+  console.log(listings, "listobject listings");
+
   useEffect(() => {
     getListings().then((res) => setListings(res));
   }, []);

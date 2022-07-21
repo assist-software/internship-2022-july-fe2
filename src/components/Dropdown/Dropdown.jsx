@@ -71,6 +71,7 @@ const Dropdown = ({
   multi,
   options,
   searchable,
+  onChange,
 }) => {
   const [multipleOption] = useState(
     multi
@@ -143,7 +144,7 @@ const Dropdown = ({
       hideSelectedOptions={multi ? false : true}
       defaultValue={title}
       controlShouldRenderValue={multi ? false : true}
-      // onChange={handleOnChange}
+      onChange={onChange}
       isSearchable={searchable ? true : false}
     />
   );

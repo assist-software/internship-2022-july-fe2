@@ -4,6 +4,7 @@ import useAuth from "../../hooks/useAuth";
 
 const Nav = ({ setView, view }) => {
   const { user } = useAuth();
+
   return (
     <div>
       {user?.role === 0 ? (

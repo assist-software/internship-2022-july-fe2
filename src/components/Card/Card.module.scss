@@ -45,8 +45,9 @@
 .ListCardImg {
   border-radius: 12px;
   height: 175px;
-  width: 500px;
+  width: 451px;
   object-fit: cover;
+  min-width: 151px;
 }
 
 .contentCard {
@@ -138,12 +139,7 @@
     border-radius: 8px;
     color: white;
   }
-  .delete:hover span {
-    display: none;
-  }
-  .delete:hover::before {
-    content: "Approve";
-  }
+
   .edit {
     padding: 10px;
     color: $color-primary-500;
