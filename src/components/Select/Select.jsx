@@ -9,12 +9,20 @@ const options = [
   { value: "4", label: "Sit" },
 ];
 
-const Select = ({ name, id, label, helper, value, options, onChange }) => {
+const Select = ({
+  name,
+  id,
+  label,
+  error,
+  helper,
+  value,
+  options,
+  onChange,
+}) => {
   return (
-    <div className={styles}>
+    <div className={`${styles} ${error && styles.error}`}>
       <label htmlFor={name}>{label}</label>
       <select value={value} name={name} id={id} onChange={onChange}>
-        <option disabled>Select a gender</option>
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
@@ -30,8 +38,9 @@ Select.propTypes = {
   name: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   options: PropTypes.array.isRequired,
-  label: PropTypes.array.isRequired,
+  label: PropTypes.string.isRequired,
   onChange: PropTypes.func,
+  error: PropTypes.bool,
 };
 
 Select.defaultProps = {
@@ -40,6 +49,7 @@ Select.defaultProps = {
   options: options,
   label: "Select",
   onChange: () => {},
+  error: false,
 };
 
 export default Select;

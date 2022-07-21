@@ -34,3 +34,16 @@ label {
   display: flex;
   margin-bottom: 4px;
 }
+
+.error {
+  select {
+    border-color: $color-alert-400;
+  }
+  p {
+    color: $color-alert-500 !important;
+    font-size: $font-body-tiny;
+    font-weight: $font-regular;
+    line-height: 20px;
+    margin-top: 4px;
+  }
+}

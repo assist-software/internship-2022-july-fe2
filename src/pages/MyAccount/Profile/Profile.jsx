@@ -61,12 +61,12 @@ const Profile = () => {
   // check errors
   const checkErrors = (field) => {
     if (field === "firstName") {
-      if (formValue.firstName.length < 3) {
+      if (formValue?.firstName?.length < 3) {
         return "First name must be at least 3 characters long";
       }
     }
     if (field === "lastName") {
-      if (formValue.lastName.length < 3) {
+      if (formValue?.lastName?.length < 3) {
         return "Last name must be at least 3 characters long";
       }
     }
@@ -87,12 +87,15 @@ const Profile = () => {
       }
     }
     if (field === "phone") {
-      if (formValue.phone.length !== 10 || !formValue.phone.match(/^[0-9]+$/)) {
+      if (
+        formValue?.phone?.length !== 10 ||
+        !formValue.phone.match(/^[0-9]+$/)
+      ) {
         return "Phone must be valid";
       }
     }
     if (field === "address") {
-      if (formValue.address.length < 10) {
+      if (formValue?.address?.length < 10) {
         return "Address must be at least 10 characters long";
       }
     }
@@ -209,6 +212,7 @@ const Profile = () => {
             onChange={handleChange}
             label="Gender"
             options={[
+              { value: "", label: "Select a gender" },
               { value: "Male", label: "Male" },
               { value: "Female", label: "Female" },
               { value: "Other", label: "Other" },

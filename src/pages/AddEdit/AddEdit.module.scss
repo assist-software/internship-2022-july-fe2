@@ -1,46 +1,45 @@
 @import "../../styles/variables.scss";
 
 .price {
-    display: flex;
-    margin-bottom: 10px;
-    h6{
-        margin-top: 40px;
-        margin-left: 10px;
-        font-weight: $font-medium;
-        font-size: $font-body-small;
-    }
+  display: flex;
+  margin-bottom: 10px;
+  h6 {
+    margin-top: 40px;
+    margin-left: 10px;
+    font-weight: $font-medium;
+    font-size: $font-body-small;
+  }
 }
 
 .addTitle {
-    font-weight: $font-bold;
-    font-size: $font-h2;
-    margin-top: 32px;
-    margin-bottom: 24px;
+  font-weight: $font-bold;
+  font-size: $font-h2;
+  margin-top: 32px;
+  margin-bottom: 24px;
 }
 
 .info {
-    h3{
-        font-weight: $font-bold;
-        font-size: $font-h6;
-       
-    };
-    p{
-        font-weight: $font-body-small;
-        font-size: $font-regular;
-        margin-top: 4px;
-    }
-    
+  h3 {
+    font-weight: $font-bold;
+    font-size: $font-h6;
+  }
+  p {
+    font-weight: $font-body-small;
+    font-size: $font-regular;
+    margin-top: 4px;
+  }
 }
 .inputs {
-    margin-top: 0px;
+  margin-top: 0px;
 }
 .bottomBorder {
-    border-bottom: 1px solid $color-gray-100;
+  border-bottom: 1px solid $color-gray-100;
 }
 
-
-
-.imgPlaceholder{
+.preview {
+  display: flex;
+  flex-direction: column;
+  img {
     height: 128px;
     width: 164px;
     background-color: $color-gray-50;
@@ -48,15 +47,51 @@
     align-items: center;
     justify-content: center;
     border-radius: 12px;
-    margin-bottom: 30px;
+    overflow: hidden;
     cursor: pointer;
-    .addIcon {
-        stroke: $color-gray-400;
-        height: 26px;
-        width: 26px;
-    }
+    object-fit: cover;
+  }
+
+  svg {
+    width: 100%;
+    cursor: pointer;
+  }
 }
 
-.imgPlaceholder:hover {
-    box-shadow: 0px 10px 24px rgba(0, 0, 0, 0.14);
+.dropzone {
+  background-color: $color-gray-50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  height: 128px;
+  width: 164px;
+  margin-bottom: 1rem;
+
+  &:hover {
+    background-color: $color-gray-100;
+  }
+
+  p {
+    font-weight: $font-body-small;
+    font-size: $font-regular;
+    color: $color-gray-400;
+    margin: 0;
+    padding: 1rem;
+    text-align: center;
+  }
+}
+
+.accept {
+  border: 2px dashed $color-success-400;
+}
+
+.reject {
+  border: 2px dashed $color-alert-400;
+}
+
+.error {
+  color: $color-alert-400;
+  font-size: $font-body-tiny;
+  margin-top: 4px;
 }
