@@ -3,7 +3,7 @@ axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
 // ---------------------------- FAVORITES ----------------------------------
 // add to favorites
-export const addFavorite = async () => {
+export const addFavorite = async (userId, listingId) => {
   try {
     const response = await axios.post("/favorite/addtofavorites", {
       userId,
