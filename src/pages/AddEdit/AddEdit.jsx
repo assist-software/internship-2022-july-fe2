@@ -1,37 +1,157 @@
-import React, { useState } from "react";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import React, { useState, useCallback, useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import { Input, Button, Select } from "../../components";
+
 import styles from "./AddEdit.module.scss";
-import PropTypes from "prop-types";
-import Input from "../../components/Input/Input";
 import { ReactComponent as Add } from "../../assets/icons/add.svg";
-import Button from "../../components/Button/Button";
+import { ReactComponent as Delete } from "../../assets/icons/delete.svg";
 
-const AddEdit = (props) => {
-  //react dropzone for images
+import { useDropzone } from "react-dropzone";
+import GetLocation from "../../components/GetLocation/GetLocation";
 
-  const [title, setTitle] = useState(props.title || "");
-  const [category, setCategory] = useState(props.category || "");
-  const [price, setPrice] = useState(props.price || "");
-  const [description, setDescription] = useState(props.description || "");
-  const [location, setLocation] = useState(props.location || "");
-  const [phoneNumber, setPhoneNumber] = useState(props.phoneNumber || "");
+const AddEdit = () => {
+  const [address, setAddress] = useState({});
+  const [coords, setCoords] = useState({});
 
-  //make price number only
-  const handlePriceChange = (e) => {
-    const re = /^[0-9\b]+$/;
-    if (e.target.value === "" || re.test(e.target.value)) {
-      setPrice(e.target.value);
-      console.log(e.target.value);
-    }
+  // form data
+  const [formValue, setFormValue] = useState({
+    title: "",
+    category: "",
+    price: "",
+    images: [],
+    description: "",
+    location: {
+      lat: coords?.lat || "",
+      lng: coords?.lng || "",
+      city: address?.city || "",
+      state: address?.state || "",
+      zip: address?.zip || "",
+      country: address?.country || "",
+    },
+    phone: "",
+  });
+
+  console.log(formValue);
+
+  const setLocation = useCallback(() => {
+    setFormValue({
+      ...formValue,
+      location: {
+        lat: coords?.lat || "",
+        lng: coords?.lng || "",
+        city: address?.city || "",
+        state: address?.state || "",
+        zip: address?.zip || "",
+        country: address?.country || "",
+      },
+    });
+  }, [address, coords]);
+
+  useEffect(() => {
+    setLocation();
+  }, [setLocation]);
+
+  // handleChange
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValue({ ...formValue, [name]: value });
   };
-  // make phone number number only
-  const handlePhoneNumberChange = (e) => {
-    const re = /^[0-9\b]+$/;
-    if (e.target.value === "" || re.test(e.target.value)) {
-      setPhoneNumber(e.target.value);
-      console.log(e.target.value);
+
+  // handleDrop
+  const handleDrop = useCallback((acceptedFiles) => {
+    acceptedFiles.map((file) => {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        setFormValue((prevState) => {
+          return {
+            ...prevState,
+            images: [...prevState.images, e.target.result],
+          };
+        });
+      };
+      reader.readAsDataURL(file);
+      return file;
+    });
+  }, []);
+
+  // handleDelete image
+  const handleDelete = (index) => {
+    setFormValue((prevState) => {
+      return {
+        ...prevState,
+        images: prevState.images.filter((image, i) => i !== index),
+      };
+    });
+  };
+
+  // check errors
+  const checkErrors = (field) => {
+    // title
+    if (field === "title") {
+      if (formValue.title.length < 10) {
+        return "Title must be at least 10 characters long";
+      }
+    }
+    // category
+    if (field === "category") {
+      if (formValue.category === "") {
+        return "Category must be selected";
+      }
+    }
+    // price
+    if (field === "price") {
+      if (formValue.price.length < 1 || !formValue.price.match(/^[0-9]+$/)) {
+        return "Price must be valid";
+      }
+    }
+    // images
+    if (field === "images") {
+      if (formValue.images.length < 5) {
+        return "Images must be at least 5";
+      }
+    }
+    // description
+    if (field === "description") {
+      if (formValue.description.length < 10) {
+        return `${formValue.description.length} /100 characters`;
+      }
+    }
+    // location
+    if (field === "location") {
+      if (formValue.location.lat === "" || formValue.location.lng === "") {
+        return "Location is mandatory";
+      }
+    }
+    // phoneNumber
+    if (field === "phone") {
+      if (formValue.phone.length !== 10 || !formValue.phone.match(/^[0-9]+$/)) {
+        return "Phone must be valid";
+      }
+    }
+    return "";
+  };
+
+  // check if form is valid
+  const isFormValid = () => {
+    let isValid = true;
+    Object.keys(formValue).forEach((field) => {
+      if (checkErrors(field)) {
+        isValid = false;
+      }
+    });
+    return isValid;
+  };
+
+  // show errors only if clicked to submit
+  const [showErrors, setShowErrors] = useState(false);
+
+  // handleSubmit
+  const handleSubmit = () => {
+    if (!isFormValid()) {
+      setShowErrors(true);
+    } else {
+      setShowErrors(false);
+      console.log(formValue);
     }
   };
 
@@ -47,23 +167,43 @@ const AddEdit = (props) => {
         </Col>
         <Col md={{ span: 6, offset: 0 }} className={styles.bottomBorder}>
           <div className={styles.inputs}>
+            {/* title */}
             <Input
+              name="title"
+              id="title"
+              value={formValue.title}
               label="Title"
               placeholder="Placeholder"
-              value={title}
-              onChange={(event) => setTitle(event.target.value)}
+              onChange={handleChange}
+              error={showErrors && checkErrors("title") ? true : false}
+              helper={showErrors ? checkErrors("title") : ""}
             />
-            <Input
+            {/* category */}
+            <Select
+              error={showErrors && checkErrors("category") ? true : false}
+              helper={showErrors ? checkErrors("category") : ""}
+              value={formValue.category}
+              name="category"
+              id="category"
+              onChange={handleChange}
               label="Category"
-              placeholder="Select category"
-              value={category}
-              onChange={(event) => setCategory(event.target.value)}
+              options={[
+                { value: "", label: "Select a category" },
+                { value: "category1", label: "Category 1" },
+                { value: "category2", label: "Category 2" },
+                { value: "category3", label: "Category 3" },
+              ]}
             />
             <div className={styles.price}>
+              {/* price */}
               <Input
+                error={showErrors && checkErrors("price") ? true : false}
+                helper={showErrors ? checkErrors("price") : ""}
+                name="price"
+                id="price"
+                onChange={handleChange}
                 label="Price"
-                value={price}
-                onChange={(event) => handlePriceChange(event)}
+                value={formValue.price}
               />
               <h6>lei</h6>
             </div>
@@ -78,58 +218,33 @@ const AddEdit = (props) => {
           </div>
         </Col>
         <Col md={{ span: 6, offset: 0 }} className={styles.bottomBorder}>
-          <Row>
-            <Col sm={{ span: 2, offset: 0 }}>
-              <div className={styles.imgPlaceholder}>
-                <Add className={styles.addIcon} />
+          {/* previews */}
+          <Col
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "1rem",
+            }}
+          >
+            {formValue?.images?.map((img, index) => (
+              <div key={index} className={styles.preview}>
+                <img src={img} alt="" />
+                <Delete
+                  onClick={() => {
+                    handleDelete(index);
+                  }}
+                />
               </div>
-            </Col>
-            <Col sm={{ span: 2, offset: 2 }}>
-              <div className={styles.imgPlaceholder}>
-                <Add className={styles.addIcon} />
-              </div>
-            </Col>
-            <Col sm={{ span: 2, offset: 2 }}>
-              <div className={styles.imgPlaceholder}>
-                <Add className={styles.addIcon} />
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col sm={{ span: 2, offset: 0 }}>
-              <div className={styles.imgPlaceholder}>
-                <Add className={styles.addIcon} />
-              </div>
-            </Col>
-            <Col sm={{ span: 2, offset: 2 }}>
-              <div className={styles.imgPlaceholder}>
-                <Add className={styles.addIcon} />
-              </div>
-            </Col>
-            <Col sm={{ span: 2, offset: 2 }}>
-              <div className={styles.imgPlaceholder}>
-                <Add className={styles.addIcon} />
-              </div>
-            </Col>
-          </Row>
+            ))}
 
-          <Row>
-            <Col sm={{ span: 2, offset: 0 }}>
-              <div className={styles.imgPlaceholder}>
-                <Add className={styles.addIcon} />
-              </div>
-            </Col>
-            <Col sm={{ span: 2, offset: 2 }}>
-              <div className={styles.imgPlaceholder}>
-                <Add className={styles.addIcon} />
-              </div>
-            </Col>
-            <Col sm={{ span: 2, offset: 2 }}>
-              <div className={styles.imgPlaceholder}>
-                <Add className={styles.addIcon} />
-              </div>
-            </Col>
-          </Row>
+            {/* dropzone */}
+            {formValue?.images?.length < 9 && <Dropzone onDrop={handleDrop} />}
+          </Col>
+          {showErrors && (
+            <div>
+              <p className={styles.error}>{checkErrors("images")}</p>
+            </div>
+          )}
         </Col>
       </Row>
       <Row style={{ marginTop: "40px" }}>
@@ -140,12 +255,16 @@ const AddEdit = (props) => {
           </div>
         </Col>
         <Col md={{ span: 6, offset: 0 }} className={styles.bottomBorder}>
+          {/* description */}
           <Input
+            error={showErrors && checkErrors("description") ? true : false}
+            helper={checkErrors("description")}
+            name="description"
+            id="description"
             label="Description details"
             placeholder="Placeholder"
-            helper={`${description.length} /100 characters`}
-            value={description}
-            onChange={(event) => setDescription(event.target.value)}
+            value={formValue.description}
+            onChange={handleChange}
           />
         </Col>
       </Row>
@@ -157,17 +276,28 @@ const AddEdit = (props) => {
           </div>
         </Col>
         <Col md={{ span: 6, offset: 0 }} className={styles.bottomBorder}>
-          <Input
-            label="Location"
-            placeholder="Placeholder"
-            value={location}
-            onChange={(event) => setLocation(event.target.value)}
+          {/* location */}
+
+          <GetLocation
+            address={address}
+            setAddress={setAddress}
+            coords={coords}
+            setCoords={setCoords}
+            error={showErrors && checkErrors("location") ? true : false}
+            helper={showErrors ? checkErrors("location") : ""}
+            id="location"
+            name="location"
           />
           <div className={styles.price}>
+            {/* phone */}
             <Input
+              error={showErrors && checkErrors("phone") ? true : false}
+              helper={showErrors ? checkErrors("phone") : ""}
+              name="phone"
+              id="phone"
               label="Phone number"
-              value={phoneNumber}
-              onChange={(event) => handlePhoneNumberChange(event)}
+              value={formValue.phone}
+              onChange={handleChange}
             />
           </div>
         </Col>
@@ -181,7 +311,11 @@ const AddEdit = (props) => {
             </Col>
 
             <Col sm={{ span: 2, offset: 2 }}>
-              <Button variant="primary" label="Publish" />
+              <Button
+                variant="primary"
+                label="Publish"
+                onClick={handleSubmit}
+              />
             </Col>
           </Row>
         </Col>
@@ -190,13 +324,52 @@ const AddEdit = (props) => {
   );
 };
 
-AddEdit.propTypes = {
-  title: PropTypes.string,
-  category: PropTypes.string,
-  price: PropTypes.number,
-  description: PropTypes.string,
-  location: PropTypes.string,
-  phoneNumber: PropTypes.number,
-};
+function Dropzone({ onDrop, accept, open }) {
+  const {
+    getRootProps,
+    getInputProps,
+    isDragAccept,
+    isDragReject,
+    isDragActive,
+  } = useDropzone({
+    accept: {
+      "image/jpeg": [],
+      "image/png": [],
+    },
+    maxFiles: 9,
+    onDrop,
+  });
+
+  const [isHovered, setHovered] = useState(false);
+  return (
+    <div
+      onMouseLeave={() => setHovered(false)}
+      onMouseOver={() => setHovered(true)}
+    >
+      <div
+        {...getRootProps({
+          className: `${styles.dropzone} ${isDragAccept && styles.accept} ${
+            isDragReject && styles.reject
+          }`,
+        })}
+      >
+        <input {...getInputProps()} />
+        <div>
+          {isDragActive ? (
+            isDragReject ? (
+              <p>File not supported</p>
+            ) : (
+              <p>Release here</p>
+            )
+          ) : isHovered ? (
+            <p>Drag and drop or click</p>
+          ) : (
+            <Add />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default AddEdit;

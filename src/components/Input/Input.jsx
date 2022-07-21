@@ -3,6 +3,7 @@ import styles from "./Input.module.scss";
 import PropTypes from "prop-types";
 
 const Input = ({
+  ref,
   error,
   icon,
   id,

@@ -1,0 +1,38 @@
+@import "../../styles/variables.scss";
+
+.locationInput {
+  display: flex;
+
+  > button {
+    margin-left: 0.5rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  > p {
+    font-size: $font-body-tiny;
+    font-weight: $font-regular;
+    line-height: 20px;
+    margin-top: 4px;
+    color: $color-gray-500;
+  }
+}
+
+.helper {
+  font-size: $font-body-tiny;
+  font-weight: $font-regular;
+  line-height: 20px;
+  margin-top: 4px;
+  color: $color-gray-500;
+}
+
+.error {
+  input {
+    border-color: $color-alert-400;
+  }
+  p {
+    color: $color-alert-500 !important;
+  }
+}
