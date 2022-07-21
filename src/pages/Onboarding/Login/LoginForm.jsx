@@ -60,7 +60,7 @@ export default function LoginForm() {
             console.log(response.data, "user json");
             navigate("/");
             localStorage.setItem("token", response?.data.token);
-            localStorage.setItem("userId", response?.data.userId);
+            localStorage.setItem("userId", response?.data.id);
 
             setAlert({
               type: "success",
