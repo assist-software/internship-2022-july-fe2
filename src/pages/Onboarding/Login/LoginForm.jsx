@@ -10,9 +10,18 @@ import { ReactComponent as Google } from "../../../assets/icons/google.svg";
 import { ReactComponent as View } from "../../../assets/icons/view.svg";
 import { ReactComponent as ViewOff } from "../../../assets/icons/view-off.svg";
 
+import useAuth from "../../../hooks/useAuth";
+import useStateProvider from "../../../hooks/useStateProvider";
+
+import { login } from "../../../api/API";
+
 // import { getUserById } from "../../../api/API";
 
 export default function LoginForm() {
+  const { setUser } = useAuth();
+
+  const { setAlert } = useStateProvider();
+
   const navigate = useNavigate();
 
   // const { setUser } = useAuth();
@@ -22,77 +31,80 @@ export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
 
-  console.log(email, pwd, "inputs");
-
   // error states
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [emailError, setEmailError] = useState(null);
   const [pwdError, setPwdError] = useState(null);
 
-  const validateEmail = (email) => {
-    const re =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-  };
-  const handleEmailError = () => {
-    if (!validateEmail(email)) {
+  const handleEmailError = (e) => {
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+    if (reg.test(e) === false) {
       setEmailError("Invalid e-mail address!");
-    } else setEmailError(null);
-    if (!emailError) {
-      // No errors.
+    } else {
+      setEmailError("");
     }
   };
 
-  const handlePwdError = () => {
-    if (pwd.length < 3) {
-      setPwdError("Password must be at least 3 chars long");
-    } else if (pwd.length > 50) {
-      setPwdError("Password must be of maximum 50 chars!");
-    } else setPwdError(null);
-
-    if (!pwdError) {
-      // No errors.
-    }
+  const handlePwdError = (e) => {
+    if (e.length < 8) {
+      setPwdError("Password must be at least 8 chars long");
+    } else setPwdError("");
   };
 
-  // const handleLogIn = () => {
-  //   try {
-  //     if (email === "" || pwd === "") {
-  //       handleEmailError();
-  //       handlePwdError();
-  //       return;
-  //     }
+  const handleLogin = async () => {
+    try {
+      if (emailError === "" && pwdError === "") {
+        if (pwd.length > 7) {
+          const response = await login(email, pwd);
+          if (response.status === 200) {
+            setUser(response.data);
+            console.log(response.data, "user json");
+            navigate("/");
+            localStorage.setItem("token", response?.data.token);
+            localStorage.setItem("userId", response?.data.id);
 
-  //     getUserById(email).then((res) => setIsLoggedIn(res));
-  //     // should make a validation if a email doesn't exist
-  //     if (isLoggedIn !== null) {
-  //       setUser({ name: "Team undefined" });
-  //       navigate("/");
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+            setAlert({
+              type: "success",
+              message: "Login successfully",
+            });
+          }
+        }
+      } else {
+        if (emailError !== "") handleEmailError("");
+        if (pwdError !== "") handlePwdError("");
+        setAlert({
+          type: "danger",
+          message: "Fill all the required fields correctly.",
+        });
+      }
+    } catch (error) {
+      console.log(error, "error");
+      setAlert({
+        type: "danger",
+        message: "Something went wrong! Check your credentials",
+      });
+    }
+  };
 
   const passToggleHandler = () => {
     setPasswordShown(!passwordShown);
   };
 
   // test login handlers
-  const handleTestLoginUser = () => {
-    const token = 1234;
-    const role = "user";
-    const id = 2;
+  // const handleTestLoginUser = () => {
+  //   const token = 1234;
+  //   const role = "user";
+  //   const id = 2;
 
-    try {
-      localStorage.setItem("token", token);
-      localStorage.setItem("role", role);
-      localStorage.setItem("user", id);
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //   try {
+  //     localStorage.setItem("token", token);
+  //     localStorage.setItem("role", role);
+  //     localStorage.setItem("userId", id);
+  //     navigate("/");
+  //     fetchUser();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   const handleTestLoginAdmin = () => {
     const token = 1234;
     const role = "admin";
@@ -100,8 +112,10 @@ export default function LoginForm() {
     try {
       localStorage.setItem("token", token);
       localStorage.setItem("role", role);
-      localStorage.setItem("name", id);
+      localStorage.setItem("userId", id);
+      //fetchUser();
       navigate("/");
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -126,7 +140,7 @@ export default function LoginForm() {
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
-                handleEmailError();
+                handleEmailError(e.target.value);
               }}
               type="email"
               placeholder={"Email"}
@@ -142,7 +156,7 @@ export default function LoginForm() {
               value={pwd}
               onChange={(e) => {
                 setPwd(e.target.value);
-                handlePwdError();
+                handlePwdError(e.target.value);
               }}
               type={passwordShown ? "password" : "text"}
               placeholder={"Password"}
@@ -174,11 +188,7 @@ export default function LoginForm() {
 
       <div className={style.contentContainerAuthOptions}>
         <div className={style.contentContainerButtons}>
-          <Button
-            variant="primary"
-            label="Log in"
-            onClick={handleTestLoginUser}
-          />
+          <Button variant="primary" label="Log in" onClick={handleLogin} />
 
           <Button
             variant="secondary"
@@ -190,7 +200,7 @@ export default function LoginForm() {
         </div>
         <div className={style.contentContainerAuthEndForm}>
           <p className={style.textAuthEndForm}>
-            Don't have an account?
+            Don't have an account?{" "}
             <span
               className={style.textAuthEndForm}
               onClick={() => {

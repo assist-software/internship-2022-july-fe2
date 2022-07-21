@@ -1,0 +1,19 @@
+@import "../../styles/variables.scss";
+.nav {
+  border-bottom: 1px solid $color-gray-200;
+}
+.buttons {
+  font-weight: $font-semibold;
+  font-size: $font-body-normal;
+  color: $color-gray-300;
+  margin-right: 10px;
+  padding: 0px 10px 10px 0px;
+  &:hover {
+    color: $color-primary-300;
+  }
+}
+.active {
+  color: $color-primary-500;
+  text-decoration: underline;
+  text-underline-offset: 14px;
+}

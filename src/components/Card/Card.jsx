@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./Card.module.scss";
 import { ReactComponent as HeartFilled } from "../../assets/icons/heart-filled.svg";
 import { ReactComponent as Heart } from "../../assets/icons/heart.svg";
+import useAuth from "../../hooks/useAuth";
 
 const Card = ({
   onClick,
@@ -12,11 +13,20 @@ const Card = ({
   location,
   description,
   price,
+  onIdClick,
+  admin,
+  hideApproval,
+  pending,
+  listingId,
 }) => {
   const [like, setLike] = useState(false);
   function stopPropagation(e) {
     e.stopPropagation();
   }
+  const { user } = useAuth();
+  const [idea, setIdea] = useState([]);
+
+  // console.log(idea);
   return (
     <div className={styles.cards}>
       <div onClick={onClick} className={styles.card}>
@@ -29,7 +39,10 @@ const Card = ({
           <div onClick={stopPropagation}>
             <button
               className={`${listView ? styles.heartList : styles.heartCard}`}
-              onClick={() => setLike(!like)}
+              onClick={() => {
+                setLike(!like);
+                setIdea(listingId);
+              }}
             >
               {!like ? <Heart /> : <HeartFilled className={styles.heartFill} />}
             </button>
@@ -60,6 +73,17 @@ const Card = ({
               {description}
             </p>
             <p className={styles.cardPrice}>{price} lei</p>
+            {user?.role === 1 && (
+              <div onClick={stopPropagation} className={styles.controls}>
+                {hideApproval && (
+                  <button className={styles.approve}>Approve</button>
+                )}
+                <button className={styles.delete}>
+                  <span>Delete</span>
+                </button>
+                <button className={styles.edit}>Edit</button>
+              </div>
+            )}
           </div>
         </div>
       </div>

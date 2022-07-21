@@ -4,7 +4,7 @@
 .navbar {
   border-bottom: 1px solid !important;
   border-bottom-color: $color-gray-200 !important;
-  z-index: 1 !important;
+  z-index: 2 !important;
   background-color: white !important;
 }
 .assist{
@@ -26,7 +26,7 @@
   border-right: none !important;
   border-radius: 0px !important;
 }
-.search:focus,:hover {
+.search:focus,.search:hover {
   box-shadow: none !important;
   border-color: $color-gray-200 !important;
 }
@@ -41,6 +41,9 @@
   border-top-right-radius: 10px !important;
   stroke: $color-primary-500;
   padding:10px 10px;
+  path{
+    fill : $color-primary-300;
+  }
 }
 
 .category{
@@ -51,6 +54,7 @@
   border-bottom-left-radius: 10px !important;
   border-top-left-radius: 10px !important;
   padding-left: 1rem;
+  border-right: none !important;
 }
 
 .favorites {
@@ -71,8 +75,13 @@
 .favoritesDiv:hover {
   .favorites{
     color: $color-primary-300 !important;
+    svg{
+      path{
+        fill: $color-primary-300 !important;
+      }
+    }
   }
-  stroke: $color-primary-300 !important;
+  
 }
 .favorites:focus {
   box-shadow: none !important;
@@ -97,15 +106,20 @@
 }
 .profileTitle:hover {
   color: $color-primary-300 !important;
+  svg{
+    path{
+      fill: $color-primary-300;
+    }
+  }
 }
 
 .blueLogo {
-  fill: $color-primary-400 !important;
-  color: $color-primary-400 !important;
-  stroke: $color-primary-400 !important;
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   margin: 5px;
+  path{
+    fill: $color-primary-300;
+  }
 }
 
 .profileOption{
@@ -121,15 +135,21 @@
 .dropMenu{
   border: 0px !important;
   border-radius: 12px !important;
- box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.14);
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.14);
+  z-index: 1;
 }
 
 .hello{
   font-size: $font-body-normal ;
   font-weight: $font-bold;
+  color: $color-black;
 }
 .logout{
   stroke: $color-gray-500  !important;
-  height: 18px;
-  width: 18px;
+  height: 20px;
+  width: 20px;
+  margin: 5px;
+  path {
+    fill: $color-gray-500;
+  }
 }

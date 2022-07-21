@@ -16,8 +16,10 @@ import { ReactComponent as Bell } from "../../assets/icons/bell.svg";
 import { ReactComponent as Chat } from "../../assets/icons/chat.svg";
 import { ReactComponent as Logout } from "../../assets/icons/logout.svg";
 import { ReactComponent as Loop } from "../../assets/icons/magnifying-glass.svg";
+import useAuth from "../../hooks/useAuth";
 
 const Header = () => {
+  const { logout } = useAuth();
   const navigate = useNavigate();
   return (
     <Navbar collapseOnSelect expand="xl" className={styles.navbar} sticky="top">
@@ -39,7 +41,7 @@ const Header = () => {
               </div>
               <Form className="d-flex">
                 <Form.Control
-                  type="search"
+                  type="text"
                   placeholder="Search"
                   className={styles.search}
                   aria-label="Search"
@@ -99,8 +101,9 @@ const Header = () => {
                   {"Login & security"}
                 </Dropdown.Item>
                 <Dropdown.Divider />
+
                 <Dropdown.Item
-                  onClick={() => navigate("/")}
+                  onClick={logout}
                   className={styles.profileOption}
                 >
                   <Logout className={styles.logout} />

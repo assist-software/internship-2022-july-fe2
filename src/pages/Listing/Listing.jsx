@@ -1,43 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { getListings } from "../../api/API";
-import Card from "../../components/Card/Card";
+import React, { useState } from "react";
 import Filters from "../../components/Filters/Filters";
 import listingStyle from "./Listing.module.scss";
+import ListObject from "./ListObject";
 
-import { useNavigate } from "react-router-dom";
-
-const Listing = ({ title }) => {
-  const [listings, setListings] = useState([]);
-  useEffect(() => {
-    getListings().then((res) => setListings(res));
-  }, []);
-
+const Listing = ({ title, admin, hideApproval, pending }) => {
   // view
   const [listView, setListView] = useState(true);
-
-  const navigate = useNavigate();
 
   return (
     <div>
       <div>
-        <h3 className={listingStyle.title}>Latest</h3>
+        <h3 className={listingStyle.title}>{title}</h3>
       </div>
-      <Filters setListView={setListView} />
-
-      {listings?.map((listing, index) => (
-        <Card
-          key={index}
-          image={listing.images}
-          title={listing.title}
-          description={listing.description}
-          price={listing.price}
-          location={listing.location}
-          listView={listView}
-          onClick={() => {
-            navigate("/listing/" + listing.id);
-          }}
-        />
-      ))}
+      <Filters admin={admin} setListView={setListView} />
+      <ListObject
+        pending={pending}
+        hideApproval={hideApproval}
+        admin={admin}
+        listView={listView}
+      />
     </div>
   );
 };

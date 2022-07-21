@@ -1,0 +1,18 @@
+@import "../../styles/variables.scss";
+
+.tabs {
+  width: 100%;
+  margin-bottom: 42px;
+}
+.welcomeMessage {
+  font-weight: $font-bold;
+  font-size: $font-h1;
+  color: $color-black;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+.addNewBtn {
+  width: 16%;
+}

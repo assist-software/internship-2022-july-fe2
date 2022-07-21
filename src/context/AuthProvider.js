@@ -8,9 +8,10 @@ export const AuthProvider = ({ children }) => {
 
   //  set user from local storage if exists
   // id should change with token in production
+  const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
+  console.log(userId);
   const fetchUser = async () => {
     try {
-      const userId = localStorage.getItem("user");
       const response = await getUserById(userId);
       setUser(response.data);
     } catch (error) {
@@ -20,13 +21,14 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     fetchUser();
-  }, []);
+  }, [userId]);
 
   // logout function
-  const logout = () => {
+  function logout() {
     setUser(null);
     localStorage.clear();
-  };
+    setUserId(null);
+  }
 
   // login function
   const login = (user) => {

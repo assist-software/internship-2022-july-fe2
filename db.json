@@ -9,7 +9,7 @@
       "price": "123,456",
       "author": 1,
       "approvedBy": "1",
-      "status": 1,
+      "status": 0,
       "images": "https://picsum.photos/200/300",
       "category": "latest",
       "viewCounter": 0,
@@ -108,9 +108,10 @@
       "fullName": "Selim Muhammetgulyyev",
       "email": "lorem@ipsum.com",
       "phone": "1234567890",
-      "address": "Str Universitatii 13l",
-      "gender": "Other",
-      "dateOfBirth": "2000-09-08"
+      "role": "user",
+      "address": "Str Universitatii 13",
+      "gender": "Male",
+      "dateOfBirth": "2000-09-09"
     },
     {
       "id": 3,

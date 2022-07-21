@@ -28,8 +28,8 @@
   height: 40%;
   border: 1px solid $color-gray-300;
   width: 100%;
-  margin: 0px 0px 30px 0px;
   padding: 15px;
+  margin: 0px 0px 30px 0px;
   p {
     padding: 7px;
     margin: 0px;
@@ -47,12 +47,6 @@
   height: 175px;
   width: 500px;
   object-fit: cover;
-  @media (max-width: 860px) {
-    height: 275px;
-  }
-  @media (max-width: 550px) {
-    height: 175px;
-  }
 }
 
 .contentCard {
@@ -115,7 +109,7 @@
   fill: $color-gray-300;
 }
 .heartCard {
-  z-index: 999;
+  z-index: 1;
   position: absolute;
   top: 5px;
   right: 5px;
@@ -127,4 +121,43 @@
 .heartFill {
   fill: red !important;
   color: black !important;
+}
+
+.controls {
+  border-top: 1px solid $color-gray-200;
+  display: flex;
+  justify-content: end;
+  width: 100%;
+
+  button {
+    margin: 10px;
+  }
+  .delete {
+    padding: 10px;
+    background-color: red;
+    border-radius: 8px;
+    color: white;
+  }
+  .delete:hover span {
+    display: none;
+  }
+  .delete:hover::before {
+    content: "Approve";
+  }
+  .edit {
+    padding: 10px;
+    color: $color-primary-500;
+    font-weight: $font-semibold;
+    font-size: $font-body-small;
+    border-radius: 8px;
+    &:hover {
+      background-color: $color-primary-100;
+    }
+  }
+}
+.approve {
+  padding: 10px;
+  background-color: $color-primary-400;
+  color: $color-white;
+  border-radius: 8px;
 }
