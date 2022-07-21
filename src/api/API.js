@@ -167,7 +167,7 @@ export const register = async (email, password) => {
 // reset password
 export const resetPassword = async (email) => {
   try {
-    const response = await axios.post("/user/reset/password" + email); //posibil sa trebuiasca /user/reset/password/
+    const response = await axios.post("/user/reset/password?email=" + email); //posibil sa trebuiasca /user/reset/password/
     return response;
   } catch (error) {
     console.log(error);

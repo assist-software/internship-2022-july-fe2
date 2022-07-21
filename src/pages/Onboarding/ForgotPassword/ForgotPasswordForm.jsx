@@ -6,7 +6,7 @@ import style from "../Authenticate.module.scss";
 import Input from "../../../components/Input/Input";
 import Button from "../../../components/Button/Button";
 
-import { forgotpwd } from "../../../api/API";
+import { resetPassword } from "../../../api/API";
 import useStateProvider from "../../../hooks/useStateProvider";
 
 export default function ForgotPasswordForm() {
@@ -51,7 +51,7 @@ export default function ForgotPasswordForm() {
   const handleForgotPwd = async () => {
     try {
       if (emailError === "") {
-        const response = await forgotpwd(email);
+        const response = await resetPassword(email);
         if (response.status === 200) {
           // setUser(response.data);
           navigate("/login");
