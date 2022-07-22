@@ -12,7 +12,6 @@ const Home = () => {
   const { setListings } = useStateProvider();
 
   const [view, setView] = useState(false);
-
   useEffect(() => {
     getListings().then((res) => setListings(res));
     // eslint-disable-next-line react-hooks/exhaustive-deps

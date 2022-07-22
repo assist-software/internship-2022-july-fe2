@@ -19,7 +19,6 @@ const Option = (props) => {
     </div>
   );
 };
-
 const Locations = [
   { value: "alba", label: "Alba" },
   { value: "arad", label: "Arad" },
@@ -55,7 +54,7 @@ const Locations = [
   { value: "satu_mare", label: "Satu Mare" },
   { value: "salaj", label: "Salaj" },
   { value: "sibiu", label: "Sibiu" },
-  { value: "suceava", label: "Suceava" },
+  { value: "Suceava", label: "Suceava" },
   { value: "teleorman", label: "Teleorman" },
   { value: "timis", label: "Timis" },
   { value: "tulcea", label: "Tulcea" },
