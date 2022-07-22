@@ -16,12 +16,12 @@ on:
   push:
     branches:
       - "main"
-      - "development"
+      - "develop"
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
       - "main"
-      - "development"
+      - "develop"
 
 # Environment variables available to all jobs and steps in this workflow
 env:
