@@ -72,6 +72,8 @@ const Dropdown = ({
   options,
   searchable,
   onChange,
+  selectedOptions,
+  setSelectedOptions,
 }) => {
   const [multipleOption] = useState(
     multi
@@ -134,6 +136,7 @@ const Dropdown = ({
 
   return (
     <Select
+      value={selectedOptions}
       options={options}
       className={`${styles.dropdown} ${styles[fontWeight]} ${styles[fontSize]} ${styles.classicOption}`}
       styles={style}

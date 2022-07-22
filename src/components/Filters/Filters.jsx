@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from "react";
 import filtersStyle from "./Filters.module.scss";
 import DropdownComponent from "../Dropdown/Dropdown";
-import { getListings, getListingsSort } from "../../api/API";
+import { getListingsSort } from "../../api/API";
 import GridRows from "./GridRows";
+import useStateProvider from "../../hooks/useStateProvider";
 
 const Filters = ({ setListView, admin }) => {
-  const [listings, setListings] = useState(null);
-  console.log(listings, "filters listings");
+  // listings
+  const { setListings } = useStateProvider();
+  const { sortOrder, setSortOrder } = useStateProvider("");
+  const { priceRange, setPriceRange } = useStateProvider("");
+  const { locationFilter, setLocationFilter } = useStateProvider("");
+  const [selectedOptions, setSelectedOptions] = useState();
   useEffect(() => {
-    getListingsSort("", "", "", "", "", "", "").then((res) => setListings(res));
-  }, []);
-
-  const handleSort = async (e) => {
-    try {
-      const response = await getListingsSort("", "", e, "", "", "", "");
-      setListings(response);
-      console.log(response, "response");
-    } catch (error) {}
-  };
+    getListingsSort(sortOrder, locationFilter, priceRange, "", "", "", "").then(
+      (res) => setListings(res)
+    );
+  }, [priceRange, setListings, sortOrder, locationFilter]);
+  console.log(priceRange);
 
   const Price = [
-    { value: "", label: "Price" },
+    { value: "", label: " All" },
     { value: "0 - 10000", label: "0 - 10.000" },
     { value: "10000 - 50000", label: "10.000 - 50.000" },
     { value: "50000 - 100000", label: "50.000 - 100.000" },
@@ -42,7 +42,9 @@ const Filters = ({ setListView, admin }) => {
           <div className={filtersStyle.locationPrice}>
             <DropdownComponent
               onChange={(e) => {
-                // handleSort(e.value);
+                setLocationFilter(e);
+                // handleSort(e);
+                setSelectedOptions(e);
               }}
               multi
               title="Location"
@@ -51,8 +53,7 @@ const Filters = ({ setListView, admin }) => {
               options={Price}
               title="Price"
               onChange={(e) => {
-                handleSort(e.value);
-                console.log(e.value);
+                setPriceRange(e.value);
               }}
             ></DropdownComponent>
           </div>
@@ -60,7 +61,13 @@ const Filters = ({ setListView, admin }) => {
         <div className={filtersStyle.rightSide}>
           <p className={filtersStyle.filterOrderBy}>Order by:</p>
           <div>
-            <DropdownComponent options={OrderBy} title="Most Popular" />
+            <DropdownComponent
+              onChange={(e) => {
+                setSortOrder(e.value);
+              }}
+              options={OrderBy}
+              title="Most Popular"
+            />
           </div>
 
           {!admin && <GridRows setListView={setListView} />}

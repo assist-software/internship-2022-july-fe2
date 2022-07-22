@@ -1,16 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { getListings } from "../../api/API";
 import Card from "../../components/Card/Card";
 import { useNavigate } from "react-router-dom";
+import useStateProvider from "../../hooks/useStateProvider";
 
 const ListObject = ({ listView, admin, hideApproval, pending }) => {
-  const [listings, setListings] = useState([]);
-  console.log(listings, "listobject listings");
-
-  useEffect(() => {
-    getListings().then((res) => setListings(res));
-  }, []);
   const navigate = useNavigate();
+  const { listings } = useStateProvider();
 
   return (
     <div>
@@ -29,7 +23,6 @@ const ListObject = ({ listView, admin, hideApproval, pending }) => {
                 listingId={listing.id}
                 admin={admin}
                 hideApproval={hideApproval}
-                onIdClick={() => console.log(listing.id, "ghjk")}
                 onClick={() => {
                   navigate("/listing/" + listing.id);
                 }}

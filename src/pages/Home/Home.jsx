@@ -1,13 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getListings } from "../../api/API";
 import Carousel from "../../components/Carousel/Carousel";
 import Nav from "../../components/Nav/Nav";
 import Tabs from "../../components/Tabs/Tabs";
 import useAuth from "../../hooks/useAuth";
 import Listing from "../Listing/Listing";
+import useStateProvider from "../../hooks/useStateProvider";
 
 const Home = () => {
   const { user } = useAuth();
+  const { setListings } = useStateProvider();
+
   const [view, setView] = useState(false);
+
+  useEffect(() => {
+    getListings().then((res) => setListings(res));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div>
       <div>

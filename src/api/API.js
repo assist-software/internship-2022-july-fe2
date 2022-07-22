@@ -101,7 +101,7 @@ export const getListingsSort = async (
       "/listing/" +
         "sort?sortOrder=" +
         sortOrder +
-        "locationFilter=" +
+        "&locationFilter=" +
         locationFilter +
         "&priceRange=" +
         priceRange +
