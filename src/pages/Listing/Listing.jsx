@@ -6,7 +6,6 @@ import ListObject from "./ListObject";
 const Listing = ({ title, admin, hideApproval, pending }) => {
   // view
   const [listView, setListView] = useState(true);
-
   return (
     <div>
       <div>

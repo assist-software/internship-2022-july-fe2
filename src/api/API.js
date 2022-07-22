@@ -86,6 +86,39 @@ export const deleteListingById = async (id) => {
   }
 };
 
+// get sort
+export const getListingsSort = async (
+  sortOrder,
+  locationFilter,
+  priceRange,
+  searchString,
+  category,
+  page,
+  pageSize
+) => {
+  try {
+    const response = await axios.get(
+      "/listing/" +
+        "sort?sortOrder=" +
+        sortOrder +
+        "&locationFilter=" +
+        locationFilter +
+        "&priceRange=" +
+        priceRange +
+        "&searchString=" +
+        searchString +
+        "&category=" +
+        category +
+        "&page=" +
+        page +
+        "&pageSize=" +
+        pageSize
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
 // ---------------------------- MAIL ----------------------------------
 // post MAIL
 export const postMail = async (data) => {
