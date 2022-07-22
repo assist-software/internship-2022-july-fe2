@@ -8,17 +8,16 @@ import useStateProvider from "../../hooks/useStateProvider";
 const Filters = ({ setListView, admin }) => {
   // listings
   const { setListings } = useStateProvider();
+  // filters state
   const { sortOrder, setSortOrder } = useStateProvider("");
   const { priceRange, setPriceRange } = useStateProvider("");
   const { locationFilter, setLocationFilter } = useStateProvider("");
-  const [selectedOptions, setSelectedOptions] = useState();
+
   useEffect(() => {
     getListingsSort(sortOrder, locationFilter, priceRange, "", "", "", "").then(
       (res) => setListings(res)
     );
   }, [priceRange, setListings, sortOrder, locationFilter]);
-  console.log(priceRange);
-
   const Price = [
     { value: "", label: " All" },
     { value: "0 - 10000", label: "0 - 10.000" },
@@ -34,6 +33,21 @@ const Filters = ({ setListView, admin }) => {
     { value: "HighToLow", label: "Price: High to Low" },
     { value: "Featured", label: "Featured" },
   ];
+
+  const getValue = (e) => {
+    const myArray = [];
+    if (myArray.length === 0) {
+      setLocationFilter("");
+    }
+    e.forEach((x) => {
+      if (myArray.includes(x.value)) {
+        myArray.splice(myArray.indexOf(x.value), 1);
+      } else {
+        myArray.push(x.value);
+      }
+      setLocationFilter(myArray);
+    });
+  };
   return (
     <div>
       <div className={filtersStyle.headerBtns}>
@@ -42,9 +56,7 @@ const Filters = ({ setListView, admin }) => {
           <div className={filtersStyle.locationPrice}>
             <DropdownComponent
               onChange={(e) => {
-                setLocationFilter(e);
-                // handleSort(e);
-                setSelectedOptions(e);
+                getValue(e);
               }}
               multi
               title="Location"
