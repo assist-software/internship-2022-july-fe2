@@ -1,9 +1,16 @@
-import React from 'react'
+import React from "react";
+import styles from "./Chat.module.scss";
+import ChatHeader from "./ChatHeader/ChatHeader";
+import ChatContainer from "./ChatContainer/ChatContainer";
 
-const Chat = () => {
+const Chat = ({ messages }) => {
   return (
-    <div>Chat</div>
-  )
-}
+    <div className={styles.container}>
+      <ChatHeader />
+      <ChatContainer messages={messages} />
+      <div className={styles.input}></div>
+    </div>
+  );
+};
 
-export default Chat
+export default Chat;

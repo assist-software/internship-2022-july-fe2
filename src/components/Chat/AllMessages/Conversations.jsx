@@ -2,10 +2,12 @@ import React from "react";
 import styles from "./Conversations.module.scss";
 import SingleConversation from "./PreviewConversation/PreviewConversation.jsx";
 
-const Conversations = () => {
+const Conversations = ({ users }) => {
   return (
-    <div className={styles.container}>
-      <SingleConversation active={true} />
+    <div className={styles.conversationsContainer}>
+      {/* {users.map((user, index) => (
+        <SingleConversation user={user} key={index} active={false} />
+      ))} */}
       <SingleConversation />
       <SingleConversation />
       <SingleConversation />

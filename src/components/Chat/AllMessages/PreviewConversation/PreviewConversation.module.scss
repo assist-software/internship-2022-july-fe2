@@ -1,6 +1,6 @@
 @import '../../../../styles/variables.scss';
 
-.messageContainer{
+.previewContainer{
     height: 100px;
     padding:10px;
     display: flex;
@@ -13,13 +13,13 @@
     background-color: $color-gray-50;
   }
   
-  .messageUserProfile {
+  .previewUserProfile {
     border-radius: 50%;
     width: 40px;
     aspect-ratio: 1;
   }
   
-  .messageContent{
+  .previewContent{
     display:flex;
     flex-direction: column;
     padding-left:15px;
@@ -29,7 +29,7 @@
     text-overflow: ellipsis;
   }
   
-  .messageHeader{
+  .previewHeader{
     display:flex;
     flex-direction: row;
     justify-content: space-between;
@@ -39,21 +39,21 @@
     line-height: 20px;
   }
   
-  .messageHeaderUsername{ 
+  .previewHeaderUsername{ 
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     width:150px;
   }
   
-  .messageHeaderTime{
+  .previewHeaderTime{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     width:43px;
   }
   
-  .messageBody{
+  .previewBody{
     
     white-space: nowrap;
     overflow: hidden;
@@ -61,7 +61,7 @@
     width:200px;
   }
   
-  .messageBodyListingTitle{
+  .previewBodyListingTitle{
     width:200px;
     white-space: nowrap;
     overflow: hidden;
@@ -73,7 +73,7 @@
     line-height: 22px;
   }
   
-  .messageBodyLastMessage{
+  .previewBodyLastMessage{
     width:200px;
     white-space: nowrap;
     overflow: hidden;
