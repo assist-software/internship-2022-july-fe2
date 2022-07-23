@@ -1,0 +1,86 @@
+@import '../../../../styles/variables.scss';
+
+.messageContainer{
+    height: 100px;
+    padding:10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    // border: 1px solid $color-gray-100;
+  }
+
+  .active{
+    background-color: $color-gray-50;
+  }
+  
+  .messageUserProfile {
+    border-radius: 50%;
+    width: 40px;
+    aspect-ratio: 1;
+  }
+  
+  .messageContent{
+    display:flex;
+    flex-direction: column;
+    padding-left:15px;
+    width:250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .messageHeader{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color:$color-gray-400;
+    font-weight: $font-regular;
+    font-size: $font-body-tiny;
+    line-height: 20px;
+  }
+  
+  .messageHeaderUsername{ 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width:150px;
+  }
+  
+  .messageHeaderTime{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width:43px;
+  }
+  
+  .messageBody{
+    
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width:200px;
+  }
+  
+  .messageBodyListingTitle{
+    width:200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    color: $color-gray-700;
+    font-size:$font-body-small;
+    font-weight: $font-medium;
+    line-height: 22px;
+  }
+  
+  .messageBodyLastMessage{
+    width:200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    color: $color-gray-500;
+    font-size:$font-body-small;
+    font-weight: $font-regular;
+    line-height: 22px;
+  }
