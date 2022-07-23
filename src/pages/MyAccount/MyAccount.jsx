@@ -29,7 +29,7 @@ import { updateUser } from "../../api/API";
 
 const MyAccount = () => {
   const { setAlert } = useStateProvider();
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -97,6 +97,16 @@ const MyAccount = () => {
     const file = e.target.files[0];
     toBase64(file).then((base64) => {
       setPreview(base64);
+    });
+  };
+
+  // handle logout
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+    setAlert({
+      type: "success",
+      message: "You are browsing in as guest",
     });
   };
 
@@ -168,11 +178,7 @@ const MyAccount = () => {
             <ChatIcon />
             <span>Messages</span>
           </button>
-          <button
-            onClick={() => {
-              console.log("Logout clicked");
-            }}
-          >
+          <button onClick={handleLogout}>
             <LogoutIcon />
             Logout
           </button>
