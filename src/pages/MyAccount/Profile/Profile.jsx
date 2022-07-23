@@ -13,7 +13,7 @@ import Select from "../../../components/Select/Select";
 
 const Profile = () => {
   // global states
-  const { user, fetchUser } = useAuth();
+  const { user, fetchUser, setUser } = useAuth();
 
   // state provider
   const { setAlert } = useStateProvider();
@@ -24,8 +24,30 @@ const Profile = () => {
   // active form
   const [activeForm, setActiveForm] = useState("");
 
+  // state for full name
+  const [fullName, setFullName] = useState({
+    firstName: user?.fullName?.split(" ")[0] || "",
+    lastName: user?.fullName?.split(" ")[1] || "",
+  });
+
+  // set full name on user change
+  useEffect(() => {
+    setFullName({
+      firstName: user?.fullName?.split(" ")[0] || "",
+      lastName: user?.fullName?.split(" ")[1] || "",
+    });
+  }, [user]);
+
   // form data
-  const [formValue, setFormValue] = useState({});
+  const [formValue, setFormValue] = useState({
+    id: "",
+    fullName: `${fullName.firstName} ${fullName.lastName}`,
+    gender: "",
+    dateOfBirth: "",
+    email: "",
+    phone: "",
+    address: "",
+  });
 
   // refetch user data
   useEffect(() => {
@@ -35,14 +57,12 @@ const Profile = () => {
     }
   }, [fetchUser, refetch]);
 
-  // set user details to formvalue
+  // set user details to formvalue on user or full name change
   useEffect(() => {
     if (user) {
       setFormValue({
         id: user.id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        fullName: user.fullName,
+        fullName: `${fullName.firstName} ${fullName.lastName}`,
         email: user.email,
         phone: user.phone,
         address: user.address,
@@ -50,79 +70,113 @@ const Profile = () => {
         dateOfBirth: user.dateOfBirth,
       });
     }
-  }, [user]);
+  }, [user, fullName]);
 
   // handleChange
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormValue({ ...formValue, [name]: value });
+    setFormValue({
+      ...formValue,
+      [name]: value,
+    });
   };
 
-  // check errors
-  const checkErrors = (field) => {
-    if (field === "firstName") {
-      if (formValue?.firstName?.length < 3) {
-        return "First name must be at least 3 characters long";
+  // handleCancel
+  const handleCancel = () => {
+    setActiveForm("");
+
+    // form inital value
+    setFormValue({
+      id: "",
+      fullName: `${fullName.firstName} ${fullName.lastName}`,
+      email: user.email,
+      phone: user.phone,
+      address: user.address,
+      gender: user.gender,
+    });
+
+    setFullName({
+      firstName: user?.fullName?.split(" ")[0] || "",
+      lastName: user?.fullName?.split(" ")[1] || "",
+    });
+  };
+
+  // isFormValid
+  const isFormValid = (field) => {
+    // name
+    if (field === "fullName") {
+      if (fullName?.firstName?.length > 2 && fullName?.lastName?.length > 2) {
+        return true;
       }
     }
+    // firstname
+    if (field === "firstName") {
+      if (fullName?.firstName?.length > 2) {
+        return true;
+      }
+    }
+    // lastName
     if (field === "lastName") {
-      if (formValue?.lastName?.length < 3) {
-        return "Last name must be at least 3 characters long";
+      if (fullName?.lastName?.length > 2) {
+        return true;
       }
     }
     // gender
     if (field === "gender") {
-      // one of male female or other
       if (
-        formValue.gender !== "Male" &&
-        formValue.gender !== "Female" &&
-        formValue.gender !== "Other"
+        formValue[field] === "" ||
+        formValue[field] === "Male" ||
+        formValue[field] === "Female" ||
+        formValue[field] === "Other"
       ) {
-        return "Must be one of male, female, other";
+        return true;
       }
     }
-    if (field === "email") {
-      if (!formValue.email.includes("@")) {
-        return "Email must be valid";
-      }
-    }
-    if (field === "phone") {
-      if (
-        formValue?.phone?.length !== 10 ||
-        !formValue.phone.match(/^[0-9]+$/)
-      ) {
-        return "Phone must be valid";
-      }
-    }
-    if (field === "address") {
-      if (formValue?.address?.length < 10) {
-        return "Address must be at least 10 characters long";
-      }
-    }
+    // birthdate
     if (field === "dateOfBirth") {
-      // at least 18 years old
-      const age = moment().diff(formValue.dateOfBirth, "years");
-      if (age < 18) {
-        return "At least 18 years old";
+      // must be at least 18 years old
+      if (moment().diff(moment(formValue[field]), "years") >= 18) {
+        return true;
       }
     }
-    return "";
+    // email
+    if (field === "email") {
+      const regex =
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (regex.test(formValue[field])) {
+        return true;
+      }
+    }
+    // phone
+    if (field === "phone") {
+      const regex = /^\d{10}$/;
+      if (regex.test(formValue[field])) {
+        return true;
+      }
+    }
+
+    // address
+    if (field === "address") {
+      if (formValue[field].length > 9) {
+        return true;
+      }
+    }
+
+    return false;
   };
 
-  // check if form is valid
-  const isFormValid = () => {
-    let isValid = true;
-    Object.keys(formValue).forEach((field) => {
-      if (checkErrors(field)) {
-        isValid = false;
-      }
-    });
-    return isValid;
-  };
+  // show error message
+  const [showErrors, setShowErrors] = useState(false);
 
   // handleSubmit
-  const handleSubmit = async () => {
-    if (isFormValid()) {
+  const handleSubmit = async (e, field) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // check if form is valid
+    if (isFormValid(field)) {
+      // set error state
+      setShowErrors(false);
       try {
         const response = await updateUser(formValue);
         if (response.status === 200) {
@@ -131,13 +185,18 @@ const Profile = () => {
             message: "Profile updated successfully",
           });
           setRefetch(true);
+          setUser(response.data);
           setActiveForm("");
         }
       } catch (error) {
         console.log(error, "error");
+        setAlert({
+          type: "danger",
+          message: "Something went wrong on the server",
+        });
       }
     } else {
-      console.log("Form has error");
+      setShowErrors(true);
     }
   };
 
@@ -147,12 +206,10 @@ const Profile = () => {
       {/* full name */}
       <RowItem
         title="Full name"
-        info={(user?.firstName + " " + user?.lastName).trim() || "Not set"}
+        info={user?.fullName || "Not set"}
         action="Edit"
         active={activeForm === "name" ? true : false}
-        onCancel={() => {
-          setActiveForm("");
-        }}
+        onCancel={handleCancel}
         onAction={() => {
           setActiveForm("name");
         }}
@@ -161,34 +218,40 @@ const Profile = () => {
         <div className={styles.form}>
           {/* firstName */}
           <Input
-            onChange={handleChange}
-            value={formValue.firstName}
+            onChange={(e) =>
+              setFullName({ ...fullName, firstName: e.target.value })
+            }
+            value={fullName?.firstName}
             name="firstName"
             id="firstName"
             type="text"
             label="First name"
-            helper={checkErrors("firstName") || ""}
-            error={checkErrors("firstName") ? true : false}
+            error={showErrors && !isFormValid("firstName")}
+            helper={
+              showErrors && !isFormValid("firstName")
+                ? "First name must be at least 3 characters"
+                : ""
+            }
           />
 
           {/* lastName */}
           <Input
-            onChange={handleChange}
-            value={formValue.lastName}
+            onChange={(e) =>
+              setFullName({ ...fullName, lastName: e.target.value })
+            }
+            value={fullName?.lastName}
             name="lastName"
             id="lastName"
             type="text"
             label="Last name"
-            helper={checkErrors("lastName") || ""}
-            error={checkErrors("lastName") ? true : false}
+            error={showErrors && !isFormValid("lastName")}
+            helper={
+              showErrors && !isFormValid("lastName")
+                ? "Last name must be at least 3 characters"
+                : ""
+            }
           />
-
-          {/* disabled if not valid */}
-          <Button
-            disabled={isFormValid() ? false : true}
-            onClick={handleSubmit}
-            label="Save"
-          />
+          <Button onClick={(e) => handleSubmit(e, "fullName")} label="Save" />
         </div>
       )}
 
@@ -198,9 +261,7 @@ const Profile = () => {
         active={activeForm === "gender" ? true : false}
         info={user?.gender || "Not set"}
         onAction={() => setActiveForm("gender")}
-        onCancel={() => {
-          setActiveForm("");
-        }}
+        onCancel={handleCancel}
         title="Gender"
       />
       {activeForm === "gender" && (
@@ -212,17 +273,13 @@ const Profile = () => {
             onChange={handleChange}
             label="Gender"
             options={[
-              { value: "", label: "Select a gender" },
+              { value: "", label: "Not specified" },
               { value: "Male", label: "Male" },
               { value: "Female", label: "Female" },
               { value: "Other", label: "Other" },
             ]}
           />
-          <Button
-            disabled={isFormValid() ? false : true}
-            onClick={handleSubmit}
-            label="Save"
-          />
+          <Button onClick={(e) => handleSubmit(e, "gender")} label="Save" />
         </div>
       )}
 
@@ -230,29 +287,39 @@ const Profile = () => {
       <RowItem
         active={activeForm === "birthday" ? true : false}
         onAction={() => setActiveForm("birthday")}
-        onCancel={() => {
-          setActiveForm("");
-        }}
+        onCancel={handleCancel}
         title="Date of birth"
-        info={user?.dateOfBirth || "Not set"}
+        info={
+          user?.dateOfBirth === "0001-01-01T00:00:00"
+            ? "Not set"
+            : moment(user?.dateOfBirth).format("DD MMM YYYY")
+        }
         action="Edit"
       />
       {activeForm === "birthday" && (
         <div className={styles.form}>
           <Input
             onChange={handleChange}
-            value={moment(formValue.dateOfBirth).format("YYYY-MM-DD")}
+            value={
+              moment(formValue.dateOfBirth).format("YYYY-MM-DD") ===
+              "0001-01-01"
+                ? ""
+                : moment(formValue.dateOfBirth).format("YYYY-MM-DD")
+            }
             // value="2022-05-25"
             name="dateOfBirth"
             id="dateOfBirth"
             type="date"
             label="Birthday"
-            helper={checkErrors("dateOfBirth") || ""}
-            error={checkErrors("dateOfBirth") ? true : false}
+            error={showErrors && !isFormValid("dateOfBirth")}
+            helper={
+              showErrors && !isFormValid("dateOfBirth")
+                ? "You must be at least 18 years old"
+                : ""
+            }
           />
           <Button
-            disabled={isFormValid() ? false : true}
-            onClick={handleSubmit}
+            onClick={(e) => handleSubmit(e, "dateOfBirth")}
             label="Save"
           />
         </div>
@@ -262,9 +329,7 @@ const Profile = () => {
       <RowItem
         active={activeForm === "email" ? true : false}
         onAction={() => setActiveForm("email")}
-        onCancel={() => {
-          setActiveForm("");
-        }}
+        onCancel={handleCancel}
         title="Email address"
         info={user?.email || "Not set"}
         action="Edit"
@@ -278,23 +343,19 @@ const Profile = () => {
             id="email"
             type="text"
             label="Email"
-            helper={checkErrors("email") || ""}
-            error={checkErrors("email") ? true : false}
+            error={showErrors && !isFormValid("email")}
+            helper={
+              showErrors && !isFormValid("email") ? "Email must be valid" : ""
+            }
           />
-          <Button
-            disabled={isFormValid() ? false : true}
-            onClick={handleSubmit}
-            label="Save"
-          />
+          <Button onClick={(e) => handleSubmit(e, "email")} label="Save" />
         </div>
       )}
       {/* phone */}
       <RowItem
         active={activeForm === "phone" ? true : false}
         onAction={() => setActiveForm("phone")}
-        onCancel={() => {
-          setActiveForm("");
-        }}
+        onCancel={handleCancel}
         title="Phone number"
         info={user?.phone || "Not set"}
         action="Edit"
@@ -308,22 +369,18 @@ const Profile = () => {
             id="phone"
             type="text"
             label="Phone"
-            helper={checkErrors("phone") || ""}
-            error={checkErrors("phone") ? true : false}
+            error={showErrors && !isFormValid("phone")}
+            helper={
+              showErrors && !isFormValid("phone") ? "Phone must be valid" : ""
+            }
           />
-          <Button
-            disabled={isFormValid() ? false : true}
-            onClick={handleSubmit}
-            label="Save"
-          />
+          <Button onClick={(e) => handleSubmit(e, "phone")} label="Save" />
         </div>
       )}
       <RowItem
         active={activeForm === "address" ? true : false}
         onAction={() => setActiveForm("address")}
-        onCancel={() => {
-          setActiveForm("");
-        }}
+        onCancel={handleCancel}
         title="Address"
         info={user?.address || "Not set"}
         action="Edit"
@@ -337,14 +394,14 @@ const Profile = () => {
             id="address"
             type="text"
             label="Address"
-            helper={checkErrors("address") || ""}
-            error={checkErrors("address") ? true : false}
+            error={showErrors && !isFormValid("address")}
+            helper={
+              showErrors && !isFormValid("address")
+                ? "Address must be at least 10 characters"
+                : ""
+            }
           />
-          <Button
-            disabled={isFormValid() ? false : true}
-            onClick={handleSubmit}
-            label="Save"
-          />
+          <Button onClick={(e) => handleSubmit(e, "address")} label="Save" />
         </div>
       )}
     </div>
