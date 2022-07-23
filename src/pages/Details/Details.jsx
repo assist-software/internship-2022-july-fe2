@@ -1,17 +1,27 @@
-import React, { useMemo, useEffect, useState } from "react";
+import React, { useMemo, useEffect, useState, useRef } from "react";
 import styles from "./Details.module.scss";
 
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import { Button } from "../../components";
 import PhotosModal from "../../components/Modal/PhotosModal";
+import FavoriteErrorModal from "./FavoriteErrorModal";
 import { ReactComponent as GridDense } from "../../assets/icons/grid-dense.svg";
 import { ReactComponent as Share } from "../../assets/icons/share.svg";
+import { ReactComponent as Heart } from "../../assets/icons/heart.svg";
+import { ReactComponent as HeartFilled } from "../../assets/icons/heart-filled.svg";
 
-import { getListingById } from "../../api/API";
+import {
+  addFavorite,
+  deleteFavoriteById,
+  getListingById,
+  getUserById,
+  newMessage,
+} from "../../api/API";
 
 import { useParams } from "react-router-dom";
 
 import moment from "moment";
+import useAuth from "../../hooks/useAuth";
 
 // map to render, default location is Suceava
 const Map = () => {
@@ -41,10 +51,13 @@ const Map = () => {
 const Details = () => {
   // states for the details page
   const [showModal, setShowModal] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
+  const [like, setLike] = useState(false);
   const [listing, setListing] = useState({});
-  // const [owner, setOwner] = useState({});
-  const owner = {};
-
+  const [owner, setOwner] = useState({});
+  const [messageContent, setMessageContent] = useState(); // not implemented yet
+  //const owner = {};
+  const { user } = useAuth();
   // get the id from the url
   const { id } = useParams();
 
@@ -54,41 +67,94 @@ const Details = () => {
       try {
         const response = await getListingById(id);
         setListing(response);
+        console.log(response);
       } catch (error) {
         console.log("Error: ", error);
       }
     })();
   }, [id]);
 
-  // get owner from API
-  // const getOwner = async () => {
-  //   if (listing.author) {
-  //     try {
-  //       const response = await getUserById(listing.author);
-  //       setOwner(response.data);
-  //     } catch (error) {
-  //       console.log("Error: ", error);
-  //     }
-  //   }
-  // };
+  //get owner from API
+  const getOwner = async () => {
+    if (listing.author) {
+      try {
+        const response = await getUserById(listing.author.id);
+        setOwner(response.data);
+      } catch (error) {
+        console.log("Error: ", error);
+      }
+    }
+  };
 
-  // useEffect(() => {
-  //   getOwner();
-  // }, [getOwner, listing.author]);
+  useEffect(() => {
+    getOwner();
+  }, [getOwner, listing.author]);
 
+  //add listing to favorites
+  const handleFavorites = async () => {
+    try {
+      //add fav
+      if (listing?.id && user?.id && like === false) {
+        const response = await addFavorite(user?.id, listing?.id);
+        setLike(true);
+        console.log("add");
+      }
+      //remove fav
+      if (listing?.id && user?.id && like === true) {
+        const response = await deleteFavoriteById(user?.id, listing?.id);
+        setLike(false);
+        console.log("delete");
+      } else if (user === null) {
+        console.log(showNotification, "show notif");
+        setShowNotification(true);
+      }
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  };
+
+  //send message
+  const sendMessage = async (data) => {
+    try {
+      const response = await newMessage(data);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //scroll to bottom ( to messages )
+  const scrollToBottom = () => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: "smooth",
+    });
+  };
+  //temporary images array
+  const tempImageArr = [
+    { id: 1, value: listing.images },
+    { id: 2, value: listing.images },
+    { id: 3, value: listing.images },
+    { id: 4, value: listing.images },
+    { id: 5, value: listing.images },
+    { id: 6, value: listing.images },
+    { id: 7, value: listing.images },
+    { id: 8, value: listing.images },
+    { id: 9, value: listing.images },
+  ];
   return (
     <section className={styles.container}>
       {/* images */}
       <div className={styles.images}>
-        <img
-          className={styles.largeImage}
-          src="https://picsum.photos/200/300"
-          alt=""
-        />
-        <img src="https://picsum.photos/200/300" alt="" />
-        <img src="https://picsum.photos/200/300" alt="" />
-        <img src="https://picsum.photos/200/300" alt="" />
-        <img src="https://picsum.photos/200/300" alt="" />
+        {tempImageArr.slice(1, 6).map((image, index) => {
+          if (index === 0) {
+            return (
+              <img src={image.value} className={styles.largeImage} alt="" />
+            );
+          } else {
+            return <img src={image.value} alt="" />;
+          }
+        })}
+
         <div className={styles.photos}>
           <Button
             variant="secondary"
@@ -102,13 +168,17 @@ const Details = () => {
         </div>
       </div>
 
-      <PhotosModal showModal={showModal} setShowModal={setShowModal} />
+      <PhotosModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        images={tempImageArr}
+      />
 
       {/* title */}
       <div className={styles.title}>
         <div>
           <h5 className={styles.listingName}>{listing.title}</h5>
-          <h4 className={styles.listingPrice}>123456 lei</h4>
+          <h4 className={styles.listingPrice}>{listing.price} lei</h4>
         </div>
         <button className={styles.shareButton}>
           {" "}
@@ -144,8 +214,12 @@ const Details = () => {
               id="message"
               cols="30"
               rows="10"
+              onChange={(e) => {
+                setMessageContent(e.target.value);
+                console.log(messageContent);
+              }}
             />
-            <button>Send</button>
+            <button onClick={sendMessage}>Send</button>
           </div>
         </div>
 
@@ -166,11 +240,23 @@ const Details = () => {
             </div>
           </div>
           <div className={styles.actions}>
-            <Button label="Purchase" />
-            <Button label="Like" variant="secondary" />
+            <Button label="Purchase" onClick={scrollToBottom} />
+            <div>
+              <Button
+                label=""
+                icon={!like ? <Heart /> : <HeartFilled />}
+                position="right"
+                variant="secondary"
+                onClick={handleFavorites}
+              />
+            </div>
           </div>
         </div>
       </div>
+      <FavoriteErrorModal
+        showNotification={showNotification}
+        setShowNotification={setShowNotification}
+      />
     </section>
   );
 };

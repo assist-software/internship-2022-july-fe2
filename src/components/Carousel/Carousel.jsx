@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getListings } from "../../api/API";
 import { Button, Card } from "../../components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
@@ -11,14 +9,13 @@ import "./swipper.scss";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import useStateProvider from "../../hooks/useStateProvider";
 
 const Carousel = ({ title }) => {
-  const [listings, setListings] = useState([]);
-  useEffect(() => {
-    getListings().then((res) => setListings(res));
-  }, []);
-
   const navigate = useNavigate();
+  // listings
+  const { listings } = useStateProvider();
+
   return (
     <div>
       <div>
@@ -36,7 +33,7 @@ const Carousel = ({ title }) => {
         <Swiper
           slidesPerView={4}
           spaceBetween={1}
-          slidesPerGroup={4}
+          slidesPerGroup={3}
           navigation={true}
           modules={[Pagination, Navigation]}
           className="mySwipper"

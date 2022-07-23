@@ -35,6 +35,17 @@ export const deleteFavorite = async (favoriteId) => {
   }
 };
 
+//delete favorite by userid and listing id
+export const deleteFavoriteById = async (userId, listingId) => {
+  try {
+    const response = await axios.delete(
+      "/favorite/" + userId + "/" + listingId
+    );
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
 // ---------------------------- LISTINGS ----------------------------------
 // add listing
 export const createListing = async (data) => {
@@ -86,6 +97,39 @@ export const deleteListingById = async (id) => {
   }
 };
 
+// get sort
+export const getListingsSort = async (
+  sortOrder,
+  locationFilter,
+  priceRange,
+  searchString,
+  category,
+  page,
+  pageSize
+) => {
+  try {
+    const response = await axios.get(
+      "/listing/" +
+        "sort?sortOrder=" +
+        sortOrder +
+        "&locationFilter=" +
+        locationFilter +
+        "&priceRange=" +
+        priceRange +
+        "&searchString=" +
+        searchString +
+        "&category=" +
+        category +
+        "&page=" +
+        page +
+        "&pageSize=" +
+        pageSize
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
 // ---------------------------- MAIL ----------------------------------
 // post MAIL
 export const postMail = async (data) => {

@@ -196,3 +196,27 @@
     margin-right: 12px;
   }
 }
+
+.favError {
+  text-align: center;
+  justify-content: center;
+  margin-top: 52px;
+}
+
+.errorTitle{
+  font-weight: $font-bold;
+  font-size: $font-h5;
+  color: $color-gray-700;
+  margin-top: 51px;
+}
+.paragraph{
+  font-weight: $font-semibold;
+  font-size: $font-body-small;
+  color: $color-gray-300;
+  margin-bottom: 40px;
+}
+.button{
+  width: 320px;
+  margin: 1rem 14rem;
+  
+}

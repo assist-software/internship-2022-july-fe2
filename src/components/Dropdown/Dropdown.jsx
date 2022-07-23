@@ -19,7 +19,6 @@ const Option = (props) => {
     </div>
   );
 };
-
 const Locations = [
   { value: "alba", label: "Alba" },
   { value: "arad", label: "Arad" },
@@ -55,7 +54,7 @@ const Locations = [
   { value: "satu_mare", label: "Satu Mare" },
   { value: "salaj", label: "Salaj" },
   { value: "sibiu", label: "Sibiu" },
-  { value: "suceava", label: "Suceava" },
+  { value: "Suceava", label: "Suceava" },
   { value: "teleorman", label: "Teleorman" },
   { value: "timis", label: "Timis" },
   { value: "tulcea", label: "Tulcea" },
@@ -71,6 +70,9 @@ const Dropdown = ({
   multi,
   options,
   searchable,
+  onChange,
+  selectedOptions,
+  setSelectedOptions,
 }) => {
   const [multipleOption] = useState(
     multi
@@ -133,6 +135,7 @@ const Dropdown = ({
 
   return (
     <Select
+      value={selectedOptions}
       options={options}
       className={`${styles.dropdown} ${styles[fontWeight]} ${styles[fontSize]} ${styles.classicOption}`}
       styles={style}
@@ -143,7 +146,7 @@ const Dropdown = ({
       hideSelectedOptions={multi ? false : true}
       defaultValue={title}
       controlShouldRenderValue={multi ? false : true}
-      // onChange={handleOnChange}
+      onChange={onChange}
       isSearchable={searchable ? true : false}
     />
   );

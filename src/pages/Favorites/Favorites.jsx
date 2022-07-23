@@ -2,20 +2,27 @@ import React, { useEffect, useState } from "react";
 
 import FavoritesError from "./FavoritesError";
 import styles from "./Favorites.module.scss";
-import { getListings } from "../../api/API";
+import { getFavorite, getListings } from "../../api/API";
 import Card from "../../components/Card/Card";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as GridRow } from "../../assets/icons/grid.svg";
 import { ReactComponent as Rows } from "../../assets/icons/rows.svg";
+import useAuth from "../../hooks/useAuth";
 
 const Favorites = () => {
   const navigate = useNavigate();
-  const [showError, setShowError] = useState(true); //daca user se logheaza setShowError=true / daca nu e logat e false
+  const { user } = useAuth();
+  // console.log(user, "user");
+  const [showError, setShowError] = useState(user === null ? true : false);
   const [listings, setListings] = useState([]);
   useEffect(() => {
-    getListings().then((res) => setListings(res));
+    user === null ? setShowError(true) : setShowError(false);
+  }, []);
+  useEffect(() => {
+    getFavorite(user.id).then((res) => setListings(res));
   }, []);
   const [listView, setListView] = useState(true);
+  //const [like,setLike] =useState(true); //like = true ca sa setez Heart icon filled pentru carduri
 
   // Filtrare cards care sunt adaugate la favorite ? Backend/Frontend
 
@@ -23,7 +30,7 @@ const Favorites = () => {
     <div className={styles.container}>
       <h1 className={styles.favoritesTitle}>Favourites</h1>
 
-      {showError ? (
+      {!showError ? (
         <div>
           {/* Filters */}
           <div className={styles.gridRow}>
@@ -44,21 +51,22 @@ const Favorites = () => {
           </div>
 
           {/* Cards view */}
-
-          {listings?.map((listing, index) => (
-            <Card
-              key={index}
-              image={listing.images}
-              title={listing.title}
-              description={listing.description}
-              price={listing.price}
-              location={listing.location}
-              listView={listView}
-              onClick={() => {
-                navigate("/listing/" + listing.id);
-              }}
-            />
-          ))}
+          <div className={styles.cardView}>
+            {listings?.map((listing, index) => (
+              <Card
+                key={index}
+                image={listing.images}
+                title={listing.title}
+                description={listing.description}
+                price={listing.price}
+                location={listing.location}
+                listView={listView}
+                onClick={() => {
+                  navigate("/listing/" + listing.id);
+                }}
+              />
+            ))}
+          </div>
         </div>
       ) : (
         <div className={styles.favorites}>

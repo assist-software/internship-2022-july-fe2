@@ -3,7 +3,8 @@ import styles from "./Card.module.scss";
 import { ReactComponent as HeartFilled } from "../../assets/icons/heart-filled.svg";
 import { ReactComponent as Heart } from "../../assets/icons/heart.svg";
 import useAuth from "../../hooks/useAuth";
-
+import { deleteListingById } from "../../api/API";
+import setAlert from "../../components/Alert/Alert";
 const Card = ({
   onClick,
   style,
@@ -13,10 +14,7 @@ const Card = ({
   location,
   description,
   price,
-  onIdClick,
-  admin,
   hideApproval,
-  pending,
   listingId,
 }) => {
   const [like, setLike] = useState(false);
@@ -25,8 +23,14 @@ const Card = ({
   }
   const { user } = useAuth();
   const [idea, setIdea] = useState([]);
-
-  // console.log(idea);
+  const handleDelete = async () => {
+    try {
+      const response = await deleteListingById(listingId);
+      if (response.status === 200) {
+        setAlert({ type: "Succes", message: "Deleted" });
+      }
+    } catch (error) {}
+  };
   return (
     <div className={styles.cards}>
       <div onClick={onClick} className={styles.card}>
@@ -78,7 +82,10 @@ const Card = ({
                 {hideApproval && (
                   <button className={styles.approve}>Approve</button>
                 )}
-                <button className={styles.delete}>
+                <button
+                  className={styles.delete}
+                  onClick={(e) => handleDelete(e)}
+                >
                   <span>Delete</span>
                 </button>
                 <button className={styles.edit}>Edit</button>
