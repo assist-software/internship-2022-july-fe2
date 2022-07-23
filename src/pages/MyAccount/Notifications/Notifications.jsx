@@ -116,31 +116,55 @@ const Notifications = () => {
         <RowItem
           onAction={() => handleModalShow("news")}
           title="News"
-          info="Off"
+          info={`${
+            !notificationSettings.news.email && !notificationSettings.news.sms
+              ? "Off"
+              : "On"
+          }`}
           action="Edit"
         />
         <RowItem
           onAction={() => handleModalShow("discounts")}
           title="Discounts & promotions"
-          info="Off"
+          info={`${
+            !notificationSettings.discounts.email &&
+            !notificationSettings.discounts.sms
+              ? "Off"
+              : "On"
+          }`}
           action="Edit"
         />
         <RowItem
           onAction={() => handleModalShow("messages")}
           title="Messages"
-          info="Off"
+          info={`${
+            !notificationSettings.messages.email &&
+            !notificationSettings.messages.sms
+              ? "Off"
+              : "On"
+          }`}
           action="Edit"
         />
         <RowItem
           onAction={() => handleModalShow("listings")}
           title="New listings"
-          info="Off"
+          info={`${
+            !notificationSettings.listings.email &&
+            !notificationSettings.listings.sms
+              ? "Off"
+              : "On"
+          }`}
           action="Edit"
         />
         <RowItem
           onAction={() => handleModalShow("priceChange")}
           title="Price change"
-          info="Off"
+          info={`${
+            !notificationSettings.priceChange.email &&
+            !notificationSettings.priceChange.sms
+              ? "Off"
+              : "On"
+          }`}
           action="Edit"
         />
       </div>
