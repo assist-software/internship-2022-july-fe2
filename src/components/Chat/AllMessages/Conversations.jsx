@@ -8,6 +8,8 @@ const Conversations = ({ users }) => {
       {/* {users.map((user, index) => (
         <SingleConversation user={user} key={index} active={false} />
       ))} */}
+      <SingleConversation active={true} />
+      <SingleConversation />
       <SingleConversation />
       <SingleConversation />
       <SingleConversation />

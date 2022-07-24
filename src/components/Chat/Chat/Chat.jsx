@@ -1,14 +1,15 @@
 import React from "react";
 import styles from "./Chat.module.scss";
 import ChatHeader from "./ChatHeader/ChatHeader";
-import ChatContainer from "./ChatContainer/ChatContainer";
+import ChatBody from "./ChatBody/ChatBody";
+import ChatInput from "./ChatInput/ChatInput";
 
 const Chat = ({ messages }) => {
   return (
-    <div className={styles.container}>
+    <div className={styles.chatContainer}>
       <ChatHeader />
-      <ChatContainer messages={messages} />
-      <div className={styles.input}></div>
+      <ChatBody messages={messages} />
+      <ChatInput messages={messages} />
     </div>
   );
 };

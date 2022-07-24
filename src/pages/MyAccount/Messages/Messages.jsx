@@ -13,11 +13,19 @@ import Chat from "../../../components/Chat/Chat/Chat";
 // TODO: send props with the informations above
 
 const messages = [
-  { message: "Acasa este foarte frumos" },
+  {
+    message:
+      "Hello! My name is James Milner and I would love purchase your listing. Please reach back to me so that we can set up a meeting to discuss further details. Thanks!",
+  },
   { message: "Ce frumoasa este viata pe la 7 dimineata" },
   { message: "O brad frumos, o brad frumos, cu cetina tot verde!" },
-  { message: "Tu esti copacul credincios, ce frunza nu si-o pierde" },
+  { message: "Tu esti copacul credincios, ce frunza nu si-o pierde." },
   { message: "E mijlocul verii si tu canti colinde?!" },
+  { message: "Conteaza?" },
+  { message: "O brad frumos, o brad frumos, cu cetina tot verde!" },
+  { message: "Tu esti copacul credincios, ce frunza nu si-o pierde." },
+  { message: "E mijlocul verii si tu canti colinde?!" },
+  { message: "Conteaza?" },
   { message: "Conteaza?" },
 ];
 
