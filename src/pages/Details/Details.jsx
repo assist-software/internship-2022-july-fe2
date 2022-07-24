@@ -230,7 +230,7 @@ const Details = () => {
             <div>
               <h6 className={styles.ownerName}>{owner.fullName}</h6>
               <p className={styles.ownerActivity}>
-                Joiner in
+                Joined in
                 <span> {moment(owner.createdAt).format("MMMM YYYY")}</span>
                 <br />
                 Response rate: <span>{owner.responseRate}</span>
