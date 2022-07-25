@@ -11,22 +11,21 @@ import useAuth from "../../hooks/useAuth";
 
 const Favorites = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
-  // console.log(user, "user");
+  const { user, userId } = useAuth();
+  console.log(user, "user");
   const [showError, setShowError] = useState(user === null ? true : false);
   const [listings, setListings] = useState([]);
   useEffect(() => {
     user === null ? setShowError(true) : setShowError(false);
   }, []);
   useEffect(() => {
-    getFavorite(user.id).then((res) => setListings(res));
-  }, []);
+    getFavorite(user?.id).then((res) => setListings(res));
+  }, [userId]);
   const [listView, setListView] = useState(true);
-  //const [like,setLike] =useState(true); //like = true ca sa setez Heart icon filled pentru carduri
-
+  const [like, setLike] = useState(true); //like = true ca sa setez Heart icon filled pentru carduri
   // Filtrare cards care sunt adaugate la favorite ? Backend/Frontend
-
-  return (
+  console.log(userId, "userID");
+  return user ? (
     <div className={styles.container}>
       <h1 className={styles.favoritesTitle}>Favourites</h1>
 
@@ -74,6 +73,8 @@ const Favorites = () => {
         </div>
       )}
     </div>
+  ) : (
+    <div>Loading...</div>
   );
 };
 
