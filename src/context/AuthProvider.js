@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   const fetchUser = async () => {
     try {
       const response = await getUserById(userId);
-      setUser(response.data);
+      setUser(response?.data);
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -20,6 +20,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     fetchUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
   // logout function

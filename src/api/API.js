@@ -98,33 +98,9 @@ export const deleteListingById = async (id) => {
 };
 
 // get sort
-export const getListingsSort = async (
-  sortOrder,
-  locationFilter,
-  priceRange,
-  searchString,
-  category,
-  page,
-  pageSize
-) => {
+export const getListingsSort = async (url) => {
   try {
-    const response = await axios.get(
-      "/listing/" +
-        "sort?sortOrder=" +
-        sortOrder +
-        "&locationFilter=" +
-        locationFilter +
-        "&priceRange=" +
-        priceRange +
-        "&searchString=" +
-        searchString +
-        "&category=" +
-        category +
-        "&page=" +
-        page +
-        "&pageSize=" +
-        pageSize
-    );
+    const response = await axios.get(`/Listing/sort?${url}`);
     return response.data;
   } catch (error) {
     console.error(error);
