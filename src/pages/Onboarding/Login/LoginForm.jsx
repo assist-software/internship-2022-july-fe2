@@ -221,7 +221,7 @@ export default function LoginForm() {
           <Button
             variant="primary"
             label="Log in"
-            onClick={handleTestLoginUser}
+            onClick={handleLogin}
           />
 
           <Button

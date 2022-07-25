@@ -28,6 +28,9 @@ export const StateProvider = ({ children }) => {
   const [sortOrder, setSortOrder] = useState("");
   const [priceRange, setPriceRange] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
+
+  // preview
+  const [preview, setPreview] = useState({});
   return (
     <StateContext.Provider
       value={{
@@ -41,6 +44,8 @@ export const StateProvider = ({ children }) => {
         setPriceRange,
         locationFilter,
         setLocationFilter,
+        preview,
+        setPreview,
       }}
     >
       {children}

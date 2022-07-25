@@ -14,8 +14,6 @@ import useAuth from "../../../hooks/useAuth";
 
 // TODO: send props with the informations above
 
-
-
 const Messages = () => {
   
 useEffect(() => {
