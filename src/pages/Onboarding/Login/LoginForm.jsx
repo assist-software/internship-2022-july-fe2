@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
-// import useAuth from "../../../hooks/useAuth";
 import style from "../Authenticate.module.scss";
 import Input from "../../../components/Input/Input";
 import Button from "../../../components/Button/Button";
@@ -18,7 +17,7 @@ import { login } from "../../../api/API";
 // import { getUserById } from "../../../api/API";
 
 export default function LoginForm() {
-  const { setUser } = useAuth();
+  const { setUser, setUserId } = useAuth();
 
   const { setAlert } = useStateProvider();
 
@@ -60,9 +59,10 @@ export default function LoginForm() {
             setUser(response.data);
             console.log(response.data, "user json");
             navigate("/");
-            localStorage.setItem("token", response?.data.token);
+            localStorage.setItem("token", "response?.data.token");
             localStorage.setItem("userId", response?.data.id);
-
+            setUserId(response?.data.id);
+            console.log(response?.data.id, "userid");
             setAlert({
               type: "success",
               message: "Login successfully",
@@ -108,26 +108,26 @@ export default function LoginForm() {
   ];
 
   // test login handlers
-  // const handleTestLoginUser = () => {
-  //   try {
-  //     localStorage.setItem("token", resp.token);
-  //     localStorage.setItem("role", resp.role);
-  //     localStorage.setItem("userId", resp.id);
-  //     setUser({
-  //       email: resp.email,
-  //       parola: resp.parola,
-  //       id: resp.id,
-  //       role: resp.role,
-  //       token: resp.token,
-  //       fullName: resp.name,
-  //       photo: resp.photo,
-  //     });
-  //     navigate("/");
-  //     // fetchUser();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const handleTestLoginUser = () => {
+    try {
+      localStorage.setItem("token", resp.token);
+      localStorage.setItem("role", resp.role);
+      localStorage.setItem("userId", resp.id);
+      setUser({
+        email: resp.email,
+        parola: resp.parola,
+        id: resp.id,
+        role: resp.role,
+        token: resp.token,
+        fullName: resp.name,
+        photo: resp.photo,
+      });
+      navigate("/");
+      // fetchUser();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleTestLoginAdmin = () => {
     try {
@@ -218,7 +218,11 @@ export default function LoginForm() {
 
       <div className={style.contentContainerAuthOptions}>
         <div className={style.contentContainerButtons}>
-          <Button variant="primary" label="Log in" onClick={handleLogin} />
+          <Button
+            variant="primary"
+            label="Log in"
+            onClick={handleTestLoginUser}
+          />
 
           <Button
             variant="secondary"
