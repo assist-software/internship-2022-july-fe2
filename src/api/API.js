@@ -229,9 +229,9 @@ export const resetPassword = async (email) => {
 };
 
 // update user
-export const updateUser = async (data) => {
+export const updateUser = async (id, data) => {
   try {
-    const response = await axios.put("/user/" + data.id, data);
+    const response = await axios.put("/user/" + id, data);
     return response;
   } catch (error) {
     console.error(error);
@@ -275,6 +275,16 @@ export const getUsers = async (data) => {
     return response.data;
   } catch (error) {
     console.log(error);
+  }
+};
+
+// update password
+export const updatePassword = async (id, data) => {
+  try {
+    const response = await axios.put("/user/update/password/" + id, data);
+    return response;
+  } catch (error) {
+    console.error(error);
   }
 };
 
