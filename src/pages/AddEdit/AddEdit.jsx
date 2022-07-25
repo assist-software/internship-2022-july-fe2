@@ -8,30 +8,31 @@ import { ReactComponent as Delete } from "../../assets/icons/delete.svg";
 
 import { useDropzone } from "react-dropzone";
 import GetLocation from "../../components/GetLocation/GetLocation";
+import { useNavigate } from "react-router-dom";
+import useStateProvider from "../../hooks/useStateProvider";
 
 const AddEdit = () => {
+  const navigate = useNavigate();
   const [address, setAddress] = useState({});
   const [coords, setCoords] = useState({});
-
+  const { preview, setPreview } = useStateProvider();
   // form data
   const [formValue, setFormValue] = useState({
-    title: "",
-    category: "",
-    price: "",
+    title: preview.title || "",
+    category: preview.category || "",
+    price: preview.price || "",
     images: [],
-    description: "",
+    description: preview.description || "",
     location: {
-      lat: coords?.lat || "",
-      lng: coords?.lng || "",
-      city: address?.city || "",
-      state: address?.state || "",
-      zip: address?.zip || "",
-      country: address?.country || "",
+      lat: preview.location.lat || coords?.lat || "",
+      lng: preview.location.lng || coords?.lng || "",
+      city: preview.location.city || address?.city || "",
+      state: preview.location.state || address?.state || "",
+      zip: preview.location.zip || address?.zip || "",
+      country: preview.location.country || address?.country || "",
     },
-    phone: "",
+    phone: preview.phone || "",
   });
-
-  console.log(formValue);
 
   const setLocation = useCallback(() => {
     setFormValue({
@@ -54,7 +55,9 @@ const AddEdit = () => {
   // handleChange
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormValue({ ...formValue, [name]: value });
+    setFormValue((prev) => {
+      return { ...prev, [name]: value };
+    });
   };
 
   // handleDrop
@@ -82,6 +85,16 @@ const AddEdit = () => {
         images: prevState.images.filter((image, i) => i !== index),
       };
     });
+  };
+
+  useEffect(() => {
+    setPreview(formValue);
+  }, [formValue]);
+
+  //handle Preview
+  const handlePreview = () => {
+    console.log(preview, " preview");
+    navigate("./preview");
   };
 
   // check errors
@@ -307,7 +320,11 @@ const AddEdit = () => {
         <Col md={{ span: 6, offset: 0 }}>
           <Row>
             <Col sm={{ span: 2, offset: 5 }}>
-              <Button variant="secondary" label="Preview" />
+              <Button
+                variant="secondary"
+                label="Preview"
+                onClick={handlePreview}
+              />
             </Col>
 
             <Col sm={{ span: 2, offset: 2 }}>
