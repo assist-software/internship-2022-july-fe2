@@ -55,10 +55,10 @@ jobs:
           CI=false npm run build
         name: Build module
         working-directory: src
-#       - run: |
-#           npm install
-#           CI: false npm run build   
-#        name: Build web app
+      - run: |
+          npm install
+          CI="" npm run build   
+        name: Build web app
           
       - name: Build And Deploy
         id: builddeploy
