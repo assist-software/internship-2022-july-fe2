@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useState, useRef } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 import styles from "./Details.module.scss";
 
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
@@ -18,7 +18,7 @@ import {
   newMessage,
 } from "../../api/API";
 
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 import moment from "moment";
 import useAuth from "../../hooks/useAuth";
@@ -95,13 +95,13 @@ const Details = () => {
     try {
       //add fav
       if (listing?.id && user?.id && like === false) {
-        const response = await addFavorite(user?.id, listing?.id);
+        const response = await addFavorite(user.id, listing.id);
         setLike(true);
         console.log("add");
       }
       //remove fav
       if (listing?.id && user?.id && like === true) {
-        const response = await deleteFavoriteById(user?.id, listing?.id);
+        const response = await deleteFavoriteById(user.id, listing.id);
         setLike(false);
         console.log("delete");
       } else if (user === null) {
@@ -129,6 +129,7 @@ const Details = () => {
       behavior: "smooth",
     });
   };
+
   //temporary images array
   const tempImageArr = [
     { id: 1, value: listing.images },

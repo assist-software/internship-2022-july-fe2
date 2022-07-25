@@ -17,6 +17,7 @@ on:
     branches:
       - "main"
       - "develop"
+      - "development"
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
@@ -51,17 +52,20 @@ jobs:
           node-version: "16"
       - run: |
           npm install
-          npm run build
+          CI=false npm run build
         name: Build module
         working-directory: src
       - run: |
           npm install
-          npm run build
+          CI="" npm run build   
         name: Build web app
           
       - name: Build And Deploy
         id: builddeploy
+        
         uses: Azure/static-web-apps-deploy@v1
+        env:
+          CI: false
         with:
           azure_static_web_apps_api_token: ${{ env.AZURE_STATIC_WEB_APPS_API_TOKEN }} # secret containing api token for app
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
@@ -86,3 +90,4 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ env.AZURE_STATIC_WEB_APPS_API_TOKEN }} # secret containing api token for app
           action: "close"
+          

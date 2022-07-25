@@ -24,6 +24,7 @@ import { Header } from "./components";
 import ProtectedRoute from "./routes/ProtectedRoutes";
 import Alert from "./components/Alert/Alert";
 import useStateProvider from "./hooks/useStateProvider";
+import Preview from "./pages/AddEdit/Preview";
 
 function App() {
   const { alert } = useStateProvider();
@@ -66,6 +67,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/listing" element={<Listing />} />
           <Route path="/add" element={<AddEdit />} />
+          <Route path="/add/preview" element={<Preview />} />
+
           <Route path="/listing/:id" element={<Details />} />
         </Route>
 
