@@ -1,17 +1,172 @@
-import React from "react";
+import React, { useState } from "react";
+import { Button, Input } from "../../../components";
 import RowItem from "../RowItem/RowItem";
 import styles from "./Security.module.scss";
 
+import { updateUser } from "../../../api/API";
+import useAuth from "../../../hooks/useAuth";
+import useStateProvider from "../../../hooks/useStateProvider";
+
 const Security = () => {
+  const [isShow, setIsShow] = useState("");
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showErrors, setShowErrors] = useState(false);
+
+  const { user } = useAuth();
+  const { setAlert } = useStateProvider();
+  console.log(user);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    switch (name) {
+      case "oldPassword":
+        setOldPassword(value);
+        break;
+      case "newPassword":
+        setNewPassword(value);
+        break;
+      case "confirmPassword":
+        setConfirmPassword(value);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleCancel = () => {
+    setIsShow("");
+    setOldPassword("");
+    setNewPassword("");
+    setConfirmPassword("");
+    setShowErrors(false);
+  };
+
+  // isFormValid
+  const isFormValid = (field) => {
+    // oldPassword
+    if (field === "oldPassword") {
+      if (oldPassword.length > 7) {
+        return true;
+      }
+    }
+
+    // newPassword
+    if (field === "newPassword") {
+      if (newPassword.length > 7) {
+        return true;
+      }
+    }
+
+    // confirmPassword
+    if (field === "confirmPassword") {
+      if (confirmPassword.length > 7) {
+        return true;
+      }
+    }
+
+    // oldPassword and newPassword
+    if (field === "match") {
+      if (newPassword === confirmPassword) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
+  // handle clear everythin
+  const handleSuccess = () => {
+    setOldPassword("");
+    setNewPassword("");
+    setConfirmPassword("");
+    setShowErrors(false);
+    setIsShow("");
+    setAlert({
+      type: "warning",
+      message: "Data is ready to send",
+    });
+  };
+
+  // handle reset
+  const handleResetPassword = async (e, field) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (isFormValid(field)) {
+      setShowErrors(true);
+      return;
+    } else {
+      handleSuccess();
+    }
+  };
+
+  // handle deactivate
+  const handleDeactivate = async () => {
+    handleSuccess();
+  };
+
+  console.log(showErrors, "showErrors");
+  console.log(isFormValid("oldPassword"), "isFormValid");
+
   return (
     <div>
       <h4 className={styles.title}>Login & Security</h4>
       {/* password */}
       <RowItem
         title="Password"
-        info="Last updated 3 weeks ago"
+        info={user?.updatedAt}
         action="Update"
+        active={isShow === "resetPassword"}
+        onAction={() => setIsShow("resetPassword")}
+        onCancel={handleCancel}
       />
+
+      {isShow === "resetPassword" && (
+        <div className={styles.form}>
+          <Input
+            onChange={handleChange}
+            name="oldPassword"
+            value={oldPassword}
+            label="Old password"
+            error={showErrors && !isFormValid("oldPassword")}
+            helper={
+              showErrors && !isFormValid("oldPassword")
+                ? "Password must be at least 7 characters"
+                : ""
+            }
+          />
+          <Input
+            onChange={handleChange}
+            name="newPassword"
+            value={newPassword}
+            label="New password"
+            error={showErrors && !isFormValid("newPassword")}
+            helper={
+              showErrors && !isFormValid("newPassword")
+                ? "Password must be at least 7 characters"
+                : ""
+            }
+          />
+          <Input
+            onChange={handleChange}
+            name="confirmPassword"
+            value={confirmPassword}
+            label="Confirm new password"
+            error={showErrors && !isFormValid("match")}
+            helper={`${
+              showErrors && !isFormValid("confirmPassword")
+                ? "Password must be at least 7 characters"
+                : ""
+            } ${
+              showErrors && !isFormValid("match") ? "Password must match" : ""
+            }`}
+          />
+          <on onClick={handleResetPassword} label="Update password" />
+        </div>
+      )}
+
       {/* social accounts */}
       <h5 className={styles.subtitle}>Login & Security</h5>
       <RowItem title="Facebook" info="Not connected" action="Connect" />
@@ -32,7 +187,27 @@ const Security = () => {
 
       {/* account */}
       <h5 className={styles.subtitle}>Account</h5>
-      <RowItem info="Deactivate your account" action="Connect" />
+      <RowItem
+        info="Deactivate your account"
+        action="Deactivate"
+        onAction={() => setIsShow("deactivate")}
+        onCancel={handleCancel}
+        active={isShow === "deactivate"}
+      />
+      {isShow === "deactivate" && (
+        <div className={styles.deactivate}>
+          <h6>Are you sure?</h6>
+          <p>
+            You can activate your account again at any time by logging in to
+            your account.
+          </p>
+          <Button
+            variant="destructive"
+            onClick={handleDeactivate}
+            label="Deactivate"
+          />
+        </div>
+      )}
     </div>
   );
 };

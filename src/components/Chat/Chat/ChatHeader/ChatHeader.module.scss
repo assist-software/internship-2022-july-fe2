@@ -1,0 +1,55 @@
+@import "../../../../styles/variables.scss";
+
+.chatHeaderContainer{
+    height: 10%;
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+
+.chatHeaderUserDetails{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left:20px;
+}
+.chatHeaderUserPhoto {
+    border-radius: 50%;
+    width: 40px;
+    aspect-ratio: 1;
+  }
+
+  .chatHeaderUserInfo{
+    margin-left:10px;
+    display: flex;
+    flex-direction: column;
+  }  
+
+  .chatHeaderUserName{
+    font-size: $font-body-small;
+    font-weight: $font-semibold;
+    line-height: 22px;
+    color: $color-black;
+
+  } 
+  
+  .chatHeaderUserStatus{
+    font-size: $font-body-tiny;
+    font-weight: $font-regular;
+    line-height: 20px;
+    color: $color-gray-300;
+  }
+
+  .chatHeaderActions{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right:20px;
+  }
+
+  .chatHeaderActions svg:first-child{
+    margin-right:20px;
+  }

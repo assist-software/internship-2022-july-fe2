@@ -1,0 +1,11 @@
+@import '../../../styles/variables.scss';
+
+.conversationsContainer{
+  // width:300px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: none;
+  align-items: flex-start;
+}
+

@@ -1,0 +1,37 @@
+@import "../../styles/variables.scss";
+
+.toggleSwitch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+}
+.toggleSwitch input[type="checkbox"] {
+  display: none;
+}
+.toggleSwitch .switch {
+  position: absolute;
+  cursor: pointer;
+  background-color: $color-white;
+  outline: 5px solid $color-gray-300;
+  border-radius: 25px;
+  inset: 0;
+  transition: background-color 0.2s ease;
+}
+.toggleSwitch .switch::before {
+  position: absolute;
+  content: "";
+  left: 2px;
+  top: 2px;
+  width: 20px;
+  height: 20px;
+  background-color: $color-gray-300;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+.toggleSwitch input[type="checkbox"]:checked + .switch::before {
+  transform: translateX(25px);
+}
+.toggleSwitch input[type="checkbox"]:checked + .switch {
+  background-color: $color-success-300;
+}

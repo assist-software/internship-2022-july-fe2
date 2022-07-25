@@ -5,6 +5,7 @@ import useStateProvider from "../../hooks/useStateProvider";
 
 const Nav = ({ setView, view }) => {
   const { user } = useAuth();
+  const { listings } = useStateProvider();
   const { setSortOrder } = useStateProvider("");
   const { setPriceRange } = useStateProvider("");
   const { setLocationFilter } = useStateProvider("");
@@ -35,6 +36,7 @@ const Nav = ({ setView, view }) => {
             className={`${styles.buttons} ${view && styles.active}`}
           >
             My listings
+            <span className={styles.listingsLength}>{listings?.length}</span>
           </button>
         </div>
       ) : null}
@@ -61,6 +63,7 @@ const Nav = ({ setView, view }) => {
             className={`${styles.buttons} ${view && styles.active}`}
           >
             Pending approval
+            <span className={styles.listingsLength}>{listings?.length}</span>
           </button>
         </div>
       ) : null}
