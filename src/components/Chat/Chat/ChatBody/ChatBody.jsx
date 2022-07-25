@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styles from "./ChatBody.module.scss";
 
 const ChatBody = ({ messages }) => {
+  const messageRef = useRef();
+
+  useEffect(() => {
+    if (messageRef && messageRef.current) {
+      const { scrollHeight, clientHeight } = messageRef.current;
+      messageRef.current.scrollTo({
+        left: 0,
+        top: scrollHeight - clientHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [messages]);
   return (
-    <div className={styles.chatBody}>
+    <div ref={messageRef} className={styles.chatBody}>
       {messages.map((m, index) => (
         <div
           key={index}

@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "../../../components";
 import styles from "./Messages.module.scss";
 import chatbot from "../../../assets/images/chatbot.png";
 import Conversations from "../../../components/Chat/AllMessages/Conversations";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Chat from "../../../components/Chat/Chat/Chat";
+import useStateProvider from "../../../hooks/useStateProvider";
+import useAuth from "../../../hooks/useAuth";
 
 // TODO: get all conversations that the current user have
 
 // TODO: get the name of the listings for each conversation
 
 // TODO: send props with the informations above
+
+const Messages = () => {
+  
+useEffect(() => {
+
+},[]);
 
 const messages = [
   {
@@ -28,8 +36,6 @@ const messages = [
   { message: "Conteaza?" },
   { message: "Conteaza?" },
 ];
-
-const Messages = () => {
   return (
     <div className={styles.container}>
       {/* <div className={styles.noMessages}>
