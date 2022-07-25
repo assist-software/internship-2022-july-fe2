@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Filters from "../../components/Filters/Filters";
 import listingStyle from "./Listing.module.scss";
 import ListObject from "./ListObject";
@@ -6,6 +6,7 @@ import ListObject from "./ListObject";
 const Listing = ({ title, admin, hideApproval, pending }) => {
   // view
   const [listView, setListView] = useState(true);
+
   return (
     <div>
       <div>
