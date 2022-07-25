@@ -38,9 +38,15 @@ const Map = () => {
 
 const Preview = () => {
   const navigate = useNavigate();
-  const { preview } = useStateProvider();
+  const { preview, setPreview } = useStateProvider();
   console.log(preview, "preview?");
   const [like, setLike] = useState(false);
+
+  //clear preview after submit
+  const clearPreview = () => {
+    setPreview({});
+    navigate("/");
+  };
 
   //temporary images
   const tempImageArr = [
@@ -161,7 +167,7 @@ const Preview = () => {
             variant="secondary"
             onClick={() => navigate("/add")}
           />
-          <Button label="Publish" variant="primary" />
+          <Button label="Publish" variant="primary" onClick={clearPreview} />
         </div>
       </div>
     </section>
