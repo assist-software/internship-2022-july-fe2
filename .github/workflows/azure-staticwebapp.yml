@@ -52,12 +52,16 @@ jobs:
           node-version: "16"
       - run: |
           npm install
-          CI=false npm run build
+          npm run build
+          env:
+            CI: ""
         name: Build module
         working-directory: src
       - run: |
           npm install
           npm run build
+          env:
+            CI: ""
         name: Build web app
           
       - name: Build And Deploy
