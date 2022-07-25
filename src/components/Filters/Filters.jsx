@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import filtersStyle from "./Filters.module.scss";
 import DropdownComponent from "../Dropdown/Dropdown";
 import { getListingsSort } from "../../api/API";
@@ -13,11 +13,34 @@ const Filters = ({ setListView, admin }) => {
   const { priceRange, setPriceRange } = useStateProvider("");
   const { locationFilter, setLocationFilter } = useStateProvider("");
 
+  const fetchListingsSort = async (url) => {
+    try {
+      const response = await getListingsSort(url);
+      setListings(response);
+    } catch (error) {}
+  };
+
   useEffect(() => {
-    getListingsSort(sortOrder, locationFilter, priceRange, "", "", "", "").then(
-      (res) => setListings(res)
-    );
-  }, [priceRange, setListings, sortOrder, locationFilter]);
+    const params = [];
+    if (priceRange !== "" && !params.includes(`PriceRange=${priceRange}`)) {
+      params.push(`PriceRange=${priceRange}`);
+    }
+    if (sortOrder !== "" && !params.includes(`SortOrder=${sortOrder}`)) {
+      params.push(`SortOrder=${sortOrder}`);
+    }
+    if (
+      locationFilter !== "" &&
+      !params.includes(`LocationFilter=${locationFilter}`)
+    ) {
+      params.push(`LocationFilter=${locationFilter}`);
+    }
+    const url = params.join("&");
+    console.log(params, "params");
+    if (url !== "") {
+      fetchListingsSort(url);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [priceRange, sortOrder, locationFilter, setListings]);
   const Price = [
     { value: "", label: " All" },
     { value: "0 - 10000", label: "0 - 10.000" },
