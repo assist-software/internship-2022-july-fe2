@@ -3,9 +3,11 @@ import { Button, Input } from "../../../components";
 import RowItem from "../RowItem/RowItem";
 import styles from "./Security.module.scss";
 
-import { updateUser } from "../../../api/API";
+import { updatePassword } from "../../../api/API";
 import useAuth from "../../../hooks/useAuth";
 import useStateProvider from "../../../hooks/useStateProvider";
+
+import moment from "moment";
 
 const Security = () => {
   const [isShow, setIsShow] = useState("");
@@ -16,7 +18,6 @@ const Security = () => {
 
   const { user } = useAuth();
   const { setAlert } = useStateProvider();
-  console.log(user);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -85,7 +86,7 @@ const Security = () => {
     setShowErrors(false);
     setIsShow("");
     setAlert({
-      type: "warning",
+      type: "success",
       message: "Data is ready to send",
     });
   };
@@ -94,11 +95,33 @@ const Security = () => {
   const handleResetPassword = async (e, field) => {
     e.preventDefault();
     e.stopPropagation();
-    if (isFormValid(field)) {
+    if (!isFormValid(field)) {
       setShowErrors(true);
+      console.log(showErrors);
       return;
     } else {
-      handleSuccess();
+      try {
+        const response = await updatePassword(user.id, {
+          oldPassword,
+          newPassword,
+        });
+        if (response.status === 200) {
+          setOldPassword("");
+          setNewPassword("");
+          setConfirmPassword("");
+          setIsShow("");
+          setAlert({
+            type: "success",
+            message: "Password is updated",
+          });
+        }
+      } catch (error) {
+        console.log(error);
+        setAlert({
+          type: "warning",
+          message: "Old password is wrong",
+        });
+      }
     }
   };
 
@@ -108,7 +131,6 @@ const Security = () => {
   };
 
   console.log(showErrors, "showErrors");
-  console.log(isFormValid("oldPassword"), "isFormValid");
 
   return (
     <div>
@@ -116,7 +138,8 @@ const Security = () => {
       {/* password */}
       <RowItem
         title="Password"
-        info={user?.updatedAt}
+        //
+        info={`Last updated ${moment(user?.updatedAt).fromNow()}`}
         action="Update"
         active={isShow === "resetPassword"}
         onAction={() => setIsShow("resetPassword")}
@@ -163,7 +186,7 @@ const Security = () => {
               showErrors && !isFormValid("match") ? "Password must match" : ""
             }`}
           />
-          <on onClick={handleResetPassword} label="Update password" />
+          <Button onClick={handleResetPassword} label="Update password" />
         </div>
       )}
 
