@@ -57,7 +57,7 @@ jobs:
         working-directory: src
       - run: |
           npm install
-          CI=false npm run build
+          npm run build
         name: Build web app
           
       - name: Build And Deploy
