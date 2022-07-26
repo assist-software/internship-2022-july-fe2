@@ -3,8 +3,9 @@ import styles from "./Card.module.scss";
 import { ReactComponent as HeartFilled } from "../../assets/icons/heart-filled.svg";
 import { ReactComponent as Heart } from "../../assets/icons/heart.svg";
 import useAuth from "../../hooks/useAuth";
-import { deleteListingById } from "../../api/API";
+import { deleteListingById, putListingById } from "../../api/API";
 import setAlert from "../../components/Alert/Alert";
+import Popup from "../../pages/Home/Popup";
 const Card = ({
   onClick,
   style,
@@ -16,13 +17,18 @@ const Card = ({
   price,
   hideApproval,
   listingId,
+  listing,
 }) => {
+  const [openPopup, setOpenPopup] = useState(false);
+  const { user } = useAuth();
+
   const [like, setLike] = useState(false);
+  const [listingIds, setListingIds] = useState([]);
   function stopPropagation(e) {
     e.stopPropagation();
   }
-  const { user } = useAuth();
-  const [idea, setIdea] = useState([]);
+
+  //delete announce
   const handleDelete = async () => {
     try {
       const response = await deleteListingById(listingId);
@@ -30,6 +36,22 @@ const Card = ({
         setAlert({ type: "Succes", message: "Deleted" });
       }
     } catch (error) {}
+  };
+
+  //Approve announce
+  const handleApprove = async () => {
+    try {
+      console.log(listing, "LISTIG");
+      listing.status = 0;
+      const response = await putListingById(listingId, listing);
+      console.log(response, "response");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //popup
+  const togglePopup = (props) => {
+    setOpenPopup(!openPopup);
   };
   return (
     <div className={styles.cards}>
@@ -45,7 +67,7 @@ const Card = ({
               className={`${listView ? styles.heartList : styles.heartCard}`}
               onClick={() => {
                 setLike(!like);
-                setIdea(listingId);
+                setListingIds(listingId);
               }}
             >
               {!like ? <Heart /> : <HeartFilled className={styles.heartFill} />}
@@ -80,12 +102,14 @@ const Card = ({
             {user?.role === 1 && (
               <div onClick={stopPropagation} className={styles.controls}>
                 {hideApproval && (
-                  <button className={styles.approve}>Approve</button>
+                  <button
+                    onClick={() => handleApprove(listingId, listing)}
+                    className={styles.approve}
+                  >
+                    Approve
+                  </button>
                 )}
-                <button
-                  className={styles.delete}
-                  onClick={(e) => handleDelete(e)}
-                >
+                <button className={styles.delete} onClick={() => togglePopup()}>
                   <span>Delete</span>
                 </button>
                 <button className={styles.edit}>Edit</button>
@@ -94,6 +118,35 @@ const Card = ({
           </div>
         </div>
       </div>
+      {/* POPUP delete */}
+      {openPopup && (
+        <Popup
+          setOpenPopup={setOpenPopup}
+          openPopup={openPopup}
+          content={
+            <div className={styles.popup}>
+              <h3 className={styles.titlePopup}>Delete listing</h3>
+              <p className={styles.descriptionPopup}>
+                You cannot recover the listing after deleting it.
+              </p>
+              <div className={styles.butonsPopup}>
+                <button
+                  className={styles.deletePopup}
+                  onClick={(e) => handleDelete(e)}
+                >
+                  Delete
+                </button>
+                <button
+                  className={styles.backPopup}
+                  onClick={() => setOpenPopup(!openPopup)}
+                >
+                  Back
+                </button>
+              </div>
+            </div>
+          }
+        />
+      )}
     </div>
   );
 };

@@ -98,33 +98,9 @@ export const deleteListingById = async (id) => {
 };
 
 // get sort
-export const getListingsSort = async (
-  sortOrder,
-  locationFilter,
-  priceRange,
-  searchString,
-  category,
-  page,
-  pageSize
-) => {
+export const getListingsSort = async (url) => {
   try {
-    const response = await axios.get(
-      "/listing/" +
-        "sort?sortOrder=" +
-        sortOrder +
-        "&locationFilter=" +
-        locationFilter +
-        "&priceRange=" +
-        priceRange +
-        "&searchString=" +
-        searchString +
-        "&category=" +
-        category +
-        "&page=" +
-        page +
-        "&pageSize=" +
-        pageSize
-    );
+    const response = await axios.get(`/Listing/sort?${url}`);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -229,9 +205,9 @@ export const resetPassword = async (email) => {
 };
 
 // update user
-export const updateUser = async (data) => {
+export const updateUser = async (id, data) => {
   try {
-    const response = await axios.put("/user/" + data.id, data);
+    const response = await axios.put("/user/" + id, data);
     return response;
   } catch (error) {
     console.error(error);
@@ -278,12 +254,11 @@ export const getUsers = async (data) => {
   }
 };
 
-// ------------------------------MOCK-------------------------------------
-// add listing    Nu exista
-export const addListing = async (data) => {
+// update password
+export const updatePassword = async (id, data) => {
   try {
-    const response = await axios.post("/listing", data);
-    return response.data;
+    const response = await axios.put("/user/update/password/" + id, data);
+    return response;
   } catch (error) {
     console.error(error);
   }
@@ -292,7 +267,20 @@ export const addListing = async (data) => {
 // deactivate user
 export const deactivateUser = async (id) => {
   try {
-    const response = await axios.delete("/deactivate/", id);
+    const response = await axios.put("/user/" + id, {
+      isActive: false,
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// ------------------------------MOCK-------------------------------------
+// add listing    Nu exista
+export const addListing = async (data) => {
+  try {
+    const response = await axios.post("/listing", data);
     return response.data;
   } catch (error) {
     console.error(error);

@@ -1,8 +1,9 @@
 import Card from "../../components/Card/Card";
 import { useNavigate } from "react-router-dom";
 import useStateProvider from "../../hooks/useStateProvider";
+import { Fragment } from "react";
 
-const ListObject = ({ listView, admin, hideApproval, pending }) => {
+const ListObject = ({ listView, admin, hideApproval, pending, listing }) => {
   const navigate = useNavigate();
   const { listings } = useStateProvider();
 
@@ -11,7 +12,7 @@ const ListObject = ({ listView, admin, hideApproval, pending }) => {
       {listings?.map(
         (listing, index) =>
           listing.status !== pending && (
-            <>
+            <Fragment key={`${listing.id}_${index}`}>
               <Card
                 key={index}
                 image={listing.images}
@@ -23,11 +24,12 @@ const ListObject = ({ listView, admin, hideApproval, pending }) => {
                 listingId={listing.id}
                 admin={admin}
                 hideApproval={hideApproval}
+                listing={listing}
                 onClick={() => {
                   navigate("/listing/" + listing.id);
                 }}
               />
-            </>
+            </Fragment>
           )
       )}
     </div>

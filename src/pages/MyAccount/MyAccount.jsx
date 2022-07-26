@@ -29,7 +29,7 @@ import { updateUser } from "../../api/API";
 
 const MyAccount = () => {
   const { setAlert } = useStateProvider();
-  const { user, logout } = useAuth();
+  const { user, logout, fetchUser } = useAuth();
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -65,14 +65,7 @@ const MyAccount = () => {
   // handle image update
   const handleAvatarChange = async () => {
     try {
-      const response = await updateUser({
-        id: user?.id,
-        fullName: user?.fullName,
-        gender: user?.gender,
-        dateOfBirth: user?.dateOfBirth,
-        email: user?.email,
-        phone: user?.phone,
-        address: user?.address,
+      const response = await updateUser(user?.id, {
         photo: preview && preview,
       });
       if (response.status === 200) {
@@ -82,6 +75,7 @@ const MyAccount = () => {
           message: "Successfully updated your profile",
         });
         setPreview(null);
+        fetchUser();
       }
     } catch (error) {
       console.log(error);
@@ -116,7 +110,11 @@ const MyAccount = () => {
       <div>
         {!preview ? (
           <div className={styles.profile}>
-            <img className={styles.avatar} src={user?.photo} alt="profile" />
+            <img
+              className={styles.avatar}
+              src={`https://${user?.photo}&${new Date().getTime()}`}
+              alt="profile"
+            />
             <label className={styles.editAvatar} htmlFor="image">
               <EditIcon />
             </label>
@@ -126,7 +124,7 @@ const MyAccount = () => {
               type="file"
               name="image"
               id="image"
-              accept="image/*"
+              accept="image/x-png"
               onChange={handleChange}
             />
           </div>
