@@ -30,9 +30,6 @@ import { getMessageByUserId, updateUser } from "../../api/API";
 // import bootstrap spiiner
 import { Spinner } from "react-bootstrap";
 
-// import bootstrap spiiner
-import { Spinner } from "react-bootstrap";
-
 const MyAccount = () => {
   const { setAlert } = useStateProvider();
   const { user, logout, fetchUser } = useAuth();
@@ -115,7 +112,6 @@ const MyAccount = () => {
       message: "You are browsing in as guest",
     });
   };
- 
 
   return user ? (
     <section className={styles.container}>
