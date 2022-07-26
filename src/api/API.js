@@ -51,9 +51,9 @@ export const deleteFavoriteById = async (userId, listingId) => {
 export const createListing = async (data) => {
   try {
     const response = await axios.post("/listing/create", data);
-    return response;
+    return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -63,7 +63,7 @@ export const putListingById = async (data) => {
     const response = await axios.put("/listing/" + data.id, data);
     return response;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -146,7 +146,7 @@ export const postMail = async (data) => {
 export const newMessage = async (data) => {
   try {
     const response = await axios.post("/message/new", data);
-    return response;
+    return response.data;
   } catch (error) {
     console.log(error);
   }
@@ -156,6 +156,16 @@ export const newMessage = async (data) => {
 export const getMessage = async (listingId) => {
   try {
     const response = await axios.get("/message/" + listingId);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// get message by user id
+export const getMessageByUserId = async (userId) => {
+  try {
+    const response = await axios.get("/message/getby/" + userId);
     return response.data;
   } catch (error) {
     console.log(error);

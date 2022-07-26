@@ -19,7 +19,7 @@ const AddEdit = () => {
   const [coords, setCoords] = useState({});
   const { preview, setPreview } = useStateProvider();
   const { userId } = useAuth();
-  console.log(userId, "userId");
+  //console.log(userId, "userId");
   // form data
   const [formValue, setFormValue] = useState({
     title: preview.title || "",
@@ -113,7 +113,7 @@ const AddEdit = () => {
       } else {
         setShowErrors(false);
         const response = await createListing(formValue);
-        console.log(response.data, "response");
+        console.log(response, "response");
       }
     } catch (error) {
       console.log("Error: ", error);
