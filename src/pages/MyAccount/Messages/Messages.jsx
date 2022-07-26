@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../../components";
 import styles from "./Messages.module.scss";
@@ -9,16 +9,6 @@ import Chat from "../../../components/Chat/Chat/Chat";
 import useStateProvider from "../../../hooks/useStateProvider";
 import useAuth from "../../../hooks/useAuth";
 import { getMessageByUserId } from "../../../api/API";
-
-// function useDidMount() {
-//   const mountRef = useRef(false);
-
-//   useEffect(() => {
-//     mountRef.current = true;
-//   }, []);
-
-//   return () => mountRef.current;
-// }
 
 const Messages = () => {
   const messagesStatic = [
@@ -35,9 +25,7 @@ const Messages = () => {
     { message: "Tu esti copacul credincios, ce frunza nu si-o pierde." },
     { message: "E mijlocul verii si tu canti colinde?!" },
     { message: "Conteaza?" },
-    { message: "Conteaza?" },
   ];
-  // const didMount = useDidMount();
 
   const navigate = useNavigate();
   const { messages, setMessages } = useStateProvider();
@@ -45,10 +33,6 @@ const Messages = () => {
   const [statusCode, setStatusCode] = useState("");
 
   useEffect(() => {
-    // if (messages === []) {
-    //   fetchMessages();
-    //   console.log("added");
-    // }
     (async () => {
       try {
         const response = await getMessageByUserId(userId);
@@ -63,6 +47,7 @@ const Messages = () => {
       }
     })();
   }, [setMessages, messages, statusCode, userId]);
+
   return (
     <div className={styles.container}>
       {statusCode === "" ? (

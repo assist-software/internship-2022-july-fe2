@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 import { getListings, getMessageByUserId } from "../api/API";
 import useAuth from "../hooks/useAuth";
 
@@ -55,9 +55,6 @@ export const StateProvider = ({ children }) => {
   const [priceRange, setPriceRange] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
 
-  // preview
-  const [preview, setPreview] = useState({});
-
   // show grid show list
   const [listView, setListView] = useState(true);
   return (
@@ -73,8 +70,6 @@ export const StateProvider = ({ children }) => {
         setPriceRange,
         locationFilter,
         setLocationFilter,
-        preview,
-        setPreview,
         listView,
         setListView,
         fetchListings,
