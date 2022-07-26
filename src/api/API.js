@@ -51,7 +51,7 @@ export const deleteFavoriteById = async (userId, listingId) => {
 export const createListing = async (data) => {
   try {
     const response = await axios.post("/listing/create", data);
-    return response.data;
+    return response;
   } catch (error) {
     console.error(error);
   }

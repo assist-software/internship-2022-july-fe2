@@ -7,9 +7,4 @@ export { default as MyAccount } from "./MyAccount/MyAccount";
 export { default as Onboarding } from "./Onboarding/Onboarding";
 export { default as Layout } from "./Layout/Layout";
 export { default as Details } from "./Details/Details";
-
-// demo
-export { default as Andrei } from "./Demo/Andrei";
-export { default as Catalin } from "./Demo/Catalin";
-export { default as Sabin } from "./Demo/Sabin";
-export { default as Selim } from "./Demo/Selim";
+export { default as Preview } from "./AddEdit/Preview";

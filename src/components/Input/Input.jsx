@@ -72,7 +72,7 @@ Input.defaultProps = {
   onChange: () => {},
   onClick: () => {},
   onIconClick: () => {},
-  placeholder: "",
+  placeholder: "Placeholder",
   type: "text",
   helper: "",
   disabled: false,
