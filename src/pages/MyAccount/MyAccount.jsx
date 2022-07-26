@@ -25,7 +25,7 @@ import useAuth from "../../hooks/useAuth";
 import useStateProvider from "../../hooks/useStateProvider";
 
 // API
-import { updateUser } from "../../api/API";
+import { getMessageByUserId, updateUser } from "../../api/API";
 
 // import bootstrap spiiner
 import { Spinner } from "react-bootstrap";
@@ -112,6 +112,7 @@ const MyAccount = () => {
       message: "You are browsing in as guest",
     });
   };
+ 
 
   return user ? (
     <section className={styles.container}>
@@ -187,7 +188,9 @@ const MyAccount = () => {
           </button>
           <button
             className={currentTab === "messages" ? styles.active : ""}
-            onClick={() => navigate("/my-account/messages")}
+            onClick={() => {
+              navigate("/my-account/messages");
+            }}
           >
             <ChatIcon />
             <span>Messages</span>

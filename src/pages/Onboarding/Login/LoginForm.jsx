@@ -59,7 +59,7 @@ export default function LoginForm() {
             setUser(response.data);
             console.log(response.data, "user json");
             navigate("/");
-            localStorage.setItem("token", "response?.data.token");
+            localStorage.setItem("token", response?.data.token);
             localStorage.setItem("userId", response?.data.id);
             setUserId(response?.data.id);
             console.log(response?.data.id, "userid");
@@ -218,11 +218,7 @@ export default function LoginForm() {
 
       <div className={style.contentContainerAuthOptions}>
         <div className={style.contentContainerButtons}>
-          <Button
-            variant="primary"
-            label="Log in"
-            onClick={handleLogin}
-          />
+          <Button variant="primary" label="Log in" onClick={handleLogin} />
 
           <Button
             variant="secondary"

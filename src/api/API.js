@@ -165,7 +165,7 @@ export const getMessage = async (listingId) => {
 export const getMessageByUserId = async (userId) => {
   try {
     const response = await axios.get("/message/getby/" + userId);
-    return response.data;
+    return response;
   } catch (error) {
     console.log(error);
   }

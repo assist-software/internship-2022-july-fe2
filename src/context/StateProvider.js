@@ -1,5 +1,12 @@
+<<<<<<< Updated upstream
 import { createContext, useCallback, useEffect, useState } from "react";
 import { getListings } from "../api/API";
+=======
+import { createContext, useEffect, useState } from "react";
+import { getListings, getMessageByUserId } from "../api/API";
+import useAuth from "../hooks/useAuth";
+
+>>>>>>> Stashed changes
 const StateContext = createContext({});
 
 export const StateProvider = ({ children }) => {
@@ -20,8 +27,24 @@ export const StateProvider = ({ children }) => {
       setListings(response);
     } catch (error) {}
   };
+  // messages
+  const [messages, setMessages] = useState([]);
+  const [privateConversation, setPrivateConversation] = useState([]);
+  const { userId } = useAuth();
+
+  // const fetchMessages = async () => {
+  //   try {
+  //     const response = await getMessageByUserId(userId);
+  //     if (response.status === 200) {
+  //       setMessages(response.data);
+  //     }
+  //   } catch (error) {}
+  // };
+
   useEffect(() => {
     fetchListings();
+    console.log("stateprovider");
+    // fetchMessages();
   }, []);
 
   // refetch
@@ -59,7 +82,14 @@ export const StateProvider = ({ children }) => {
         setPreview,
         listView,
         setListView,
+<<<<<<< Updated upstream
         fetchListings,
+=======
+        messages,
+        setMessages,
+        privateConversation,
+        setPrivateConversation,
+>>>>>>> Stashed changes
       }}
     >
       {children}
