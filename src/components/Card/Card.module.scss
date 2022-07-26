@@ -52,6 +52,10 @@
 
 .contentCard {
   margin-right: 0px 5px;
+  width: 80%;
+  @media (max-width: 750px) {
+    width: 50%;
+  }
   p {
     padding: 8px;
   }
