@@ -81,6 +81,29 @@ export const getListings = async () => {
 export const getListingById = async (id) => {
   try {
     const response = await axios.get("/listing/" + id);
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// approved listings
+export const approveListing = async (id) => {
+  try {
+    const response = await axios.put("/listing/" + id, {
+      status: 1,
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const declineListing = async (id) => {
+  try {
+    const response = await axios.put("/listing/" + id, {
+      status: 2,
+    });
     return response.data;
   } catch (error) {
     console.error(error);
@@ -122,7 +145,7 @@ export const postMail = async (data) => {
 export const newMessage = async (data) => {
   try {
     const response = await axios.post("/message/new", data);
-    return response.data;
+    return response;
   } catch (error) {
     console.log(error);
   }

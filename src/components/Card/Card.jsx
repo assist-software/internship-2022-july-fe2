@@ -3,14 +3,19 @@ import styles from "./Card.module.scss";
 import { ReactComponent as HeartFilled } from "../../assets/icons/heart-filled.svg";
 import { ReactComponent as Heart } from "../../assets/icons/heart.svg";
 import useAuth from "../../hooks/useAuth";
-import { deleteListingById, getFavorite, putListingById } from "../../api/API";
+import {
+  approveListing,
+  declineListing,
+  deleteListingById,
+  getFavorite,
+  putListingById,
+} from "../../api/API";
 import setAlert from "../../components/Alert/Alert";
 import Popup from "../../pages/Home/Popup";
 import useStateProvider from "../../hooks/useStateProvider";
 const Card = ({
   onClick,
   style,
-  listView,
   image,
   title,
   location,
@@ -19,6 +24,7 @@ const Card = ({
   hideApproval,
   listingId,
   listing,
+  pending,
 }) => {
   const [openPopup, setOpenPopup] = useState(false);
   const { user, userId } = useAuth();
@@ -29,7 +35,11 @@ const Card = ({
   // }, [userId]);
 
   const [like, setLike] = useState(false);
-  const [listingIds, setListingIds] = useState([]);
+  const [setListingIds] = useState([]);
+
+  //grid view list view
+  const { listView } = useStateProvider();
+
   function stopPropagation(e) {
     e.stopPropagation();
   }
@@ -45,14 +55,40 @@ const Card = ({
   };
 
   //Approve announce
-  const handleApprove = async () => {
+
+  const handleApprove = async (id) => {
     try {
-      console.log(listing, "LISTIG");
-      listing.status = 0;
-      const response = await putListingById(listingId, listing);
-      console.log(response, "response");
+      const response = await approveListing(id);
+      if (response.status === 200) {
+        setAlert({
+          type: "success",
+          message: "Approved",
+        });
+      }
     } catch (error) {
       console.log(error);
+      setAlert({
+        type: "danger",
+        message: "Something went wrong",
+      });
+    }
+  };
+  // Decline announce
+  const handleDecline = async (id) => {
+    try {
+      const response = await declineListing(id);
+      if (response.status === 200) {
+        setAlert({
+          type: "success",
+          message: "Approved",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      setAlert({
+        type: "danger",
+        message: "Something went wrong",
+      });
     }
   };
   //popup
@@ -116,15 +152,28 @@ const Card = ({
               <div onClick={stopPropagation} className={styles.controls}>
                 {hideApproval && (
                   <button
-                    onClick={() => handleApprove(listingId, listing)}
+                    onClick={() => handleApprove(listing.id)}
                     className={styles.approve}
                   >
                     Approve
                   </button>
                 )}
-                <button className={styles.delete} onClick={() => togglePopup()}>
-                  <span>Delete</span>
-                </button>
+                {pending === 0 ? (
+                  <button
+                    className={styles.delete}
+                    onClick={() => togglePopup()}
+                  >
+                    <span>Delete</span>
+                  </button>
+                ) : (
+                  <button
+                    className={styles.delete}
+                    onClick={() => handleDecline(listing.id)}
+                  >
+                    <span>Decline</span>
+                  </button>
+                )}
+
                 <button className={styles.edit}>Edit</button>
               </div>
             )}

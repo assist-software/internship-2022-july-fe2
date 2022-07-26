@@ -1,8 +1,8 @@
 @import "../../styles/mixins.scss";
 
 .layout {
-  padding: 2rem 8rem;
-
+  max-width: 1140px;
+  margin: 32px auto 0 auto;
   @include medium {
     padding: 0 2rem;
   }

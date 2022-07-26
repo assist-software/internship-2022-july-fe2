@@ -27,6 +27,9 @@ import useStateProvider from "../../hooks/useStateProvider";
 // API
 import { updateUser } from "../../api/API";
 
+// import bootstrap spiiner
+import { Spinner } from "react-bootstrap";
+
 const MyAccount = () => {
   const { setAlert } = useStateProvider();
   const { user, logout, fetchUser } = useAuth();
@@ -62,8 +65,13 @@ const MyAccount = () => {
   // preview image
   const [preview, setPreview] = useState(null);
 
+  // loading image
+  const [loading, setLoading] = useState(false);
+  console.log(loading, "loading");
+
   // handle image update
   const handleAvatarChange = async () => {
+    setLoading(true);
     try {
       const response = await updateUser(user?.id, {
         photo: preview && preview,
@@ -75,6 +83,7 @@ const MyAccount = () => {
           message: "Successfully updated your profile",
         });
         setPreview(null);
+        setLoading(false);
         fetchUser();
       }
     } catch (error) {
@@ -112,7 +121,8 @@ const MyAccount = () => {
           <div className={styles.profile}>
             <img
               className={styles.avatar}
-              src={`https://${user?.photo}&${new Date().getTime()}`}
+              // src={`${user?.photo}&${new Date().getTime()}`}
+              src={user?.photo}
               alt="profile"
             />
             <label className={styles.editAvatar} htmlFor="image">
@@ -130,7 +140,13 @@ const MyAccount = () => {
           </div>
         ) : (
           <div className={styles.profile}>
-            <img className={styles.avatar} src={preview} alt="profile" />
+            {loading ? (
+              <div className={styles.loading}>
+                <Spinner animation="border" />
+              </div>
+            ) : (
+              <img className={styles.avatar} src={preview} alt="profile" />
+            )}
             <div className={styles.actions}>
               <button
                 className={styles.apply}

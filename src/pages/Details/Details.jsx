@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Details.module.scss";
 
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
@@ -14,22 +14,22 @@ import {
   addFavorite,
   deleteFavoriteById,
   getListingById,
-  getUserById,
   newMessage,
 } from "../../api/API";
 
-import { Navigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import moment from "moment";
 import useAuth from "../../hooks/useAuth";
+import useStateProvider from "../../hooks/useStateProvider";
+import TextArea from "../../components/Input/TextArea";
 
-// map to render, default location is Suceava
-const Map = () => {
+// map to render
+const Map = ({ center }) => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
 
-  const center = useMemo(() => ({ lat: 47.6635, lng: 26.2732 }), []);
   return isLoaded ? (
     <GoogleMap
       id="map"
@@ -54,41 +54,43 @@ const Details = () => {
   const [showNotification, setShowNotification] = useState(false);
   const [like, setLike] = useState(false);
   const [listing, setListing] = useState({});
-  const [owner, setOwner] = useState({});
-  const [messageContent, setMessageContent] = useState(); // not implemented yet
-  //const owner = {};
+  const [messageContent, setMessageContent] = useState("");
+
   const { user } = useAuth();
+  const { setAlert } = useStateProvider();
   // get the id from the url
   const { id } = useParams();
+
+  // message
+  const [message, setMessage] = useState({});
 
   // get listing from API
   useEffect(() => {
     (async () => {
       try {
         const response = await getListingById(id);
-        setListing(response);
-        console.log(response, "listing");
+        setListing(response.data);
+        console.log(response);
       } catch (error) {
         console.log("Error: ", error);
       }
     })();
   }, [id]);
 
-  //get owner from API
-  const getOwner = async () => {
-    if (listing.author) {
-      try {
-        const response = await getUserById(listing.author.id);
-        setOwner(response.data);
-      } catch (error) {
-        console.log("Error: ", error);
-      }
-    }
-  };
-
+  // update message object useEffect
   useEffect(() => {
-    getOwner();
-  }, [getOwner, listing.author]);
+    setMessage({
+      ...message,
+      senderId: user?.id,
+      receiverId: listing?.author?.id,
+      listingId: listing?.id,
+      content: messageContent,
+    });
+  }, [user?.id, listing?.author?.id, listing?.id, messageContent]);
+
+  console.log(message);
+
+  // set message object usecallback
 
   //add listing to favorites
   const handleFavorites = async () => {
@@ -113,15 +115,6 @@ const Details = () => {
     }
   };
 
-  //send message
-  const sendMessage = async (data) => {
-    try {
-      const response = await newMessage(data);
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   //scroll to bottom ( to messages )
   const scrollToBottom = () => {
     window.scrollTo({
@@ -130,34 +123,43 @@ const Details = () => {
     });
   };
 
-  //temporary images array
-  const tempImageArr = [
-    { id: 1, value: listing.images },
-    { id: 2, value: listing.images },
-    { id: 3, value: listing.images },
-    { id: 4, value: listing.images },
-    { id: 5, value: listing.images },
-    { id: 6, value: listing.images },
-    { id: 7, value: listing.images },
-    { id: 8, value: listing.images },
-    { id: 9, value: listing.images },
-  ];
+  // send message to API
+  const handleSendMessage = async () => {
+    console.log(message);
+    try {
+      const response = await newMessage(message);
+      if (response.status === 201) {
+        setMessageContent("");
+        setAlert({
+          type: "success",
+          message: "Message sent successfully",
+        });
+      }
+    } catch (error) {
+      console.log("Error: ", error);
+      setAlert({
+        type: "error",
+        message: "Error sending message",
+      });
+    }
+  };
+
   return (
     <section className={styles.container}>
       {/* images */}
       <div className={styles.images}>
-        {tempImageArr.slice(1, 6).map((image, index) => {
+        {listing?.images?.slice(1, 6).map((image, index) => {
           if (index === 0) {
             return (
               <img
-                src={image.value}
+                key={index}
+                src={image}
                 className={styles.largeImage}
                 alt=""
-                key={index}
               />
             );
           } else {
-            return <img src={image.value} alt="" key={index} />;
+            return <img key={index} src={image} alt="" />;
           }
         })}
 
@@ -177,7 +179,7 @@ const Details = () => {
       <PhotosModal
         showModal={showModal}
         setShowModal={setShowModal}
-        images={tempImageArr}
+        images={listing?.images}
       />
 
       {/* title */}
@@ -204,44 +206,69 @@ const Details = () => {
           {/* location */}
           <div className={styles.location}>
             <h6>Location</h6>
-            <p>{listing.location}</p>
+            <p>
+              {listing?.location &&
+                listing?.location[2] +
+                  ", " +
+                  (listing?.location[3].length > 0
+                    ? listing?.location[3] + " , "
+                    : "") +
+                  listing?.location[5]}
+            </p>
             {/* google maps */}
             <div className={styles.map}>
-              <Map />
+              <Map
+                center={{
+                  lat: listing.location ? parseFloat(listing?.location[0]) : 0,
+                  lng: listing.location ? parseFloat(listing?.location[1]) : 0,
+                }}
+              />
+              {/* lat={59.838} lng={14.619} */}
             </div>
           </div>
           {/* message seller */}
           <div className={styles.message}>
             <h6>Message the seller</h6>
-            <textarea
+            <TextArea
+              label=""
+              value={messageContent}
               placeholder="Enter your message here"
-              className={styles.messageBox}
+              onChange={(e) => setMessageContent(e.target.value)}
               name="message"
               id="message"
-              cols="30"
-              rows="10"
-              onChange={(e) => {
-                setMessageContent(e.target.value);
-                console.log(messageContent);
-              }}
+              cols={20}
+              rows={5}
             />
-            <button onClick={sendMessage}>Send</button>
+            <Button
+              variant="secondary"
+              className={styles.sendButton}
+              onClick={handleSendMessage}
+              label="Send"
+              disabled={messageContent?.length < 1 ? true : false}
+            />
           </div>
         </div>
 
         {/* owner */}
         <div>
           <div className={styles.ownerDetails}>
-            <img className={styles.ownerImage} src={owner.photo} alt="" />
+            <img
+              className={styles.ownerImage}
+              src={listing?.author?.photo}
+              alt=""
+            />
             <div>
-              <h6 className={styles.ownerName}>{owner.fullName}</h6>
+              <h6 className={styles.ownerName}>{listing?.author?.fullName}</h6>
               <p className={styles.ownerActivity}>
-                Joined in
-                <span> {moment(owner.createdAt).format("MMMM YYYY")}</span>
+                Joined on
+                <span>
+                  {" "}
+                  {moment(listing?.author?.createdAt).format("MMMM YYYY")}
+                </span>
                 <br />
-                Response rate: <span>{owner.responseRate}</span>
+                Response rate: <span>90%</span>
                 <br />
-                Response time: <span>{owner.responseTime}</span>
+                Response time: <span>1h</span>
               </p>
             </div>
           </div>
