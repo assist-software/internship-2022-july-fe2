@@ -11,21 +11,20 @@ import useAuth from "../../hooks/useAuth";
 
 const Favorites = () => {
   const navigate = useNavigate();
-  const { user, userId } = useAuth();
-  console.log(user, "user");
-  const [showError, setShowError] = useState(user === null ? true : false);
+  const { userId } = useAuth();
   const [listings, setListings] = useState([]);
   useEffect(() => {
-    user === null ? setShowError(true) : setShowError(false);
+    userId === null ? setShowError(true) : setShowError(false);
   }, []);
+  const [showError, setShowError] = useState(userId === null ? true : false);
   useEffect(() => {
-    getFavorite(user?.id).then((res) => setListings(res));
+    getFavorite(userId).then((res) => setListings(res));
   }, [userId]);
   const [listView, setListView] = useState(true);
   const [like, setLike] = useState(true); //like = true ca sa setez Heart icon filled pentru carduri
   // Filtrare cards care sunt adaugate la favorite ? Backend/Frontend
   console.log(userId, "userID");
-  return user ? (
+  return userId ? (
     <div className={styles.container}>
       <h1 className={styles.favoritesTitle}>Favourites</h1>
 

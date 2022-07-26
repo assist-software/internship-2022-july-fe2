@@ -106,7 +106,8 @@ const AddEdit = () => {
   };
 
   // handleSubmit
-  const handleSubmit = async (formValue) => {
+  const handleSubmit = async () => {
+    console.log(formValue, "formval");
     try {
       if (!isFormValid()) {
         setShowErrors(true);
