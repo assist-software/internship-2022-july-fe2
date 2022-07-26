@@ -3,13 +3,16 @@ import { Button, Input } from "../../../components";
 import RowItem from "../RowItem/RowItem";
 import styles from "./Security.module.scss";
 
-import { updatePassword } from "../../../api/API";
+import { updatePassword, deactivateUser } from "../../../api/API";
 import useAuth from "../../../hooks/useAuth";
 import useStateProvider from "../../../hooks/useStateProvider";
 
 import moment from "moment";
 
+import { useNavigate } from "react-router-dom";
+
 const Security = () => {
+  const navigate = useNavigate();
   const [isShow, setIsShow] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -75,20 +78,19 @@ const Security = () => {
       }
     }
 
-    return false;
-  };
+    // all
+    if (field === "all") {
+      if (
+        oldPassword.length > 7 &&
+        newPassword.length > 7 &&
+        confirmPassword.length > 7 &&
+        newPassword === confirmPassword
+      ) {
+        return true;
+      }
+    }
 
-  // handle clear everythin
-  const handleSuccess = () => {
-    setOldPassword("");
-    setNewPassword("");
-    setConfirmPassword("");
-    setShowErrors(false);
-    setIsShow("");
-    setAlert({
-      type: "success",
-      message: "Data is ready to send",
-    });
+    return false;
   };
 
   // handle reset
@@ -126,11 +128,29 @@ const Security = () => {
   };
 
   // handle deactivate
-  const handleDeactivate = async () => {
-    handleSuccess();
+  const handleDeactivate = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    try {
+      const response = await deactivateUser(user.id);
+      if (response.status === 200) {
+        setAlert({
+          type: "success",
+          message: "Your account is deactivated",
+        });
+        setTimeout(() => {
+          localStorage.clear();
+          navigate("/");
+        }, 2000);
+      }
+    } catch (error) {
+      console.log(error);
+      setAlert({
+        type: "danger",
+        message: "Something went wrong on server",
+      });
+    }
   };
-
-  console.log(showErrors, "showErrors");
 
   return (
     <div>
@@ -186,7 +206,10 @@ const Security = () => {
               showErrors && !isFormValid("match") ? "Password must match" : ""
             }`}
           />
-          <Button onClick={handleResetPassword} label="Update password" />
+          <Button
+            onClick={(e) => handleResetPassword(e, "all")}
+            label="Update password"
+          />
         </div>
       )}
 
@@ -219,14 +242,14 @@ const Security = () => {
       />
       {isShow === "deactivate" && (
         <div className={styles.deactivate}>
-          <h6>Are you sure?</h6>
+          <h5>Are you sure?</h5>
           <p>
             You can activate your account again at any time by logging in to
             your account.
           </p>
           <Button
-            variant="destructive"
             onClick={handleDeactivate}
+            variant="destructive"
             label="Deactivate"
           />
         </div>
