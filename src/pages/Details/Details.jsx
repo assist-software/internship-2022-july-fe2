@@ -149,10 +149,15 @@ const Details = () => {
         {tempImageArr.slice(1, 6).map((image, index) => {
           if (index === 0) {
             return (
-              <img src={image.value} className={styles.largeImage} alt="" />
+              <img
+                src={image.value}
+                className={styles.largeImage}
+                alt=""
+                key={index}
+              />
             );
           } else {
-            return <img src={image.value} alt="" />;
+            return <img src={image.value} alt="" key={index} />;
           }
         })}
 

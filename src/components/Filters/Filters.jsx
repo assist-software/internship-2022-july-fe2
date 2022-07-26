@@ -22,7 +22,6 @@ const Filters = ({ admin }) => {
 
   useEffect(() => {
     const params = [];
-
     if (priceRange !== "" && !params.includes(`PriceRange=${priceRange}`)) {
       params.push(`PriceRange=${priceRange}`);
     }

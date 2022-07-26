@@ -11,6 +11,7 @@ import useStateProvider from "../../hooks/useStateProvider";
 
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 // map to render, default location is Suceava
 const Map = () => {
   const { isLoaded } = useLoadScript({
@@ -37,10 +38,17 @@ const Map = () => {
 };
 
 const Preview = () => {
+  const { user } = useAuth();
   const navigate = useNavigate();
-  const { preview } = useStateProvider();
+  const { preview, setPreview } = useStateProvider();
   console.log(preview, "preview?");
   const [like, setLike] = useState(false);
+
+  //clear preview after submit
+  const clearPreview = () => {
+    setPreview({});
+    navigate("/");
+  };
 
   //temporary images
   const tempImageArr = [
@@ -61,10 +69,15 @@ const Preview = () => {
         {tempImageArr.slice(1, 6).map((image, index) => {
           if (index === 0) {
             return (
-              <img src={image.value} className={styles.largeImage} alt="" />
+              <img
+                src={image.value}
+                className={styles.largeImage}
+                alt=""
+                key={index}
+              />
             );
           } else {
-            return <img src={image.value} alt="" />;
+            return <img src={image.value} alt="" key={index} />;
           }
         })}
 
@@ -125,16 +138,16 @@ const Preview = () => {
 
         <div>
           <div className={styles.ownerDetails}>
-            <img className={styles.ownerImage} src={preview?.photo} alt="" />
+            <img className={styles.ownerImage} src={user?.photo} alt="" />
             <div>
-              <h6 className={styles.ownerName}>{preview?.fullName}</h6>
+              <h6 className={styles.ownerName}>{user?.fullName}</h6>
               <p className={styles.ownerActivity}>
                 Joiner in
-                <span> {moment(preview?.createdAt).format("MMMM YYYY")}</span>
+                <span> {moment(user?.createdAt).format("MMMM YYYY")}</span>
                 <br />
-                Response rate: <span>{preview?.responseRate}</span>
+                Response rate: <span>{user?.responseRate}</span>
                 <br />
-                Response time: <span>{preview?.responseTime}</span>
+                Response time: <span>{user?.responseTime}</span>
               </p>
             </div>
           </div>
@@ -161,7 +174,7 @@ const Preview = () => {
             variant="secondary"
             onClick={() => navigate("/add")}
           />
-          <Button label="Publish" variant="primary" />
+          <Button label="Publish" variant="primary" onClick={clearPreview} />
         </div>
       </div>
     </section>

@@ -10,12 +10,16 @@ import { useDropzone } from "react-dropzone";
 import GetLocation from "../../components/GetLocation/GetLocation";
 import { useNavigate } from "react-router-dom";
 import useStateProvider from "../../hooks/useStateProvider";
+import { createListing } from "../../api/API";
+import useAuth from "../../hooks/useAuth";
 
 const AddEdit = () => {
   const navigate = useNavigate();
   const [address, setAddress] = useState({});
   const [coords, setCoords] = useState({});
   const { preview, setPreview } = useStateProvider();
+  const { userId } = useAuth();
+  //console.log(userId, "userId");
   // form data
   const [formValue, setFormValue] = useState({
     title: preview.title || "",
@@ -24,14 +28,15 @@ const AddEdit = () => {
     images: [],
     description: preview.description || "",
     location: {
-      lat: preview.location.lat || coords?.lat || "",
-      lng: preview.location.lng || coords?.lng || "",
-      city: preview.location.city || address?.city || "",
-      state: preview.location.state || address?.state || "",
-      zip: preview.location.zip || address?.zip || "",
-      country: preview.location.country || address?.country || "",
+      lat: coords?.lat || "",
+      lng: coords?.lng || "",
+      city: address?.city || "",
+      state: address?.state || "",
+      zip: address?.zip || "",
+      country: address?.country || "",
     },
     phone: preview.phone || "",
+    author: userId,
   });
 
   const setLocation = useCallback(() => {
@@ -48,10 +53,17 @@ const AddEdit = () => {
     });
   }, [address, coords]);
 
+  //------------------------------ useEffect
+  //set location in useEffect
   useEffect(() => {
     setLocation();
   }, [setLocation]);
+  //set preview in useEffect
+  useEffect(() => {
+    setPreview(formValue);
+  }, [formValue]);
 
+  //------------------------------- HANDLERS
   // handleChange
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -87,16 +99,29 @@ const AddEdit = () => {
     });
   };
 
-  useEffect(() => {
-    setPreview(formValue);
-  }, [formValue]);
-
   //handle Preview
   const handlePreview = () => {
     console.log(preview, " preview");
     navigate("./preview");
   };
 
+  // handleSubmit
+  const handleSubmit = async () => {
+    console.log(formValue, "formval");
+    try {
+      if (!isFormValid()) {
+        setShowErrors(true);
+      } else {
+        setShowErrors(false);
+        const response = await createListing(formValue);
+        console.log(response, "response");
+      }
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  };
+
+  //-------------------------------- validations
   // check errors
   const checkErrors = (field) => {
     // title
@@ -157,16 +182,6 @@ const AddEdit = () => {
 
   // show errors only if clicked to submit
   const [showErrors, setShowErrors] = useState(false);
-
-  // handleSubmit
-  const handleSubmit = () => {
-    if (!isFormValid()) {
-      setShowErrors(true);
-    } else {
-      setShowErrors(false);
-      console.log(formValue);
-    }
-  };
 
   return (
     <Container>

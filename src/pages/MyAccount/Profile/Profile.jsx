@@ -40,7 +40,6 @@ const Profile = () => {
 
   // form data
   const [formValue, setFormValue] = useState({
-    id: "",
     fullName: `${fullName.firstName} ${fullName.lastName}`,
     gender: "",
     dateOfBirth: "",
@@ -61,7 +60,6 @@ const Profile = () => {
   useEffect(() => {
     if (user) {
       setFormValue({
-        id: user.id,
         fullName: `${fullName.firstName} ${fullName.lastName}`,
         email: user.email,
         phone: user.phone,
@@ -126,8 +124,7 @@ const Profile = () => {
       if (
         formValue[field] === "" ||
         formValue[field] === "Male" ||
-        formValue[field] === "Female" ||
-        formValue[field] === "Other"
+        formValue[field] === "Female"
       ) {
         return true;
       }
@@ -178,7 +175,9 @@ const Profile = () => {
       // set error state
       setShowErrors(false);
       try {
-        const response = await updateUser(formValue);
+        const response = await updateUser(user?.id, {
+          [field]: formValue[field],
+        });
         if (response.status === 200) {
           setAlert({
             type: "success",
@@ -259,7 +258,13 @@ const Profile = () => {
       <RowItem
         action="Edit"
         active={activeForm === "gender" ? true : false}
-        info={user?.gender || "Not set"}
+        info={
+          user?.gender === 0
+            ? "Prefer not to say"
+            : user?.gender === 1
+            ? "Male"
+            : "Female"
+        }
         onAction={() => setActiveForm("gender")}
         onCancel={handleCancel}
         title="Gender"
@@ -267,16 +272,21 @@ const Profile = () => {
       {activeForm === "gender" && (
         <div className={styles.form}>
           <Select
-            value={formValue?.gender}
+            value={
+              formValue?.gender === 0
+                ? ""
+                : formValue?.gender === 1
+                ? "Male"
+                : "Female"
+            }
             name="gender"
             id="gender"
             onChange={handleChange}
             label="Gender"
             options={[
-              { value: "", label: "Not specified" },
+              { value: "", label: "Prefer not to say" },
               { value: "Male", label: "Male" },
               { value: "Female", label: "Female" },
-              { value: "Other", label: "Other" },
             ]}
           />
           <Button onClick={(e) => handleSubmit(e, "gender")} label="Save" />

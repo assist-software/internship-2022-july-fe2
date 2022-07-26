@@ -51,9 +51,9 @@ export const deleteFavoriteById = async (userId, listingId) => {
 export const createListing = async (data) => {
   try {
     const response = await axios.post("/listing/create", data);
-    return response;
+    return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -63,7 +63,7 @@ export const putListingById = async (data) => {
     const response = await axios.put("/listing/" + data.id, data);
     return response;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -228,9 +228,9 @@ export const resetPassword = async (email) => {
 };
 
 // update user
-export const updateUser = async (data) => {
+export const updateUser = async (id, data) => {
   try {
-    const response = await axios.put("/user/" + data.id, data);
+    const response = await axios.put("/user/" + id, data);
     return response;
   } catch (error) {
     console.error(error);
@@ -277,12 +277,11 @@ export const getUsers = async (data) => {
   }
 };
 
-// ------------------------------MOCK-------------------------------------
-// add listing    Nu exista
-export const addListing = async (data) => {
+// update password
+export const updatePassword = async (id, data) => {
   try {
-    const response = await axios.post("/listing", data);
-    return response.data;
+    const response = await axios.put("/user/update/password/" + id, data);
+    return response;
   } catch (error) {
     console.error(error);
   }
@@ -291,7 +290,20 @@ export const addListing = async (data) => {
 // deactivate user
 export const deactivateUser = async (id) => {
   try {
-    const response = await axios.delete("/deactivate/", id);
+    const response = await axios.put("/user/" + id, {
+      isActive: false,
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// ------------------------------MOCK-------------------------------------
+// add listing    Nu exista
+export const addListing = async (data) => {
+  try {
+    const response = await axios.post("/listing", data);
     return response.data;
   } catch (error) {
     console.error(error);
