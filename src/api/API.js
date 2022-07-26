@@ -288,21 +288,23 @@ export const updatePassword = async (id, data) => {
   }
 };
 
-// ------------------------------MOCK-------------------------------------
-// add listing    Nu exista
-export const addListing = async (data) => {
+// deactivate user
+export const deactivateUser = async (id) => {
   try {
-    const response = await axios.post("/listing", data);
-    return response.data;
+    const response = await axios.put("/user/" + id, {
+      isActive: false,
+    });
+    return response;
   } catch (error) {
     console.error(error);
   }
 };
 
-// deactivate user
-export const deactivateUser = async (id) => {
+// ------------------------------MOCK-------------------------------------
+// add listing    Nu exista
+export const addListing = async (data) => {
   try {
-    const response = await axios.delete("/deactivate/", id);
+    const response = await axios.post("/listing", data);
     return response.data;
   } catch (error) {
     console.error(error);
