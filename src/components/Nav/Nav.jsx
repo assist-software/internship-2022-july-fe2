@@ -9,6 +9,9 @@ const Nav = ({ setView, view }) => {
   const { setSortOrder } = useStateProvider("");
   const { setPriceRange } = useStateProvider("");
   const { setLocationFilter } = useStateProvider("");
+  //grid view list view
+  const { setListView } = useStateProvider();
+
   return (
     <div>
       {user?.role === 0 ? (
@@ -18,6 +21,7 @@ const Nav = ({ setView, view }) => {
               setSortOrder("");
               setPriceRange("");
               setLocationFilter("");
+              setListView(false);
               setTimeout(() => {
                 setView(false);
               }, 30);
@@ -47,6 +51,7 @@ const Nav = ({ setView, view }) => {
               setView(false);
               setSortOrder("");
               setPriceRange("");
+              setListView(true);
               setLocationFilter("");
             }}
             className={`${styles.buttons} ${!view && styles.active}`}

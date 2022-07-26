@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Details.module.scss";
 
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
