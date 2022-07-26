@@ -38,7 +38,7 @@ export const StateProvider = ({ children }) => {
   };
   useEffect(() => {
     fetchFavorites();
-  }, []);
+  }, [userId]);
 
   // Filters states
   const [sortOrder, setSortOrder] = useState("");

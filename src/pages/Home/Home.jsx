@@ -10,7 +10,7 @@ import PendingApproval from "../../components/Nav/PendingApproval";
 import MyListings from "../../components/Nav/MyListings";
 
 const Home = () => {
-  const { user } = useAuth();
+  const { user, userId } = useAuth();
   const { setListings } = useStateProvider();
 
   const [view, setView] = useState(false);

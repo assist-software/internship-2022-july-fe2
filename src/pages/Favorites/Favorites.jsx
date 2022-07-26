@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { ReactComponent as GridRow } from "../../assets/icons/grid.svg";
 import { ReactComponent as Rows } from "../../assets/icons/rows.svg";
 import useAuth from "../../hooks/useAuth";
+import useStateProvider from "../../hooks/useStateProvider";
 
 const Favorites = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const Favorites = () => {
   const [showError, setShowError] = useState(
     userId === null || listings === null ? true : false
   );
-  const [listView, setListView] = useState(true);
+  const { listView, setListView } = useStateProvider();
   //const [like, setLike] = useState(true); //like = true ca sa setez Heart icon filled pentru carduri
   // Filtrare cards care sunt adaugate la favorite ? Backend/Frontend
   console.log(userId, "userID");

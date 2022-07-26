@@ -4,8 +4,10 @@ import { ReactComponent as HeartFilled } from "../../assets/icons/heart-filled.s
 import { ReactComponent as Heart } from "../../assets/icons/heart.svg";
 import useAuth from "../../hooks/useAuth";
 import {
+  addFavorite,
   approveListing,
   declineListing,
+  deleteFavoriteById,
   deleteListingById,
   getFavorite,
   putListingById,
@@ -13,6 +15,7 @@ import {
 import setAlert from "../../components/Alert/Alert";
 import Popup from "../../pages/Home/Popup";
 import useStateProvider from "../../hooks/useStateProvider";
+import FavoriteErrorModal from "../../pages/Details/FavoriteErrorModal";
 const Card = ({
   onClick,
   style,
@@ -28,14 +31,14 @@ const Card = ({
 }) => {
   const [openPopup, setOpenPopup] = useState(false);
   const { user, userId } = useAuth();
-  const { favorites } = useStateProvider();
-  // const [favourites, setFavourites] = useState([]);
-  // useEffect(() => {
-  //   getFavorite(userId).then((res) => setFavourites(res));
-  // }, [userId]);
+  const { favorites, setFavorites } = useStateProvider();
+  const [showNotification, setShowNotification] = useState(false);
+  const [favourites, setFavourites] = useState([]);
+  useEffect(() => {
+    getFavorite(userId).then((res) => setFavourites(res));
+  }, [userId]);
 
   const [like, setLike] = useState(false);
-  const [setListingIds] = useState([]);
 
   //grid view list view
   const { listView } = useStateProvider();
@@ -91,13 +94,44 @@ const Card = ({
       });
     }
   };
+  useEffect(() => {
+    setFavorites(favourites);
+  }, [favourites]);
+  //handle favorites
+  const handleFavorites = async () => {
+    try {
+      //add fav
+      if (listingId && userId && like === false) {
+        const response = await addFavorite(userId, listingId);
+
+        setLike(true);
+        console.log(favourites, "add ");
+        console.log(favorites, "add global");
+      }
+      //remove fav
+      if (listingId && userId && like === true) {
+        const response = await deleteFavoriteById(userId, listingId);
+
+        setLike(false);
+        console.log(favourites, "delete ");
+        console.log(favorites, "delete glob");
+      } else if (user === null) {
+        console.log(showNotification, "show notif");
+        setShowNotification(true);
+      }
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  };
+
   //popup
   const togglePopup = (props) => {
     setOpenPopup(!openPopup);
   };
 
+  //check favorites
   useEffect(() => {
-    favorites.forEach((favorite) => {
+    favorites?.forEach((favorite) => {
       if (favorite.id === listingId) setLike(true);
     });
   }, []);
@@ -114,10 +148,7 @@ const Card = ({
           <div onClick={stopPropagation}>
             <button
               className={`${listView ? styles.heartList : styles.heartCard}`}
-              onClick={() => {
-                setLike(!like);
-                setListingIds(listingId);
-              }}
+              onClick={handleFavorites}
             >
               {!like ? <Heart /> : <HeartFilled className={styles.heartFill} />}
             </button>
@@ -209,6 +240,10 @@ const Card = ({
           }
         />
       )}
+      <FavoriteErrorModal
+        showNotification={showNotification}
+        setShowNotification={setShowNotification}
+      />
     </div>
   );
 };
