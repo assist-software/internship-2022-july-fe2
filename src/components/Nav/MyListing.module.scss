@@ -1,0 +1,49 @@
+@import "../../styles/variables.scss";
+.content {
+  width: 100%;
+  position: relative;
+}
+.cardControls {
+  display: flex;
+  justify-content: end;
+  width: 100%;
+  position: absolute;
+  right: 850px;
+  top: 275px;
+}
+.controls {
+  border-top: 1px solid $color-gray-200;
+  display: flex;
+  justify-content: end;
+  width: 100%;
+  position: absolute;
+  right: 0;
+  bottom: 0px;
+}
+button {
+  margin: 10px;
+}
+.delete {
+  padding: 10px;
+  background-color: red;
+  border-radius: 8px;
+  color: white;
+}
+
+.edit {
+  padding: 10px;
+  color: $color-primary-500;
+  font-weight: $font-semibold;
+  font-size: $font-body-small;
+  border-radius: 8px;
+  &:hover {
+    background-color: $color-primary-100;
+  }
+}
+
+.approve {
+  padding: 10px;
+  background-color: $color-primary-400;
+  color: $color-white;
+  border-radius: 8px;
+}

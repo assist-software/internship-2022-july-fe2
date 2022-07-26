@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 import { getListings } from "../api/API";
 const StateContext = createContext({});
 
@@ -23,6 +23,14 @@ export const StateProvider = ({ children }) => {
   useEffect(() => {
     fetchListings();
   }, []);
+
+  // refetch
+  // const refetchListing = useCallback(
+  //   () => {
+  //     doSomething(a, b);
+  //   },
+  //   [a, b],
+  // );
 
   // Filters states
   const [sortOrder, setSortOrder] = useState("");
@@ -51,6 +59,7 @@ export const StateProvider = ({ children }) => {
         setPreview,
         listView,
         setListView,
+        fetchListings,
       }}
     >
       {children}
