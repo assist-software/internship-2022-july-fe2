@@ -31,6 +31,9 @@ export const StateProvider = ({ children }) => {
 
   // preview
   const [preview, setPreview] = useState({});
+
+  // show grid show list
+  const [listView, setListView] = useState(true);
   return (
     <StateContext.Provider
       value={{
@@ -46,6 +49,8 @@ export const StateProvider = ({ children }) => {
         setLocationFilter,
         preview,
         setPreview,
+        listView,
+        setListView,
       }}
     >
       {children}

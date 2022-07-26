@@ -87,6 +87,29 @@ export const getListingById = async (id) => {
   }
 };
 
+// approved listings
+export const approveListing = async (id) => {
+  try {
+    const response = await axios.put("/listing/" + id, {
+      status: 1,
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const declineListing = async (id) => {
+  try {
+    const response = await axios.put("/listing/" + id, {
+      status: 2,
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 // delete listing
 export const deleteListingById = async (id) => {
   try {

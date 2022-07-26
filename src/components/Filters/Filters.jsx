@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import filtersStyle from "./Filters.module.scss";
 import DropdownComponent from "../Dropdown/Dropdown";
-import { getListingsSort } from "../../api/API";
+import { getListings, getListingsSort } from "../../api/API";
 import GridRows from "./GridRows";
 import useStateProvider from "../../hooks/useStateProvider";
 
-const Filters = ({ setListView, admin }) => {
+const Filters = ({ admin }) => {
   // listings
   const { setListings } = useStateProvider();
   // filters state
@@ -22,6 +22,7 @@ const Filters = ({ setListView, admin }) => {
 
   useEffect(() => {
     const params = [];
+
     if (priceRange !== "" && !params.includes(`PriceRange=${priceRange}`)) {
       params.push(`PriceRange=${priceRange}`);
     }
@@ -35,6 +36,9 @@ const Filters = ({ setListView, admin }) => {
       params.push(`LocationFilter=${locationFilter}`);
     }
     const url = params.join("&");
+    if (params.length === 0) {
+      getListings().then((res) => setListings(res));
+    }
     console.log(params, "params");
     if (url !== "") {
       fetchListingsSort(url);
@@ -105,7 +109,7 @@ const Filters = ({ setListView, admin }) => {
             />
           </div>
 
-          {!admin && <GridRows setListView={setListView} />}
+          {!admin && <GridRows />}
         </div>
       </div>
     </div>
