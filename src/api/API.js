@@ -93,7 +93,7 @@ export const approveListing = async (id) => {
     const response = await axios.put("/listing/" + id, {
       status: 1,
     });
-    return response.data;
+    return response;
   } catch (error) {
     console.error(error);
   }
