@@ -38,9 +38,9 @@ const Home = () => {
         <>
           {!view ? (
             <>
-              <Carousel title="Most view" />
-              <Carousel title="Big Houses" />
-              <Carousel title="Small Houses" />
+              <Carousel pending={0} title="Most view" />
+              <Carousel pending={0} title="Big Houses" />
+              <Carousel pending={0} title="Small Houses" />
             </>
           ) : (
             <MyListings />
@@ -49,9 +49,9 @@ const Home = () => {
       )}
       {user?.role == null && (
         <>
-          <Carousel title="Most view" />
-          <Carousel title="Big Houses" />
-          <Carousel title="Small Houses" />
+          <Carousel pending={0} title="Most view" />
+          <Carousel pending={0} title="Big Houses" />
+          <Carousel pending={0} title="Small Houses" />
         </>
       )}
     </div>

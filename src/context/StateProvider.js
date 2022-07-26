@@ -1,11 +1,10 @@
-import { createContext, useEffect, useState } from "react";
-import { getFavorite, getListings } from "../api/API";
+import { createContext, useCallback, useEffect, useState } from "react";
+import { getListings, getMessageByUserId, getFavorite } from "../api/API";
 import useAuth from "../hooks/useAuth";
+
 const StateContext = createContext({});
 
 export const StateProvider = ({ children }) => {
-  // user ID
-  const { userId } = useAuth();
   // alert
   const [alert, setAlert] = useState(null);
   if (alert) {
@@ -25,8 +24,24 @@ export const StateProvider = ({ children }) => {
       console.log(response);
     } catch (error) {}
   };
+  // messages
+  const [messages, setMessages] = useState([]);
+  const [privateConversation, setPrivateConversation] = useState([]);
+  const { userId } = useAuth();
+
+  // const fetchMessages = async () => {
+  //   try {
+  //     const response = await getMessageByUserId(userId);
+  //     if (response.status === 200) {
+  //       setMessages(response.data);
+  //     }
+  //   } catch (error) {}
+  // };
+
   useEffect(() => {
     fetchListings();
+    console.log("stateprovider");
+    // fetchMessages();
   }, []);
 
   const fetchFavorites = async () => {
@@ -44,9 +59,6 @@ export const StateProvider = ({ children }) => {
   const [sortOrder, setSortOrder] = useState("");
   const [priceRange, setPriceRange] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
-
-  // preview
-  const [preview, setPreview] = useState({});
 
   // show grid show list
   const [listView, setListView] = useState(true);
@@ -69,6 +81,11 @@ export const StateProvider = ({ children }) => {
         setFavorites,
         listView,
         setListView,
+        fetchListings,
+        messages,
+        setMessages,
+        privateConversation,
+        setPrivateConversation,
       }}
     >
       {children}

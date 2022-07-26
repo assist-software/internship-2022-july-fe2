@@ -28,6 +28,7 @@ const Card = ({
   listingId,
   listing,
   pending,
+  showcontrols,
 }) => {
   const [openPopup, setOpenPopup] = useState(false);
   const { user, userId } = useAuth();
@@ -39,6 +40,9 @@ const Card = ({
   }, [userId]);
 
   const [like, setLike] = useState(false);
+  const { setAlert } = useStateProvider();
+  const { listings } = useStateProvider();
+  const { fetchListings } = useStateProvider();
 
   //grid view list view
   const { listView } = useStateProvider();
@@ -52,9 +56,17 @@ const Card = ({
     try {
       const response = await deleteListingById(listingId);
       if (response.status === 200) {
+        togglePopup();
         setAlert({ type: "Succes", message: "Deleted" });
+        fetchListings();
       }
-    } catch (error) {}
+    } catch (error) {
+      togglePopup();
+      setAlert({
+        type: "danger",
+        message: "Something went wrong",
+      });
+    }
   };
 
   //Approve announce
@@ -67,6 +79,7 @@ const Card = ({
           type: "success",
           message: "Approved",
         });
+        fetchListings();
       }
     } catch (error) {
       console.log(error);
@@ -85,6 +98,7 @@ const Card = ({
           type: "success",
           message: "Approved",
         });
+        fetchListings();
       }
     } catch (error) {
       console.log(error);
@@ -204,8 +218,23 @@ const Card = ({
                     <span>Decline</span>
                   </button>
                 )}
-
                 <button className={styles.edit}>Edit</button>
+              </div>
+            )}
+
+            {user?.role === 0 && (
+              <div onClick={stopPropagation} className={styles.controls}>
+                {user?.id === listings?.author?.id && (
+                  <div>
+                    <button
+                      className={styles.delete}
+                      onClick={() => togglePopup()}
+                    >
+                      <span>Delete</span>
+                    </button>
+                    <button className={styles.edit}>Edit</button>
+                  </div>
+                )}
               </div>
             )}
           </div>

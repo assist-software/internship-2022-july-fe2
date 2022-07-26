@@ -12,7 +12,7 @@ import "swiper/css/navigation";
 import useStateProvider from "../../hooks/useStateProvider";
 import { useEffect, useState } from "react";
 
-const Carousel = ({ title }) => {
+const Carousel = ({ title, pending }) => {
   const navigate = useNavigate();
   // listings
   const { listings } = useStateProvider();
@@ -40,22 +40,25 @@ const Carousel = ({ title }) => {
           modules={[Pagination, Navigation]}
           className="mySwipper"
         >
-          {listings?.map((listing) => (
-            <SwiperSlide key={listing.id}>
-              <Card
-                style={{ width: "90%" }}
-                image={listing.images}
-                title={listing.title}
-                description={listing.description}
-                price={listing.price}
-                location={listing.location}
-                listingId={listing.id}
-                onClick={() => {
-                  navigate("/listing/" + listing.id);
-                }}
-              />
-            </SwiperSlide>
-          ))}
+          {listings?.map(
+            (listing) =>
+              listing.status !== pending && (
+                <SwiperSlide key={listing.id}>
+                  <Card
+                    style={{ width: "90%" }}
+                    image={listing.images[0]}
+                    title={listing.title}
+                    description={listing.description}
+                    price={listing.price}
+                    location={listing.location[2] + ", " + listing.location[5]}
+                    listingId={listing.id}
+                    onClick={() => {
+                      navigate("/listing/" + listing.id);
+                    }}
+                  />
+                </SwiperSlide>
+              )
+          )}
           <SwiperSlide>
             <div onClick={() => navigate("/listing")}>
               <div className={styles.seeEverything}>

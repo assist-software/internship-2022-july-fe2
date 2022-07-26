@@ -1,18 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Conversations.module.scss";
-import SingleConversation from "./PreviewConversation/PreviewConversation.jsx";
+import useStateProvider from "../../../hooks/useStateProvider";
+import PreviewConversation from "./PreviewConversation/PreviewConversation.jsx";
+import { getListingById, getUserById } from "../../../api/API";
 
-const Conversations = ({ users }) => {
+const Conversations = () => {
+  const { messages, setAlert } = useStateProvider();
+
   return (
     <div className={styles.conversationsContainer}>
-      {/* {users.map((user, index) => (
-        <SingleConversation user={user} key={index} active={false} />
-      ))} */}
-      <SingleConversation active={true} />
-      <SingleConversation />
-      <SingleConversation />
-      <SingleConversation />
-      <SingleConversation />
+      {messages.map((messagePreview, index) => (
+        <PreviewConversation
+          messagePreview={messagePreview}
+          listingId={messagePreview.listingId}
+          userReceiverId={messagePreview.receiverId}
+        />
+      ))}
+      {/* <PreviewConversation active={true} />
+      <PreviewConversation />
+      <PreviewConversation />
+      <PreviewConversation />
+      <PreviewConversation /> */}
     </div>
   );
 };
