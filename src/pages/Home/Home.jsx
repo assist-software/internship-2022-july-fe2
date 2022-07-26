@@ -6,6 +6,8 @@ import Tabs from "../../components/Tabs/Tabs";
 import useAuth from "../../hooks/useAuth";
 import Listing from "../Listing/Listing";
 import useStateProvider from "../../hooks/useStateProvider";
+import PendingApproval from "../../components/Nav/PendingApproval";
+import MyListings from "../../components/Nav/MyListings";
 
 const Home = () => {
   const { user } = useAuth();
@@ -26,7 +28,7 @@ const Home = () => {
       {user?.role === 1 && (
         <>
           {view ? (
-            <Listing pending={1} hideApproval admin />
+            <PendingApproval pending={1} hideApproval admin />
           ) : (
             <Listing pending={0} admin />
           )}
@@ -41,7 +43,7 @@ const Home = () => {
               <Carousel title="Small Houses" />
             </>
           ) : (
-            <Listing />
+            <MyListings />
           )}
         </>
       )}
