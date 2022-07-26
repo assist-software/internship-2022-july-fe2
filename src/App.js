@@ -42,7 +42,7 @@ function App() {
           }
         >
           {/* protected routes */}
-          <Route path="/favorites" element={<Favorites />} />
+
           <Route path="/confirmation" element={<Confirmation />} />
           <Route path="/my-account">
             <Route path="profile" element={<MyAccount />} />
@@ -68,7 +68,7 @@ function App() {
           <Route path="/listing" element={<Listing />} />
           <Route path="/add" element={<AddEdit />} />
           <Route path="/add/preview" element={<Preview />} />
-
+          <Route path="/favorites" element={<Favorites />} />
           <Route path="/listing/:id" element={<Details />} />
         </Route>
 

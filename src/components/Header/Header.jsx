@@ -21,6 +21,13 @@ import useAuth from "../../hooks/useAuth";
 const Header = () => {
   const { logout } = useAuth();
   const navigate = useNavigate();
+  const categories = [
+    { value: "", label: "Category" },
+    { value: "big", label: "Big Houses" },
+    { value: "small", label: "Small Houses" },
+    { value: "office", label: "Offices" },
+    { value: "apartment", label: "Apartments" },
+  ];
   return (
     <Navbar collapseOnSelect expand="xl" className={styles.navbar} sticky="top">
       <Container>
@@ -37,6 +44,7 @@ const Header = () => {
                   fontSize="buton"
                   title="Category"
                   className={styles.drop}
+                  options={categories}
                 />
               </div>
               <Form className="d-flex">

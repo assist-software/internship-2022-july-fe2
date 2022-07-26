@@ -67,7 +67,7 @@ const Details = () => {
       try {
         const response = await getListingById(id);
         setListing(response);
-        console.log(response);
+        console.log(response, "listing");
       } catch (error) {
         console.log("Error: ", error);
       }

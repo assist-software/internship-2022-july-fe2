@@ -13,18 +13,23 @@ const Favorites = () => {
   const navigate = useNavigate();
   const { userId } = useAuth();
   const [listings, setListings] = useState([]);
-  useEffect(() => {
-    userId === null ? setShowError(true) : setShowError(false);
-  }, []);
-  const [showError, setShowError] = useState(userId === null ? true : false);
+
   useEffect(() => {
     getFavorite(userId).then((res) => setListings(res));
   }, [userId]);
+  useEffect(() => {
+    userId === null || listings === null
+      ? setShowError(true)
+      : setShowError(false);
+  }, []);
+  const [showError, setShowError] = useState(
+    userId === null || listings === null ? true : false
+  );
   const [listView, setListView] = useState(true);
   const [like, setLike] = useState(true); //like = true ca sa setez Heart icon filled pentru carduri
   // Filtrare cards care sunt adaugate la favorite ? Backend/Frontend
   console.log(userId, "userID");
-  return userId ? (
+  return (
     <div className={styles.container}>
       <h1 className={styles.favoritesTitle}>Favourites</h1>
 
@@ -72,8 +77,6 @@ const Favorites = () => {
         </div>
       )}
     </div>
-  ) : (
-    <div>Loading...</div>
   );
 };
 
