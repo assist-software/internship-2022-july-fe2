@@ -57,6 +57,9 @@ export const StateProvider = ({ children }) => {
 
   // show grid show list
   const [listView, setListView] = useState(true);
+
+  // preview
+  const [preview, setPreview] = useState({});
   return (
     <StateContext.Provider
       value={{
@@ -77,6 +80,8 @@ export const StateProvider = ({ children }) => {
         setMessages,
         privateConversation,
         setPrivateConversation,
+        preview,
+        setPreview,
       }}
     >
       {children}
