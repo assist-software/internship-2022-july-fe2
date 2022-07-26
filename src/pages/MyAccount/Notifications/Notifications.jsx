@@ -109,6 +109,8 @@ const Notifications = () => {
     }
   };
 
+  console.log(notificationSettings);
+
   return (
     <>
       <div>

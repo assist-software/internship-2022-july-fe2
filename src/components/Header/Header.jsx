@@ -23,7 +23,7 @@ const Header = () => {
   const navigate = useNavigate();
   return (
     <Navbar collapseOnSelect expand="xl" className={styles.navbar} sticky="top">
-      <Container>
+      <Container className={styles.content}>
         <Navbar.Brand onClick={() => navigate("/")}>
           <img src={logo} className={styles.assist} alt="Assist header logo" />
         </Navbar.Brand>

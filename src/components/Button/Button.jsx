@@ -3,12 +3,20 @@ import PropTypes from "prop-types";
 import styles from "./Button.module.scss";
 import { ReactComponent as Heart } from "../../assets/icons/heart.svg";
 
-const Button = ({ variant, label, icon, position, disabled, onClick }) => {
+const Button = ({
+  className,
+  variant,
+  label,
+  icon,
+  position,
+  disabled,
+  onClick,
+}) => {
   return (
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`${styles.button} ${styles[variant]} ${styles[position]}`}
+      className={`${styles.button} ${styles[variant]} ${styles[position]} ${className}`}
     >
       {icon}
       {label}
@@ -24,6 +32,7 @@ Button.propTypes = {
   position: PropTypes.oneOf(["left", "right", "none"]),
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
+  className: PropTypes.string,
 };
 
 Button.defaultProps = {
@@ -33,6 +42,7 @@ Button.defaultProps = {
   position: "none",
   disabled: false,
   onClick: () => {},
+  className: "",
 };
 
 export default Button;
