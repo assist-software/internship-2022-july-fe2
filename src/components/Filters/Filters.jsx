@@ -12,7 +12,7 @@ const Filters = ({ admin }) => {
   const { sortOrder, setSortOrder } = useStateProvider("");
   const { priceRange, setPriceRange } = useStateProvider("");
   const { locationFilter, setLocationFilter } = useStateProvider("");
-
+  console.log(locationFilter, "LOCATION");
   const fetchListingsSort = async (url) => {
     try {
       const response = await getListingsSort(url);

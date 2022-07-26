@@ -17,11 +17,11 @@ const PendingApproval = ({ admin, hideApproval, pending }) => {
             <Fragment key={`${listing.id}_${index}`}>
               <Card
                 key={index}
-                image={listing.images}
+                image={listing.images[0]}
                 title={listing.title}
                 description={listing.description}
                 price={listing.price}
-                location={listing.location}
+                location={listing.location[2] + " ," + listing.location[5]}
                 listingId={listing.id}
                 admin={admin}
                 hideApproval={hideApproval}
