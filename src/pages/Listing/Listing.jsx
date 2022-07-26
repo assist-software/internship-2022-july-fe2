@@ -11,7 +11,7 @@ const Listing = ({ title, admin, hideApproval, pending }) => {
         <h3 className={listingStyle.title}>{title}</h3>
       </div>
       <Filters admin={admin} />
-      <ListObject pending={pending} hideApproval={hideApproval} admin={admin} />
+      <ListObject pending={0} hideApproval={hideApproval} admin={admin} />
     </div>
   );
 };
