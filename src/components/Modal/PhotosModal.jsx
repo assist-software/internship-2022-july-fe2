@@ -32,43 +32,43 @@ const PhotosModal = ({ showModal, setShowModal, images }) => {
       </Modal.Title>
 
       <Modal.Body className={styles.modalBody}>
-        {/* {images.map((image, index) => {
+        {images?.map((image, index) => {
           if (index === 0 || index === 3 || index === 6) {
             return (
-              <div className={styles.largeImage}>
-                <img src={image.value} alt="" />
+              <div key={index} className={styles.largeImage}>
+                <img src={image} alt="" />
               </div>
             );
           } else {
             return (
-              <div className={styles.smallImage}>
-                <img src={image.value} alt="" />
+              <div key={index} className={styles.smallImage}>
+                <img src={image} alt="" />
               </div>
             );
           }
-        })} */}
+        })}
 
-        <div className={styles.largeImage}>
-          <img src={images[0].value} alt="" />
+        {/* <div className={styles.largeImage}>
+          <img src={images[0]} alt="" />
         </div>
         <div className={styles.smallImage}>
-          <img src={images[1].value} alt="" />
-          <img src={images[2].value} alt="" />
+          <img src={images[1]} alt="" />
+          <img src={images[2]} alt="" />
         </div>
         <div className={styles.largeImage}>
-          <img src={images[3].value} alt="" />
+          <img src={images[3]} alt="" />
         </div>
         <div className={styles.smallImage}>
-          <img src={images[4].value} alt="" />
-          <img src={images[5].value} alt="" />
+          <img src={images[4]} alt="" />
+          <img src={images[5]} alt="" />
         </div>
         <div className={styles.largeImage}>
-          <img src={images[6].value} alt="" />
+          <img src={images[6]} alt="" />
         </div>
         <div className={styles.smallImage}>
-          <img src={images[7].value} alt="" />
-          <img src={images[8].value} alt="" />
-        </div>
+          <img src={images[7]} alt="" />
+          <img src={images[8]} alt="" />
+        </div> */}
       </Modal.Body>
     </Modal>
   );

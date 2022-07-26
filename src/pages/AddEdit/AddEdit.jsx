@@ -14,6 +14,7 @@ import { createListing } from "../../api/API";
 import useAuth from "../../hooks/useAuth";
 
 const AddEdit = () => {
+  const { setAlert } = useStateProvider();
   const navigate = useNavigate();
   const [address, setAddress] = useState({});
   const [coords, setCoords] = useState({});
@@ -27,14 +28,15 @@ const AddEdit = () => {
     price: preview.price || "",
     images: [],
     description: preview.description || "",
-    location: {
-      lat: coords?.lat || "",
-      lng: coords?.lng || "",
-      city: address?.city || "",
-      state: address?.state || "",
-      zip: address?.zip || "",
-      country: address?.country || "",
-    },
+    shortDescription: "",
+    location: [
+      coords?.lat?.toLocaleString() || "",
+      coords?.lng?.toLocaleString() || "",
+      address?.city || "",
+      address?.state || "",
+      address?.zip || "",
+      address?.country || "",
+    ],
     phone: preview.phone || "",
     author: userId,
   });
@@ -42,14 +44,14 @@ const AddEdit = () => {
   const setLocation = useCallback(() => {
     setFormValue({
       ...formValue,
-      location: {
-        lat: coords?.lat || "",
-        lng: coords?.lng || "",
-        city: address?.city || "",
-        state: address?.state || "",
-        zip: address?.zip || "",
-        country: address?.country || "",
-      },
+      location: [
+        coords?.lat?.toLocaleString() || "",
+        coords?.lng?.toLocaleString() || "",
+        address?.city || "",
+        address?.state || "",
+        address?.zip || "",
+        address?.country || "",
+      ],
     });
   }, [address, coords]);
 
@@ -106,17 +108,25 @@ const AddEdit = () => {
   };
 
   // handleSubmit
-  const handleSubmit = async (formValue) => {
+  const handleSubmit = async () => {
+    if (!isFormValid()) {
+      setShowErrors(true);
+    }
     try {
-      if (!isFormValid()) {
-        setShowErrors(true);
-      } else {
-        setShowErrors(false);
-        const response = await createListing(formValue);
-        console.log(response, "response");
+      const response = await createListing(formValue);
+      if (response.status === 200) {
+        setAlert({
+          type: "success",
+          message: "Listing created successfully",
+          // navigate("./preview");
+        });
       }
     } catch (error) {
-      console.log("Error: ", error);
+      console.log(error);
+      setAlert({
+        type: "danger",
+        message: "Error creating listing",
+      });
     }
   };
 
@@ -182,6 +192,7 @@ const AddEdit = () => {
   // show errors only if clicked to submit
   const [showErrors, setShowErrors] = useState(false);
 
+  console.log(formValue, "formValue");
   return (
     <Container>
       <h1 className={styles.addTitle}>Add new</h1>
@@ -364,7 +375,6 @@ function Dropzone({ onDrop, accept, open }) {
     isDragActive,
   } = useDropzone({
     accept: {
-      "image/jpeg": [],
       "image/png": [],
     },
     maxFiles: 9,

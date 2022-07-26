@@ -99,3 +99,17 @@
     }
   }
 }
+
+.loading {
+  width: auto;
+  aspect-ratio: 1;
+  margin-inline: auto;
+  margin-bottom: 29px;
+  height: 112px;
+  border-radius: 50%;
+  background-color: $color-gray-100;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
