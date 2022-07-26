@@ -1,8 +1,11 @@
 import { createContext, useEffect, useState } from "react";
-import { getListings } from "../api/API";
+import { getFavorite, getListings } from "../api/API";
+import useAuth from "../hooks/useAuth";
 const StateContext = createContext({});
 
 export const StateProvider = ({ children }) => {
+  // user ID
+  const { userId } = useAuth();
   // alert
   const [alert, setAlert] = useState(null);
   if (alert) {
@@ -13,15 +16,28 @@ export const StateProvider = ({ children }) => {
 
   // listings
   const [listings, setListings] = useState(null);
+  const [favorites, setFavorites] = useState([]);
 
   const fetchListings = async () => {
     try {
       const response = await getListings();
       setListings(response);
+      console.log(response);
     } catch (error) {}
   };
   useEffect(() => {
     fetchListings();
+  }, []);
+
+  const fetchFavorites = async () => {
+    try {
+      const response = await getFavorite(userId);
+      setFavorites(response);
+      console.log(response);
+    } catch (error) {}
+  };
+  useEffect(() => {
+    fetchFavorites();
   }, []);
 
   // Filters states
@@ -46,6 +62,8 @@ export const StateProvider = ({ children }) => {
         setLocationFilter,
         preview,
         setPreview,
+        favorites,
+        setFavorites,
       }}
     >
       {children}

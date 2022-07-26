@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Card.module.scss";
 import { ReactComponent as HeartFilled } from "../../assets/icons/heart-filled.svg";
 import { ReactComponent as Heart } from "../../assets/icons/heart.svg";
 import useAuth from "../../hooks/useAuth";
-import { deleteListingById, putListingById } from "../../api/API";
+import { deleteListingById, getFavorite, putListingById } from "../../api/API";
 import setAlert from "../../components/Alert/Alert";
 import Popup from "../../pages/Home/Popup";
+import useStateProvider from "../../hooks/useStateProvider";
 const Card = ({
   onClick,
   style,
@@ -20,7 +21,12 @@ const Card = ({
   listing,
 }) => {
   const [openPopup, setOpenPopup] = useState(false);
-  const { user } = useAuth();
+  const { user, userId } = useAuth();
+  const { favorites } = useStateProvider();
+  // const [favourites, setFavourites] = useState([]);
+  // useEffect(() => {
+  //   getFavorite(userId).then((res) => setFavourites(res));
+  // }, [userId]);
 
   const [like, setLike] = useState(false);
   const [listingIds, setListingIds] = useState([]);
@@ -53,6 +59,13 @@ const Card = ({
   const togglePopup = (props) => {
     setOpenPopup(!openPopup);
   };
+
+  useEffect(() => {
+    favorites.forEach((favorite) => {
+      if (favorite.id === listingId) setLike(true);
+    });
+  }, []);
+
   return (
     <div className={styles.cards}>
       <div onClick={onClick} className={styles.card}>

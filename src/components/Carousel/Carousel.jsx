@@ -10,11 +10,13 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import useStateProvider from "../../hooks/useStateProvider";
+import { useEffect, useState } from "react";
 
 const Carousel = ({ title }) => {
   const navigate = useNavigate();
   // listings
   const { listings } = useStateProvider();
+  const [like, setLike] = useState(false);
 
   return (
     <div>

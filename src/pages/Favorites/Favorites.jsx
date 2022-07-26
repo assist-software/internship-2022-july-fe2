@@ -26,7 +26,7 @@ const Favorites = () => {
     userId === null || listings === null ? true : false
   );
   const [listView, setListView] = useState(true);
-  const [like, setLike] = useState(true); //like = true ca sa setez Heart icon filled pentru carduri
+  //const [like, setLike] = useState(true); //like = true ca sa setez Heart icon filled pentru carduri
   // Filtrare cards care sunt adaugate la favorite ? Backend/Frontend
   console.log(userId, "userID");
   return (
@@ -63,6 +63,7 @@ const Favorites = () => {
                 description={listing.description}
                 price={listing.price}
                 location={listing.location}
+                listingId={listing.id}
                 listView={listView}
                 onClick={() => {
                   navigate("/listing/" + listing.id);
