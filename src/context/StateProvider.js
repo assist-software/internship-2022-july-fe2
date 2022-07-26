@@ -1,12 +1,7 @@
-<<<<<<< Updated upstream
-import { createContext, useCallback, useEffect, useState } from "react";
-import { getListings } from "../api/API";
-=======
 import { createContext, useEffect, useState } from "react";
 import { getListings, getMessageByUserId } from "../api/API";
 import useAuth from "../hooks/useAuth";
 
->>>>>>> Stashed changes
 const StateContext = createContext({});
 
 export const StateProvider = ({ children }) => {
@@ -82,14 +77,11 @@ export const StateProvider = ({ children }) => {
         setPreview,
         listView,
         setListView,
-<<<<<<< Updated upstream
         fetchListings,
-=======
         messages,
         setMessages,
         privateConversation,
         setPrivateConversation,
->>>>>>> Stashed changes
       }}
     >
       {children}
