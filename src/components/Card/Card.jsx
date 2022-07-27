@@ -190,7 +190,7 @@ const Card = ({
               style={{ display: listView ? "block" : "none" }}
               className={styles.cardDescription}
             >
-              {description}
+              {description.substring(0, 500)}
             </p>
             <p className={styles.cardPrice}>{price} lei</p>
             {user?.role === 1 && (

@@ -44,7 +44,7 @@ const Carousel = ({ title, pending, pending2, showcontrols }) => {
           modules={[Pagination, Navigation]}
           className="mySwipper"
         >
-          {listings?.map(
+          {listings?.slice(0, 6).map(
             (listing) =>
               listing.status !== pending &&
               listing.status !== pending2 && (
