@@ -9,15 +9,23 @@ import useStateProvider from "../../hooks/useStateProvider";
 import PendingApproval from "../../components/Nav/PendingApproval";
 import MyListings from "../../components/Nav/MyListings";
 
-const Home = () => {
-  const { user, userId } = useAuth();
+const Home = ({ showcontrols }) => {
+  const { user } = useAuth();
   const { setListings } = useStateProvider();
+  const { setListView } = useStateProvider();
 
   const [view, setView] = useState(false);
   useEffect(() => {
     getListings().then((res) => setListings(res));
+    if (user?.role === 1) {
+      setListView(true);
+    } else if (user?.role === 0) {
+      setListView(false);
+    } else {
+      setListView(false);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [setListView]);
 
   return (
     <div>
@@ -30,7 +38,7 @@ const Home = () => {
           {view ? (
             <PendingApproval pending={1} hideApproval admin />
           ) : (
-            <Listing pending={0} admin />
+            <Listing pending={0} pending2={2} admin />
           )}
         </>
       )}
@@ -38,9 +46,24 @@ const Home = () => {
         <>
           {!view ? (
             <>
-              <Carousel pending={0} title="Most view" />
-              <Carousel pending={0} title="Big Houses" />
-              <Carousel pending={0} title="Small Houses" />
+              <Carousel
+                showcontrols
+                pending={0}
+                pending2={2}
+                title="Most view"
+              />
+              <Carousel
+                showcontrols
+                pending={0}
+                pending2={2}
+                title="Big Houses"
+              />
+              <Carousel
+                showcontrols
+                pending={0}
+                pending2={2}
+                title="Small Houses"
+              />
             </>
           ) : (
             <MyListings />
@@ -49,9 +72,14 @@ const Home = () => {
       )}
       {user?.role == null && (
         <>
-          <Carousel pending={0} title="Most view" />
-          <Carousel pending={0} title="Big Houses" />
-          <Carousel pending={0} title="Small Houses" />
+          <Carousel showcontrols pending={0} pending2={2} title="Most view" />
+          <Carousel showcontrols pending={0} pending2={2} title="Big Houses" />
+          <Carousel
+            showcontrols
+            pending={0}
+            pending2={2}
+            title="Small Houses"
+          />
         </>
       )}
     </div>

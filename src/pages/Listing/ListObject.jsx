@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useStateProvider from "../../hooks/useStateProvider";
 import { Fragment } from "react";
 
-const ListObject = ({ admin, hideApproval, pending }) => {
+const ListObject = ({ admin, hideApproval, pending, pending2 }) => {
   const navigate = useNavigate();
   const { listings } = useStateProvider();
 
@@ -13,7 +13,8 @@ const ListObject = ({ admin, hideApproval, pending }) => {
     <div>
       {listings?.map(
         (listing, index) =>
-          listing.status !== pending && (
+          listing.status !== pending &&
+          listing.status !== pending2 && (
             <Fragment key={`${listing.id}_${index}`}>
               <Card
                 key={index}

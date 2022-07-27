@@ -21,7 +21,6 @@ const Nav = ({ setView, view }) => {
               setSortOrder("");
               setPriceRange("");
               setLocationFilter("");
-              setListView(false);
               setTimeout(() => {
                 setView(false);
               }, 30);
@@ -36,6 +35,7 @@ const Nav = ({ setView, view }) => {
               setSortOrder("");
               setPriceRange("");
               setLocationFilter("");
+              setListView(true);
             }}
             className={`${styles.buttons} ${view && styles.active}`}
           >
@@ -51,7 +51,6 @@ const Nav = ({ setView, view }) => {
               setView(false);
               setSortOrder("");
               setPriceRange("");
-              setListView(true);
               setLocationFilter("");
             }}
             className={`${styles.buttons} ${!view && styles.active}`}

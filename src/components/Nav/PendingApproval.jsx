@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import useStateProvider from "../../hooks/useStateProvider";
 import Card from "../Card/Card";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +7,10 @@ import Filters from "../Filters/Filters";
 const PendingApproval = ({ admin, hideApproval, pending }) => {
   const { listings } = useStateProvider();
   const navigate = useNavigate();
-
+  const { setListView } = useStateProvider();
+  useEffect(() => {
+    setListView(true);
+  }, []);
   return (
     <div>
       <Filters admin={admin} />
