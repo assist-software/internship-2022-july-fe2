@@ -19,7 +19,7 @@ import { ReactComponent as Loop } from "../../assets/icons/magnifying-glass.svg"
 import useAuth from "../../hooks/useAuth";
 
 const Header = () => {
-  const { logout, user } = useAuth();
+  const { logout, user, userId } = useAuth();
   const navigate = useNavigate();
   const categories = [
     { value: "", label: "Category" },
@@ -69,8 +69,11 @@ const Header = () => {
               </Button>
             </div>
             <Dropdown>
-              <Dropdown.Toggle className={styles.profileTitle}>
-                {user === null ? (
+              <Dropdown.Toggle
+                className={styles.profileTitle}
+                style={{ display: "inline-flex" }}
+              >
+                {userId === null ? (
                   <div className={styles.profile}>
                     <Person
                       style={{ stroke: "$color-gray-600", marginRight: "7px" }}

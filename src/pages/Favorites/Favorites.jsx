@@ -30,6 +30,7 @@ const Favorites = () => {
   //const [like, setLike] = useState(true); //like = true ca sa setez Heart icon filled pentru carduri
   // Filtrare cards care sunt adaugate la favorite ? Backend/Frontend
   console.log(userId, "userID");
+  console.log(listings, "favorites");
   return (
     <div className={styles.container}>
       <h1 className={styles.favoritesTitle}>Favourites</h1>
@@ -59,11 +60,11 @@ const Favorites = () => {
             {listings?.map((listing, index) => (
               <Card
                 key={index}
-                image={listing.images}
+                image={listing.images[0]}
                 title={listing.title}
                 description={listing.description}
                 price={listing.price}
-                location={listing.location}
+                location={listing.location[2] + ", " + listing.location[5]}
                 listingId={listing.id}
                 listView={listView}
                 onClick={() => {
