@@ -11,8 +11,14 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import useStateProvider from "../../hooks/useStateProvider";
 import { useEffect } from "react";
-
-const Carousel = ({ title, pending, pending2, showcontrols }) => {
+const Carousel = ({
+  title,
+  pending,
+  pending2,
+  showcontrols,
+  category,
+  mostView,
+}) => {
   const navigate = useNavigate();
   // listings
   const { listings } = useStateProvider();
@@ -47,7 +53,8 @@ const Carousel = ({ title, pending, pending2, showcontrols }) => {
           {listings?.slice(0, 6).map(
             (listing) =>
               listing.status !== pending &&
-              listing.status !== pending2 && (
+              listing.status !== pending2 &&
+              listing.category === category && (
                 <SwiperSlide key={listing.id}>
                   <Card
                     showcontrols={showcontrols}
