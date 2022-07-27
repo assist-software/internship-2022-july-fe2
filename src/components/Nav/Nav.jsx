@@ -11,7 +11,8 @@ const Nav = ({ setView, view }) => {
   const { setLocationFilter } = useStateProvider("");
   //grid view list view
   const { setListView } = useStateProvider();
-
+  const myListings = listings?.filter((list) => list?.author?.id === user?.id);
+  const pendingApproval = listings?.filter((list) => list?.status === 0);
   return (
     <div>
       {user?.role === 0 ? (
@@ -40,7 +41,7 @@ const Nav = ({ setView, view }) => {
             className={`${styles.buttons} ${view && styles.active}`}
           >
             My listings
-            <span className={styles.listingsLength}>{listings?.length}</span>
+            <span className={styles.listingsLength}>{myListings?.length}</span>
           </button>
         </div>
       ) : null}
@@ -67,7 +68,9 @@ const Nav = ({ setView, view }) => {
             className={`${styles.buttons} ${view && styles.active}`}
           >
             Pending approval
-            <span className={styles.listingsLength}>{listings?.length}</span>
+            <span className={styles.listingsLength}>
+              {pendingApproval?.length}
+            </span>
           </button>
         </div>
       ) : null}
