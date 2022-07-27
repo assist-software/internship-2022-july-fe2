@@ -1,61 +1,60 @@
 @import "../../styles/variables.scss";
 
-.mainContainer{
-    height: 100vh;
-    width: 100vw;
-    display: flex;
+.mainContainer {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
 }
 
-.container{  
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-.leftSide{    
-    height: 100%;
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.leftSide {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.rightSide{
-    height: 100%;
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.rightSide {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.content{
-    width: 50%;
-    height: 75%;
-    display: flex;
-    flex-direction: column;
+.content {
+  width: 50%;
+  height: 75%;
+  display: flex;
+  flex-direction: column;
 }
 
-.logoImageOnboarding{
-    // position: absolute;
-    width: 101px;
-    height: 30.77px;
-    left: 281px;
-    top: 274px;
+.logoImageOnboarding {
+  // position: absolute;
+  width: 101px;
+  height: 30.77px;
+  left: 281px;
+  top: 274px;
 }
-.rightImageOnboarding{
-    height: auto;
-    width: 50vw;
+.rightImageOnboarding {
+  height: auto;
+  width: 50vw;
 }
 
-@media (max-width : 550px){
-    .leftSide{
-        width:100%;
-    }
-    .rightImageOnboarding{
-        display: none;
-    }
-    .logoImageOnboarding{
-        margin-left:30%;
-
-    }
+@media (max-width: 550px) {
+  .leftSide {
+    width: 100%;
+  }
+  .rightImageOnboarding {
+    display: none;
+  }
+  .logoImageOnboarding {
+    margin-left: 30%;
+  }
 }

@@ -1,420 +1,403 @@
 @import "../../styles/variables.scss";
 
-div a{
-    text-decoration: none;
+div a {
+  text-decoration: none;
 }
 // main container
-.containerAuth{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-    width: 415px;
-    height: 478px;
-    left: 281px;
-    top: 329px;
+.containerAuth {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 415px;
+  height: 478px;
+  left: 281px;
+  top: 329px;
 }
 
 //reset pwd
-.containerAuthResetPwd{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 415px;
-    height: 208px;
-    left: 281px;
-    top: 429px;
+.containerAuthResetPwd {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 415px;
+  height: 208px;
+  left: 281px;
+  top: 429px;
 }
 
+.contentContainerForm {
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 28px;
 
-.contentContainerForm{
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0px;
-    gap: 28px;
-    
-    width: 415px;
-    height: 320px;
-    
+  width: 415px;
+  height: 320px;
 }
 
 // reset pwd
-.contentContainerFormResetPwd{
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0px;
-    gap: 28px;
-    
-    width: 415px;
-    height: 70px;
-    
+.contentContainerFormResetPwd {
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 28px;
+
+  width: 415px;
+  height: 70px;
 }
 
+.form {
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 20px;
 
-.form{
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0px;
-    gap: 20px;
-    
-    width: 415px;
-    height: 246px;
-    
-    
-    flex: none;
-    order: 0;
-    align-self: stretch;
-    flex-grow: 0;
+  width: 415px;
+  height: 246px;
+
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
 }
 
-.formTitle{
-    padding: 0px;
-    gap: 4px;
-    
-    width: 415px;
-    height: 58px;
-    
-    order: 0;
-    align-self: stretch;
-    flex-grow: 0;
+.formTitle {
+  padding: 0px;
+  gap: 4px;
+
+  width: 415px;
+  height: 58px;
+
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
 }
 
-.formTitleReset{
-    padding: 0px;
-    gap: 4px;
-    
-    width: 415px;
-    height: 58px;
-    
-    order: 0;
-    align-self: stretch;
-    flex-grow: 0;
+.formTitleReset {
+  padding: 0px;
+  gap: 4px;
+
+  width: 415px;
+  height: 58px;
+
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
 }
 
-.title{
-    color: $color-black;
-    
-    font-size: $font-h4;
-    font-weight: $font-bold;
+.title {
+  color: $color-black;
 
-    order: 0;
-    align-self: stretch;
-    flex-grow: 0;
+  font-size: $font-h4;
+  font-weight: $font-bold;
+
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
 }
 
-.subTitle{
-    color: $color-gray-300;
-    font-size: $font-body-small;
+.subTitle {
+  color: $color-gray-300;
+  font-size: $font-body-small;
+  font-weight: $font-semibold;
+}
+
+.formInput {
+  padding: 0px;
+  gap: 28px;
+
+  width: 415px;
+  height: 168px;
+
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.registerSeparator {
+  width: 415px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  hr {
+    width: 100%;
+    height: 1px;
+  }
+  span {
+    margin: 0px 20px;
+    font-size: $font-body-tiny;
     font-weight: $font-semibold;
-
+    color: #6c6c6c;
+  }
 }
 
-.formInput{
-    padding: 0px;
-    gap: 28px;
-    
-    width: 415px;
-    height: 168px;
-    
-    flex: none;
-    order: 1;
-    align-self: stretch;
-    flex-grow: 0;
+.authError {
+  color: $color-alert-400;
+  font-size: $font-body-small;
+  width: 415px;
 }
 
-.registerSeparator{
-    width: 415px;
-    display:flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    hr{
-        width: 100%;
-        height: 1px;
-    }
-    span{
-        margin: 0px 20px;
-        font-size:$font-body-tiny;
-        font-weight: $font-semibold;
-        color:#6c6c6c;
-    }
+.rememberMe {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  width: 415px;
+  height: 80px;
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
 }
 
+.checkBox {
+  display: flex;
+  flex-direction: row;
 
-
-.authError{
-    color: $color-alert-400;
-    font-size: $font-body-small;
-    width:415px;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 5px;
+  padding: 0px;
+  padding-top: 14px;
 }
 
+.textRememberMe {
+  color: $color-gray-500;
+  font-size: $font-body-small;
+  font-weight: $font-medium;
 
-.rememberMe{
+  width: 97px;
+  height: 22px;
+  text-align: center;
 
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    
-    width: 415px;
-    height: 80px;
-    
-    flex: none;
-    order: 1;
-    flex-grow: 0;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
 }
 
-.checkBox{
-    display: flex;
-    flex-direction: row;
-    
-    justify-content: flex-end;
-    align-items: center;
-    gap: 5px;
-    padding:0px;
-    padding-top:14px;
+.textpwdInfo {
+  width: 415px;
+  height: 20px;
+  font-size: $font-body-tiny;
+  font-weight: $font-regular;
+  line-height: 20px;
+  color: $color-gray-500;
 
+  flex: none;
+  order: 0;
+  flex-grow: 1;
 }
 
-.textRememberMe{
-    color: $color-gray-500;
-    font-size: $font-body-small;
-    font-weight: $font-medium;
+.forgotPassword {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0px;
 
-    width: 97px;
-    height: 22px;
-    text-align: center;
+  width: 294px;
+  height: 22px;
 
-    flex: none;
-    order: 1;
-    flex-grow: 0;
+  flex: none;
+  order: 1;
+  flex-grow: 1;
 }
 
-.textpwdInfo{
-    width: 415px;
-    height: 20px;
-    font-size:$font-body-tiny;
-    font-weight: $font-regular;
-    line-height: 20px;
-    color: $color-gray-500;
+.textForgotPassword {
+  height: 22px;
 
-    flex: none;
-    order: 0;
-    flex-grow: 1;
+  color: $color-primary-400;
+  font-weight: $font-semibold;
+  font-size: $font-body-small;
+  cursor: pointer;
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
 }
-
-.forgotPassword{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 0px;
-    
-    width: 294px;
-    height: 22px;
-    
-    
-    flex: none;
-    order: 1;
-    flex-grow: 1;
-
-}
-
-.textForgotPassword{
-    height: 22px;
-
-    color:$color-primary-400;
-    font-weight: $font-semibold;
-    font-size: $font-body-small;
-    cursor:pointer;
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-}
-
 
 // login button, login with google, signup option
-.contentContainerAuthOptions{
-    padding: 0px;
-    gap: 24px;
-    
-    width: 415px;
-    height: 142px;
-    
-    flex: none;
-    order: 1;
-    flex-grow: 0;  
+.contentContainerAuthOptions {
+  padding: 0px;
+  gap: 24px;
+
+  width: 415px;
+  height: 142px;
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
 }
 
-.contentContainerButtons{
+.contentContainerButtons {
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+
+  width: 415px;
+  height: 96px;
+  Button,
+  .formInput Button {
+    margin-top: 20px;
+  }
+}
+
+.register {
+  margin-top: 90px;
+}
+
+.reset {
+  margin-top: 90px;
+}
+
+.contentContainerAuthEndForm,
+.forgotPasswordEndForm {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0px;
+  gap: 4px;
+
+  width: 415px;
+  height: 22px;
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+
+  margin-top: 36px;
+}
+
+.authRegister {
+  margin-top: -35px;
+}
+
+.textAuthEndForm {
+  font-size: $font-body-small;
+  font-weight: $font-semibold;
+  line-height: 22px;
+  align-items: center;
+
+  span {
+    color: $color-primary-400;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 860px) {
+  .authError,
+  .containerAuth,
+  .contentContainerForm,
+  .form,
+  .formTitle,
+  .formTitleReset,
+  .formInput,
+  .rememberMe,
+  .contentContainerAuthOptions,
+  .forgotPassword,
+  .contentContainerButtons,
+  .contentContainerButtons Button,
+  .formInput Button,
+  .registerSeparator,
+  .containerAuthResetPwd,
+  .contentContainerFormResetPwd,
+  .contentContainerAuthEndForm,
+  .forgotPasswordEndForm {
+    width: 260px;
+  }
+
+  .formTitleReset {
+    height: 80px;
+  }
+  .registerSeparator {
+    width: 260px;
+  }
+
+  .authError {
+    font-size: $font-body-tiny;
+  }
+
+  .contentContainerButtons {
+    margin-top: 40px;
+  }
+
+  .reset {
+    margin-top: 120px;
+  }
+
+  .rememberMe {
     flex-direction: column;
-    align-items: flex-start;
-    padding: 0px;
-    gap: 8px;
-
-    width: 415px;
-    height: 96px;
-    Button, .formInput Button{
-        margin-top:20px;
-    }
-}
-
-.register{
-    margin-top:90px;
-}
-
-.reset{
-    margin-top:90px;
-}
-
-.contentContainerAuthEndForm,.forgotPasswordEndForm{
-    display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: center;
-
-    padding: 0px;
-    gap: 4px;
-
-    width: 415px;
-    height: 22px;
-
-    flex: none;
-    order: 1;
-    flex-grow: 0;
-
-    margin-top:36px;
-
-}
-
-.authRegister{
-    margin-top:-35px;
-}
-
-.textAuthEndForm{
-    font-size: $font-body-small;
-    font-weight: $font-semibold;
-    line-height: 22px;
-    align-items: center;
-
-    span{
-      color: $color-primary-400;
-      cursor:pointer;
-    }
-}
-
-@media (max-width : 860px){
-    .authError,
-    .containerAuth, 
-    .contentContainerForm, 
-    .form, 
-    .formTitle,
-    .formTitleReset, 
-    .formInput,
-    .rememberMe,
-    .contentContainerAuthOptions,
-    .forgotPassword,
-    .contentContainerButtons,
-    .contentContainerButtons Button, 
-    .formInput Button,
-    .registerSeparator,
-    .containerAuthResetPwd,
-    .contentContainerFormResetPwd,
-    .contentContainerAuthEndForm,
-    .forgotPasswordEndForm
-    {
-        width: 260px;
-    }
-
-    .formTitleReset{
-        height: 80px;
-    }
-    .registerSeparator
-    {
-        width: 260px;
-    }
-
-    .authError{
-        font-size: $font-body-tiny;
-    }
-
-    .contentContainerButtons{
-        margin-top:40px;
-    }
-    
-    .reset{
-        margin-top:120px;
-    }
-   
-    .rememberMe{
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .forgotPassword{
-        justify-content: center;    
-    }
-    
-    // .contentContainerButtons{
-    //     height: 120px;
-    // }
-    
-    .contentContainerButtons Button, .formInput Button{
-        padding:9px;
-    }
-    .textAuthEndForm{
-        margin-top:15px;
-    }
-    .authRegister{
-      margin-top:-15px;
   }
-    .register{
-        margin-top:90px;
-    }
+
+  .forgotPassword {
+    justify-content: center;
+  }
+
+  // .contentContainerButtons{
+  //     height: 120px;
+  // }
+
+  .contentContainerButtons Button,
+  .formInput Button {
+    padding: 9px;
+  }
+  .textAuthEndForm {
+    margin-top: 15px;
+  }
+  .authRegister {
+    margin-top: -15px;
+  }
+  .register {
+    margin-top: 90px;
+  }
 }
 
-@media (max-width : 550px){
+@media (max-width: 550px) {
+  .containerAuth,
+  .contentContainerForm,
+  .form,
+  .formTitle,
+  .formInput,
+  .rememberMe,
+  .contentContainerAuthOptions,
+  .forgotPassword,
+  .contentContainerButtons,
+  .contentContainerButtons Button,
+  .formInput Button,
+  .containerAuthResetPwd,
+  .contentContainerFormResetPwd,
+  .contentContainerAuthEndForm,
+  .forgotPasswordEndForm {
+    width: 260px;
+  }
 
+  .rememberMe {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 
-    .containerAuth, 
-    .contentContainerForm, 
-    .form, 
-    .formTitle, 
-    .formInput,
-    .rememberMe,
-    .contentContainerAuthOptions,
-    .forgotPassword,
-    .contentContainerButtons,
-    .contentContainerButtons Button,
-    .formInput Button,
-    .containerAuthResetPwd,
-    .contentContainerFormResetPwd,
-    .contentContainerAuthEndForm,
-    .forgotPasswordEndForm
-    {
-        width: 260px;
-    }    
-    
-   
-    .rememberMe{
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .forgotPassword{
-        justify-content: center;    
-    }
-    
-    // .contentContainerButtons{
-    //     height: 120px;
-    // }
-    
-    .contentContainerButtons Button, .formInput Button{
-        padding:5px;
-    }
-    .register{
-        margin-top:90px;
-    }
+  .forgotPassword {
+    justify-content: center;
+  }
+
+  // .contentContainerButtons{
+  //     height: 120px;
+  // }
+
+  .contentContainerButtons Button,
+  .formInput Button {
+    padding: 5px;
+  }
+  .register {
+    margin-top: 90px;
+  }
 }

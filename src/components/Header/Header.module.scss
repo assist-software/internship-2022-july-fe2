@@ -124,6 +124,66 @@
       fill: $color-primary-300;
     }
   }
+  stroke: $color-primary-300 !important;
+}
+.favorites:focus {
+  box-shadow: none !important;
+}
+
+.profileTitle {
+  color: $color-gray-600 !important;
+  background-color: white !important;
+  border: none !important;
+  font-weight: $font-semibold;
+  font-size: $font-body-small;
+  padding: 0.48rem !important;
+  margin-left: 0.9rem !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5px;
+  gap: 8px !important;
+}
+.profileTitle:focus {
+  box-shadow: none !important;
+}
+.profileTitle:hover {
+  color: $color-primary-300 !important;
+}
+
+.blueLogo {
+  fill: $color-primary-400 !important;
+  color: $color-primary-400 !important;
+  stroke: $color-primary-400 !important;
+  width: 16px;
+  height: 16px;
+  margin: 5px;
+}
+
+.profileOption {
+  font-weight: $font-medium;
+  font-size: $font-body-small;
+  color: $color-gray-600 !important;
+}
+.profileOption:hover {
+  background-color: white !important;
+  color: $color-primary-300 !important;
+}
+
+.dropMenu {
+  border: 0px !important;
+  border-radius: 12px !important;
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.14);
+}
+
+.hello {
+  font-size: $font-body-normal;
+  font-weight: $font-bold;
+}
+.logout {
+  stroke: $color-gray-500 !important;
+  height: 18px;
+  width: 18px;
 }
 
 .profileTitle {
