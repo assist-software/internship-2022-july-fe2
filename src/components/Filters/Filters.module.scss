@@ -31,6 +31,8 @@
 .gridRow {
   margin-left: 55px;
   cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
 
   svg {
     &:hover {
@@ -39,6 +41,13 @@
       }
     }
   }
+}
+.filter{
+  svg{
+  path{
+      fill: $color-primary-300;
+  }
+}
 }
 .locationPrice {
   display: flex;

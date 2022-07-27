@@ -6,20 +6,24 @@ import useStateProvider from "../../hooks/useStateProvider";
 
 const GridRows = () => {
   //grid view list view
-  const { setListView } = useStateProvider();
+  const { listView, setListView } = useStateProvider();
   return (
     <div className={filtersStyle.showGrid}>
       <div className={filtersStyle.gridRow}>
-        <GridRow
-          onClick={() => {
-            setListView(false);
-          }}
-        />
-        <Rows
-          onClick={() => {
-            setListView(true);
-          }}
-        />
+        <div className={listView ? null : filtersStyle.filter}>
+          <GridRow
+            onClick={() => {
+              setListView(false);
+            }}
+          />
+        </div>
+        <div className={listView ? filtersStyle.filter : null}>
+          <Rows
+            onClick={() => {
+              setListView(true);
+            }}
+          />
+        </div>
       </div>
     </div>
   );
