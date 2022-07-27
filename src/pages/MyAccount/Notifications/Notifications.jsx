@@ -120,8 +120,11 @@ const Notifications = () => {
     }
   };
 
+  const [skip, setSkip] = useState(true);
+
   useEffect(() => {
-    handleSubmit();
+    if (skip) setSkip(false);
+    if (!skip) handleSubmit();
   }, [notificationSettings]);
 
   return (

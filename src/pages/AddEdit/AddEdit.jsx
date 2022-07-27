@@ -433,11 +433,13 @@ const AddEdit = () => {
         <Col md={{ span: 6, offset: 0 }}>
           <Row>
             <Col sm={{ span: 2, offset: 5 }}>
-              <Button
-                variant="secondary"
-                label="Preview"
-                onClick={handlePreview}
-              />
+              {!id && (
+                <Button
+                  variant="secondary"
+                  label="Preview"
+                  onClick={handlePreview}
+                />
+              )}
             </Col>
 
             <Col sm={{ span: 2, offset: 2 }}>
