@@ -37,15 +37,17 @@ const ChatHeader = ({ previewFromChatPreview }) => {
           {/* <div className={styles.chatHeaderUserName}>Jordan Henderson</div>
           <div className={styles.chatHeaderUserStatus}>Active 2d ago</div> */}
           <div className={styles.chatHeaderUserName}>
-            {localStorage.getItem("userName") || "Empty chat"}
+            {localStorage.getItem("receiverId") === ""
+              ? "Empty chat"
+              : localStorage.getItem("userName")}
           </div>
           <div className={styles.chatHeaderUserStatus}>
-            {localStorage.getItem("userName") === null ? null : "Active 2d ago"}
+            {localStorage.getItem("receiverId") === "" ? null : "Active 2d ago"}
           </div>
         </div>
       </div>
       <div className={styles.chatHeaderActions}>
-        {localStorage.getItem("userName") === null ? null : (
+        {localStorage.getItem("receiverId") === "" ? null : (
           <>
             <Delete onClick={() => handleDeleteMessage()} />
             <Block />

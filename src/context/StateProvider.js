@@ -28,7 +28,8 @@ export const StateProvider = ({ children }) => {
   };
   // messages
   const [messages, setMessages] = useState([]);
-  const [privateConversation, setPrivateConversation] = useState([]);
+  const [privateConversation, setPrivateConversation] = useState(false);
+  const [privateMessages, setPrivateMessages] = useState([]);
   const { userId, user } = useAuth();
 
   // const fetchMessages = async () => {
@@ -54,6 +55,14 @@ export const StateProvider = ({ children }) => {
     } catch (error) {}
   };
   useEffect(() => {
+    localStorage.setItem("userName", "");
+    localStorage.setItem("receiverId", "");
+    localStorage.setItem(
+      "photo",
+      "https://blobassistjuly2022be2.blob.core.windows.net/repository/default%20user.png?sv=2021-06-08&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2022-08-16T17:30:43Z&st=2022-07-20T09:30:43Z&sip=0.0.0.0-255.255.255.255&spr=https&sig=RReu5GnC4EjJqvE63A00A3iK6gLCOJp9Mk%2F6eXHbeQM%3D"
+    );
+    localStorage.setItem("listingId", "");
+    setPrivateMessages([]);
     fetchFavorites();
   }, [userId]);
 
@@ -90,6 +99,8 @@ export const StateProvider = ({ children }) => {
         setPrivateConversation,
         preview,
         setPreview,
+        privateMessages,
+        setPrivateMessages,
       }}
     >
       {children}

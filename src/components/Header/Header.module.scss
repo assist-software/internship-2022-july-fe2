@@ -131,6 +131,7 @@
   justify-content: center;
   margin-right: 5px;
   gap: 8px !important;
+
 }
 .profileTitle:focus {
   box-shadow: none !important;
@@ -142,6 +143,9 @@
       fill: $color-primary-300;
     }
   }
+}
+.dropdown-toggle:after{
+  align-self: center;
 }
 
 

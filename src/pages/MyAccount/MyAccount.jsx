@@ -80,7 +80,7 @@ const MyAccount = () => {
         console.log("Success");
         setAlert({
           type: "success",
-          message: "Successfully updated your profile",
+          message: "Avatar updated successfully",
         });
         setPreview(null);
         setLoading(false);
@@ -121,8 +121,7 @@ const MyAccount = () => {
           <div className={styles.profile}>
             <img
               className={styles.avatar}
-              // src={`${user?.photo}&${new Date().getTime()}`}
-              src={user?.photo}
+              src={`${user?.photo}&${new Date().getTime()}`}
               alt="profile"
             />
             <label className={styles.editAvatar} htmlFor="image">
