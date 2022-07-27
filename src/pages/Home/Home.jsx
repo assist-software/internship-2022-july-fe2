@@ -81,6 +81,7 @@ const Home = ({ showcontrols }) => {
       {user?.role == null && (
         <>
           <Carousel
+            all
             mostView
             showcontrols
             pending={0}
