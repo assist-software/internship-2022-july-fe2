@@ -3,10 +3,18 @@ import styles from "./PreviewConversation.module.scss";
 import { getListingById, getUserById } from "../../../../api/API";
 import useStateProvider from "../../../../hooks/useStateProvider";
 
-const PreviewConversation = ({ messagePreview, userReceiverId, listingId }) => {
+const PreviewConversation = ({
+  messagePreview,
+  userReceiverId,
+  listingId,
+  previewFromChatPreview,
+  setPreviewFromChatPreview,
+  active,
+  setActive,
+}) => {
   const [userName, setUserName] = useState("");
+  const [userPhoto, setUserPhoto] = useState("");
   const [listTitle, setListTitle] = useState("");
-  const { setAlert } = useStateProvider();
 
   // const getUserName = async (senderId) => {
   //   try {
@@ -42,8 +50,8 @@ const PreviewConversation = ({ messagePreview, userReceiverId, listingId }) => {
     (async () => {
       try {
         const response = await getListingById(listingId);
+
         setListTitle(response?.data.title);
-        console.log(response);
       } catch (error) {
         console.log("Error: ", error);
       }
@@ -55,27 +63,47 @@ const PreviewConversation = ({ messagePreview, userReceiverId, listingId }) => {
       try {
         const response = await getUserById(userReceiverId);
         setUserName(response?.data.fullName);
-        console.log(response);
+        setUserPhoto(response.data.photo);
       } catch (error) {
         console.log("Error: ", error);
       }
     })();
-  }, [userReceiverId]);
+  }, [userName, userReceiverId]);
 
-  const [active, setActive] = useState(false);
+  const handlePrivateConversation = () => {
+    setPreviewFromChatPreview({
+      userId: userReceiverId,
+      userName: userName,
+      listingId: listingId,
+      photo: userPhoto,
+    });
+
+    setActive(!active);
+
+    localStorage.setItem("receiverId", userReceiverId);
+    localStorage.setItem("userName", userName);
+    localStorage.setItem("listingId", listingId);
+    localStorage.setItem("photo", userPhoto);
+  };
+
+  // const [active, setActive] = useState(false);
   return (
     <div
       key={messagePreview.id}
-      className={`${styles.previewContainer} ${active ? styles.active : ""}`}
+      className={`${styles.previewContainer} ${
+        active === true ? styles.active : null
+      }`}
       onClick={(e) => {
-        setActive(!active);
-        console.log(active, "actiev");
+        //setActive(!active);
+        //console.log(active, "actiev");
+        handlePrivateConversation();
       }}
     >
       <img
         className={styles.previewUserProfile}
-        src="https://media.istockphoto.com/vectors/vector-illustration-of-red-house-icon-vector-id155666671?k=20&m=155666671&s=612x612&w=0&h=sL5gRpVmrGcZBVu5jEjF5Ne7A4ZrBCuh5d6DpRv3mps="
-        alt=""
+        //src="https://media.istockphoto.com/vectors/vector-illustration-of-red-house-icon-vector-id155666671?k=20&m=155666671&s=612x612&w=0&h=sL5gRpVmrGcZBVu5jEjF5Ne7A4ZrBCuh5d6DpRv3mps="
+        src={userPhoto}
+        alt="IMG"
       />
       <div className={styles.previewContent}>
         <div className={styles.previewHeader}>

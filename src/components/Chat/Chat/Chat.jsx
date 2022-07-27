@@ -4,12 +4,12 @@ import ChatHeader from "./ChatHeader/ChatHeader";
 import ChatBody from "./ChatBody/ChatBody";
 import ChatInput from "./ChatInput/ChatInput";
 
-const Chat = ({ messages }) => {
+const Chat = ({ messages, previewFromChatPreview }) => {
   return (
     <div className={styles.chatContainer}>
-      <ChatHeader />
-      <ChatBody messages={messages} />
-      <ChatInput messages={messages} />
+      <ChatHeader previewFromChatPreview={previewFromChatPreview} />
+      <ChatBody previewFromChatPreview={previewFromChatPreview} />
+      <ChatInput previewFromChatPreview={previewFromChatPreview} />
     </div>
   );
 };

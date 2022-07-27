@@ -6,11 +6,16 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    // border: 1px solid $color-gray-100;
+    border: 1px solid $color-gray-100;
+    cursor:pointer;
   }
 
   .active{
-    background-color: $color-gray-50;
+      background-color: $color-gray-50;
+  
+  } 
+   .notActive{
+    background-color: $color-white;
   }
   
   .previewUserProfile {

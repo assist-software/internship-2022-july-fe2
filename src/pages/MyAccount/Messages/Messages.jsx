@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../../components";
 import styles from "./Messages.module.scss";
@@ -31,7 +31,12 @@ const Messages = () => {
   const { messages, setMessages } = useStateProvider();
   const { userId } = useAuth();
   const [statusCode, setStatusCode] = useState("");
-
+  const [previewFromChatPreview, setPreviewFromChatPreview] = useState({
+    userId: "", // receiverID
+    userName: "",
+    listingId: "",
+    photo: "",
+  });
   useEffect(() => {
     (async () => {
       try {
@@ -62,12 +67,15 @@ const Messages = () => {
           <h4 className={styles.title}>Messages</h4>
           <div className={styles.chatContainer}>
             <div className={styles.chatLeftSide}>
-              <Conversations />
+              <Conversations
+                previewFromChatPreview={previewFromChatPreview}
+                setPreviewFromChatPreview={setPreviewFromChatPreview}
+              />
             </div>
 
             <div className={styles.chatRigthSide}>
-              {}
-              <Chat messages={messagesStatic} />
+              {/* <Chat messages={messagesStatic} /> */}
+              <Chat previewFromChatPreview={previewFromChatPreview} />
             </div>
           </div>
         </>
