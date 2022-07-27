@@ -28,7 +28,7 @@ const AddEdit = () => {
     title: preview.title || "",
     category: preview.category || "",
     price: preview.price || "",
-    images: [],
+    images: preview.images || [],
     description: preview.description || "",
     shortDescription: "",
     location: [
