@@ -41,45 +41,49 @@ const Favorites = ({ showcontrols }) => {
       <h1 className={styles.favoritesTitle}>Favourites</h1>
 
       {!showError ? (
-        <div>
-          {/* Filters */}
-          <div className={styles.gridRow}>
-            <div className={listView ? null : styles.filter}>
-              <GridRow
-                onClick={() => {
-                  setListView(false);
-                }}
-              />
+        listings.length > 0 ? (
+          <div>
+            {/* Filters */}
+            <div className={styles.gridRow}>
+              <div className={listView ? null : styles.filter}>
+                <GridRow
+                  onClick={() => {
+                    setListView(false);
+                  }}
+                />
+              </div>
+              <div className={listView ? styles.filter : null}>
+                <Rows
+                  onClick={() => {
+                    setListView(true);
+                  }}
+                />
+              </div>
             </div>
-            <div className={listView ? styles.filter : null}>
-              <Rows
-                onClick={() => {
-                  setListView(true);
-                }}
-              />
-            </div>
-          </div>
 
-          {/* Cards view */}
-          <div className={styles.cardView}>
-            {listings?.map((listing, index) => (
-              <Card
-                key={index}
-                image={listing.images[0]}
-                title={listing.title}
-                description={listing.description}
-                price={listing.price}
-                location={listing.location[2] + ", " + listing.location[5]}
-                listingId={listing.id}
-                listView={listView}
-                showcontrols={!showcontrols}
-                onClick={() => {
-                  navigate("/listing/" + listing.id);
-                }}
-              />
-            ))}
+            {/* Cards view */}
+            <div className={styles.cardView}>
+              {listings?.map((listing, index) => (
+                <Card
+                  key={index}
+                  image={listing.images[0]}
+                  title={listing.title}
+                  description={listing.description}
+                  price={listing.price}
+                  location={listing.location[2] + ", " + listing.location[5]}
+                  listingId={listing.id}
+                  listView={listView}
+                  showcontrols={!showcontrols}
+                  onClick={() => {
+                    navigate("/listing/" + listing.id);
+                  }}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div>No fav</div>
+        )
       ) : (
         <div className={styles.favorites}>
           <FavoritesError />

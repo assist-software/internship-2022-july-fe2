@@ -3,6 +3,7 @@ import filtersStyle from "./Filters.module.scss";
 import { ReactComponent as GridRow } from "../../assets/icons/grid.svg";
 import { ReactComponent as Rows } from "../../assets/icons/rows.svg";
 import useStateProvider from "../../hooks/useStateProvider";
+
 const GridRows = () => {
   //grid view list view
   const { setListView } = useStateProvider();

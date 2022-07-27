@@ -30,6 +30,15 @@
 }
 .gridRow {
   margin-left: 55px;
+  cursor: pointer;
+
+  svg {
+    &:hover {
+      path {
+        fill: $color-primary-500;
+      }
+    }
+  }
 }
 .locationPrice {
   display: flex;

@@ -103,12 +103,6 @@ const AddEdit = () => {
     });
   };
 
-  //handle Preview
-  const handlePreview = () => {
-    console.log(preview, " preview");
-    navigate("./preview");
-  };
-
   //-------------------------------- validations
   // check errors
   const checkErrors = (field) => {
@@ -189,6 +183,18 @@ const AddEdit = () => {
   // show errors only if clicked to submit
   const [showErrors, setShowErrors] = useState(false);
 
+  //handle Preview
+  const handlePreview = () => {
+    if (!isFormValid()) {
+      setShowErrors(true);
+    }
+    if (isFormValid()) {
+      setShowErrors(false);
+      setPreview(formValue);
+      navigate("./preview");
+    }
+  };
+
   // handleSubmit
   const handleSubmit = async () => {
     if (!isFormValid()) {
@@ -199,14 +205,8 @@ const AddEdit = () => {
       try {
         const response = await createListing(formValue);
         if (response.status === 200) {
-          setAlert({
-            type: "success",
-            message: "Listing created successfully",
-            // navigate("./preview");
-          });
-          setTimeout(() => {
-            navigate("/");
-          }, 1000);
+          navigate("/confirmation");
+          setPreview({});
         }
       } catch (error) {
         console.log(error);

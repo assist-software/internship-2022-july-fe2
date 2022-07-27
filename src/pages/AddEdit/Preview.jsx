@@ -9,6 +9,8 @@ import { ReactComponent as Heart } from "../../assets/icons/heart.svg";
 import { ReactComponent as HeartFilled } from "../../assets/icons/heart-filled.svg";
 import useStateProvider from "../../hooks/useStateProvider";
 
+import { createListing } from "../../api/API";
+
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
@@ -44,10 +46,17 @@ const Preview = () => {
   console.log(preview, "preview?");
   const [like, setLike] = useState(false);
 
-  //clear preview after submit
-  const clearPreview = () => {
-    setPreview({});
-    navigate("/");
+  // submit
+  const handleSubmit = async () => {
+    try {
+      const response = await createListing(preview);
+      if (response.status === 200) {
+        navigate("/confirmation");
+        setPreview({});
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -176,7 +185,7 @@ const Preview = () => {
             variant="secondary"
             onClick={() => navigate("/add")}
           />
-          <Button label="Publish" variant="primary" onClick={clearPreview} />
+          <Button label="Publish" variant="primary" onClick={handleSubmit} />
         </div>
       </div>
     </section>
