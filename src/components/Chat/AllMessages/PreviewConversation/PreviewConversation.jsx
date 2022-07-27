@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styles from "./PreviewConversation.module.scss";
-import { getListingById, getUserById } from "../../../../api/API";
+import {
+  getListingById,
+  getPrivateConversation,
+  getUserById,
+} from "../../../../api/API";
 import useStateProvider from "../../../../hooks/useStateProvider";
 import useAuth from "../../../../hooks/useAuth";
 
@@ -15,6 +19,13 @@ const PreviewConversation = ({
   const [userPhoto, setUserPhoto] = useState("");
   const [listTitle, setListTitle] = useState("");
   const { userId } = useAuth();
+
+  const {
+    privateConversation,
+    setPrivateConversation,
+    privateMessages,
+    setPrivateMessages,
+  } = useStateProvider();
 
   // const getUserName = async (senderId) => {
   //   try {
@@ -50,7 +61,7 @@ const PreviewConversation = ({
     (async () => {
       try {
         const response = await getListingById(listingId);
-
+        
         setListTitle(response?.data.title);
       } catch (error) {
         console.log("Error: ", error);
@@ -71,20 +82,56 @@ const PreviewConversation = ({
   }, [userName, userReceiverId]);
 
   const handlePrivateConversation = () => {
+    // setPrivateMessages([]);
     setActive(!active);
 
     localStorage.setItem("receiverId", userReceiverId);
     localStorage.setItem("userName", userName);
     localStorage.setItem("listingId", listingId);
     localStorage.setItem("photo", userPhoto);
-
+    setPrivateConversation(true);
     console.log(
       localStorage.getItem("receiverId"),
       "sender",
       userId,
       "receiver",
-      localStorage.getItem("listingId")
+      localStorage.getItem("listingId"),
+      "from previewConv"
     );
+
+    // NEW ADDED FROM CHATBODY
+    (async () => {
+      try {
+        console.log(
+          localStorage.getItem("receiverId"),
+          "sender",
+          localStorage.getItem("userId"),
+          "receiver",
+          localStorage.getItem("listingId"),
+          "from Chatbody"
+        );
+        // setPrivateMessages([]);
+        if (
+          localStorage.getItem("receiverId") !== "" &&
+          localStorage.getItem("listingId") !== ""
+        ) {
+          // console.log("test");
+          // debugger;
+          const response = await getPrivateConversation(
+            localStorage.getItem("receiverId"),
+            localStorage.getItem("userId"),
+            localStorage.getItem("listingId")
+          );
+          console.log(response, "response");
+          // setPrivateMessages([]);
+          privateMessages.push(response.data);
+
+          console.log(privateMessages, "conversation");
+        }
+      } catch (error) {
+        console.log("Error: ", error);
+      }
+    })();
   };
 
   // const [active, setActive] = useState(false);

@@ -4,12 +4,12 @@ import ChatHeader from "./ChatHeader/ChatHeader";
 import ChatBody from "./ChatBody/ChatBody";
 import ChatInput from "./ChatInput/ChatInput";
 
-const Chat = ({ messages }) => {
+const Chat = () => {
   return (
     <div className={styles.chatContainer}>
       <ChatHeader />
-      <ChatBody messages={messages} />
-      <ChatInput messages={messages} />
+      <ChatBody />
+      <ChatInput />
     </div>
   );
 };
