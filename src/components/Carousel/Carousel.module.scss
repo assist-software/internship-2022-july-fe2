@@ -24,10 +24,15 @@
   .chevron {
     height: 50px;
     width: 50px;
-    border: 1px solid $color-black;
     border-radius: 50%;
     background: #0356e8;
     color: white !important;
+    padding: 12px;
+    margin-bottom: 1rem;
+
+    path {
+      fill: white;
+    }
   }
   .text {
     text-align: center;

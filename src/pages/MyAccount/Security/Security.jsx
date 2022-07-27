@@ -214,7 +214,7 @@ const Security = () => {
       )}
 
       {/* social accounts */}
-      <h5 className={styles.subtitle}>Login & Security</h5>
+      <h5 className={styles.subtitle}>Social Accounts</h5>
       <RowItem title="Facebook" info="Not connected" action="Connect" />
       <RowItem title="Google" info="Connected" action="Disonnect" />
 

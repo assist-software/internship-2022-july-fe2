@@ -5,6 +5,9 @@ axios.defaults.headers = {
   Accept: "application/json",
 };
 
+// access control axios
+// axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
+
 // ---------------------------- FAVORITES ----------------------------------
 // add to favorites
 export const addFavorite = async (userId, listingId) => {

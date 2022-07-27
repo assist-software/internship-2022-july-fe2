@@ -14,6 +14,8 @@ import { createListing } from "../../api/API";
 import useAuth from "../../hooks/useAuth";
 
 import TextArea from "../../components/Input/TextArea";
+import { useParams } from "react-router-dom";
+import { getListingById } from "../../api/API";
 
 const AddEdit = () => {
   const { setAlert } = useStateProvider();
@@ -22,6 +24,26 @@ const AddEdit = () => {
   const [coords, setCoords] = useState({});
   const { preview, setPreview } = useStateProvider();
   const { userId } = useAuth();
+
+  const { id } = useParams();
+
+  const [listing, setListing] = useState({});
+
+  const getListing = async () => {
+    const response = await getListingById(id);
+    if (response.status === 200) {
+      // setListing(response.data);
+      setFormValue(response.data);
+      console.log(response.data);
+    }
+  };
+  useEffect(() => {
+    if (id) {
+      getListing();
+    }
+  }, [id]);
+
+  console.log(listing, "listing");
   //console.log(userId, "userId");
   // form data
   const [formValue, setFormValue] = useState({

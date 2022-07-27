@@ -47,7 +47,7 @@ function App() {
             <Route path="notifications" element={<MyAccount />} />
             <Route path="messages" element={<MyAccount />} />
           </Route>
-          <Route path="/edit" element={<AddEdit />} />
+          <Route path="/edit/:id" element={<AddEdit />} />
         </Route>
 
         <Route

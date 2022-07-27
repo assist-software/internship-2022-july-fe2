@@ -39,7 +39,7 @@ const Carousel = ({
               icon={<ArrowRight />}
               position="right"
               variant="tertiary"
-              label="See everything "
+              label="See everything"
             />
           </span>
         </div>

@@ -1,14 +1,20 @@
+@import "../../styles/variables.scss";
+
 .swiper-button-next,
 .swiper-button-prev {
   --swiper-navigation-size: 44px !important;
-  border: 1px solid black;
+  border: 1px solid $color-primary-400;
   border-radius: 50%;
   background-color: white;
 }
 .swiper-button-next:after,
 .swiper-button-prev:after {
-  font-size: 15px !important;
+  font-size: 12px !important;
+  color: $color-primary-400;
+  font-weight: 900;
+  // stroke
 }
+
 .swiper-button-next,
 .swiper-rtl,
 .swiper-button-prev {
