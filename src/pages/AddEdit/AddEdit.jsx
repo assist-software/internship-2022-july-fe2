@@ -10,7 +10,7 @@ import { useDropzone } from "react-dropzone";
 import GetLocation from "../../components/GetLocation/GetLocation";
 import { useNavigate } from "react-router-dom";
 import useStateProvider from "../../hooks/useStateProvider";
-import { createListing } from "../../api/API";
+import { createListing, updateListing } from "../../api/API";
 import useAuth from "../../hooks/useAuth";
 
 import TextArea from "../../components/Input/TextArea";
@@ -236,6 +236,25 @@ const AddEdit = () => {
     }
   };
 
+  // handleUpdate
+  const handleUpdate = async () => {
+    if (!isFormValid()) {
+      setShowErrors(true);
+    }
+    if (isFormValid()) {
+      setShowErrors(false);
+      try {
+        const response = await updateListing(formValue);
+        if (response.status === 200) {
+          navigate("/confirmation");
+          setPreview({});
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
   console.log(showErrors, "showErrors");
   return (
     <Container>
@@ -413,8 +432,15 @@ const AddEdit = () => {
             <Col sm={{ span: 2, offset: 2 }}>
               <Button
                 variant="primary"
-                label="Publish"
-                onClick={handleSubmit}
+                label={id ? "Update" : "Publish"}
+                // onClick={id ? handleUpdate : handleSubmit}
+                onClick={() => {
+                  if (id) {
+                    handleUpdate();
+                  } else {
+                    handleSubmit();
+                  }
+                }}
               />
             </Col>
           </Row>
