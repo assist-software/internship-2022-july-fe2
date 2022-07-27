@@ -38,7 +38,12 @@ const Home = ({ showcontrols }) => {
           {view ? (
             <PendingApproval pending={1} hideApproval admin />
           ) : (
-            <Listing pending={0} pending2={2} admin />
+            <Listing
+              showcontrols={showcontrols}
+              pending={0}
+              pending2={2}
+              admin
+            />
           )}
         </>
       )}
@@ -66,7 +71,7 @@ const Home = ({ showcontrols }) => {
               />
             </>
           ) : (
-            <MyListings />
+            <MyListings showcontrols={showcontrols} />
           )}
         </>
       )}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import RowItem from "../RowItem/RowItem";
 
 import styles from "./Notifications.module.scss";
@@ -61,7 +61,6 @@ const Notifications = () => {
   const handleModalHide = () => {
     setCurrentModal(null);
     setShow(false);
-    handleSubmit();
   };
 
   // dynamic modal title
@@ -108,7 +107,7 @@ const Notifications = () => {
         console.log("Success");
         setAlert({
           type: "success",
-          message: "Successfully updated your profile",
+          message: "Notifications updated successfully",
         });
         fetchUser();
       }
@@ -120,6 +119,10 @@ const Notifications = () => {
       });
     }
   };
+
+  useEffect(() => {
+    handleSubmit();
+  }, [notificationSettings]);
 
   return (
     <>
