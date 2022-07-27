@@ -131,6 +131,11 @@
   padding: 5px;
   border-radius: 50%;
   fill: white;
+
+  &:hover {
+    background-color: $color-gray-400;
+    transition: all 0.1s ease-in-out;
+  }
 }
 .heartFill {
   fill: red !important;
