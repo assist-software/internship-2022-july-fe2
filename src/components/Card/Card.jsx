@@ -148,7 +148,7 @@ const Card = ({
     favorites?.forEach((favorite) => {
       if (favorite.id === listingId) setLike(true);
     });
-  }, []);
+  }, [favorites]);
 
   return (
     <div className={styles.cards}>
