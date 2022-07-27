@@ -50,6 +50,7 @@ const Map = ({ center }) => {
 
 const Details = () => {
   // states for the details page
+  const { favorites } = useStateProvider();
   const [showModal, setShowModal] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [like, setLike] = useState(false);
@@ -75,6 +76,15 @@ const Details = () => {
         console.log("Error: ", error);
       }
     })();
+  }, [id]);
+
+  //check favorite
+  useEffect(() => {
+    favorites.forEach((favorite) => {
+      if (favorite.id === id) {
+        setLike(true);
+      }
+    });
   }, [id]);
 
   // update message object useEffect
