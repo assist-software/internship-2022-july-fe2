@@ -51,7 +51,13 @@ const Home = ({ showcontrols }) => {
         <>
           {!view ? (
             <>
-              <Carousel showcontrols pending={0} pending2={2} title="Latest" />
+              <Carousel
+                all
+                showcontrols
+                pending={0}
+                pending2={2}
+                title="Latest"
+              />
               <Carousel
                 category="big"
                 showcontrols
