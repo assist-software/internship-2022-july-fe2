@@ -3,7 +3,13 @@ import { useNavigate } from "react-router-dom";
 import useStateProvider from "../../hooks/useStateProvider";
 import { Fragment } from "react";
 
-const ListObject = ({ admin, hideApproval, pending, pending2 }) => {
+const ListObject = ({
+  admin,
+  hideApproval,
+  pending,
+  pending2,
+  showcontrols,
+}) => {
   const navigate = useNavigate();
   const { listings } = useStateProvider();
 
@@ -29,6 +35,7 @@ const ListObject = ({ admin, hideApproval, pending, pending2 }) => {
                 hideApproval={hideApproval}
                 listing={listing}
                 pending={pending}
+                showcontrols={!showcontrols}
                 onClick={() => {
                   navigate("/listing/" + listing.id);
                 }}

@@ -3,7 +3,14 @@ import Filters from "../../components/Filters/Filters";
 import listingStyle from "./Listing.module.scss";
 import ListObject from "./ListObject";
 
-const Listing = ({ title, admin, hideApproval, pending, pending2 }) => {
+const Listing = ({
+  title,
+  admin,
+  hideApproval,
+  pending,
+  pending2,
+  showcontrols,
+}) => {
   // view
   return (
     <div>
@@ -12,6 +19,7 @@ const Listing = ({ title, admin, hideApproval, pending, pending2 }) => {
       </div>
       <Filters admin={admin} />
       <ListObject
+        showcontrols={showcontrols}
         pending={pending}
         pending2={pending2}
         hideApproval={hideApproval}
