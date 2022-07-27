@@ -158,7 +158,7 @@ const Details = () => {
     <section className={styles.container}>
       {/* images */}
       <div className={styles.images}>
-        {listing?.images?.slice(1, 6).map((image, index) => {
+        {listing?.images?.slice(0, 5).map((image, index) => {
           if (index === 0) {
             return (
               <img
