@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { getUserById } from "../api/API";
+import { getUserById, getNotifications } from "../api/API";
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
@@ -22,6 +22,8 @@ export const AuthProvider = ({ children }) => {
     fetchUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
+
+  console.log("user: ", user);
 
   // logout function
   function logout() {
