@@ -51,12 +51,7 @@ const Home = ({ showcontrols }) => {
         <>
           {!view ? (
             <>
-              <Carousel
-                showcontrols
-                pending={0}
-                pending2={2}
-                title="Most view"
-              />
+              <Carousel showcontrols pending={0} pending2={2} title="Latest" />
               <Carousel
                 showcontrols
                 pending={0}
@@ -77,13 +72,33 @@ const Home = ({ showcontrols }) => {
       )}
       {user?.role == null && (
         <>
-          <Carousel showcontrols pending={0} pending2={2} title="Most view" />
-          <Carousel showcontrols pending={0} pending2={2} title="Big Houses" />
           <Carousel
+            mostView
+            showcontrols
+            pending={0}
+            pending2={2}
+            title="Latest"
+          />
+          <Carousel
+            category="big"
+            showcontrols
+            pending={0}
+            pending2={2}
+            title="Big Houses"
+          />
+          <Carousel
+            category="small"
             showcontrols
             pending={0}
             pending2={2}
             title="Small Houses"
+          />
+          <Carousel
+            category="apartaments"
+            showcontrols
+            pending={0}
+            pending2={2}
+            title="Apartaments"
           />
         </>
       )}
