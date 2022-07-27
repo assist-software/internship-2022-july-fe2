@@ -1,41 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RowItem from "../RowItem/RowItem";
 
 import styles from "./Notifications.module.scss";
 import { Form, Modal } from "react-bootstrap";
 import Switch from "../../../components/Switch/Switch";
 import NotificationModal from "../../../components/Modal/NotificationModal";
+import { updateNotification } from "../../../api/API";
+import useAuth from "../../../hooks/useAuth";
+import useStateProvider from "../../../hooks/useStateProvider";
 
 const Notifications = () => {
   // show modal
   const [show, setShow] = useState(false);
 
+  // iser
+  const { user, fetchUser } = useAuth();
+
+  // state provider
+  const { setAlert } = useStateProvider();
+
   // current modal
   const [currentModal, setCurrentModal] = useState(null);
 
   // notification settings
-  const [notificationSettings, setNotificationsSettings] = useState({
-    news: {
-      email: false,
-      sms: false,
-    },
-    discounts: {
-      email: false,
-      sms: false,
-    },
-    messages: {
-      email: false,
-      sms: false,
-    },
-    listings: {
-      email: false,
-      sms: false,
-    },
-    priceChange: {
-      email: false,
-      sms: false,
-    },
-  });
+  const [notificationSettings, setNotificationsSettings] = useState(
+    user?.notificationResponse
+  );
 
   // handle email change
   const handleEmailChange = () => {
@@ -71,20 +61,21 @@ const Notifications = () => {
   const handleModalHide = () => {
     setCurrentModal(null);
     setShow(false);
+    handleSubmit();
   };
 
   // dynamic modal title
   const modalTitle = (modal) => {
     switch (modal) {
-      case "news":
+      case "newsNotificationDto":
         return "News";
-      case "messages":
+      case "messagesNotificationDto":
         return "Messages";
-      case "listings":
+      case "listingsNotificationDto":
         return "Listings";
-      case "priceChange":
+      case "priceChangeNotificationDto":
         return "Price Change";
-      case "discounts":
+      case "discountNotificationDto":
         return "Discounts";
       default:
         break;
@@ -94,76 +85,98 @@ const Notifications = () => {
   // dynamic modal description
   const modalDescription = (modal) => {
     switch (modal) {
-      case "news":
+      case "newsNotificationDto":
         return "Receive news about new listings, price changes, and discounts.";
-      case "messages":
+      case "messagesNotificationDto":
         return "Receive messages from your landlord.";
-      case "listings":
+      case "listingsNotificationDto":
         return "Receive notifications when a listing is added to your favorites.";
-      case "priceChange":
+      case "priceChangeNotificationDto":
         return "Receive notifications when a listing price changes.";
-      case "discounts":
+      case "discountNotificationDto":
         return "Receive notifications when a listing has a discount.";
       default:
         break;
     }
   };
 
-  console.log(notificationSettings);
+  // handle submit
+  const handleSubmit = async () => {
+    try {
+      const response = await updateNotification(user?.id, notificationSettings);
+      if (response.status === 200) {
+        console.log("Success");
+        setAlert({
+          type: "success",
+          message: "Successfully updated your profile",
+        });
+        fetchUser();
+      }
+    } catch (error) {
+      console.log(error);
+      setAlert({
+        type: "danger",
+        message: "Something went wrong on server",
+      });
+    }
+  };
 
   return (
     <>
       <div>
         <h4 className={styles.title}>Notifications</h4>
         <RowItem
-          onAction={() => handleModalShow("news")}
+          onAction={() => handleModalShow("newsNotificationDto")}
           title="News"
           info={`${
-            !notificationSettings.news.email && !notificationSettings.news.sms
+            !user?.notificationResponse?.newsNotificationDto?.email &&
+            !user?.notificationResponse?.newsNotificationDto?.sms
               ? "Off"
               : "On"
           }`}
           action="Edit"
         />
         <RowItem
-          onAction={() => handleModalShow("discounts")}
+          onAction={() => handleModalShow("discountNotificationDto")}
           title="Discounts & promotions"
           info={`${
-            !notificationSettings.discounts.email &&
-            !notificationSettings.discounts.sms
+            // !notificationSettings.discounts.email &&
+            // !notificationSettings.discounts.sms
+            !user?.notificationResponse?.newsNotificationDto?.email &&
+            !user?.notificationResponse?.newsNotificationDto?.sms
               ? "Off"
               : "On"
           }`}
           action="Edit"
         />
         <RowItem
-          onAction={() => handleModalShow("messages")}
+          onAction={() => handleModalShow("messagesNotificationDto")}
           title="Messages"
           info={`${
-            !notificationSettings.messages.email &&
-            !notificationSettings.messages.sms
+            !user?.notificationResponse?.messagesNotificationDto?.email &&
+            !user?.notificationResponse?.messagesNotificationDto?.sms
               ? "Off"
               : "On"
           }`}
           action="Edit"
         />
         <RowItem
-          onAction={() => handleModalShow("listings")}
+          onAction={() => handleModalShow("listingsNotificationDto")}
           title="New listings"
           info={`${
-            !notificationSettings.listings.email &&
-            !notificationSettings.listings.sms
+            !user?.notificationResponse?.listingsNotificationDto?.email &&
+            !user?.notificationResponse?.listingsNotificationDto?.sms
               ? "Off"
               : "On"
           }`}
           action="Edit"
         />
         <RowItem
-          onAction={() => handleModalShow("priceChange")}
+          onAction={() => handleModalShow("priceChangeNotificationDto")}
           title="Price change"
           info={`${
-            !notificationSettings.priceChange.email &&
-            !notificationSettings.priceChange.sms
+            !user?.notificationResponse?.priceChangeNotificationDto?.email &&
+            !user?.notificationResponse?.priceChangeNotificationDto?.sms
               ? "Off"
               : "On"
           }`}

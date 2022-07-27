@@ -122,7 +122,7 @@ const Profile = () => {
     // gender
     if (field === "gender") {
       if (
-        formValue[field] === "" ||
+        formValue[field] === "NS" ||
         formValue[field] === "Male" ||
         formValue[field] === "Female"
       ) {
@@ -274,17 +274,19 @@ const Profile = () => {
           <Select
             value={
               formValue?.gender === 0
-                ? ""
+                ? "NS"
                 : formValue?.gender === 1
                 ? "Male"
-                : "Female"
+                : formValue?.gender === 2
+                ? "Female"
+                : null
             }
             name="gender"
             id="gender"
             onChange={handleChange}
             label="Gender"
             options={[
-              { value: "", label: "Prefer not to say" },
+              { value: "NS", label: "Prefer not to say" },
               { value: "Male", label: "Male" },
               { value: "Female", label: "Female" },
             ]}

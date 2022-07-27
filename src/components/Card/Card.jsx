@@ -148,7 +148,7 @@ const Card = ({
     favorites?.forEach((favorite) => {
       if (favorite.id === listingId) setLike(true);
     });
-  }, []);
+  }, [favorites]);
 
   return (
     <div className={styles.cards}>
@@ -224,7 +224,7 @@ const Card = ({
 
             {user?.role === 0 && (
               <div onClick={stopPropagation} className={styles.controls}>
-                {user?.id === listings?.author?.id && (
+                {!showcontrols && (
                   <div>
                     <button
                       className={styles.delete}

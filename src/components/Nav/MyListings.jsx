@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Card from "../Card/Card";
 import Filters from "../Filters/Filters";
 import useStateProvider from "../../hooks/useStateProvider";
@@ -11,7 +11,7 @@ const MyListings = ({ admin, hideApproval, pending, showcontrols }) => {
   const [openPopup, setOpenPopup] = useState(false);
   const { user } = useAuth();
   //grid view list view
-  const { listView } = useStateProvider();
+  const { listView, setListView } = useStateProvider();
 
   function stopPropagation(e) {
     e.stopPropagation();

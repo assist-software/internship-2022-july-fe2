@@ -13,12 +13,12 @@ import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 // map to render, default location is Suceava
-const Map = () => {
+const Map = ({ center }) => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
 
-  const center = useMemo(() => ({ lat: 47.6635, lng: 26.2732 }), []);
+  //const center = useMemo(() => ({ lat: 47.6635, lng: 26.2732 }), []);
   return isLoaded ? (
     <GoogleMap
       id="map"
@@ -50,34 +50,22 @@ const Preview = () => {
     navigate("/");
   };
 
-  //temporary images
-  const tempImageArr = [
-    { id: 1, value: preview?.images },
-    { id: 2, value: preview?.images },
-    { id: 3, value: preview?.images },
-    { id: 4, value: preview?.images },
-    { id: 5, value: preview?.images },
-    { id: 6, value: preview?.images },
-    { id: 7, value: preview?.images },
-    { id: 8, value: preview?.images },
-    { id: 9, value: preview?.images },
-  ];
   return (
     <section className={styles.container}>
       {/* images */}
       <div className={styles.images}>
-        {tempImageArr.slice(1, 6).map((image, index) => {
+        {preview?.images?.slice(0, 5).map((image, index) => {
           if (index === 0) {
             return (
               <img
-                src={image.value}
+                src={image}
                 className={styles.largeImage}
                 alt=""
                 key={index}
               />
             );
           } else {
-            return <img src={image.value} alt="" key={index} />;
+            return <img src={image} alt="" key={index} />;
           }
         })}
 
@@ -115,10 +103,24 @@ const Preview = () => {
           {/* location */}
           <div className={styles.location}>
             <h6>Location</h6>
-            <p>{preview?.location?.city}</p>
+            <p>
+              {preview?.location &&
+                (preview?.location[2].length > 0
+                  ? preview?.location[2] + ", "
+                  : "") +
+                  (preview?.location[3].length > 0
+                    ? preview?.location[3] + " , "
+                    : "") +
+                  preview?.location[5]}
+            </p>
             {/* google maps */}
             <div className={styles.map}>
-              <Map />
+              <Map
+                center={{
+                  lat: preview?.location ? parseFloat(preview?.location[0]) : 0,
+                  lng: preview?.location ? parseFloat(preview?.location[1]) : 0,
+                }}
+              />
             </div>
           </div>
           {/* message seller */}

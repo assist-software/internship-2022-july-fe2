@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../../components";
 import styles from "./Messages.module.scss";
@@ -31,7 +31,6 @@ const Messages = () => {
   const { messages, setMessages } = useStateProvider();
   const { userId } = useAuth();
   const [statusCode, setStatusCode] = useState("");
-
   useEffect(() => {
     (async () => {
       try {
@@ -66,8 +65,8 @@ const Messages = () => {
             </div>
 
             <div className={styles.chatRigthSide}>
-              {}
-              <Chat messages={messagesStatic} />
+              {/* <Chat messages={messagesStatic} /> */}
+              <Chat />
             </div>
           </div>
         </>

@@ -171,6 +171,18 @@ export const getMessageByUserId = async (userId) => {
   }
 };
 
+// get message by user senderId, receiverId, listingId
+export const getPrivateConversation = async (senderId, receiverId, userId) => {
+  try {
+    const response = await axios.get(
+      "/Message/" + senderId + "/" + receiverId + "/" + userId
+    );
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // delete all messages by listing id
 export const deleteAllMessages = async (listingId) => {
   try {
@@ -293,6 +305,26 @@ export const deactivateUser = async (id) => {
     const response = await axios.put("/user/" + id, {
       isActive: false,
     });
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// get notifications
+export const getNotifications = async (id) => {
+  try {
+    const response = await axios.get("/notifications/" + id);
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// update notification
+export const updateNotification = async (id, data) => {
+  try {
+    const response = await axios.put("/notifications/" + id, data);
     return response;
   } catch (error) {
     console.error(error);

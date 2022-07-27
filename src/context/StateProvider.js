@@ -15,6 +15,8 @@ export const StateProvider = ({ children }) => {
 
   // listings
   const [listings, setListings] = useState(null);
+  // show grid show list
+  const [listView, setListView] = useState(true);
   const [favorites, setFavorites] = useState([]);
 
   const fetchListings = async () => {
@@ -59,9 +61,6 @@ export const StateProvider = ({ children }) => {
   const [sortOrder, setSortOrder] = useState("");
   const [priceRange, setPriceRange] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
-
-  // show grid show list
-  const [listView, setListView] = useState(true);
 
   // preview
   const [preview, setPreview] = useState({});
