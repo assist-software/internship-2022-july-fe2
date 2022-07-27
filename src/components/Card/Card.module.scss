@@ -96,6 +96,7 @@
   color: $color-gray-400;
   font-size: 12px;
   line-height: 20px;
+  min-height: 120px;
   @media (max-width: 550px) {
     text-overflow: ellipsis;
     white-space: nowrap;

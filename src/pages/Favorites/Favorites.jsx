@@ -82,7 +82,7 @@ const Favorites = ({ showcontrols }) => {
             </div>
           </div>
         ) : (
-          <div>No fav</div>
+          <div className={styles.noFav}>You have no favorite listing </div>
         )
       ) : (
         <div className={styles.favorites}>

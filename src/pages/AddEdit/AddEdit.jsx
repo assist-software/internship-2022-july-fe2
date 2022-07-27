@@ -32,8 +32,16 @@ const AddEdit = () => {
   const getListing = async () => {
     const response = await getListingById(id);
     if (response.status === 200) {
-      // setListing(response.data);
-      setFormValue(response.data);
+      setFormValue({
+        id: response.data.id,
+        title: response.data.title,
+        category: response.data.category,
+        price: response.data.price.toString(),
+        images: response.data.images,
+        description: response.data.description,
+        location: response.data.location,
+        phone: "0757791329",
+      });
       console.log(response.data);
     }
   };
@@ -43,7 +51,6 @@ const AddEdit = () => {
     }
   }, [id]);
 
-  console.log(listing, "listing");
   //console.log(userId, "userId");
   // form data
   const [formValue, setFormValue] = useState({
@@ -255,7 +262,11 @@ const AddEdit = () => {
     }
   };
 
+  console.log(formValue, "formValue");
   console.log(showErrors, "showErrors");
+
+  console.log(id, "id");
+
   return (
     <Container>
       <h1
@@ -434,13 +445,13 @@ const AddEdit = () => {
                 variant="primary"
                 label={id ? "Update" : "Publish"}
                 // onClick={id ? handleUpdate : handleSubmit}
-                onClick={() => {
-                  if (id) {
-                    handleUpdate();
-                  } else {
-                    handleSubmit();
-                  }
-                }}
+                onClick={
+                  id
+                    ? () => {
+                        handleUpdate();
+                      }
+                    : handleSubmit
+                }
               />
             </Col>
           </Row>
