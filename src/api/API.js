@@ -171,6 +171,18 @@ export const getMessageByUserId = async (userId) => {
   }
 };
 
+// get message by user senderId, receiverId, listingId
+export const getPrivateConversation = async (senderId, receiverId, userId) => {
+  try {
+    const response = await axios.get(
+      "/Message/" + senderId + "/" + receiverId + "/" + userId
+    );
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // delete all messages by listing id
 export const deleteAllMessages = async (listingId) => {
   try {
