@@ -80,7 +80,7 @@ const Details = () => {
 
   //check favorite
   useEffect(() => {
-    favorites.forEach((favorite) => {
+    favorites?.forEach((favorite) => {
       if (favorite.id === id) {
         setLike(true);
       }

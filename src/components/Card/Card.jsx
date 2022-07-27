@@ -16,6 +16,7 @@ import setAlert from "../../components/Alert/Alert";
 import Popup from "../../pages/Home/Popup";
 import useStateProvider from "../../hooks/useStateProvider";
 import FavoriteErrorModal from "../../pages/Details/FavoriteErrorModal";
+import { useNavigate } from "react-router-dom";
 const Card = ({
   onClick,
   style,
@@ -35,6 +36,7 @@ const Card = ({
   const { favorites, setFavorites } = useStateProvider();
   const [showNotification, setShowNotification] = useState(false);
   const [favourites, setFavourites] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     getFavorite(userId).then((res) => setFavourites(res));
   }, [userId]);
@@ -218,7 +220,12 @@ const Card = ({
                     <span>Decline</span>
                   </button>
                 )}
-                <button className={styles.edit}>Edit</button>
+                <button
+                  className={styles.edit}
+                  onClick={() => navigate(`/edit/${listing.id}`)}
+                >
+                  Edit
+                </button>
               </div>
             )}
 
@@ -232,7 +239,12 @@ const Card = ({
                     >
                       <span>Delete</span>
                     </button>
-                    <button className={styles.edit}>Edit</button>
+                    <button
+                      className={styles.edit}
+                      onClick={() => navigate(`/edit/${listing.id}`)}
+                    >
+                      Edit
+                    </button>
                   </div>
                 )}
               </div>
