@@ -52,7 +52,6 @@ const ChatBody = () => {
   //   })();
   // }, [privateConversation]);
 
-
   useEffect(() => {
     if (messageRef && messageRef.current) {
       const { scrollHeight, clientHeight } = messageRef.current;
@@ -66,16 +65,18 @@ const ChatBody = () => {
 
   return (
     <div ref={messageRef} className={styles.chatBody}>
-      {privateMessages.map((message, index) =>
-        message.map((msg, index2) => (
+      {privateMessages.map(
+        (message, index) => (
+          // message.map((msg, index2) => (
           <div
-            key={msg.id}
+            key={message.id}
             className={styles.chatBodyUserMessage}
             onClick={() => console.log(index, "index")}
           >
-            <div className={styles.chatBodyMessage}>{msg.content}</div>
+            <div className={styles.chatBodyMessage}>{message.content}</div>
           </div>
-        ))
+        )
+        //))
       )}
     </div>
   );

@@ -9,6 +9,7 @@ import useStateProvider from "../../../../hooks/useStateProvider";
 import useAuth from "../../../../hooks/useAuth";
 
 const PreviewConversation = ({
+  status,
   messagePreview,
   userReceiverId,
   listingId,
@@ -61,7 +62,7 @@ const PreviewConversation = ({
     (async () => {
       try {
         const response = await getListingById(listingId);
-        
+
         setListTitle(response?.data.title);
       } catch (error) {
         console.log("Error: ", error);
@@ -102,35 +103,18 @@ const PreviewConversation = ({
     // NEW ADDED FROM CHATBODY
     (async () => {
       try {
-        console.log(
-          localStorage.getItem("receiverId"),
-          "sender",
-          localStorage.getItem("userId"),
-          "receiver",
-          localStorage.getItem("listingId"),
-          "from Chatbody"
-        );
-        // setPrivateMessages([]);
         if (
           localStorage.getItem("receiverId") !== "" &&
           localStorage.getItem("listingId") !== ""
         ) {
-          // console.log("test");
-          // debugger;
           const response = await getPrivateConversation(
             localStorage.getItem("receiverId"),
             localStorage.getItem("userId"),
             localStorage.getItem("listingId")
           );
-          console.log(response, "response");
-          // setPrivateMessages([]);
-          privateMessages.push(response.data);
-
-          console.log(privateMessages, "conversation");
+          setPrivateMessages(response.data);
         }
-      } catch (error) {
-        console.log("Error: ", error);
-      }
+      } catch (error) {}
     })();
   };
 
@@ -142,8 +126,6 @@ const PreviewConversation = ({
         active === true ? styles.active : null
       }`}
       onClick={(e) => {
-        //setActive(!active);
-        //console.log(active, "actiev");
         handlePrivateConversation();
       }}
     >
@@ -172,6 +154,7 @@ const PreviewConversation = ({
           <div className={styles.previewBodyLastMessage}>
             {messagePreview.content}
           </div>
+          <div className={styles.previewBodyLastMessage}>{status}</div>
         </div>
       </div>
     </div>

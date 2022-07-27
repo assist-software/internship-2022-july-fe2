@@ -11,11 +11,14 @@ const ChatInput = () => {
   const [message, setMessage] = useState("");
   const { userId } = useAuth;
 
-  const newMessage = {
+  const newMess = {
     senderId: localStorage.getItem("userId"),
     receiverId: localStorage.getItem("receiverId"),
     listingId: localStorage.getItem("listingId"),
+    createdAt: "2022-07-27T12:09:40.947Z",
+    updatedAt: "2022-07-27T12:09:40.947Z",
     content: message,
+    viewStatus: true,
   };
 
   const { setAlert } = useStateProvider();
@@ -26,9 +29,9 @@ const ChatInput = () => {
       onSubmit={(e) => {
         e.preventDefault();
         try {
-          newMessage.content = message;
+          newMess.content = message;
           console.log(message, "mesaaaaaj ");
-          const response = newMessage(newMessage);
+          const response = newMessage(newMess);
 
           if (response.status === 201) {
             setAlert({
@@ -37,9 +40,9 @@ const ChatInput = () => {
             });
           }
 
+          setMessage("");
           //messages.push(message);
           //console.log(message, ": messages");
-          setMessage("");
         } catch (e) {
           console.log("Error: ", e);
           setAlert({
