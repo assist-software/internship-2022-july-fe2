@@ -51,14 +51,22 @@ const Home = ({ showcontrols }) => {
         <>
           {!view ? (
             <>
-              <Carousel showcontrols pending={0} pending2={2} title="Latest" />
               <Carousel
+                all
+                showcontrols
+                pending={0}
+                pending2={2}
+                title="Latest"
+              />
+              <Carousel
+                category="big"
                 showcontrols
                 pending={0}
                 pending2={2}
                 title="Big Houses"
               />
               <Carousel
+                category="small"
                 showcontrols
                 pending={0}
                 pending2={2}
@@ -92,13 +100,6 @@ const Home = ({ showcontrols }) => {
             pending={0}
             pending2={2}
             title="Small Houses"
-          />
-          <Carousel
-            category="apartaments"
-            showcontrols
-            pending={0}
-            pending2={2}
-            title="Apartaments"
           />
         </>
       )}
