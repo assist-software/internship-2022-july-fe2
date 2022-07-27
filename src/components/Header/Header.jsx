@@ -19,8 +19,15 @@ import { ReactComponent as Loop } from "../../assets/icons/magnifying-glass.svg"
 import useAuth from "../../hooks/useAuth";
 
 const Header = () => {
-  const { logout } = useAuth();
+  const { logout, user, userId } = useAuth();
   const navigate = useNavigate();
+  const categories = [
+    { value: "", label: "Category" },
+    { value: "big", label: "Big Houses" },
+    { value: "small", label: "Small Houses" },
+    { value: "office", label: "Offices" },
+    { value: "apartment", label: "Apartments" },
+  ];
   return (
     <Navbar collapseOnSelect expand="xl" className={styles.navbar} sticky="top">
       <Container className={styles.content}>
@@ -37,6 +44,7 @@ const Header = () => {
                   fontSize="buton"
                   title="Category"
                   className={styles.drop}
+                  options={categories}
                 />
               </div>
               <Form className="d-flex">
@@ -61,11 +69,29 @@ const Header = () => {
               </Button>
             </div>
             <Dropdown>
-              <Dropdown.Toggle className={styles.profileTitle}>
-                <Person
-                  style={{ stroke: "$color-gray-600", marginRight: "7px" }}
-                />
-                My Profile
+              <Dropdown.Toggle
+                className={styles.profileTitle}
+                style={{ display: "inline-flex" }}
+              >
+                {userId === null ? (
+                  <div className={styles.profile}>
+                    <Person
+                      style={{ stroke: "$color-gray-600", marginRight: "7px" }}
+                    />
+                    My Profile
+                  </div>
+                ) : (
+                  <div className={styles.profile}>
+                    <div className={styles.photoDiv}>
+                      <img
+                        src={user?.photo}
+                        alt=""
+                        className={styles.userPhoto}
+                      />
+                    </div>
+                    {user?.fullName}
+                  </div>
+                )}
               </Dropdown.Toggle>
 
               <Dropdown.Menu className={styles.dropMenu}>

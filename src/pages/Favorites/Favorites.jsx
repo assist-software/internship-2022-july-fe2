@@ -8,23 +8,30 @@ import { useNavigate } from "react-router-dom";
 import { ReactComponent as GridRow } from "../../assets/icons/grid.svg";
 import { ReactComponent as Rows } from "../../assets/icons/rows.svg";
 import useAuth from "../../hooks/useAuth";
+import useStateProvider from "../../hooks/useStateProvider";
 
 const Favorites = () => {
   const navigate = useNavigate();
   const { userId } = useAuth();
   const [listings, setListings] = useState([]);
-  useEffect(() => {
-    userId === null ? setShowError(true) : setShowError(false);
-  }, []);
-  const [showError, setShowError] = useState(userId === null ? true : false);
+
   useEffect(() => {
     getFavorite(userId).then((res) => setListings(res));
   }, [userId]);
-  const [listView, setListView] = useState(true);
-  const [like, setLike] = useState(true); //like = true ca sa setez Heart icon filled pentru carduri
+  useEffect(() => {
+    userId === null || listings === null
+      ? setShowError(true)
+      : setShowError(false);
+  }, []);
+  const [showError, setShowError] = useState(
+    userId === null || listings === null ? true : false
+  );
+  const { listView, setListView } = useStateProvider();
+  //const [like, setLike] = useState(true); //like = true ca sa setez Heart icon filled pentru carduri
   // Filtrare cards care sunt adaugate la favorite ? Backend/Frontend
   console.log(userId, "userID");
-  return userId ? (
+  console.log(listings, "favorites");
+  return (
     <div className={styles.container}>
       <h1 className={styles.favoritesTitle}>Favourites</h1>
 
@@ -53,11 +60,12 @@ const Favorites = () => {
             {listings?.map((listing, index) => (
               <Card
                 key={index}
-                image={listing.images}
+                image={listing.images[0]}
                 title={listing.title}
                 description={listing.description}
                 price={listing.price}
-                location={listing.location}
+                location={listing.location[2] + ", " + listing.location[5]}
+                listingId={listing.id}
                 listView={listView}
                 onClick={() => {
                   navigate("/listing/" + listing.id);
@@ -72,8 +80,6 @@ const Favorites = () => {
         </div>
       )}
     </div>
-  ) : (
-    <div>Loading...</div>
   );
 };
 
