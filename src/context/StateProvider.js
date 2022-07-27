@@ -27,7 +27,7 @@ export const StateProvider = ({ children }) => {
   // messages
   const [messages, setMessages] = useState([]);
   const [privateConversation, setPrivateConversation] = useState([]);
-  const { userId } = useAuth();
+  const { userId, user } = useAuth();
 
   // const fetchMessages = async () => {
   //   try {
