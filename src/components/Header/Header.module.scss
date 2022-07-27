@@ -1,4 +1,5 @@
 @import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
 
 .navbar {
   border-bottom: 1px solid $color-gray-200 !important;
@@ -69,8 +70,11 @@
   font-size: $font-button;
   align-items: center;
   justify-content: center;
-  margin-top: 13px;
   margin-left: 1rem;
+}
+
+.favoritesDiv {
+  margin: auto 0;
 }
 
 .favoritesDiv:hover {
@@ -87,20 +91,20 @@
   box-shadow: none !important;
 }
 
-.photoDiv{
-    border: 1px solid $color-gray-100;
-    border-radius: 25px;
-    display: flex;
-    height: fit-content;
-    .userPhoto{
-      width: 3rem;
-      height: 3rem;
-      aspect-ratio: 1;
-      border-radius: 50%;
-    }
+.photoDiv {
+  border: 1px solid $color-gray-100;
+  border-radius: 25px;
+  display: flex;
+  height: fit-content;
+  .userPhoto {
+    width: 3rem;
+    height: 3rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+  }
 }
 
-.profile{
+.profile {
   color: $color-gray-600 !important;
   font-weight: $font-semibold;
   font-size: $font-body-small;
@@ -108,6 +112,10 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
+
+  @include medium {
+    margin-left: 22px;
+  }
 }
 .profile:hover {
   color: $color-primary-300 !important;
@@ -131,7 +139,6 @@
   justify-content: center;
   margin-right: 5px;
   gap: 8px !important;
-
 }
 .profileTitle:focus {
   box-shadow: none !important;
@@ -144,10 +151,9 @@
     }
   }
 }
-.dropdown-toggle:after{
+.dropdown-toggle:after {
   align-self: center;
 }
-
 
 .blueLogo {
   width: 20px;
