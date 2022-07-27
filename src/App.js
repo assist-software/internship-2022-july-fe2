@@ -14,10 +14,7 @@ import {
   Onboarding,
   Layout,
   Details,
-  Selim,
-  Catalin,
-  Andrei,
-  Sabin,
+  Preview,
 } from "./pages";
 
 import { Header } from "./components";
@@ -41,7 +38,8 @@ function App() {
           }
         >
           {/* protected routes */}
-          <Route path="/favorites" element={<Favorites />} />
+          <Route path="/add" element={<AddEdit />} />
+          <Route path="/add/preview" element={<Preview />} />
           <Route path="/confirmation" element={<Confirmation />} />
           <Route path="/my-account">
             <Route path="profile" element={<MyAccount />} />
@@ -65,8 +63,8 @@ function App() {
           {/* public routes */}
           <Route path="/" element={<Home />} />
           <Route path="/listing" element={<Listing />} />
-          <Route path="/add" element={<AddEdit />} />
           <Route path="/listing/:id" element={<Details />} />
+          <Route path="/favorites" element={<Favorites />} />
         </Route>
 
         {/* onboarding routes */}
@@ -74,12 +72,6 @@ function App() {
         <Route path="/register" element={<Onboarding />} />
         <Route path="/forgot-password" element={<Onboarding />} />
         <Route path="/reset-password" element={<Onboarding />} />
-
-        {/* test routes */}
-        <Route path="/selim" element={<Selim />} />
-        <Route path="/catalin" element={<Catalin />} />
-        <Route path="/andrei" element={<Andrei />} />
-        <Route path="/sabin" element={<Sabin />} />
       </Routes>
       {alert && <Alert message={alert.message} type={alert.type} />}
     </Router>

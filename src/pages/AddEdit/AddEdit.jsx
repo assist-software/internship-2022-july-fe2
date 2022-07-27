@@ -8,53 +8,72 @@ import { ReactComponent as Delete } from "../../assets/icons/delete.svg";
 
 import { useDropzone } from "react-dropzone";
 import GetLocation from "../../components/GetLocation/GetLocation";
+import { useNavigate } from "react-router-dom";
+import useStateProvider from "../../hooks/useStateProvider";
+import { createListing } from "../../api/API";
+import useAuth from "../../hooks/useAuth";
+
+import TextArea from "../../components/Input/TextArea";
 
 const AddEdit = () => {
+  const { setAlert } = useStateProvider();
+  const navigate = useNavigate();
   const [address, setAddress] = useState({});
   const [coords, setCoords] = useState({});
-
+  const { preview, setPreview } = useStateProvider();
+  const { userId } = useAuth();
+  //console.log(userId, "userId");
   // form data
   const [formValue, setFormValue] = useState({
-    title: "",
-    category: "",
-    price: "",
+    title: preview.title || "",
+    category: preview.category || "",
+    price: preview.price || "",
     images: [],
-    description: "",
-    location: {
-      lat: coords?.lat || "",
-      lng: coords?.lng || "",
-      city: address?.city || "",
-      state: address?.state || "",
-      zip: address?.zip || "",
-      country: address?.country || "",
-    },
-    phone: "",
+    description: preview.description || "",
+    shortDescription: "",
+    location: [
+      coords?.lat?.toLocaleString() || "",
+      coords?.lng?.toLocaleString() || "",
+      address?.city || "",
+      address?.state || "",
+      address?.zip || "",
+      address?.country || "",
+    ],
+    phone: preview.phone || "",
+    author: userId,
   });
-
-  console.log(formValue);
 
   const setLocation = useCallback(() => {
     setFormValue({
       ...formValue,
-      location: {
-        lat: coords?.lat || "",
-        lng: coords?.lng || "",
-        city: address?.city || "",
-        state: address?.state || "",
-        zip: address?.zip || "",
-        country: address?.country || "",
-      },
+      location: [
+        coords?.lat?.toLocaleString() || "",
+        coords?.lng?.toLocaleString() || "",
+        address?.city || "",
+        address?.state || "",
+        address?.zip || "",
+        address?.country || "",
+      ],
     });
   }, [address, coords]);
 
+  //------------------------------ useEffect
+  //set location in useEffect
   useEffect(() => {
     setLocation();
   }, [setLocation]);
+  //set preview in useEffect
+  useEffect(() => {
+    setPreview(formValue);
+  }, [formValue]);
 
+  //------------------------------- HANDLERS
   // handleChange
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormValue({ ...formValue, [name]: value });
+    setFormValue((prev) => {
+      return { ...prev, [name]: value };
+    });
   };
 
   // handleDrop
@@ -84,12 +103,23 @@ const AddEdit = () => {
     });
   };
 
+  //handle Preview
+  const handlePreview = () => {
+    console.log(preview, " preview");
+    navigate("./preview");
+  };
+
+  //-------------------------------- validations
   // check errors
   const checkErrors = (field) => {
     // title
     if (field === "title") {
-      if (formValue.title.length < 10) {
+      if (formValue.title.length < 10 && formValue.title.length > 0) {
         return "Title must be at least 10 characters long";
+      } else if (formValue.title.length > 50) {
+        return "Title must be less than 50 characters long";
+      } else if (formValue.title.length === 0) {
+        return "Title is required";
       }
     }
     // category
@@ -100,26 +130,40 @@ const AddEdit = () => {
     }
     // price
     if (field === "price") {
-      if (formValue.price.length < 1 || !formValue.price.match(/^[0-9]+$/)) {
+      if (formValue.price.length === 0) {
+        return "Price is required";
+      }
+      // if more than 2 digits
+      else if (formValue.price.length > 5) {
+        return "Price must be less than 99,999 lei";
+      } else if (!formValue.price.match(/^[0-9]+$/)) {
         return "Price must be valid";
       }
     }
     // images
     if (field === "images") {
-      if (formValue.images.length < 5) {
+      if (formValue.images.length < 5 && formValue.images.length !== 0) {
         return "Images must be at least 5";
+      } else if (formValue.images.length > 9) {
+        return "Images must be maximum 9";
+      } else if (formValue.images.length < 1) {
+        return "Images are required";
       }
     }
     // description
     if (field === "description") {
-      if (formValue.description.length < 10) {
-        return `${formValue.description.length} /100 characters`;
+      if (formValue.description.length < 100) {
+        return `${formValue.description.length} /100 mandatory characters`;
+      } else if (formValue.description.length > 500) {
+        return "Description must be less than 500 characters long";
+      } else if (formValue.description.length === 0) {
+        return "Description is required";
       }
     }
     // location
     if (field === "location") {
-      if (formValue.location.lat === "" || formValue.location.lng === "") {
-        return "Location is mandatory";
+      if (formValue.location[0] === "" || formValue.location[1] === "") {
+        return "Location must be selected from dropdown";
       }
     }
     // phoneNumber
@@ -146,18 +190,49 @@ const AddEdit = () => {
   const [showErrors, setShowErrors] = useState(false);
 
   // handleSubmit
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!isFormValid()) {
       setShowErrors(true);
-    } else {
+    }
+    if (isFormValid()) {
       setShowErrors(false);
-      console.log(formValue);
+      try {
+        const response = await createListing(formValue);
+        if (response.status === 200) {
+          setAlert({
+            type: "success",
+            message: "Listing created successfully",
+            // navigate("./preview");
+          });
+          setTimeout(() => {
+            navigate("/");
+          }, 1000);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
+  console.log(showErrors, "showErrors");
   return (
     <Container>
-      <h1 className={styles.addTitle}>Add new</h1>
+      <h1
+        onClick={() =>
+          setFormValue({
+            ...formValue,
+            title: "Lorem ipsum dolor sit amet",
+            category: "big",
+            price: "999",
+            description:
+              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem lorem testing let me describe my self",
+            phone: "0712345678",
+          })
+        }
+        className={styles.addTitle}
+      >
+        Add new
+      </h1>
       <Row>
         <Col md={{ span: 4, offset: 0 }} className={styles.bottomBorder}>
           <div className={styles.info}>
@@ -173,7 +248,6 @@ const AddEdit = () => {
               id="title"
               value={formValue.title}
               label="Title"
-              placeholder="Placeholder"
               onChange={handleChange}
               error={showErrors && checkErrors("title") ? true : false}
               helper={showErrors ? checkErrors("title") : ""}
@@ -189,9 +263,10 @@ const AddEdit = () => {
               label="Category"
               options={[
                 { value: "", label: "Select a category" },
-                { value: "category1", label: "Category 1" },
-                { value: "category2", label: "Category 2" },
-                { value: "category3", label: "Category 3" },
+                { value: "big", label: "Big houses" },
+                { value: "small", label: "Small houses" },
+                { value: "office", label: "Offices" },
+                { value: "apartment", label: "Apartments" },
               ]}
             />
             <div className={styles.price}>
@@ -256,13 +331,12 @@ const AddEdit = () => {
         </Col>
         <Col md={{ span: 6, offset: 0 }} className={styles.bottomBorder}>
           {/* description */}
-          <Input
-            error={showErrors && checkErrors("description") ? true : false}
-            helper={checkErrors("description")}
+          <TextArea
             name="description"
             id="description"
             label="Description details"
-            placeholder="Placeholder"
+            error={showErrors && checkErrors("description") ? true : false}
+            helper={checkErrors("description")}
             value={formValue.description}
             onChange={handleChange}
           />
@@ -307,7 +381,11 @@ const AddEdit = () => {
         <Col md={{ span: 6, offset: 0 }}>
           <Row>
             <Col sm={{ span: 2, offset: 5 }}>
-              <Button variant="secondary" label="Preview" />
+              <Button
+                variant="secondary"
+                label="Preview"
+                onClick={handlePreview}
+              />
             </Col>
 
             <Col sm={{ span: 2, offset: 2 }}>
@@ -333,7 +411,6 @@ function Dropzone({ onDrop, accept, open }) {
     isDragActive,
   } = useDropzone({
     accept: {
-      "image/jpeg": [],
       "image/png": [],
     },
     maxFiles: 9,

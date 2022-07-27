@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { getUserById } from "../api/API";
+import { getUserById, getNotifications } from "../api/API";
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   const fetchUser = async () => {
     try {
       const response = await getUserById(userId);
-      setUser(response.data);
+      setUser(response?.data);
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -20,7 +20,10 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     fetchUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
+
+  console.log("user: ", user);
 
   // logout function
   function logout() {
@@ -31,7 +34,7 @@ export const AuthProvider = ({ children }) => {
 
   // login function
   const login = (user) => {
-    localStorage.setItem("token", user.token);
+    localStorage.setItem("token", "user.token");
     setUser(user);
   };
 
@@ -42,7 +45,16 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ login, logout, isLoggedIn, user, fetchUser, setUser }}
+      value={{
+        login,
+        logout,
+        isLoggedIn,
+        user,
+        fetchUser,
+        setUser,
+        userId,
+        setUserId,
+      }}
     >
       {children}
     </AuthContext.Provider>

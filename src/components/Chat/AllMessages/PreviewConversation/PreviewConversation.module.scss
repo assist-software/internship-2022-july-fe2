@@ -1,0 +1,87 @@
+@import '../../../../styles/variables.scss';
+
+.previewContainer{
+    height: 100px;
+    padding:10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid $color-gray-100;
+    cursor:pointer;
+  }
+
+  .active{
+    background-color: $color-gray-50;
+  }
+  
+  .previewUserProfile {
+    border-radius: 50%;
+    width: 40px;
+    aspect-ratio: 1;
+  }
+  
+  .previewContent{
+    display:flex;
+    flex-direction: column;
+    padding-left:15px;
+    width:220px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .previewHeader{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color:$color-gray-400;
+    font-weight: $font-regular;
+    font-size: $font-body-tiny;
+    line-height: 20px;
+  }
+  
+  .previewHeaderUsername{ 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width:150px;
+  }
+  
+  .previewHeaderTime{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width:43px;
+  }
+  
+  .previewBody{
+    
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width:160px;
+  }
+  
+  .previewBodyListingTitle{
+    width:150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    color: $color-gray-700;
+    font-size:$font-body-small;
+    font-weight: $font-medium;
+    line-height: 22px;
+  }
+  
+  .previewBodyLastMessage{
+    width:150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    color: $color-gray-500;
+    font-size:$font-body-small;
+    font-weight: $font-regular;
+    line-height: 22px;
+  }

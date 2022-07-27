@@ -1,32 +1,32 @@
 @import "../../styles/variables.scss";
 
-
 .navbar {
-  border-bottom: 1px solid !important;
-  border-bottom-color: $color-gray-200 !important;
+  border-bottom: 1px solid $color-gray-200 !important;
   z-index: 2 !important;
   background-color: white !important;
 }
-.assist{
-  width: 103px !important;
-  min-width: 100px !important;
+
+.content {
+  max-width: 1140px !important;
+}
+.assist {
+  width: 103px;
+  min-width: 100px;
   height: 32px;
-  min-height: 40px !important;
+  min-height: 40px;
   cursor: pointer;
-  
 }
 
-
-
 .search {
-  margin:1rem 0rem 1rem 0rem;
+  margin: 1rem 0rem 1rem 0rem;
   background-color: white;
   height: 40px;
   width: 400px !important;
   border-right: none !important;
   border-radius: 0px !important;
 }
-.search:focus,.search:hover {
+.search:focus,
+.search:hover {
   box-shadow: none !important;
   border-color: $color-gray-200 !important;
 }
@@ -40,13 +40,13 @@
   border-bottom-right-radius: 10px !important;
   border-top-right-radius: 10px !important;
   stroke: $color-primary-500;
-  padding:10px 10px;
-  path{
-    fill : $color-primary-300;
+  padding: 10px 10px;
+  path {
+    fill: $color-primary-300;
   }
 }
 
-.category{
+.category {
   margin: 1rem 0;
   border: 1px solid $color-gray-200 !important;
   height: 40px;
@@ -69,22 +69,53 @@
   font-size: $font-button;
   align-items: center;
   justify-content: center;
-  margin-right: 5px;
+  margin-top: 13px;
+  margin-left: 1rem;
 }
 
 .favoritesDiv:hover {
-  .favorites{
+  .favorites {
     color: $color-primary-300 !important;
-    svg{
-      path{
+    svg {
+      path {
         fill: $color-primary-300 !important;
       }
     }
   }
-  
 }
 .favorites:focus {
   box-shadow: none !important;
+}
+
+.photoDiv{
+    border: 1px solid $color-gray-100;
+    border-radius: 25px;
+    display: flex;
+    height: fit-content;
+    .userPhoto{
+      width: 3rem;
+      height: 3rem;
+      aspect-ratio: 1;
+      border-radius: 50%;
+    }
+}
+
+.profile{
+  color: $color-gray-600 !important;
+  font-weight: $font-semibold;
+  font-size: $font-body-small;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.profile:hover {
+  color: $color-primary-300 !important;
+  svg {
+    path {
+      fill: $color-primary-300;
+    }
+  }
 }
 
 .profileTitle {
@@ -94,7 +125,7 @@
   font-weight: $font-semibold;
   font-size: $font-body-small;
   padding: 0.48rem !important;
-  margin-left: 0.9rem !important;
+  margin-left: 0.4rem !important;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -106,46 +137,47 @@
 }
 .profileTitle:hover {
   color: $color-primary-300 !important;
-  svg{
-    path{
+  svg {
+    path {
       fill: $color-primary-300;
     }
   }
 }
 
+
 .blueLogo {
   width: 20px;
   height: 20px;
   margin: 5px;
-  path{
+  path {
     fill: $color-primary-300;
   }
 }
 
-.profileOption{
+.profileOption {
   font-weight: $font-medium;
   font-size: $font-body-small;
   color: $color-gray-600 !important;
 }
 .profileOption:hover {
   background-color: white !important;
-  color: $color-primary-300  !important;
+  color: $color-primary-300 !important;
 }
 
-.dropMenu{
+.dropMenu {
   border: 0px !important;
   border-radius: 12px !important;
   box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.14);
   z-index: 1;
 }
 
-.hello{
-  font-size: $font-body-normal ;
+.hello {
+  font-size: $font-body-normal;
   font-weight: $font-bold;
   color: $color-black;
 }
-.logout{
-  stroke: $color-gray-500  !important;
+.logout {
+  stroke: $color-gray-500 !important;
   height: 20px;
   width: 20px;
   margin: 5px;

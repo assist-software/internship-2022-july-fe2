@@ -1,0 +1,48 @@
+@import "../../styles/variables.scss";
+
+.container {
+  display: flex;
+}
+
+.closeButton {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.modalBody {
+  padding: 5rem 3rem !important;
+}
+
+.title {
+  font-size: $font-h5;
+  font-weight: $font-bold;
+  line-height: 28px;
+  margin-bottom: 4px;
+}
+
+.description {
+  font-size: $font-body-small;
+  font-weight: $font-regular;
+  line-height: 22px;
+  margin-bottom: 4px;
+  color: $color-gray-400;
+  margin-bottom: 33px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  margin-top: 33px;
+  color: $color-black;
+
+  & > * {
+    font-size: $font-body-normal;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+  }
+}

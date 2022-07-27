@@ -1,24 +1,49 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import filtersStyle from "./Filters.module.scss";
 import DropdownComponent from "../Dropdown/Dropdown";
-import { getListingsSort } from "../../api/API";
+import { getListings, getListingsSort } from "../../api/API";
 import GridRows from "./GridRows";
 import useStateProvider from "../../hooks/useStateProvider";
 
-const Filters = ({ setListView, admin }) => {
+const Filters = ({ admin }) => {
   // listings
   const { setListings } = useStateProvider();
+  // filters state
   const { sortOrder, setSortOrder } = useStateProvider("");
   const { priceRange, setPriceRange } = useStateProvider("");
   const { locationFilter, setLocationFilter } = useStateProvider("");
-  const [selectedOptions, setSelectedOptions] = useState();
-  useEffect(() => {
-    getListingsSort(sortOrder, locationFilter, priceRange, "", "", "", "").then(
-      (res) => setListings(res)
-    );
-  }, [priceRange, setListings, sortOrder, locationFilter]);
-  console.log(priceRange);
+  console.log(locationFilter, "LOCATION");
+  const fetchListingsSort = async (url) => {
+    try {
+      const response = await getListingsSort(url);
+      setListings(response);
+    } catch (error) {}
+  };
 
+  useEffect(() => {
+    const params = [];
+    if (priceRange !== "" && !params.includes(`PriceRange=${priceRange}`)) {
+      params.push(`PriceRange=${priceRange}`);
+    }
+    if (sortOrder !== "" && !params.includes(`SortOrder=${sortOrder}`)) {
+      params.push(`SortOrder=${sortOrder}`);
+    }
+    if (
+      locationFilter !== "" &&
+      !params.includes(`LocationFilter=${locationFilter}`)
+    ) {
+      params.push(`LocationFilter=${locationFilter}`);
+    }
+    const url = params.join("&");
+    if (params.length === 0) {
+      getListings().then((res) => setListings(res));
+    }
+    console.log(params, "params");
+    if (url !== "") {
+      fetchListingsSort(url);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [priceRange, sortOrder, locationFilter, setListings]);
   const Price = [
     { value: "", label: " All" },
     { value: "0 - 10000", label: "0 - 10.000" },
@@ -34,6 +59,21 @@ const Filters = ({ setListView, admin }) => {
     { value: "HighToLow", label: "Price: High to Low" },
     { value: "Featured", label: "Featured" },
   ];
+
+  const getValue = (e) => {
+    const myArray = [];
+    if (myArray.length === 0) {
+      setLocationFilter("");
+    }
+    e.forEach((x) => {
+      if (myArray.includes(x.value)) {
+        myArray.splice(myArray.indexOf(x.value), 1);
+      } else {
+        myArray.push(x.value);
+      }
+      setLocationFilter(myArray);
+    });
+  };
   return (
     <div>
       <div className={filtersStyle.headerBtns}>
@@ -42,9 +82,7 @@ const Filters = ({ setListView, admin }) => {
           <div className={filtersStyle.locationPrice}>
             <DropdownComponent
               onChange={(e) => {
-                setLocationFilter(e);
-                // handleSort(e);
-                setSelectedOptions(e);
+                getValue(e);
               }}
               multi
               title="Location"
@@ -70,7 +108,7 @@ const Filters = ({ setListView, admin }) => {
             />
           </div>
 
-          {!admin && <GridRows setListView={setListView} />}
+          {!admin && <GridRows />}
         </div>
       </div>
     </div>

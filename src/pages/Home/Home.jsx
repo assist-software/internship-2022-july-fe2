@@ -6,17 +6,26 @@ import Tabs from "../../components/Tabs/Tabs";
 import useAuth from "../../hooks/useAuth";
 import Listing from "../Listing/Listing";
 import useStateProvider from "../../hooks/useStateProvider";
+import PendingApproval from "../../components/Nav/PendingApproval";
+import MyListings from "../../components/Nav/MyListings";
 
-const Home = () => {
+const Home = ({ showcontrols }) => {
   const { user } = useAuth();
   const { setListings } = useStateProvider();
+  const { setListView } = useStateProvider();
 
   const [view, setView] = useState(false);
-
   useEffect(() => {
     getListings().then((res) => setListings(res));
+    if (user?.role === 1) {
+      setListView(true);
+    } else if (user?.role === 0) {
+      setListView(false);
+    } else {
+      setListView(false);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [setListView]);
 
   return (
     <div>
@@ -27,9 +36,9 @@ const Home = () => {
       {user?.role === 1 && (
         <>
           {view ? (
-            <Listing pending={1} hideApproval admin />
+            <PendingApproval pending={1} hideApproval admin />
           ) : (
-            <Listing pending={0} admin />
+            <Listing pending={0} pending2={2} admin />
           )}
         </>
       )}
@@ -37,20 +46,40 @@ const Home = () => {
         <>
           {!view ? (
             <>
-              <Carousel title="Most view" />
-              <Carousel title="Big Houses" />
-              <Carousel title="Small Houses" />
+              <Carousel
+                showcontrols
+                pending={0}
+                pending2={2}
+                title="Most view"
+              />
+              <Carousel
+                showcontrols
+                pending={0}
+                pending2={2}
+                title="Big Houses"
+              />
+              <Carousel
+                showcontrols
+                pending={0}
+                pending2={2}
+                title="Small Houses"
+              />
             </>
           ) : (
-            <Listing />
+            <MyListings />
           )}
         </>
       )}
       {user?.role == null && (
         <>
-          <Carousel title="Most view" />
-          <Carousel title="Big Houses" />
-          <Carousel title="Small Houses" />
+          <Carousel showcontrols pending={0} pending2={2} title="Most view" />
+          <Carousel showcontrols pending={0} pending2={2} title="Big Houses" />
+          <Carousel
+            showcontrols
+            pending={0}
+            pending2={2}
+            title="Small Houses"
+          />
         </>
       )}
     </div>

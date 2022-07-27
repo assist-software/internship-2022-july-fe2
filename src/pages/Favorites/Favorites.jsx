@@ -8,24 +8,29 @@ import { useNavigate } from "react-router-dom";
 import { ReactComponent as GridRow } from "../../assets/icons/grid.svg";
 import { ReactComponent as Rows } from "../../assets/icons/rows.svg";
 import useAuth from "../../hooks/useAuth";
+import useStateProvider from "../../hooks/useStateProvider";
 
-const Favorites = () => {
+const Favorites = ({}) => {
   const navigate = useNavigate();
-  const { user } = useAuth();
-  // console.log(user, "user");
-  const [showError, setShowError] = useState(user === null ? true : false);
+  const { userId } = useAuth();
   const [listings, setListings] = useState([]);
-  useEffect(() => {
-    user === null ? setShowError(true) : setShowError(false);
-  }, []);
-  useEffect(() => {
-    getFavorite(user.id).then((res) => setListings(res));
-  }, []);
-  const [listView, setListView] = useState(true);
-  //const [like,setLike] =useState(true); //like = true ca sa setez Heart icon filled pentru carduri
 
+  useEffect(() => {
+    getFavorite(userId).then((res) => setListings(res));
+  }, [userId]);
+  useEffect(() => {
+    userId === null || listings === null
+      ? setShowError(true)
+      : setShowError(false);
+  }, []);
+  const [showError, setShowError] = useState(
+    userId === null || listings === null ? true : false
+  );
+  const { listView, setListView } = useStateProvider();
+  //const [like, setLike] = useState(true); //like = true ca sa setez Heart icon filled pentru carduri
   // Filtrare cards care sunt adaugate la favorite ? Backend/Frontend
-
+  console.log(userId, "userID");
+  console.log(listings, "favorites");
   return (
     <div className={styles.container}>
       <h1 className={styles.favoritesTitle}>Favourites</h1>
@@ -55,11 +60,12 @@ const Favorites = () => {
             {listings?.map((listing, index) => (
               <Card
                 key={index}
-                image={listing.images}
+                image={listing.images[0]}
                 title={listing.title}
                 description={listing.description}
                 price={listing.price}
-                location={listing.location}
+                location={listing.location[2] + ", " + listing.location[5]}
+                listingId={listing.id}
                 listView={listView}
                 onClick={() => {
                   navigate("/listing/" + listing.id);

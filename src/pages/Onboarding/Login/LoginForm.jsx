@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
-// import useAuth from "../../../hooks/useAuth";
 import style from "../Authenticate.module.scss";
 import Input from "../../../components/Input/Input";
 import Button from "../../../components/Button/Button";
@@ -18,7 +17,7 @@ import { login } from "../../../api/API";
 // import { getUserById } from "../../../api/API";
 
 export default function LoginForm() {
-  const { setUser } = useAuth();
+  const { setUser, setUserId } = useAuth();
 
   const { setAlert } = useStateProvider();
 
@@ -54,14 +53,16 @@ export default function LoginForm() {
     try {
       if (emailError === "" && pwdError === "") {
         if (pwd.length > 7) {
+          //setUser()
           const response = await login(email, pwd);
           if (response.status === 200) {
             setUser(response.data);
             console.log(response.data, "user json");
             navigate("/");
-            localStorage.setItem("token", response?.data.token);
+            localStorage.setItem("token", "response?.data.token");
             localStorage.setItem("userId", response?.data.id);
-
+            setUserId(response?.data.id);
+            console.log(response?.data.id, "userid");
             setAlert({
               type: "success",
               message: "Login successfully",
@@ -88,34 +89,63 @@ export default function LoginForm() {
   const passToggleHandler = () => {
     setPasswordShown(!passwordShown);
   };
+  const resp = [
+    {
+      id: "9f244a73-8105-4bd8-6893-08da6d50a9d6",
+      fullName: "Andrei Andries",
+      gender: 0,
+      date_of_birth: "",
+      email: "andrei@1.com",
+      password: "useruser",
+      token: "secret",
+      phone: "string",
+      address: "string",
+      role: 1,
+      photo:
+        "https://media.istockphoto.com/vectors/vector-illustration-of-red-house-icon-vector-id155666671?k=20&m=155666671&s=612x612&w=0&h=sL5gRpVmrGcZBVu5jEjF5Ne7A4ZrBCuh5d6DpRv3mps=",
+      isActive: "",
+    },
+  ];
 
   // test login handlers
-  // const handleTestLoginUser = () => {
-  //   const token = 1234;
-  //   const role = "user";
-  //   const id = 2;
-
-  //   try {
-  //     localStorage.setItem("token", token);
-  //     localStorage.setItem("role", role);
-  //     localStorage.setItem("userId", id);
-  //     navigate("/");
-  //     fetchUser();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-  const handleTestLoginAdmin = () => {
-    const token = 1234;
-    const role = "admin";
-    const id = 1;
+  const handleTestLoginUser = () => {
     try {
-      localStorage.setItem("token", token);
-      localStorage.setItem("role", role);
-      localStorage.setItem("userId", id);
-      //fetchUser();
+      localStorage.setItem("token", resp.token);
+      localStorage.setItem("role", resp.role);
+      localStorage.setItem("userId", resp.id);
+      setUser({
+        email: resp.email,
+        parola: resp.parola,
+        id: resp.id,
+        role: resp.role,
+        token: resp.token,
+        fullName: resp.name,
+        photo: resp.photo,
+      });
+      navigate("/");
+      // fetchUser();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleTestLoginAdmin = () => {
+    try {
+      localStorage.setItem("token", resp.token);
+      localStorage.setItem("role", resp.role);
+      localStorage.setItem("userId", resp.id);
+      setUser({
+        email: resp.email,
+        parola: resp.parola,
+        id: resp.id,
+        role: resp.role,
+        token: resp.token,
+        fullName: resp.name,
+        photo: resp.photo,
+      });
       navigate("/");
       window.location.reload();
+      // fetchUser();
     } catch (error) {
       console.log(error);
     }
@@ -188,7 +218,11 @@ export default function LoginForm() {
 
       <div className={style.contentContainerAuthOptions}>
         <div className={style.contentContainerButtons}>
-          <Button variant="primary" label="Log in" onClick={handleLogin} />
+          <Button
+            variant="primary"
+            label="Log in"
+            onClick={handleLogin}
+          />
 
           <Button
             variant="secondary"

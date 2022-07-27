@@ -1,0 +1,37 @@
+@import "../../../../styles/variables.scss";
+
+
+.chatInput{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  height: 10%;
+  width:100%;
+  justify-content: space-around;
+  padding-top:30px;
+  border-top:1px solid $color-gray-100;
+}
+
+.inputChat{
+  display:flex;
+  align-items: center;
+}
+
+.chatInput Input{
+  padding-right: 12px;
+}
+
+.chatInputButtonBlueCircle {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: $color-primary-300;
+  border: 1px solid $color-primary-300;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -1rem;
+}
+
+
+

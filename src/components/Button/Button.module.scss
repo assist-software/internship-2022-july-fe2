@@ -11,6 +11,7 @@
   align-items: center;
   justify-content: center;
   line-height: 22px;
+  white-space: nowrap;
 
   &:disabled {
     pointer-events: none;
