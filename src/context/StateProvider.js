@@ -13,6 +13,8 @@ export const StateProvider = ({ children }) => {
 
   // listings
   const [listings, setListings] = useState(null);
+  // show grid show list
+  const [listView, setListView] = useState(true);
 
   const fetchListings = async () => {
     try {
@@ -24,14 +26,6 @@ export const StateProvider = ({ children }) => {
     fetchListings();
   }, []);
 
-  // refetch
-  // const refetchListing = useCallback(
-  //   () => {
-  //     doSomething(a, b);
-  //   },
-  //   [a, b],
-  // );
-
   // Filters states
   const [sortOrder, setSortOrder] = useState("");
   const [priceRange, setPriceRange] = useState("");
@@ -40,8 +34,6 @@ export const StateProvider = ({ children }) => {
   // preview
   const [preview, setPreview] = useState({});
 
-  // show grid show list
-  const [listView, setListView] = useState(true);
   return (
     <StateContext.Provider
       value={{
