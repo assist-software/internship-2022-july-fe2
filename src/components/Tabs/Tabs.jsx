@@ -2,11 +2,12 @@ import styles from "./Tabs.module.scss";
 import Button from "../Button/Button";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import useStateProvider from "../../hooks/useStateProvider";
 
 const Tabs = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
-
+  const { setPreview } = useStateProvider();
   return (
     <div className={styles.tabs}>
       {user?.role === 0 ? (
@@ -16,7 +17,10 @@ const Tabs = () => {
           </h3>
           <div className={styles.addNewBtn}>
             <Button
-              onClick={() => navigate("/add")}
+              onClick={() => {
+                setPreview({});
+                navigate("/add");
+              }}
               variant="primary"
               label="Add new"
             />
