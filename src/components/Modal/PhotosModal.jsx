@@ -39,36 +39,28 @@ const PhotosModal = ({ showModal, setShowModal, images }) => {
                 <img src={image} alt="" />
               </div>
             );
-          } else {
+          } else if (index === 1 || index === 4 || index === 7) {
             return (
-              <div key={index} className={styles.smallImage}>
+              <div
+                key={index}
+                className={styles.smallImage}
+                style={{ paddingLeft: "25%", paddingRight: "10px" }}
+              >
+                <img src={image} alt="" />
+              </div>
+            );
+          } else if (index === 2 || index === 5 || index === 8) {
+            return (
+              <div
+                key={index}
+                className={styles.smallImage}
+                style={{ paddingRight: "25%", paddingLeft: "10px" }}
+              >
                 <img src={image} alt="" />
               </div>
             );
           }
         })}
-
-        {/* <div className={styles.largeImage}>
-          <img src={images[0]} alt="" />
-        </div>
-        <div className={styles.smallImage}>
-          <img src={images[1]} alt="" />
-          <img src={images[2]} alt="" />
-        </div>
-        <div className={styles.largeImage}>
-          <img src={images[3]} alt="" />
-        </div>
-        <div className={styles.smallImage}>
-          <img src={images[4]} alt="" />
-          <img src={images[5]} alt="" />
-        </div>
-        <div className={styles.largeImage}>
-          <img src={images[6]} alt="" />
-        </div>
-        <div className={styles.smallImage}>
-          <img src={images[7]} alt="" />
-          <img src={images[8]} alt="" />
-        </div> */}
       </Modal.Body>
     </Modal>
   );
