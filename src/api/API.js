@@ -299,6 +299,26 @@ export const deactivateUser = async (id) => {
   }
 };
 
+// get notifications
+export const getNotifications = async (id) => {
+  try {
+    const response = await axios.get("/notifications/" + id);
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// update notification
+export const updateNotification = async (id, data) => {
+  try {
+    const response = await axios.put("/notifications/" + id, data);
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 // ------------------------------MOCK-------------------------------------
 // add listing    Nu exista
 export const addListing = async (data) => {
