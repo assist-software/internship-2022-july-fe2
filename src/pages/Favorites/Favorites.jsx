@@ -10,7 +10,7 @@ import { ReactComponent as Rows } from "../../assets/icons/rows.svg";
 import useAuth from "../../hooks/useAuth";
 import useStateProvider from "../../hooks/useStateProvider";
 
-const Favorites = () => {
+const Favorites = ({ showcontrols }) => {
   const navigate = useNavigate();
   const { userId } = useAuth();
   const [listings, setListings] = useState([]);
@@ -67,6 +67,7 @@ const Favorites = () => {
                 location={listing.location[2] + ", " + listing.location[5]}
                 listingId={listing.id}
                 listView={listView}
+                showcontrols={!showcontrols}
                 onClick={() => {
                   navigate("/listing/" + listing.id);
                 }}
