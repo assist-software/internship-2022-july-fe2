@@ -17,7 +17,7 @@ const Favorites = ({ showcontrols }) => {
   const { favorites, setFavorites } = useStateProvider();
 
   useEffect(() => {
-    getFavorite(userId).then((res) => setListings(res));
+    if (userId !== null) getFavorite(userId).then((res) => setListings(res));
   }, [userId]);
   useEffect(() => {
     setFavorites(listings);

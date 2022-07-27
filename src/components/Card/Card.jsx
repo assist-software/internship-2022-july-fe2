@@ -38,7 +38,7 @@ const Card = ({
   const [favourites, setFavourites] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    getFavorite(userId).then((res) => setFavourites(res));
+    if (userId !== null) getFavorite(userId).then((res) => setFavourites(res));
   }, [userId]);
 
   const [like, setLike] = useState(false);
@@ -131,7 +131,7 @@ const Card = ({
         setLike(false);
         console.log(favourites, "delete ");
         console.log(favorites, "delete glob");
-      } else if (user === null) {
+      } else if (userId === null) {
         console.log(showNotification, "show notif");
         setShowNotification(true);
       }

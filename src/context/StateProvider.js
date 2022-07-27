@@ -30,7 +30,7 @@ export const StateProvider = ({ children }) => {
   const [messages, setMessages] = useState([]);
   const [privateConversation, setPrivateConversation] = useState(false);
   const [privateMessages, setPrivateMessages] = useState([]);
-  const { userId, user } = useAuth();
+  const { userId } = useAuth();
 
   // const fetchMessages = async () => {
   //   try {
@@ -49,9 +49,12 @@ export const StateProvider = ({ children }) => {
 
   const fetchFavorites = async () => {
     try {
-      const response = await getFavorite(userId);
-      setFavorites(response);
-      console.log(response);
+      if (userId !== null) {
+        const response = await getFavorite(userId);
+        setFavorites(response);
+
+        console.log(response);
+      }
     } catch (error) {}
   };
   useEffect(() => {
@@ -63,7 +66,7 @@ export const StateProvider = ({ children }) => {
     );
     localStorage.setItem("listingId", "");
     setPrivateMessages([]);
-    fetchFavorites();
+    if (userId !== null) fetchFavorites();
   }, [userId]);
 
   // Filters states
