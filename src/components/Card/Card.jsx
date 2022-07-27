@@ -59,8 +59,8 @@ const Card = ({
       const response = await deleteListingById(listingId);
       if (response.status === 200) {
         togglePopup();
-        setAlert({ type: "Succes", message: "Deleted" });
         fetchListings();
+        setAlert({ type: "success", message: "Deleted" });
       }
     } catch (error) {
       togglePopup();
