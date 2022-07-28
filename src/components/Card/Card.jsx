@@ -10,7 +10,6 @@ import {
   deleteFavoriteById,
   deleteListingById,
   getFavorite,
-  putListingById,
 } from "../../api/API";
 import setAlert from "../../components/Alert/Alert";
 import Popup from "../../pages/Home/Popup";

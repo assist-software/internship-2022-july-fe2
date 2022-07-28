@@ -10,7 +10,7 @@ import { useDropzone } from "react-dropzone";
 import GetLocation from "../../components/GetLocation/GetLocation";
 import { useNavigate } from "react-router-dom";
 import useStateProvider from "../../hooks/useStateProvider";
-import { createListing } from "../../api/API";
+import { createListing, updateListing } from "../../api/API";
 import useAuth from "../../hooks/useAuth";
 
 import TextArea from "../../components/Input/TextArea";
@@ -32,8 +32,16 @@ const AddEdit = () => {
   const getListing = async () => {
     const response = await getListingById(id);
     if (response.status === 200) {
-      // setListing(response.data);
-      setFormValue(response.data);
+      setFormValue({
+        id: response.data.id,
+        title: response.data.title,
+        category: response.data.category,
+        price: response.data.price.toString(),
+        images: response.data.images,
+        description: response.data.description,
+        location: response.data.location,
+        phone: "0757791329",
+      });
       console.log(response.data);
     }
   };
@@ -43,7 +51,6 @@ const AddEdit = () => {
     }
   }, [id]);
 
-  console.log(listing, "listing");
   //console.log(userId, "userId");
   // form data
   const [formValue, setFormValue] = useState({
@@ -236,7 +243,30 @@ const AddEdit = () => {
     }
   };
 
+  // handleUpdate
+  const handleUpdate = async () => {
+    if (!isFormValid()) {
+      setShowErrors(true);
+    }
+    if (isFormValid()) {
+      setShowErrors(false);
+      try {
+        const response = await updateListing(formValue);
+        if (response.status === 200) {
+          navigate("/confirmation");
+          setPreview({});
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  console.log(formValue, "formValue");
   console.log(showErrors, "showErrors");
+
+  console.log(id, "id");
+
   return (
     <Container>
       <h1
@@ -403,18 +433,27 @@ const AddEdit = () => {
         <Col md={{ span: 6, offset: 0 }}>
           <Row>
             <Col sm={{ span: 2, offset: 5 }}>
-              <Button
-                variant="secondary"
-                label="Preview"
-                onClick={handlePreview}
-              />
+              {!id && (
+                <Button
+                  variant="secondary"
+                  label="Preview"
+                  onClick={handlePreview}
+                />
+              )}
             </Col>
 
             <Col sm={{ span: 2, offset: 2 }}>
               <Button
                 variant="primary"
-                label="Publish"
-                onClick={handleSubmit}
+                label={id ? "Update" : "Publish"}
+                // onClick={id ? handleUpdate : handleSubmit}
+                onClick={
+                  id
+                    ? () => {
+                        handleUpdate();
+                      }
+                    : handleSubmit
+                }
               />
             </Col>
           </Row>

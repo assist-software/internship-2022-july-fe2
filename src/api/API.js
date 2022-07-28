@@ -65,7 +65,7 @@ export const createListing = async (data) => {
 };
 
 // put listing by id
-export const putListingById = async (data) => {
+export const updateListing = async (data) => {
   try {
     const response = await axios.put("/listing/" + data.id, data);
     return response;

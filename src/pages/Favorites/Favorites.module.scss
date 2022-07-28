@@ -1,89 +1,93 @@
 @import "../../styles/variables.scss";
 
 .headerBtns {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
-.favorites{
-    display: flex;
-    justify-content: center;
+.favorites {
+  display: flex;
+  justify-content: center;
 }
 .favError {
-    text-align: center;
-    justify-content: center;
-    margin-top: 52px;
+  text-align: center;
+  justify-content: center;
+  margin-top: 52px;
 }
 
-.errorTitle{
-    font-weight: $font-bold;
-    font-size: $font-h5;
-    color: $color-gray-700;
-    margin-top: 51px;
+.errorTitle {
+  font-weight: $font-bold;
+  font-size: $font-h5;
+  color: $color-gray-700;
+  margin-top: 51px;
 }
-.paragraph{
-    font-weight: $font-semibold;
-    font-size: $font-body-small;
-    color: $color-gray-300;
-    margin-bottom: 40px;
-}
-
-.favoritesTitle{
-    font-weight: $font-bold;
-    font-size: $font-h3;
-    color: $color-black;
-    margin-top: 32px;
-    
+.paragraph {
+  font-weight: $font-semibold;
+  font-size: $font-body-small;
+  color: $color-gray-300;
+  margin-bottom: 40px;
 }
 
-.button{
-    width: 320px;
-    margin: 1rem 4rem;
-    
+.favoritesTitle {
+  font-weight: $font-bold;
+  font-size: $font-h3;
+  color: $color-black;
+  margin-top: 32px;
+}
+
+.button {
+  width: 320px;
+  margin: 1rem 4rem;
 }
 
 .gridRow {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 23px;
-    
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 23px;
 }
-.filter{
-    svg{
-    path{
-        fill: $color-primary-300;
+.filter {
+  svg {
+    path {
+      fill: $color-primary-300;
     }
-}
+  }
 }
 
 .container {
-    padding: 0 10rem 0 11rem;
+  padding: 0 10rem 0 11rem;
 }
 
-
-.empty{
-    text-align: center;
-    justify-content: center;
-    margin-top: 52px;
+.empty {
+  text-align: center;
+  justify-content: center;
+  margin-top: 52px;
 }
 
-.emptyTitle{
-    font-weight: $font-bold;
-    font-size: $font-h5;
-    color: $color-gray-700;
-    margin-top: 51px;
+.emptyTitle {
+  font-weight: $font-bold;
+  font-size: $font-h5;
+  color: $color-gray-700;
+  margin-top: 51px;
 }
-.paragraph{
-    font-weight: $font-semibold;
-    font-size: $font-body-small;
-    color: $color-gray-300;
-    margin-bottom: 40px;
+.paragraph {
+  font-weight: $font-semibold;
+  font-size: $font-body-small;
+  color: $color-gray-300;
+  margin-bottom: 40px;
 }
 
-.button{
-    width: 300px;
-    margin: 1rem auto;
-    
+.button {
+  width: 300px;
+  margin: 1rem auto;
+}
+
+.noFav {
+  text-align: center;
+  justify-content: center;
+  margin-top: 52px;
+  color: $color-gray-500;
+  font-size: 1rem;
+  font-weight: bold;
 }
