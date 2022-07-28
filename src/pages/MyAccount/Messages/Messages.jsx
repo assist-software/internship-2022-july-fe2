@@ -49,7 +49,7 @@ const Messages = () => {
 
   return (
     <div className={styles.container}>
-     {localStorage.getItem("listingId") === "" ? (
+    {statusCode === "" ? (
         <div className={styles.noMessages}>
           <img src={chatbot} alt="" />
           <h1>You haven't sent any messages yet</h1>
