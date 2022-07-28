@@ -270,22 +270,7 @@ const AddEdit = () => {
 
   return (
     <Container>
-      <h1
-        onClick={() =>
-          setFormValue({
-            ...formValue,
-            title: "Lorem ipsum dolor sit amet",
-            category: "big",
-            price: "999",
-            description:
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem lorem testing let me describe my self",
-            phone: "0712345678",
-          })
-        }
-        className={styles.addTitle}
-      >
-        Add new
-      </h1>
+      <h1 className={styles.addTitle}>Add new</h1>
       <Row>
         <Col md={{ span: 4, offset: 0 }} className={styles.bottomBorder}>
           <div className={styles.info}>
@@ -378,7 +363,17 @@ const AddEdit = () => {
       <Row style={{ marginTop: "40px" }}>
         <Col md={{ span: 4, offset: 0 }} className={styles.bottomBorder}>
           <div className={styles.info}>
-            <h3>Description</h3>
+            <h3
+              onClick={() =>
+                setFormValue({
+                  ...formValue,
+                  description:
+                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque illum recusandae molestiae consequuntur tempora, esse omnis fugiat quam harum iure?",
+                })
+              }
+            >
+              Description
+            </h3>
             <p>Lörem ipsum trede relig, oktig. Tism rallylydnad. </p>
           </div>
         </Col>
