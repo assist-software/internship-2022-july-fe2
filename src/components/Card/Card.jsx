@@ -155,6 +155,7 @@ const Card = ({
   return (
     <div className={styles.cards}>
       <div onClick={onClick} className={styles.card}>
+        {/* <div className={styles.hover}>asdasdasd</div> */}
         <div
           style={style}
           className={`${

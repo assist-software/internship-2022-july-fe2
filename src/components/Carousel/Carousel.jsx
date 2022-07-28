@@ -52,42 +52,49 @@ const Carousel = ({
           className="mySwipper"
         >
           {listings?.slice(0, 6).map((listing) =>
-            listing.status !== pending && listing.status !== pending2 && all ? (
-              // latest
-              <SwiperSlide key={listing.id}>
-                <Card
-                  showcontrols={showcontrols}
-                  style={{ width: "90%" }}
-                  image={listing.images[0]}
-                  title={listing.title}
-                  description={listing.description}
-                  price={listing.price}
-                  location={listing.location[2] + ", " + listing.location[5]}
-                  listingId={listing.id}
-                  onClick={() => {
-                    navigate("/listing/" + listing.id);
-                  }}
-                />
-              </SwiperSlide>
-            ) : (
-              listing.category === category && (
-                <SwiperSlide key={listing.id}>
-                  <Card
-                    showcontrols={showcontrols}
-                    style={{ width: "90%" }}
-                    image={listing.images[0]}
-                    title={listing.title}
-                    description={listing.description}
-                    price={listing.price}
-                    location={listing.location[2] + ", " + listing.location[5]}
-                    listingId={listing.id}
-                    onClick={() => {
-                      navigate("/listing/" + listing.id);
-                    }}
-                  />
-                </SwiperSlide>
-              )
-            )
+            all
+              ? listing.status !== pending &&
+                listing.status !== pending2 && (
+                  // latest
+                  <SwiperSlide key={listing.id}>
+                    <Card
+                      showcontrols={showcontrols}
+                      style={{ width: "90%" }}
+                      image={listing.images[0]}
+                      title={listing.title}
+                      description={listing.description}
+                      price={listing.price}
+                      location={
+                        listing.location[2] + ", " + listing.location[5]
+                      }
+                      listingId={listing.id}
+                      onClick={() => {
+                        navigate("/listing/" + listing.id);
+                      }}
+                    />
+                  </SwiperSlide>
+                )
+              : listing.status !== pending &&
+                listing.status !== pending2 &&
+                listing.category === category && (
+                  <SwiperSlide key={listing.id}>
+                    <Card
+                      showcontrols={showcontrols}
+                      style={{ width: "90%" }}
+                      image={listing.images[0]}
+                      title={listing.title}
+                      description={listing.description}
+                      price={listing.price}
+                      location={
+                        listing.location[2] + ", " + listing.location[5]
+                      }
+                      listingId={listing.id}
+                      onClick={() => {
+                        navigate("/listing/" + listing.id);
+                      }}
+                    />
+                  </SwiperSlide>
+                )
           )}
           <SwiperSlide>
             <div onClick={() => navigate("/listing")}>

@@ -44,17 +44,6 @@ const MyListings = ({ admin, hideApproval, pending, showcontrols }) => {
                   navigate("/listing/" + listing.id);
                 }}
               />
-              {/* <div
-                onClick={stopPropagation}
-                className={`${
-                  listView ? styles.controls : styles.cardControls
-                }`}
-              >
-                <button className={styles.delete} onClick={() => togglePopup()}>
-                  <span>Delete</span>
-                </button>
-                <button className={styles.edit}>Edit</button>
-              </div> */}
             </Fragment>
           )
       )}
