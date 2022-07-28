@@ -95,6 +95,7 @@ const Details = () => {
       receiverId: listing?.author?.id,
       listingId: listing?.id,
       content: messageContent,
+      createdAt: moment().format(),
     });
   }, [user?.id, listing?.author?.id, listing?.id, messageContent]);
 
@@ -148,8 +149,14 @@ const Details = () => {
     } catch (error) {
       console.log("Error: ", error);
       setAlert({
-        type: "error",
+        type: "danger",
         message: "Error sending message",
+      });
+    }
+    if (!user?.id) {
+      setAlert({
+        type: "danger",
+        message: "Please login to send message",
       });
     }
   };

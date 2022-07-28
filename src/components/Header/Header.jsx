@@ -17,9 +17,11 @@ import { ReactComponent as Chat } from "../../assets/icons/chat.svg";
 import { ReactComponent as Logout } from "../../assets/icons/logout.svg";
 import { ReactComponent as Loop } from "../../assets/icons/magnifying-glass.svg";
 import useAuth from "../../hooks/useAuth";
+import useStateProvider from "../../hooks/useStateProvider";
 
 const Header = () => {
   const { logout, user, userId } = useAuth();
+  const { setAlert } = useStateProvider();
   const navigate = useNavigate();
   const categories = [
     { value: "", label: "Category" },
@@ -28,6 +30,18 @@ const Header = () => {
     { value: "office", label: "Offices" },
     { value: "apartment", label: "Apartments" },
   ];
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+    setAlert({
+      type: "success",
+      message: "You are browsing in as guest",
+    });
+    // refresh page
+    window.location.reload();
+  };
+
   return (
     <Navbar collapseOnSelect expand="xl" className={styles.navbar} sticky="top">
       <Container className={styles.content}>
@@ -129,7 +143,7 @@ const Header = () => {
                 <Dropdown.Divider />
 
                 <Dropdown.Item
-                  onClick={logout}
+                  onClick={handleLogout}
                   className={styles.profileOption}
                 >
                   <Logout className={styles.logout} />
