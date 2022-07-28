@@ -40,6 +40,7 @@ const AddEdit = () => {
         images: response.data.images,
         description: response.data.description,
         location: response.data.location,
+        status: 0,
         phone: "0757791329",
       });
       console.log(response.data);
